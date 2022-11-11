@@ -1,4 +1,4 @@
-# Materializer
+# Coroutines
 
 ## Description
 
@@ -14,4 +14,3 @@ OR
 
 Git add this repository as a submodule inside your Unity project Assets folder:  
 `git submodule add https://github.com/Kmiecis/Unity-Package-Coroutines`
-
