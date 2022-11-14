@@ -7,6 +7,11 @@ namespace Common.Coroutines
 {
     public static partial class UCoroutine
     {
+        public static IEnumerator Yield()
+        {
+            yield return null;
+        }
+
         public static IEnumerator Yield(YieldInstruction yield)
         {
             yield return yield;
@@ -62,6 +67,23 @@ namespace Common.Coroutines
             {
                 consumer(coroutine.Current);
                 yield return null;
+            }
+        }
+
+        public static IEnumerator<U> YieldInto<T, U>(IEnumerator<T> coroutine, Func<T, U> parser)
+        {
+            while (coroutine.MoveNext())
+            {
+                yield return parser(coroutine.Current);
+            }
+        }
+
+        public static IEnumerator<U> YieldInto<T, U>(Func<IEnumerator<T>> provider, Func<T, U> parser)
+        {
+            var coroutine = provider();
+            while (coroutine.MoveNext())
+            {
+                yield return parser(coroutine.Current);
             }
         }
 

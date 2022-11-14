@@ -91,7 +91,12 @@ namespace Common.Coroutines
         #region Into
         public static IEnumerator Into<T>(this IEnumerator<T> self, Action<T> consumer)
         {
-            return consumer == null ? self : UCoroutine.YieldInto(self, consumer);
+            return UCoroutine.YieldInto(self, consumer);
+        }
+
+        public static IEnumerator<U> Into<T, U>(this IEnumerator<T> self, Func<T, U> parser)
+        {
+            return UCoroutine.YieldInto(self, parser);
         }
         #endregion
 
