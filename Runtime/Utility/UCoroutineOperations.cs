@@ -7,8 +7,6 @@ namespace Common.Coroutines
 {
     public static partial class UCoroutine
     {
-        private static float DefaultEaser(float t) => t;
-
         public static IEnumerator<float> YieldTime(float duration)
         {
             float t = 0.0f;
@@ -95,32 +93,37 @@ namespace Common.Coroutines
 
         public static IEnumerator<int> YieldValue(int start, int target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator<float> YieldValue(float start, float target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(start, target, duration, Mathf.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator<Vector2> YieldValue(Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(start, target, duration, Vector2.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator<Vector3> YieldValue(Vector3 start, Vector3 target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(start, target, duration, Vector3.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator<Vector4> YieldValue(Vector4 start, Vector4 target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(start, target, duration, Vector4.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
+        }
+
+        public static IEnumerator<Color> YieldValue(Color start, Color target, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator<Quaternion> YieldValue(Quaternion start, Quaternion target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(start, target, duration, Quaternion.Slerp, easer ?? DefaultEaser);
+            return YieldAnyValue(start, target, duration, UMath.Slerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, T target, float duration, Func<T, T, float, T> parser, Func<float, float> easer)
@@ -147,32 +150,32 @@ namespace Common.Coroutines
 
         public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator YieldValueTo(Func<float> getter, Action<float> setter, float target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValueTo(getter, setter, target, duration, Mathf.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator YieldValueTo(Func<Vector2> getter, Action<Vector2> setter, Vector2 target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValueTo(getter, setter, target, duration, Vector2.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator YieldValueTo(Func<Vector3> getter, Action<Vector3> setter, Vector3 target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValueTo(getter, setter, target, duration, Vector3.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator YieldValueTo(Func<Vector4> getter, Action<Vector4> setter, Vector4 target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValueTo(getter, setter, target, duration, Vector4.Lerp, easer ?? DefaultEaser);
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer ?? EaseMath.Linear);
         }
 
         public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Quaternion target, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValueTo(getter, setter, target, duration, Quaternion.Slerp, easer ?? DefaultEaser);
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Slerp, easer ?? EaseMath.Linear);
         }
     }
 }
