@@ -61,7 +61,8 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InOutQuad(float f)
         {
-            return f < 0.5f ? (2.0f * f * f)
+            return f < 0.5f
+                ? (2.0f * f * f)
                 : (1.0f - UMath.Square(-2.0f * f + 2.0f) * 0.5f);
         }
 
@@ -80,7 +81,8 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InOutCubic(float f)
         {
-            return f < 0.5f ? (4.0f * f * f * f)
+            return f < 0.5f
+                ? (4.0f * f * f * f)
                 : (1.0f - UMath.Cubic(-2.0f * f + 2.0f) * 0.5f);
         }
 
@@ -99,7 +101,8 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InOutQuart(float f)
         {
-            return f < 0.5f ? (8.0f * f * f * f * f)
+            return f < 0.5f
+                ? (8.0f * f * f * f * f)
                 : (1.0f - UMath.Quart(-2.0f * f + 2.0f) * 0.5f);
         }
 
@@ -118,7 +121,8 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InOutQuint(float f)
         {
-            return f < 0.5f ? (16.0f * f * f * f * f * f)
+            return f < 0.5f
+                ? (16.0f * f * f * f * f * f)
                 : (1.0f - UMath.Quint(-2.0f * f + 2.0f) * 0.5f);
         }
 
@@ -137,7 +141,8 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InOutExpo(float f)
         {
-            return f < 0.5f ? f == 0.0f ? 0.0f : (Mathf.Pow(2.0f, 20.0f * f - 10.0f) * 0.5f)
+            return f < 0.5f
+                ? f == 0.0f ? 0.0f : (Mathf.Pow(2.0f, 20.0f * f - 10.0f) * 0.5f)
                 : f == 1.0f ? 1.0f : ((2.0f - Mathf.Pow(2.0f, -20.0f * f + 10.0f)) * 0.5f);
         }
 
@@ -157,8 +162,8 @@ namespace Common.Coroutines
         public static float InOutCirc(float f)
         {
             return f < 0.5f
-              ? (1.0f - Mathf.Sqrt(1.0f - 4.0f * f * f)) * 0.5f
-              : (Mathf.Sqrt(1.0f - UMath.Square(-2.0f * f + 2.0f)) + 1.0f) * 0.5f;
+                ? (1.0f - Mathf.Sqrt(1.0f - 4.0f * f * f)) * 0.5f
+                : (Mathf.Sqrt(1.0f - UMath.Square(-2.0f * f + 2.0f)) + 1.0f) * 0.5f;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -183,8 +188,8 @@ namespace Common.Coroutines
             const float C1 = 1.70158f;
             const float C2 = C1 * 1.525f;
             return f < 0.5f
-              ? (4.0f * f * f * ((C2 + 1.0f) * 2.0f * f - C2)) * 0.5f
-              : (UMath.Square(2.0f * f - 2.0f) * ((C2 + 1.0f) * (f * 2.0f - 2.0f) + C2) + 2.0f) * 0.5f;
+                ? (4.0f * f * f * ((C2 + 1.0f) * 2.0f * f - C2)) * 0.5f
+                : (UMath.Square(2.0f * f - 2.0f) * ((C2 + 1.0f) * (f * 2.0f - 2.0f) + C2) + 2.0f) * 0.5f;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -192,8 +197,8 @@ namespace Common.Coroutines
         {
             const float C1 = (2.0f * Mathf.PI) * (1.0f / 3.0f);
             return f == 0.0f ? 0.0f
-              : f == 1.0f ? 1.0f
-              : -Mathf.Pow(2.0f, 10.0f * f - 10.0f) * Mathf.Sin((f * 10.0f - 10.75f) * C1);
+                : f == 1.0f ? 1.0f
+                : -Mathf.Pow(2.0f, 10.0f * f - 10.0f) * Mathf.Sin((f * 10.0f - 10.75f) * C1);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -201,16 +206,17 @@ namespace Common.Coroutines
         {
             const float C1 = (2.0f * Mathf.PI) * (1.0f / 3.0f);
             return f == 0.0f ? 0.0f
-              : f == 1.0f ? 1.0f
-              : Mathf.Pow(2.0f, -10.0f * f) * Mathf.Sin((f * 10.0f - 0.75f) * C1) + 1.0f;
+                : f == 1.0f ? 1.0f
+                : Mathf.Pow(2.0f, -10.0f * f) * Mathf.Sin((f * 10.0f - 0.75f) * C1) + 1.0f;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InOutElastic(float f)
         {
             const float C1 = (2.0f * Mathf.PI) * (1.0f / 4.5f);
-            return f < 0.5f ? f == 0.0f ? 0.0f : -(Mathf.Pow(2.0f, 20.0f * f - 10.0f) * Mathf.Sin((20.0f * f - 11.125f) * C1)) * 0.5f
-              : f == 1.0f ? 1.0f : (Mathf.Pow(2.0f, -20.0f * f + 10.0f) * Mathf.Sin((20.0f * f - 11.125f) * C1)) * 0.5f + 1.0f;
+            return f < 0.5f
+                ? f == 0.0f ? 0.0f : -(Mathf.Pow(2.0f, 20.0f * f - 10.0f) * Mathf.Sin((20.0f * f - 11.125f) * C1)) * 0.5f
+                : f == 1.0f ? 1.0f : (Mathf.Pow(2.0f, -20.0f * f + 10.0f) * Mathf.Sin((20.0f * f - 11.125f) * C1)) * 0.5f + 1.0f;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
