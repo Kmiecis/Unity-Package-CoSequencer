@@ -188,6 +188,36 @@ namespace Common.Coroutines
         #endregion
 
         #region Operations
+        public static IEnumerator<float> YieldDeltaTime(float duration)
+        {
+            var deltaTime = Time.deltaTime;
+
+            while (duration > deltaTime)
+            {
+                yield return deltaTime;
+
+                duration -= deltaTime;
+                deltaTime = Time.deltaTime;
+            }
+
+            yield return duration;
+        }
+
+        public static IEnumerator<float> YieldDeltaRealtime(float duration)
+        {
+            var deltaTime = Time.unscaledDeltaTime;
+
+            while (duration > deltaTime)
+            {
+                yield return deltaTime;
+
+                duration -= deltaTime;
+                deltaTime = Time.unscaledDeltaTime;
+            }
+
+            yield return duration;
+        }
+
         public static IEnumerator<float> YieldTime(float duration)
         {
             float t = 0.0f;
