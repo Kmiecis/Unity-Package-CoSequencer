@@ -109,6 +109,30 @@ namespace Common.Coroutines
 
         public static void SetRotation(this Transform self, Quaternion value)
             => self.rotation = value;
+
+        public static Vector3 GetEulerRotation(this Transform self)
+            => self.eulerAngles;
+
+        public static void SetEulerRotation(this Transform self, Vector3 value)
+            => self.eulerAngles = value;
+
+        public static float GetEulerRotationX(this Transform self)
+            => self.eulerAngles.x;
+
+        public static void SetEulerRotationX(this Transform self, float value)
+            => self.eulerAngles = self.eulerAngles.WithX(value);
+
+        public static float GetEulerRotationY(this Transform self)
+            => self.eulerAngles.y;
+
+        public static void SetEulerRotationY(this Transform self, float value)
+            => self.eulerAngles = self.eulerAngles.WithY(value);
+
+        public static float GetEulerRotationZ(this Transform self)
+            => self.eulerAngles.z;
+
+        public static void SetEulerRotationZ(this Transform self, float value)
+            => self.eulerAngles = self.eulerAngles.WithZ(value);
         #endregion
 
         #region Local rotation
@@ -117,6 +141,30 @@ namespace Common.Coroutines
 
         public static void SetLocalRotation(this Transform self, Quaternion value)
             => self.localRotation = value;
+
+        public static Vector3 GetLocalEulerRotation(this Transform self)
+            => self.localEulerAngles;
+
+        public static void SetLocalEulerRotation(this Transform self, Vector3 value)
+            => self.localEulerAngles = value;
+
+        public static float GetLocalEulerRotationX(this Transform self)
+            => self.localEulerAngles.x;
+
+        public static void SetLocalEulerRotationX(this Transform self, float value)
+            => self.localEulerAngles = self.localEulerAngles.WithX(value);
+
+        public static float GetLocalEulerRotationY(this Transform self)
+            => self.localEulerAngles.y;
+
+        public static void SetLocalEulerRotationY(this Transform self, float value)
+            => self.localEulerAngles = self.localEulerAngles.WithY(value);
+
+        public static float GetLocalEulerRotationZ(this Transform self)
+            => self.localEulerAngles.z;
+
+        public static void SetLocalEulerRotationZ(this Transform self, float value)
+            => self.localEulerAngles = self.localEulerAngles.WithZ(value);
         #endregion
 
         #region Local scale
