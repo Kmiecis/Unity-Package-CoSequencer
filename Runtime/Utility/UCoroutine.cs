@@ -532,5 +532,37 @@ namespace Common.Coroutines
             return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
         }
 #endregion
+
+#region Rects
+        public static IEnumerator<Rect> YieldValue(Rect start, Rect target, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
+        }
+
+        public static IEnumerator<Rect> YieldValue(Rect start, Rect target, float duration, EEase ease)
+        {
+            return YieldValue(start, target, duration, ease.ToEaser());
+        }
+
+        public static IEnumerator<Rect> YieldValue(Rect start, Rect target, float duration, AnimationCurve curve)
+        {
+            return YieldValue(start, target, duration, curve.Evaluate);
+        }
+
+        public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
+        }
+
+        public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, EEase ease)
+        {
+            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
+        }
+
+        public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, AnimationCurve curve)
+        {
+            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
+        }
+#endregion
     }
 }

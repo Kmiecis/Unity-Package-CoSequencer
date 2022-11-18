@@ -49,6 +49,15 @@ namespace Common.Coroutines
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rect Lerp(Rect a, Rect b, float t)
+        {
+            return new Rect(
+                Lerp(a.x, b.x, t), Lerp(a.y, b.y, t),
+                Lerp(a.width, b.width, t), Lerp(a.height, b.height, t)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Square(float f)
         {
             return f * f;
