@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Common.Coroutines
 {
-    public static partial class UCoroutine
+    public static class UCoroutine
     {
         #region Core
         public static IEnumerator Yield()
