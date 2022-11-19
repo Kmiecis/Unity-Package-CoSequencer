@@ -21,7 +21,10 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, float t)
         {
-            return a + (b - a) * t;
+            return new Vector2(
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -36,7 +39,11 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
         {
-            return a + (b - a) * t;
+            return new Vector3(
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t),
+                Lerp(a.z, b.z, t)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,13 +59,23 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Lerp(Vector4 a, Vector4 b, float t)
         {
-            return a + (b - a) * t;
+            return new Vector4(
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t),
+                Lerp(a.z, b.z, t),
+                Lerp(a.w, b.w, t)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color Lerp(Color a, Color b, float t)
         {
-            return a + (b - a) * t;
+            return new Color(
+                Lerp(a.r, b.r, t),
+                Lerp(a.g, b.g, t),
+                Lerp(a.b, b.b, t),
+                Lerp(a.a, b.a, t)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
