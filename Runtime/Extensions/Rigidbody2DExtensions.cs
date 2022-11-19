@@ -6,17 +6,17 @@ namespace Common.Coroutines
 {
     public static class Rigidbody2DExtensions
     {
-        public static IEnumerator CoMove(this Rigidbody2D self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPosition, self.SetPosition, target, duration, easer);
+        public static Func<IEnumerator> CoMove(this Rigidbody2D self, Vector2 target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPosition, self.MovePosition, target, duration, easer);
 
-        public static IEnumerator CoMoveX(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionX, self.SetPositionX, target, duration, easer);
+        public static Func<IEnumerator> CoMoveX(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPositionX, self.MovePositionX, target, duration, easer);
 
-        public static IEnumerator CoMoveY(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionY, self.SetPositionY, target, duration, easer);
+        public static Func<IEnumerator> CoMoveY(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPositionY, self.MovePositionY, target, duration, easer);
 
-        public static IEnumerator CoRotate(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, target, duration, easer);
+        public static Func<IEnumerator> CoRotate(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetRotation, self.MoveRotation, target, duration, easer);
     }
 
     internal static class InternalRigidbody2DExtensions
@@ -47,6 +47,14 @@ namespace Common.Coroutines
 
         public static void SetRotation(this Rigidbody2D self, float value)
             => self.rotation = value;
+        #endregion
+
+        #region Move position
+        public static void MovePositionX(this Rigidbody2D self, float value)
+            => self.MovePosition(self.position.WithX(value));
+
+        public static void MovePositionY(this Rigidbody2D self, float value)
+            => self.MovePosition(self.position.WithY(value));
         #endregion
     }
 }

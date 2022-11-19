@@ -6,47 +6,47 @@ namespace Common.Coroutines
 {
     public static class TransformExtensions
     {
-        public static IEnumerator CoMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPosition, self.SetPosition, target, duration, easer);
+        public static Func<IEnumerator> CoMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPosition, self.SetPosition, target, duration, easer);
 
-        public static IEnumerator CoMoveX(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionX, self.SetPositionX, target, duration, easer);
+        public static Func<IEnumerator> CoMoveX(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPositionX, self.SetPositionX, target, duration, easer);
 
-        public static IEnumerator CoMoveY(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionY, self.SetPositionY, target, duration, easer);
+        public static Func<IEnumerator> CoMoveY(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPositionY, self.SetPositionY, target, duration, easer);
 
-        public static IEnumerator CoMoveZ(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionZ, self.SetPositionZ, target, duration, easer);
+        public static Func<IEnumerator> CoMoveZ(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetPositionZ, self.SetPositionZ, target, duration, easer);
 
-        public static IEnumerator CoLocalMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalPosition, self.SetLocalPosition, target, duration, easer);
+        public static Func<IEnumerator> CoLocalMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalPosition, self.SetLocalPosition, target, duration, easer);
 
-        public static IEnumerator CoLocalMoveX(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalPositionX, self.SetLocalPositionX, target, duration, easer);
+        public static Func<IEnumerator> CoLocalMoveX(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalPositionX, self.SetLocalPositionX, target, duration, easer);
 
-        public static IEnumerator CoLocalMoveY(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalPositionY, self.SetLocalPositionY, target, duration, easer);
+        public static Func<IEnumerator> CoLocalMoveY(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalPositionY, self.SetLocalPositionY, target, duration, easer);
 
-        public static IEnumerator CoLocalMoveZ(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalPositionZ, self.SetLocalPositionZ, target, duration, easer);
+        public static Func<IEnumerator> CoLocalMoveZ(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalPositionZ, self.SetLocalPositionZ, target, duration, easer);
 
-        public static IEnumerator CoRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, target, duration, easer);
+        public static Func<IEnumerator> CoRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, target, duration, easer);
 
-        public static IEnumerator CoLocalRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, target, duration, easer);
+        public static Func<IEnumerator> CoLocalRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, target, duration, easer);
 
-        public static IEnumerator CoLocalScale(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, target, duration, easer);
+        public static Func<IEnumerator> CoLocalScale(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, target, duration, easer);
 
-        public static IEnumerator CoLocalScaleX(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalScaleX, self.SetLocalScaleX, target, duration, easer);
+        public static Func<IEnumerator> CoLocalScaleX(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalScaleX, self.SetLocalScaleX, target, duration, easer);
 
-        public static IEnumerator CoLocalScaleY(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalScaleY, self.SetLocalScaleY, target, duration, easer);
+        public static Func<IEnumerator> CoLocalScaleY(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalScaleY, self.SetLocalScaleY, target, duration, easer);
 
-        public static IEnumerator CoLocalScaleZ(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetLocalScaleZ, self.SetLocalScaleZ, target, duration, easer);
+        public static Func<IEnumerator> CoLocalScaleZ(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetLocalScaleZ, self.SetLocalScaleZ, target, duration, easer);
     }
 
     internal static class InternalTransformExtensions

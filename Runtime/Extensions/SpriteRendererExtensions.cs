@@ -6,23 +6,14 @@ namespace Common.Coroutines
 {
     public static class SpriteRendererExtensions
     {
-        public static IEnumerator CoColor(this SpriteRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, duration, easer);
+        public static Func<IEnumerator> CoColor(this SpriteRenderer self, Color target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, duration, easer);
 
-        public static IEnumerator CoColorR(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorR, self.SetColorR, target, duration, easer);
+        public static Func<IEnumerator> CoFade(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, duration, easer);
 
-        public static IEnumerator CoColorG(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorG, self.SetColorG, target, duration, easer);
-
-        public static IEnumerator CoColorB(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorB, self.SetColorB, target, duration, easer);
-
-        public static IEnumerator CoFade(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, duration, easer);
-
-        public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetColor, duration, easer);
+        public static Func<IEnumerator> CoGradient(this SpriteRenderer self, Gradient target, float duration, Func<float, float> easer = null)
+            => () => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetColor, duration, easer);
     }
 
     internal static class InternalSpriteRendererExtensions

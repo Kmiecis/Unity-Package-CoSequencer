@@ -15,7 +15,7 @@ namespace Common.Coroutines
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Lerp(int a, int b, float t)
         {
-            return a + (int)Math.Round((b - a) * t);
+            return a + Mathf.RoundToInt((b - a) * t);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -25,9 +25,28 @@ namespace Common.Coroutines
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Lerp(Vector2Int a, Vector2Int b, float t)
+        {
+            return new Vector2Int(
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
         {
             return a + (b - a) * t;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Lerp(Vector3Int a, Vector3Int b, float t)
+        {
+            return new Vector3Int(
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t),
+                Lerp(a.z, b.z, t)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,8 +71,10 @@ namespace Common.Coroutines
         public static Rect Lerp(Rect a, Rect b, float t)
         {
             return new Rect(
-                Lerp(a.x, b.x, t), Lerp(a.y, b.y, t),
-                Lerp(a.width, b.width, t), Lerp(a.height, b.height, t)
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t),
+                Lerp(a.width, b.width, t),
+                Lerp(a.height, b.height, t)
             );
         }
 

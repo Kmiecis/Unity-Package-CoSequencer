@@ -289,7 +289,6 @@ namespace Common.Coroutines
         }
 
         public static IEnumerator<T> YieldAnyValue<T>(T start, T target, float duration, Func<T, T, float, T> parser, Func<float, float> easer = null)
-            where T : struct
         {
             return YieldTimeEased(duration, easer ?? EaseMath.Linear)
                 .Into(t => parser(start, target, t));
@@ -302,219 +301,112 @@ namespace Common.Coroutines
         }
 
         public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, T target, float duration, Func<T, T, float, T> parser, Func<float, float> easer = null)
-            where T : struct
         {
             return YieldAnyValue(getter(), target, duration, parser, easer)
                 .Into(setter);
         }
-#endregion
+        #endregion
 
-#region Ints
-        public static IEnumerator<int> YieldValue(int start, int target, float duration, Func<float, float> easer = null)
-        {
-            return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
-        }
-
-        public static IEnumerator<int> YieldValue(int start, int target, float duration, EEase ease)
-        {
-            return YieldValue(start, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator<int> YieldValue(int start, int target, float duration, AnimationCurve curve)
-        {
-            return YieldValue(start, target, duration, curve.Evaluate);
-        }
-
-        public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, float duration, Func<float, float> easer = null)
-        {
-            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
-        }
-
-        public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Floats
+        #region Floats
         public static IEnumerator<float> YieldValue(float start, float target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
-        }
-
-        public static IEnumerator<float> YieldValue(float start, float target, float duration, EEase ease)
-        {
-            return YieldValue(start, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator<float> YieldValue(float start, float target, float duration, AnimationCurve curve)
-        {
-            return YieldValue(start, target, duration, curve.Evaluate);
         }
 
         public static IEnumerator YieldValueTo(Func<float> getter, Action<float> setter, float target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator YieldValueTo(Func<float> getter, Action<float> setter, float target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<float> getter, Action<float> setter, float target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Vector2s
-        public static IEnumerator<Vector2> YieldValue(Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
+        #region Ints
+        public static IEnumerator<int> YieldValue(int start, int target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
         }
 
-        public static IEnumerator<Vector2> YieldValue(Vector2 start, Vector2 target, float duration, EEase ease)
+        public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, duration, ease.ToEaser());
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator<Vector2> YieldValue(Vector2 start, Vector2 target, float duration, AnimationCurve curve)
+        #region Vector2s
+        public static IEnumerator<Vector2> YieldValue(Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, duration, curve.Evaluate);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
         }
 
         public static IEnumerator YieldValueTo(Func<Vector2> getter, Action<Vector2> setter, Vector2 target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator YieldValueTo(Func<Vector2> getter, Action<Vector2> setter, Vector2 target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<Vector2> getter, Action<Vector2> setter, Vector2 target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Vector3s
-        public static IEnumerator<Vector3> YieldValue(Vector3 start, Vector3 target, float duration, Func<float, float> easer = null)
+        #region Vector2Ints
+        public static IEnumerator<Vector2Int> YieldValue(Vector2Int start, Vector2Int target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
         }
 
-        public static IEnumerator<Vector3> YieldValue(Vector3 start, Vector3 target, float duration, EEase ease)
+        public static IEnumerator YieldValueTo(Func<Vector2Int> getter, Action<Vector2Int> setter, Vector2Int target, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, duration, ease.ToEaser());
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator<Vector3> YieldValue(Vector3 start, Vector3 target, float duration, AnimationCurve curve)
+        #region Vector3s
+        public static IEnumerator<Vector3> YieldValue(Vector3 start, Vector3 target, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, duration, curve.Evaluate);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
         }
 
         public static IEnumerator YieldValueTo(Func<Vector3> getter, Action<Vector3> setter, Vector3 target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator YieldValueTo(Func<Vector3> getter, Action<Vector3> setter, Vector3 target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<Vector3> getter, Action<Vector3> setter, Vector3 target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Vector4s
-        public static IEnumerator<Vector4> YieldValue(Vector4 start, Vector4 target, float duration, Func<float, float> easer = null)
+        #region Vector3Ints
+        public static IEnumerator<Vector3Int> YieldValue(Vector3Int start, Vector3Int target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
         }
 
-        public static IEnumerator<Vector4> YieldValue(Vector4 start, Vector4 target, float duration, EEase ease)
+        public static IEnumerator YieldValueTo(Func<Vector3Int> getter, Action<Vector3Int> setter, Vector3Int target, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, duration, ease.ToEaser());
+            return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator<Vector4> YieldValue(Vector4 start, Vector4 target, float duration, AnimationCurve curve)
+        #region Vector4s
+        public static IEnumerator<Vector4> YieldValue(Vector4 start, Vector4 target, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, duration, curve.Evaluate);
+            return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
         }
 
         public static IEnumerator YieldValueTo(Func<Vector4> getter, Action<Vector4> setter, Vector4 target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
+        #endregion
 
-        public static IEnumerator YieldValueTo(Func<Vector4> getter, Action<Vector4> setter, Vector4 target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<Vector4> getter, Action<Vector4> setter, Vector4 target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Quaternions
+        #region Quaternions
         public static IEnumerator<Quaternion> YieldValue(Quaternion start, Quaternion target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Slerp, easer);
-        }
-
-        public static IEnumerator<Quaternion> YieldValue(Quaternion start, Quaternion target, float duration, EEase ease)
-        {
-            return YieldValue(start, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator<Quaternion> YieldValue(Quaternion start, Quaternion target, float duration, AnimationCurve curve)
-        {
-            return YieldValue(start, target, duration, curve.Evaluate);
         }
 
         public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Quaternion target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Slerp, easer);
         }
+        #endregion
 
-        public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Quaternion target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Quaternion target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Colors
+        #region Colors
         public static IEnumerator<Color> YieldValue(Color start, Color target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
-        }
-
-        public static IEnumerator<Color> YieldValue(Color start, Color target, float duration, EEase ease)
-        {
-            return YieldValue(start, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator<Color> YieldValue(Color start, Color target, float duration, AnimationCurve curve)
-        {
-            return YieldValue(start, target, duration, curve.Evaluate);
         }
 
         public static IEnumerator YieldValueTo(Func<Color> getter, Action<Color> setter, Color target, float duration, Func<float, float> easer = null)
@@ -522,47 +414,18 @@ namespace Common.Coroutines
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
 
-        public static IEnumerator YieldValueTo(Func<Color> getter, Action<Color> setter, Color target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
+        #endregion
 
-        public static IEnumerator YieldValueTo(Func<Color> getter, Action<Color> setter, Color target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
-
-#region Rects
+        #region Rects
         public static IEnumerator<Rect> YieldValue(Rect start, Rect target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValue(start, target, duration, UMath.Lerp, easer);
-        }
-
-        public static IEnumerator<Rect> YieldValue(Rect start, Rect target, float duration, EEase ease)
-        {
-            return YieldValue(start, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator<Rect> YieldValue(Rect start, Rect target, float duration, AnimationCurve curve)
-        {
-            return YieldValue(start, target, duration, curve.Evaluate);
         }
 
         public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, duration, UMath.Lerp, easer);
         }
-
-        public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, EEase ease)
-        {
-            return YieldValueTo(getter, setter, target, duration, ease.ToEaser());
-        }
-
-        public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, AnimationCurve curve)
-        {
-            return YieldValueTo(getter, setter, target, duration, curve.Evaluate);
-        }
-#endregion
+        #endregion
     }
 }
