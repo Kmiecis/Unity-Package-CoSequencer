@@ -100,6 +100,18 @@ namespace Common.Coroutines
         }
         #endregion
 
+        #region While
+        public static IEnumerator While(this Func<IEnumerator> self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldWhile(self, verifier);
+        }
+
+        public static IEnumerator<T> While<T>(this Func<IEnumerator<T>> self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldWhile(self, verifier);
+        }
+        #endregion
+
         public static Coroutine Start(this Func<IEnumerator> self, MonoBehaviour target)
         {
             return self().Start(target);

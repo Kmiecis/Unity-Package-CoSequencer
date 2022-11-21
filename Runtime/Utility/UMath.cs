@@ -79,7 +79,7 @@ namespace Common.Coroutines
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Quaternion Slerp(Quaternion a, Quaternion b, float t)
+        public static Quaternion Lerp(Quaternion a, Quaternion b, float t)
         {
             return Quaternion.SlerpUnclamped(a, b, t);
         }
