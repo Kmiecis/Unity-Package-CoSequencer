@@ -7,7 +7,7 @@ namespace Common.Coroutines
 {
     public static class UCoroutine
     {
-        #region Core
+        #region Yield
         public static IEnumerator Yield()
         {
             yield return null;
@@ -67,7 +67,9 @@ namespace Common.Coroutines
                 yield return coroutine.Current;
             }
         }
+        #endregion
 
+        #region Yield into
         public static IEnumerator YieldInto<T>(IEnumerator<T> coroutine, Action<T> consumer)
         {
             while (coroutine.MoveNext())
@@ -103,7 +105,9 @@ namespace Common.Coroutines
                 yield return parser(coroutine.Current);
             }
         }
+        #endregion
 
+        #region Yield while
         public static IEnumerator YieldWhile(IEnumerator coroutine, Func<bool> verifier)
         {
             while (verifier() && coroutine.MoveNext())
@@ -137,7 +141,9 @@ namespace Common.Coroutines
                 yield return coroutine.Current;
             }
         }
+        #endregion
 
+        #region Yield infinitely
         public static IEnumerator YieldInfinitely(Func<IEnumerator> provider)
         {
             while (true)
@@ -161,7 +167,9 @@ namespace Common.Coroutines
                 }
             }
         }
+        #endregion
 
+        #region Yield sequentially
         public static IEnumerator YieldSequentially(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext())
@@ -209,7 +217,9 @@ namespace Common.Coroutines
                 }
             }
         }
+        #endregion
 
+        #region Yield parallel
         public static IEnumerator YieldParallel(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext() | second.MoveNext())
@@ -237,7 +247,7 @@ namespace Common.Coroutines
         }
         #endregion
 
-        #region Operations
+        #region Yield time
         public static IEnumerator<float> YieldDeltaTime(float duration)
         {
             var deltaTime = Time.deltaTime;
@@ -270,7 +280,7 @@ namespace Common.Coroutines
 
         public static IEnumerator<float> YieldTime(float duration)
         {
-            float t = 0.0f;
+            float t = Time.deltaTime;
 
             while (t < duration)
             {
@@ -284,7 +294,7 @@ namespace Common.Coroutines
 
         public static IEnumerator<float> YieldRealtime(float duration)
         {
-            float t = 0.0f;
+            float t = Time.unscaledDeltaTime;
 
             while (t < duration)
             {
@@ -298,8 +308,8 @@ namespace Common.Coroutines
 
         public static IEnumerator<float> YieldTimeNormalized(float duration)
         {
-            float t = 0.0f;
             float n = 1.0f / duration;
+            float t = n * Time.deltaTime;
 
             while (t < 1.0f)
             {
@@ -313,8 +323,8 @@ namespace Common.Coroutines
 
         public static IEnumerator<float> YieldRealtimeNormalized(float duration)
         {
-            float t = 0.0f;
             float n = 1.0f / duration;
+            float t = n * Time.unscaledDeltaTime;
 
             while (t < 1.0f)
             {
@@ -331,29 +341,79 @@ namespace Common.Coroutines
             return YieldTimeNormalized(duration)
                 .Into(easer);
         }
+        #endregion
 
-        public static IEnumerator<T> YieldAnyValue<T>(Func<float, T> provider, float duration, Func<float, float> easer = null)
+        #region Yield any value
+        public static IEnumerator<T> YieldAnyValue<T>(Func<float, T> evaluator, IEnumerator<float> timer)
         {
-            return YieldTimeEased(duration, easer ?? EaseMath.Linear)
-                .Into(provider);
+            return timer.Into(evaluator);
+        }
+
+        public static IEnumerator<T> YieldAnyValue<T>(Func<float, T> evaluator, float duration)
+        {
+            return YieldAnyValue(evaluator, YieldTimeNormalized(duration));
+        }
+
+        public static IEnumerator<T> YieldAnyValue<T>(Func<float, T> evaluator, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValue(evaluator, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+        }
+
+        public static IEnumerator<T> YieldAnyValue<T>(T start, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
+        {
+            T Evaluator(float t) => parser(start, target, t);
+            return YieldAnyValue(Evaluator, timer);
+        }
+
+        public static IEnumerator<T> YieldAnyValue<T>(T start, T target, Func<T, T, float, T> parser, float duration)
+        {
+            return YieldAnyValue(start, target, parser, YieldTimeNormalized(duration));
         }
 
         public static IEnumerator<T> YieldAnyValue<T>(T start, T target, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
         {
-            T Provider(float t) { return parser(start, target, t); }
-            return YieldAnyValue(Provider, duration, easer);
+            return YieldAnyValue(start, target, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+        }
+        #endregion
+
+        #region Yield any value to
+        public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
+        {
+            var start = getter();
+            while (timer.MoveNext())
+            {
+                var t = timer.Current;
+                var v = parser(start, target, t);
+                setter(v);
+
+                yield return null;
+            }
         }
 
-        public static IEnumerator YieldAnyValueTo<T>(Func<float, T> provider, Action<T> setter, float duration, Func<float, float> easer = null)
+        public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, T target, Func<T, T, float, T> parser, float duration)
         {
-            return YieldAnyValue(provider, duration, easer)
-                .Into(setter);
+            return YieldAnyValueTo(getter, setter, target, parser, YieldTimeNormalized(duration));
         }
 
         public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, T target, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
         {
-            return YieldAnyValue(getter(), target, parser, duration, easer)
+            return YieldAnyValueTo(getter, setter, target, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+        }
+
+        public static IEnumerator YieldAnyValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
+        {
+            return timer.Into(evaluator)
                 .Into(setter);
+        }
+
+        public static IEnumerator YieldAnyValueTo<T>(Func<float, T> evaluator, Action<T> setter, float duration)
+        {
+            return YieldAnyValueTo(evaluator, setter, YieldTimeNormalized(duration));
+        }
+
+        public static IEnumerator YieldAnyValueTo<T>(Func<float, T> evaluator, Action<T> setter, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(evaluator, setter, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
         }
         #endregion
 
