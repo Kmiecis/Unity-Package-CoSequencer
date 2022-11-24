@@ -7,14 +7,14 @@ namespace Common.Coroutines
 {
     public static class GraphicExtensions
     {
-        public static Func<IEnumerator> CoColor(this Graphic self, Color target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, duration, easer);
+        public static IEnumerator CoColor(this Graphic self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, duration, easer);
 
-        public static Func<IEnumerator> CoFade(this Graphic self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, duration, easer);
+        public static IEnumerator CoFade(this Graphic self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, duration, easer);
 
-        public static Func<IEnumerator> CoGradient(this Graphic self, Gradient target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetColor, duration, easer);
+        public static IEnumerator CoGradient(this Graphic self, Gradient target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetColor, duration, easer);
     }
 
     internal static class InternalGraphicExtensions

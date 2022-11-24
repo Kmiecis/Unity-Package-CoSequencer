@@ -7,14 +7,14 @@ namespace Common.Coroutines
 {
     public static class OutlineExtensions
     {
-        public static Func<IEnumerator> CoEffectColor(this Outline self, Color target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetEffectColor, self.SetEffectColor, target, duration, easer);
+        public static IEnumerator CoEffectColor(this Outline self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetEffectColor, self.SetEffectColor, target, duration, easer);
 
-        public static Func<IEnumerator> CoEffectFade(this Outline self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetEffectColorA, self.SetEffectColorA, target, duration, easer);
+        public static IEnumerator CoEffectFade(this Outline self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetEffectColorA, self.SetEffectColorA, target, duration, easer);
 
-        public static Func<IEnumerator> CoEffectGradient(this Outline self, Gradient target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetEffectColor, duration, easer);
+        public static IEnumerator CoEffectGradient(this Outline self, Gradient target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetEffectColor, duration, easer);
     }
 
     internal static class InternalOutlineExtensions

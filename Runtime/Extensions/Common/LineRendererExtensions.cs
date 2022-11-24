@@ -6,17 +6,17 @@ namespace Common.Coroutines
 {
     public static class LineRendererExtensions
     {
-        public static Func<IEnumerator> CoStartColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, duration, easer);
+        public static IEnumerator CoStartColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, duration, easer);
 
-        public static Func<IEnumerator> CoEndColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, duration, easer);
+        public static IEnumerator CoEndColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, duration, easer);
 
-        public static Func<IEnumerator> CoStartWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, duration, easer);
+        public static IEnumerator CoStartWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, duration, easer);
 
-        public static Func<IEnumerator> CoEndWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, duration, easer);
+        public static IEnumerator CoEndWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, duration, easer);
     }
 
     internal static class InternalLineRendererExtensions

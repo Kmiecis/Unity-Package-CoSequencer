@@ -6,29 +6,29 @@ namespace Common.Coroutines
 {
     public static class CameraExtensions
     {
-        public static Func<IEnumerator> CoAspect(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetAspect, self.SetAspect, target, duration, easer);
+        public static IEnumerator CoAspect(this Camera self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetAspect, self.SetAspect, target, duration, easer);
 
-        public static Func<IEnumerator> CoBackgroundColor(this Camera self, Color target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetBackgroundColor, self.SetBackgroundColor, target, duration, easer);
+        public static IEnumerator CoBackgroundColor(this Camera self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetBackgroundColor, self.SetBackgroundColor, target, duration, easer);
 
-        public static Func<IEnumerator> CoNearClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetNearClipPlane, self.SetNearClipPlane, target, duration, easer);
+        public static IEnumerator CoNearClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetNearClipPlane, self.SetNearClipPlane, target, duration, easer);
 
-        public static Func<IEnumerator> CoFarClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetFarClipPlane, self.SetFarClipPlane, target, duration, easer);
+        public static IEnumerator CoFarClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetFarClipPlane, self.SetFarClipPlane, target, duration, easer);
 
-        public static Func<IEnumerator> CoFieldOfView(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetFieldOfView, self.SetFieldOfView, target, duration, easer);
+        public static IEnumerator CoFieldOfView(this Camera self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetFieldOfView, self.SetFieldOfView, target, duration, easer);
 
-        public static Func<IEnumerator> CoOrthographicSize(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetOrthographicSize, self.SetOrthographicSize, target, duration, easer);
+        public static IEnumerator CoOrthographicSize(this Camera self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetOrthographicSize, self.SetOrthographicSize, target, duration, easer);
 
-        public static Func<IEnumerator> CoPixelRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetPixelRect, self.SetPixelRect, target, duration, easer);
+        public static IEnumerator CoPixelRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetPixelRect, self.SetPixelRect, target, duration, easer);
 
-        public static Func<IEnumerator> CoRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
-            => () => UCoroutine.YieldValueTo(self.GetRect, self.SetRect, target, duration, easer);
+        public static IEnumerator CoRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetRect, self.SetRect, target, duration, easer);
     }
 
     internal static class InternalCameraExtensions
