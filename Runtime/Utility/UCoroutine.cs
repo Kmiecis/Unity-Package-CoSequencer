@@ -107,6 +107,33 @@ namespace Common.Coroutines
         }
         #endregion
 
+        #region Yield await
+        public static IEnumerator YieldAwait(IEnumerator coroutine, Func<bool> verifier)
+        {
+            while (!verifier())
+            {
+                yield return null;
+            }
+            while (coroutine.MoveNext())
+            {
+                yield return coroutine.Current;
+            }
+        }
+
+        public static IEnumerator YieldAwait(Func<IEnumerator> provider, Func<bool> verifier)
+        {
+            while (!verifier())
+            {
+                yield return null;
+            }
+            var coroutine = provider();
+            while (coroutine.MoveNext())
+            {
+                yield return coroutine.Current;
+            }
+        }
+        #endregion
+
         #region Yield while
         public static IEnumerator YieldWhile(IEnumerator coroutine, Func<bool> verifier)
         {

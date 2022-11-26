@@ -100,6 +100,13 @@ namespace Common.Coroutines
         }
         #endregion
 
+        #region Await
+        public static IEnumerator Await(this Func<IEnumerator> self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldAwait(self, verifier);
+        }
+        #endregion
+
         #region While
         public static IEnumerator While(this Func<IEnumerator> self, Func<bool> verifier)
         {
