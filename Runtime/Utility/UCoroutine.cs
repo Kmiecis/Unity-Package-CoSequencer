@@ -144,6 +144,14 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield infinitely
+        public static IEnumerator YieldInfinitely()
+        {
+            while (true)
+            {
+                yield return null;
+            }
+        }
+
         public static IEnumerator YieldInfinitely(Func<IEnumerator> provider)
         {
             while (true)
@@ -339,6 +347,12 @@ namespace Common.Coroutines
         public static IEnumerator<float> YieldTimeEased(float duration, Func<float, float> easer)
         {
             return YieldTimeNormalized(duration)
+                .Into(easer);
+        }
+
+        public static IEnumerator<float> YieldRealtimeEased(float duration, Func<float, float> easer)
+        {
+            return YieldRealtimeNormalized(duration)
                 .Into(easer);
         }
         #endregion

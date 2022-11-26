@@ -23,9 +23,9 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(callback));
         }
 
-        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, Func<T> provider)
+        public static IEnumerator<T> Then<T>(this Func<IEnumerator<T>> self, Func<T> provider)
         {
-            return self.Then(UCoroutine.Yield(provider));
+            return UCoroutine.Yield(self).Then(provider);
         }
 
         public static IEnumerator Then(this Func<IEnumerator> self, IEnumerator coroutine)
