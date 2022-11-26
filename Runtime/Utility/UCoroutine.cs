@@ -18,11 +18,6 @@ namespace Common.Coroutines
             yield return yield;
         }
 
-        public static IEnumerator Yield(Coroutine coroutine)
-        {
-            yield return coroutine;
-        }
-
         public static IEnumerator Yield(Action callback)
         {
             callback();
@@ -108,29 +103,17 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield await
-        public static IEnumerator YieldAwait(IEnumerator coroutine, Func<bool> verifier)
+        public static IEnumerator YieldAwait(Func<bool> verifier)
         {
             while (!verifier())
             {
                 yield return null;
-            }
-            while (coroutine.MoveNext())
-            {
-                yield return coroutine.Current;
             }
         }
 
-        public static IEnumerator YieldAwait(Func<IEnumerator> provider, Func<bool> verifier)
+        public static IEnumerator YieldAwait(Coroutine coroutine)
         {
-            while (!verifier())
-            {
-                yield return null;
-            }
-            var coroutine = provider();
-            while (coroutine.MoveNext())
-            {
-                yield return coroutine.Current;
-            }
+            yield return coroutine;
         }
         #endregion
 

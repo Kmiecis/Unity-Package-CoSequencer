@@ -103,7 +103,12 @@ namespace Common.Coroutines
         #region Await
         public static IEnumerator Await(this Func<IEnumerator> self, Func<bool> verifier)
         {
-            return UCoroutine.YieldAwait(self, verifier);
+            return self.Then(UCoroutine.YieldAwait(verifier));
+        }
+
+        public static IEnumerator Await(this Func<IEnumerator> self, Coroutine coroutine)
+        {
+            return self.Then(UCoroutine.YieldAwait(coroutine));
         }
         #endregion
 
