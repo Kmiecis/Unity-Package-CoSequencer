@@ -12,32 +12,6 @@ By default, it should be used to ease creating sequences of actions, but also fe
 
 ## Examples
 
-Under the hood, there is no manager class that handles the sequences. It is all coroutines, down to the core!  
-Which means that we have to be aware that building a sequence works top-down and by default it merges previously built coroutine into new one.  
-As a result, two example methods found below will have a different outcome.  
-
-```cs
-void ExampleMethod1()
-{
-    UCoroutine.Yield()
-        .Wait(1.0f) // Waits 1 second
-        .Then(Move(1.0f)) // Moves for 1 second
-        .With(Scale(1.0f)) // Scales for 1 second while we are waiting
-        .Start(this);
-}
-
-void ExampleMethod2()
-{
-    UCoroutine.Yield()
-        .Wait(1.0f) // Waits 1 second
-        .Then(
-            Move(1.0f) // Moves for 1 second
-                .With(Scale(1.0f)) // Scales for 1 second while we are moving
-        )
-        .Start(this);
-}
-```
-
 <details>
 <summary>
 Creating and starting a sequence
@@ -156,6 +130,41 @@ void OnClick(Action onFinish)
     canvasGroup.CoFade(0.0f, duration, EEase.Linear.ToEaser())
         .With(transform.CoLocalScale(Vector3.one * 1.3f, duration, EaseMath.InBounce))
         .Then(onFinish)
+        .Start(this);
+}
+```
+
+</p>
+</details>
+
+<details>
+<summary>
+<b>Word of knowledge</b>
+</summary>
+<p>
+
+Under the hood, there is no manager class that handles the sequences. It is all coroutines, down to the core!  
+Which means that we have to be aware that building a sequence works top-down and by default it merges previously built coroutine into new one.  
+As a result, two example methods found below will have a different outcome.  
+
+```cs
+void ExampleMethod1()
+{
+    UCoroutine.Yield()
+        .Wait(1.0f) // Waits 1 second
+        .Then(Move(1.0f)) // Moves for 1 second
+        .With(Scale(1.0f)) // Scales for 1 second while we are waiting
+        .Start(this);
+}
+
+void ExampleMethod2()
+{
+    UCoroutine.Yield()
+        .Wait(1.0f) // Waits 1 second
+        .Then(
+            Move(1.0f) // Moves for 1 second
+                .With(Scale(1.0f)) // Scales for 1 second while we are moving
+        )
         .Start(this);
 }
 ```
