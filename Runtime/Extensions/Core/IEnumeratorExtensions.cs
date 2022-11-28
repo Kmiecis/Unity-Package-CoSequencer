@@ -77,14 +77,19 @@ namespace Common.Coroutines
         #endregion
 
         #region Wait
-        public static IEnumerator Wait(this IEnumerator self, float duration)
+        public static IEnumerator WaitSeconds(this IEnumerator self, float duration)
         {
             return self.Then(UCoroutine.YieldTime(duration));
         }
 
-        public static IEnumerator WaitRealtime(this IEnumerator self, float duration)
+        public static IEnumerator WaitSecondsRealtime(this IEnumerator self, float duration)
         {
             return self.Then(UCoroutine.YieldRealtime(duration));
+        }
+
+        public static IEnumerator WaitFrames(this IEnumerator self, int frames)
+        {
+            return self.Then(UCoroutine.YieldFrames(frames));
         }
         #endregion
 
@@ -97,6 +102,18 @@ namespace Common.Coroutines
         public static IEnumerator<U> Into<T, U>(this IEnumerator<T> self, Func<T, U> parser)
         {
             return UCoroutine.YieldInto(self, parser);
+        }
+        #endregion
+
+        #region If
+        public static IEnumerator If(this IEnumerator self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldIf(self, verifier);
+        }
+
+        public static IEnumerator<T> If<T>(this IEnumerator<T> self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldIf(self, verifier);
         }
         #endregion
 

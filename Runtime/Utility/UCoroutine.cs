@@ -103,6 +103,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield await
+        /// <summary> Suspends next coroutine execution until verifier evaluates to true </summary>
         public static IEnumerator YieldAwait(Func<bool> verifier)
         {
             while (!verifier())
@@ -111,13 +112,63 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Suspends next coroutine execution until coroutine finishes </summary>
         public static IEnumerator YieldAwait(Coroutine coroutine)
         {
             yield return coroutine;
         }
         #endregion
 
+        #region Yield if
+        public static IEnumerator YieldIf(IEnumerator coroutine, Func<bool> verifier)
+        {
+            if (verifier())
+            {
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
+            }
+        }
+
+        public static IEnumerator YieldIf(Func<IEnumerator> provider, Func<bool> verifier)
+        {
+            if (verifier())
+            {
+                var coroutine = provider();
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
+            }
+        }
+
+        public static IEnumerator<T> YieldIf<T>(IEnumerator<T> coroutine, Func<bool> verifier)
+        {
+            if (verifier())
+            {
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
+            }
+        }
+
+        public static IEnumerator<T> YieldIf<T>(Func<IEnumerator<T>> provider, Func<bool> verifier)
+        {
+            if (verifier())
+            {
+                var coroutine = provider();
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
+            }
+        }
+        #endregion
+
         #region Yield while
+        /// <summary> Executes coroutine only if and as long as verifier evaluates to true </summary>
         public static IEnumerator YieldWhile(IEnumerator coroutine, Func<bool> verifier)
         {
             while (verifier() && coroutine.MoveNext())
@@ -364,6 +415,17 @@ namespace Common.Coroutines
         {
             return YieldRealtimeNormalized(duration)
                 .Into(easer);
+        }
+        #endregion
+
+        #region Yield frames
+        public static IEnumerator YieldFrames(int frames)
+        {
+            while (frames > 0)
+            {
+                --frames;
+                yield return null;
+            }
         }
         #endregion
 
