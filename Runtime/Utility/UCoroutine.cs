@@ -37,17 +37,17 @@ namespace Common.Coroutines
             }
         }
 
-        public static IEnumerator Yield(Func<IEnumerator> provider)
+        public static IEnumerator<T> Yield<T>(IEnumerator<T> coroutine)
         {
-            var coroutine = provider();
             while (coroutine.MoveNext())
             {
                 yield return coroutine.Current;
             }
         }
 
-        public static IEnumerator<T> Yield<T>(IEnumerator<T> coroutine)
+        public static IEnumerator Yield(Func<IEnumerator> provider)
         {
+            var coroutine = provider();
             while (coroutine.MoveNext())
             {
                 yield return coroutine.Current;
@@ -74,6 +74,14 @@ namespace Common.Coroutines
             }
         }
 
+        public static IEnumerator<U> YieldInto<T, U>(IEnumerator<T> coroutine, Func<T, U> parser)
+        {
+            while (coroutine.MoveNext())
+            {
+                yield return parser(coroutine.Current);
+            }
+        }
+
         public static IEnumerator YieldInto<T>(Func<IEnumerator<T>> provider, Action<T> consumer)
         {
             var coroutine = provider();
@@ -81,14 +89,6 @@ namespace Common.Coroutines
             {
                 consumer(coroutine.Current);
                 yield return null;
-            }
-        }
-
-        public static IEnumerator<U> YieldInto<T, U>(IEnumerator<T> coroutine, Func<T, U> parser)
-        {
-            while (coroutine.MoveNext())
-            {
-                yield return parser(coroutine.Current);
             }
         }
 
@@ -131,11 +131,10 @@ namespace Common.Coroutines
             }
         }
 
-        public static IEnumerator YieldIf(Func<IEnumerator> provider, Func<bool> verifier)
+        public static IEnumerator<T> YieldIf<T>(IEnumerator<T> coroutine, Func<bool> verifier)
         {
             if (verifier())
             {
-                var coroutine = provider();
                 while (coroutine.MoveNext())
                 {
                     yield return coroutine.Current;
@@ -143,10 +142,11 @@ namespace Common.Coroutines
             }
         }
 
-        public static IEnumerator<T> YieldIf<T>(IEnumerator<T> coroutine, Func<bool> verifier)
+        public static IEnumerator YieldIf(Func<IEnumerator> provider, Func<bool> verifier)
         {
             if (verifier())
             {
+                var coroutine = provider();
                 while (coroutine.MoveNext())
                 {
                     yield return coroutine.Current;
@@ -177,17 +177,17 @@ namespace Common.Coroutines
             }
         }
 
-        public static IEnumerator YieldWhile(Func<IEnumerator> provider, Func<bool> verifier)
+        public static IEnumerator<T> YieldWhile<T>(IEnumerator<T> coroutine, Func<bool> verifier)
         {
-            var coroutine = provider();
             while (verifier() && coroutine.MoveNext())
             {
                 yield return coroutine.Current;
             }
         }
 
-        public static IEnumerator<T> YieldWhile<T>(IEnumerator<T> coroutine, Func<bool> verifier)
+        public static IEnumerator YieldWhile(Func<IEnumerator> provider, Func<bool> verifier)
         {
+            var coroutine = provider();
             while (verifier() && coroutine.MoveNext())
             {
                 yield return coroutine.Current;
@@ -200,6 +200,34 @@ namespace Common.Coroutines
             while (verifier() && coroutine.MoveNext())
             {
                 yield return coroutine.Current;
+            }
+        }
+        #endregion
+
+        #region Yield repeat
+        public static IEnumerator YieldRepeat(Func<IEnumerator> provider, int repeats)
+        {
+            while (repeats > 0)
+            {
+                var coroutine = provider();
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
+                --repeats;
+            }
+        }
+
+        public static IEnumerator<T> YieldRepeat<T>(Func<IEnumerator<T>> provider, int repeats)
+        {
+            while (repeats > 0)
+            {
+                var coroutine = provider();
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
+                --repeats;
             }
         }
         #endregion

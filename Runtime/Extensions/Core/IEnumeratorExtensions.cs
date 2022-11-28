@@ -28,6 +28,16 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(provider));
         }
 
+        public static IEnumerator Then(this IEnumerator self, IEnumerator coroutine)
+        {
+            return UCoroutine.YieldSequentially(self, coroutine);
+        }
+
+        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, IEnumerator<T> coroutine)
+        {
+            return UCoroutine.YieldSequentially(self, coroutine);
+        }
+
         public static IEnumerator Then(this IEnumerator self, Func<IEnumerator> provider)
         {
             return self.Then(UCoroutine.Yield(provider));
@@ -38,14 +48,9 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(provider));
         }
 
-        public static IEnumerator Then(this IEnumerator self, IEnumerator coroutine)
+        public static IEnumerator Then(this IEnumerator self, params IEnumerator[] coroutines)
         {
-            return UCoroutine.YieldSequentially(self, coroutine);
-        }
-
-        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, IEnumerator<T> coroutine)
-        {
-            return UCoroutine.YieldSequentially(self, coroutine);
+            return self.Then(UCoroutine.YieldParallel(coroutines));
         }
         #endregion
 
@@ -65,14 +70,26 @@ namespace Common.Coroutines
             return self.With(UCoroutine.Yield(callback));
         }
 
+        public static IEnumerator With(this IEnumerator self, IEnumerator coroutine)
+        {
+            return UCoroutine.YieldParallel(self, coroutine);
+        }
+
         public static IEnumerator With(this IEnumerator self, Func<IEnumerator> provider)
         {
             return self.With(UCoroutine.Yield(provider));
         }
+        #endregion
 
-        public static IEnumerator With(this IEnumerator self, IEnumerator coroutine)
+        #region Into
+        public static IEnumerator Into<T>(this IEnumerator<T> self, Action<T> consumer)
         {
-            return UCoroutine.YieldParallel(self, coroutine);
+            return UCoroutine.YieldInto(self, consumer);
+        }
+
+        public static IEnumerator<U> Into<T, U>(this IEnumerator<T> self, Func<T, U> parser)
+        {
+            return UCoroutine.YieldInto(self, parser);
         }
         #endregion
 
@@ -91,51 +108,35 @@ namespace Common.Coroutines
         {
             return self.Then(UCoroutine.YieldFrames(frames));
         }
-        #endregion
 
-        #region Into
-        public static IEnumerator Into<T>(this IEnumerator<T> self, Action<T> consumer)
-        {
-            return UCoroutine.YieldInto(self, consumer);
-        }
-
-        public static IEnumerator<U> Into<T, U>(this IEnumerator<T> self, Func<T, U> parser)
-        {
-            return UCoroutine.YieldInto(self, parser);
-        }
-        #endregion
-
-        #region If
-        public static IEnumerator If(this IEnumerator self, Func<bool> verifier)
-        {
-            return UCoroutine.YieldIf(self, verifier);
-        }
-
-        public static IEnumerator<T> If<T>(this IEnumerator<T> self, Func<bool> verifier)
-        {
-            return UCoroutine.YieldIf(self, verifier);
-        }
-        #endregion
-
-        #region Await
-        public static IEnumerator Await(this IEnumerator self, Func<bool> verifier)
+        public static IEnumerator WaitTrue(this IEnumerator self, Func<bool> verifier)
         {
             return self.Then(UCoroutine.YieldAwait(verifier));
         }
 
-        public static IEnumerator Await(this IEnumerator self, Coroutine coroutine)
+        public static IEnumerator WaitFinish(this IEnumerator self, Coroutine coroutine)
         {
             return self.Then(UCoroutine.YieldAwait(coroutine));
         }
         #endregion
 
-        #region While
-        public static IEnumerator While(this IEnumerator self, Func<bool> verifier)
+        #region Execute
+        public static IEnumerator ExecuteIf(this IEnumerator self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldIf(self, verifier);
+        }
+
+        public static IEnumerator<T> ExecuteIf<T>(this IEnumerator<T> self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldIf(self, verifier);
+        }
+        
+        public static IEnumerator ExecuteWhile(this IEnumerator self, Func<bool> verifier)
         {
             return UCoroutine.YieldWhile(self, verifier);
         }
 
-        public static IEnumerator<T> While<T>(this IEnumerator<T> self, Func<bool> verifier)
+        public static IEnumerator<T> ExecuteWhile<T>(this IEnumerator<T> self, Func<bool> verifier)
         {
             return UCoroutine.YieldWhile(self, verifier);
         }
