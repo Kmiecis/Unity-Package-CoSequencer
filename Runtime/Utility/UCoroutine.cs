@@ -13,6 +13,19 @@ namespace Common.Coroutines
             yield return null;
         }
 
+        public static IEnumerator<T> Yield<T>(T value)
+        {
+            yield return value;
+        }
+
+        public static IEnumerator<T> Yield<T>(params T[] values)
+        {
+            for (int i = 0; i < values.Length; ++i)
+            {
+                yield return values[i];
+            }
+        }
+
         public static IEnumerator Yield(YieldInstruction yield)
         {
             yield return yield;
