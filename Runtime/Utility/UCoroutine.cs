@@ -527,6 +527,30 @@ namespace Common.Coroutines
             return YieldAnyValueTo(getter, setter, target, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
         }
 
+        public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, Func<T> provider, Func<T, T, float, T> parser, IEnumerator<float> timer)
+        {
+            var start = getter();
+            var target = provider();
+            while (timer.MoveNext())
+            {
+                var t = timer.Current;
+                var v = parser(start, target, t);
+                setter(v);
+
+                yield return null;
+            }
+        }
+
+        public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, Func<T> provider, Func<T, T, float, T> parser, float duration)
+        {
+            return YieldAnyValueTo(getter, setter, provider, parser, YieldTimeNormalized(duration));
+        }
+
+        public static IEnumerator YieldAnyValueTo<T>(Func<T> getter, Action<T> setter, Func<T> provider, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+        }
+
         public static IEnumerator YieldAnyValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
         {
             return timer.Into(evaluator)
@@ -554,6 +578,11 @@ namespace Common.Coroutines
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
         }
+
+        public static IEnumerator YieldValueTo(Func<float> getter, Action<float> setter, Func<float> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
+        }
         #endregion
 
         #region Ints
@@ -565,6 +594,11 @@ namespace Common.Coroutines
         public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
+        }
+
+        public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, Func<int> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
         }
         #endregion
 
@@ -578,6 +612,11 @@ namespace Common.Coroutines
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
         }
+
+        public static IEnumerator YieldValueTo(Func<Vector2> getter, Action<Vector2> setter, Func<Vector2> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
+        }
         #endregion
 
         #region Vector2Ints
@@ -589,6 +628,11 @@ namespace Common.Coroutines
         public static IEnumerator YieldValueTo(Func<Vector2Int> getter, Action<Vector2Int> setter, Vector2Int target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
+        }
+
+        public static IEnumerator YieldValueTo(Func<Vector2Int> getter, Action<Vector2Int> setter, Func<Vector2Int> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
         }
         #endregion
 
@@ -602,6 +646,11 @@ namespace Common.Coroutines
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
         }
+
+        public static IEnumerator YieldValueTo(Func<Vector3> getter, Action<Vector3> setter, Func<Vector3> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
+        }
         #endregion
 
         #region Vector3Ints
@@ -613,6 +662,11 @@ namespace Common.Coroutines
         public static IEnumerator YieldValueTo(Func<Vector3Int> getter, Action<Vector3Int> setter, Vector3Int target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
+        }
+
+        public static IEnumerator YieldValueTo(Func<Vector3Int> getter, Action<Vector3Int> setter, Func<Vector3Int> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
         }
         #endregion
 
@@ -626,6 +680,11 @@ namespace Common.Coroutines
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
         }
+
+        public static IEnumerator YieldValueTo(Func<Vector4> getter, Action<Vector4> setter, Func<Vector4> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
+        }
         #endregion
 
         #region Quaternions
@@ -637,6 +696,11 @@ namespace Common.Coroutines
         public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Quaternion target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
+        }
+
+        public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Func<Quaternion> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
         }
         #endregion
 
@@ -651,6 +715,10 @@ namespace Common.Coroutines
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
         }
 
+        public static IEnumerator YieldValueTo(Func<Color> getter, Action<Color> setter, Func<Color> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
+        }
         #endregion
 
         #region Rects
@@ -662,6 +730,11 @@ namespace Common.Coroutines
         public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, float duration, Func<float, float> easer = null)
         {
             return YieldAnyValueTo(getter, setter, target, UMath.Lerp, duration, easer);
+        }
+
+        public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Func<Rect> provider, float duration, Func<float, float> easer = null)
+        {
+            return YieldAnyValueTo(getter, setter, provider, UMath.Lerp, duration, easer);
         }
         #endregion
     }

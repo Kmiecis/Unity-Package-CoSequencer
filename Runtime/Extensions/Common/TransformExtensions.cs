@@ -36,6 +36,9 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, target, duration, easer);
 
+        public static IEnumerator CoLookAt(this Transform self, Vector3 position, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, () => self.GetLookAtRotation(position), duration, easer);
+
         public static IEnumerator CoLocalScale(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, target, duration, easer);
 
@@ -133,6 +136,9 @@ namespace Common.Coroutines
 
         public static void SetEulerRotationZ(this Transform self, float value)
             => self.eulerAngles = self.eulerAngles.WithZ(value);
+
+        public static Quaternion GetLookAtRotation(this Transform self, Vector3 value)
+            => Quaternion.LookRotation((value - self.position).normalized);
         #endregion
 
         #region Local rotation
