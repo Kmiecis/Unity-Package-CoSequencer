@@ -42,6 +42,9 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalScale(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, target, duration, easer);
 
+        public static IEnumerator CoLocalScale(this Transform self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, Vector3.one * target, duration, easer);
+
         public static IEnumerator CoLocalScaleX(this Transform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalScaleX, self.SetLocalScaleX, target, duration, easer);
 
