@@ -19,10 +19,10 @@ namespace Common.Coroutines
             => UCoroutine.YieldValueTo(() => self.GetFade(propertyId), f => self.SetFade(propertyId, f), target, duration, easer);
 
         public static IEnumerator CoGradient(this Material self, Gradient target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetColor, duration, easer);
+            => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, duration, easer);
 
         public static IEnumerator CoGradient(this Material self, Gradient target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldAnyValueTo(target.Evaluate, c => self.SetColor(propertyId, c), duration, easer);
+            => UCoroutine.YieldValueTo(target.Evaluate, c => self.SetColor(propertyId, c), duration, easer);
 
         public static IEnumerator CoFloat(this Material self, float target, int propertyId, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(() => self.GetFloat(propertyId), f => self.SetFloat(propertyId, f), target, duration, easer);

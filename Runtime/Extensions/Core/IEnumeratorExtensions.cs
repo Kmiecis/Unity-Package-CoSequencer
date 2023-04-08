@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Common.Coroutines
 {
-    public static partial class IEnumeratorExtensions
+    public static class IEnumeratorExtensions
     {
         #region Then
         public static IEnumerator Then(this IEnumerator self, YieldInstruction yield)

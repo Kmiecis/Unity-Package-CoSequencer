@@ -13,7 +13,7 @@ namespace Common.Coroutines
             => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, duration, easer);
 
         public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldAnyValueTo(target.Evaluate, self.SetColor, duration, easer);
+            => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, duration, easer);
     }
 
     internal static class InternalSpriteRendererExtensions
