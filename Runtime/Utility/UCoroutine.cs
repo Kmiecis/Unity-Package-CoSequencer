@@ -26,11 +26,6 @@ namespace Common.Coroutines
             }
         }
 
-        public static IEnumerator Yield(YieldInstruction yield)
-        {
-            yield return yield;
-        }
-
         public static IEnumerator Yield(Action callback)
         {
             callback();
@@ -123,6 +118,12 @@ namespace Common.Coroutines
             {
                 yield return null;
             }
+        }
+
+        /// <summary> Suspends next coroutine execution until yield instruction finishes </summary>
+        public static IEnumerator YieldAwait(YieldInstruction yield)
+        {
+            yield return yield;
         }
 
         /// <summary> Suspends next coroutine execution until coroutine finishes </summary>
@@ -483,7 +484,7 @@ namespace Common.Coroutines
 
         public static IEnumerator<T> YieldValue<T>(Func<float, T> evaluator, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(evaluator, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+            return YieldValue(evaluator, YieldTimeEased(duration, easer ?? Easings.SmoothStep));
         }
 
         public static IEnumerator YieldValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
@@ -499,7 +500,7 @@ namespace Common.Coroutines
 
         public static IEnumerator YieldValueTo<T>(Func<float, T> evaluator, Action<T> setter, float duration, Func<float, float> easer = null)
         {
-            return YieldValueTo(evaluator, setter, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+            return YieldValueTo(evaluator, setter, YieldTimeEased(duration, easer ?? Easings.SmoothStep));
         }
 
         public static IEnumerator<T> YieldValue<T>(T start, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
@@ -515,7 +516,7 @@ namespace Common.Coroutines
 
         public static IEnumerator<T> YieldValue<T>(T start, T target, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
         {
-            return YieldValue(start, target, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+            return YieldValue(start, target, parser, YieldTimeEased(duration, easer ?? Easings.SmoothStep));
         }
         
         public static IEnumerator YieldValueTo<T>(Func<T> getter, Action<T> setter, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
@@ -538,7 +539,7 @@ namespace Common.Coroutines
 
         public static IEnumerator YieldValueTo<T>(Func<T> getter, Action<T> setter, T target, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
         {
-            return YieldValueTo(getter, setter, target, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+            return YieldValueTo(getter, setter, target, parser, YieldTimeEased(duration, easer ?? Easings.SmoothStep));
         }
 
         public static IEnumerator YieldValueTo<T>(Func<T> getter, Action<T> setter, Func<T> provider, Func<T, T, float, T> parser, IEnumerator<float> timer)
@@ -562,7 +563,7 @@ namespace Common.Coroutines
 
         public static IEnumerator YieldValueTo<T>(Func<T> getter, Action<T> setter, Func<T> provider, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
         {
-            return YieldValueTo(getter, setter, provider, parser, YieldTimeEased(duration, easer ?? EaseMath.SmoothStep));
+            return YieldValueTo(getter, setter, provider, parser, YieldTimeEased(duration, easer ?? Easings.SmoothStep));
         }
         #endregion
 

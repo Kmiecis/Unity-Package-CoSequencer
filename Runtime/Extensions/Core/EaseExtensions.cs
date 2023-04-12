@@ -2,47 +2,47 @@
 
 namespace Common.Coroutines
 {
-    public static class EEaseExtensions
+    public static class EEaseTypeExtensions
     {
-        public static Func<float, float> ToEaser(this EEase ease)
+        public static Func<float, float> ToEaser(this EEaseType self)
         {
-            switch (ease)
+            switch (self)
             {
-                case EEase.Step: return EaseMath.Step;
-                case EEase.SmoothStep: return EaseMath.SmoothStep;
-                case EEase.SmootherStep: return EaseMath.SmootherStep;
-                case EEase.InSine: return EaseMath.InSine;
-                case EEase.OutSine: return EaseMath.OutSine;
-                case EEase.InOutSine: return EaseMath.InOutSine;
-                case EEase.InQuad: return EaseMath.InQuad;
-                case EEase.OutQuad: return EaseMath.OutQuad;
-                case EEase.InOutQuad: return EaseMath.InOutQuad;
-                case EEase.InCubic: return EaseMath.InCubic;
-                case EEase.OutCubic: return EaseMath.OutCubic;
-                case EEase.InOutCubic: return EaseMath.InOutCubic;
-                case EEase.InQuart: return EaseMath.InQuart;
-                case EEase.OutQuart: return EaseMath.OutQuart;
-                case EEase.InOutQuart: return EaseMath.InOutQuart;
-                case EEase.InQuint: return EaseMath.InQuint;
-                case EEase.OutQuint: return EaseMath.OutQuint;
-                case EEase.InOutQuint: return EaseMath.InOutQuint;
-                case EEase.InExpo: return EaseMath.InExpo;
-                case EEase.OutExpo: return EaseMath.OutExpo;
-                case EEase.InOutExpo: return EaseMath.InOutExpo;
-                case EEase.InCirc: return EaseMath.InCirc;
-                case EEase.OutCirc: return EaseMath.OutCirc;
-                case EEase.InOutCirc: return EaseMath.InOutCirc;
-                case EEase.InBack: return EaseMath.InBack;
-                case EEase.OutBack: return EaseMath.OutBack;
-                case EEase.InOutBack: return EaseMath.InOutBack;
-                case EEase.InElastic: return EaseMath.InElastic;
-                case EEase.OutElastic: return EaseMath.OutElastic;
-                case EEase.InOutElastic: return EaseMath.InOutElastic;
-                case EEase.InBounce: return EaseMath.InBounce;
-                case EEase.OutBounce: return EaseMath.OutBounce;
-                case EEase.InOutBounce: return EaseMath.InOutBounce;
+                case EEaseType.Step: return Easings.Step;
+                case EEaseType.SmoothStep: return Easings.SmoothStep;
+                case EEaseType.SmootherStep: return Easings.SmootherStep;
+                case EEaseType.InSine: return Easings.InSine;
+                case EEaseType.OutSine: return Easings.OutSine;
+                case EEaseType.InOutSine: return Easings.InOutSine;
+                case EEaseType.InQuad: return Easings.InQuad;
+                case EEaseType.OutQuad: return Easings.OutQuad;
+                case EEaseType.InOutQuad: return Easings.InOutQuad;
+                case EEaseType.InCubic: return Easings.InCubic;
+                case EEaseType.OutCubic: return Easings.OutCubic;
+                case EEaseType.InOutCubic: return Easings.InOutCubic;
+                case EEaseType.InQuart: return Easings.InQuart;
+                case EEaseType.OutQuart: return Easings.OutQuart;
+                case EEaseType.InOutQuart: return Easings.InOutQuart;
+                case EEaseType.InQuint: return Easings.InQuint;
+                case EEaseType.OutQuint: return Easings.OutQuint;
+                case EEaseType.InOutQuint: return Easings.InOutQuint;
+                case EEaseType.InExpo: return Easings.InExpo;
+                case EEaseType.OutExpo: return Easings.OutExpo;
+                case EEaseType.InOutExpo: return Easings.InOutExpo;
+                case EEaseType.InCirc: return Easings.InCirc;
+                case EEaseType.OutCirc: return Easings.OutCirc;
+                case EEaseType.InOutCirc: return Easings.InOutCirc;
+                case EEaseType.InBack: return Easings.InBack;
+                case EEaseType.OutBack: return Easings.OutBack;
+                case EEaseType.InOutBack: return Easings.InOutBack;
+                case EEaseType.InElastic: return Easings.InElastic;
+                case EEaseType.OutElastic: return Easings.OutElastic;
+                case EEaseType.InOutElastic: return Easings.InOutElastic;
+                case EEaseType.InBounce: return Easings.InBounce;
+                case EEaseType.OutBounce: return Easings.OutBounce;
+                case EEaseType.InOutBounce: return Easings.InOutBounce;
             }
-            return EaseMath.Linear;
+            return Easings.Linear;
         }
     }
 }

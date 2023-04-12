@@ -8,14 +8,14 @@ namespace Common.Coroutines
     public static class IEnumeratorExtensions
     {
         #region Then
-        public static IEnumerator Then(this IEnumerator self, YieldInstruction yield)
+        public static IEnumerator Then<T>(this IEnumerator self, T value)
         {
-            return self.Then(UCoroutine.Yield(yield));
+            return self.Then(UCoroutine.Yield(value));
         }
 
-        public static IEnumerator Then(this IEnumerator self, Coroutine coroutine)
+        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, T value)
         {
-            return self.Then(UCoroutine.Yield(coroutine));
+            return self.Then(UCoroutine.Yield(value));
         }
 
         public static IEnumerator Then(this IEnumerator self, Action callback)
@@ -52,17 +52,17 @@ namespace Common.Coroutines
         {
             return self.Then(UCoroutine.YieldParallel(coroutines));
         }
+
+        public static IEnumerator Then<T>(this IEnumerator self, params IEnumerator<T>[] coroutines)
+        {
+            return self.Then(UCoroutine.YieldParallel(coroutines));
+        }
         #endregion
 
         #region With
-        public static IEnumerator With(this IEnumerator self, YieldInstruction yield)
+        public static IEnumerator With<T>(this IEnumerator self, T value)
         {
-            return self.With(UCoroutine.Yield(yield));
-        }
-
-        public static IEnumerator With(this IEnumerator self, Coroutine coroutine)
-        {
-            return self.With(UCoroutine.Yield(coroutine));
+            return self.With(UCoroutine.Yield(value));
         }
 
         public static IEnumerator With(this IEnumerator self, Action callback)
@@ -143,6 +143,19 @@ namespace Common.Coroutines
         public static IEnumerator<T> While<T>(this IEnumerator<T> self, Func<bool> verifier)
         {
             return UCoroutine.YieldWhile(self, verifier);
+        }
+        #endregion
+
+        #region Timer
+        public static IEnumerator<float> Ease(this IEnumerator<float> self, Func<float, float> easer)
+        {
+            return UCoroutine.YieldInto(self, easer);
+        }
+
+        public static IEnumerator<float> Flip(this IEnumerator<float> self)
+        {
+            float OneMinus(float f) => 1.0f - f;
+            return UCoroutine.YieldInto(self, OneMinus);
         }
         #endregion
 
