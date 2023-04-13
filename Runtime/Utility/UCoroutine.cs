@@ -218,7 +218,7 @@ namespace Common.Coroutines
             }
         }
 
-        public static IEnumerator<T> YieldWhile(Func<T> provider, Func<bool> verifier)
+        public static IEnumerator<T> YieldWhile<T>(Func<T> provider, Func<bool> verifier)
         {
             while (verifier())
             {
