@@ -13,6 +13,16 @@ namespace Common.Coroutines
         {
             yield return null;
         }
+        
+        public static IEnumerator Yield(YieldInstruction yield)
+        {
+            yield return yield;
+        }
+        
+        public static IEnumerator Yield(Coroutine coroutine)
+        {
+            yield return coroutine;
+        }
 
         /// <summary> Yields value once </summary>
         public static IEnumerator<T> Yield<T>(T value)
@@ -199,6 +209,23 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield while
+        public static IEnumerator YieldWhile(Action action, Func<bool> verifier)
+        {
+            while (verifier())
+            {
+                action();
+                yield return null;
+            }
+        }
+
+        public static IEnumerator<T> YieldWhile(Func<T> provider, Func<bool> verifier)
+        {
+            while (verifier())
+            {
+                yield return provider();
+            }
+        }
+        
         /// <summary> Executes coroutine only if and as long as verifier evaluates to true </summary>
         public static IEnumerator YieldWhile(IEnumerator coroutine, Func<bool> verifier)
         {
@@ -240,7 +267,7 @@ namespace Common.Coroutines
 
         #region Yield until
         /// <summary> Executes action until coroutine finishes </summary>
-        public static IEnumerator YieldUntil(IEnumerator coroutine, Action action)
+        public static IEnumerator YieldUntil(Action action, IEnumerator coroutine)
         {
             while (coroutine.MoveNext())
             {
@@ -250,7 +277,7 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes action until coroutine finishes </summary>
-        public static IEnumerator<T> YieldUntil<T>(IEnumerator<T> coroutine, Action action)
+        public static IEnumerator<T> YieldUntil<T>(Action action, IEnumerator<T> coroutine)
         {
             while (coroutine.MoveNext())
             {
@@ -260,7 +287,7 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes action until created coroutine finishes </summary>
-        public static IEnumerator YieldUntil(Func<IEnumerator> provider, Action action)
+        public static IEnumerator YieldUntil(Action action, Func<IEnumerator> provider)
         {
             var coroutine = provider();
             while (coroutine.MoveNext())
@@ -271,7 +298,7 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes action until created coroutine finishes </summary>
-        public static IEnumerator<T> YieldUntil<T>(Func<IEnumerator<T>> provider, Action action)
+        public static IEnumerator<T> YieldUntil<T>(Action action, Func<IEnumerator<T>> provider)
         {
             var coroutine = provider();
             while (coroutine.MoveNext())
