@@ -10,12 +10,12 @@ namespace Common.Coroutines
         #region Then
         public static IEnumerator Then(this IEnumerator self, YieldInstruction yield)
         {
-            return self.Then(UCoroutine.Yield(value));
+            return self.Then(UCoroutine.Yield(yield));
         }
 
-        public static IEnumerator Then(this IEnumerator self, Coroutine value)
+        public static IEnumerator Then(this IEnumerator self, Coroutine coroutine)
         {
-            return self.Then(UCoroutine.Yield(value));
+            return self.Then(UCoroutine.Yield(coroutine));
         }
 
         public static IEnumerator Then(this IEnumerator self, Action callback)
@@ -62,12 +62,12 @@ namespace Common.Coroutines
         #region With
         public static IEnumerator With(this IEnumerator self, YieldInstruction yield)
         {
-            return self.With(UCoroutine.Yield(value));
+            return self.With(UCoroutine.Yield(yield));
         }
 
-        public static IEnumerator With(this IEnumerator self, Coroutine value)
+        public static IEnumerator With(this IEnumerator self, Coroutine coroutine)
         {
-            return self.With(UCoroutine.Yield(value));
+            return self.With(UCoroutine.Yield(coroutine));
         }
 
         public static IEnumerator With(this IEnumerator self, IEnumerator coroutine)
