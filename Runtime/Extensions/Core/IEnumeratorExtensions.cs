@@ -79,6 +79,11 @@ namespace Common.Coroutines
         {
             return self.With(UCoroutine.Yield(provider));
         }
+        
+        public static IEnumerator With(this IEnumerator self, Action action)
+        {
+            return UCoroutine.YieldUntil(action, self);
+        }
         #endregion
 
         #region Into
