@@ -8,12 +8,12 @@ namespace Common.Coroutines
     public static class IEnumeratorExtensions
     {
         #region Then
-        public static IEnumerator Then<T>(this IEnumerator self, T value)
+        public static IEnumerator Then(this IEnumerator self, YieldInstruction yield)
         {
             return self.Then(UCoroutine.Yield(value));
         }
 
-        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, T value)
+        public static IEnumerator Then(this IEnumerator self, Coroutine value)
         {
             return self.Then(UCoroutine.Yield(value));
         }
@@ -60,14 +60,14 @@ namespace Common.Coroutines
         #endregion
 
         #region With
-        public static IEnumerator With<T>(this IEnumerator self, T value)
+        public static IEnumerator With(this IEnumerator self, YieldInstruction yield)
         {
             return self.With(UCoroutine.Yield(value));
         }
 
-        public static IEnumerator With(this IEnumerator self, Action callback)
+        public static IEnumerator With(this IEnumerator self, Coroutine value)
         {
-            return self.With(UCoroutine.Yield(callback));
+            return self.With(UCoroutine.Yield(value));
         }
 
         public static IEnumerator With(this IEnumerator self, IEnumerator coroutine)
