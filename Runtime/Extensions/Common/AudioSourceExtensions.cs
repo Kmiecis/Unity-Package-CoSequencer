@@ -7,10 +7,10 @@ namespace Common.Coroutines
     public static class AudioSourceExtensions
     {
         public static IEnumerator CoPitch(this AudioSource self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPitch, self.SetPitch, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetPitch, self.SetPitch, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoVolume(this AudioSource self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetVolume, self.SetVolume, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetVolume, self.SetVolume, target, UCoroutine.YieldTimeEased(duration, easer));
     }
 
     internal static class InternalAudioSourceExtensions

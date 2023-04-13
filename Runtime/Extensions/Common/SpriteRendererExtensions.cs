@@ -7,13 +7,13 @@ namespace Common.Coroutines
     public static class SpriteRendererExtensions
     {
         public static IEnumerator CoColor(this SpriteRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoFade(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, duration, easer);
+            => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
     }
 
     internal static class InternalSpriteRendererExtensions

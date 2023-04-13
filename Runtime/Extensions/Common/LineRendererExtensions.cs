@@ -7,16 +7,16 @@ namespace Common.Coroutines
     public static class LineRendererExtensions
     {
         public static IEnumerator CoStartColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoEndColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoStartWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoEndWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, UCoroutine.YieldTimeEased(duration, easer));
     }
 
     internal static class InternalLineRendererExtensions

@@ -152,12 +152,12 @@ namespace Common.Coroutines
         #endregion
 
         #region Timer
-        public static IEnumerator<float> Ease(this IEnumerator<float> self, Func<float, float> easer)
+        public static IEnumerator<float> Eased(this IEnumerator<float> self, Func<float, float> easer = null)
         {
-            return UCoroutine.YieldInto(self, easer);
+            return UCoroutine.YieldInto(self, easer ?? Easings.SmoothStep);
         }
 
-        public static IEnumerator<float> Flip(this IEnumerator<float> self)
+        public static IEnumerator<float> Flipped(this IEnumerator<float> self)
         {
             float OneMinus(float f) => 1.0f - f;
             return UCoroutine.YieldInto(self, OneMinus);

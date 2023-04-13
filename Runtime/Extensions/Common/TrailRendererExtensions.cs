@@ -7,19 +7,19 @@ namespace Common.Coroutines
     public static class TrailRendererExtensions
     {
         public static IEnumerator CoStartColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoEndColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoTime(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetTime, self.SetTime, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetTime, self.SetTime, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoStartWidth(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoEndWidth(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, duration, easer);
+            => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, UCoroutine.YieldTimeEased(duration, easer));
     }
 
     internal static class InternalTrailRendererExtensions
