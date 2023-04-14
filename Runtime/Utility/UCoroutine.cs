@@ -542,16 +542,16 @@ namespace Common.Coroutines
             yield return 1.0f;
         }
 
-        public static IEnumerator<float> YieldTimeEased(float duration, Func<float, float> easer)
+        public static IEnumerator<float> YieldTimeEased(float duration, Func<float, float> easer = null)
         {
             return YieldTimeNormalized(duration)
-                .Into(easer);
+                .Eased(easer);
         }
 
-        public static IEnumerator<float> YieldRealtimeEased(float duration, Func<float, float> easer)
+        public static IEnumerator<float> YieldRealtimeEased(float duration, Func<float, float> easer = null)
         {
             return YieldRealtimeNormalized(duration)
-                .Into(easer);
+                .Eased(easer);
         }
         #endregion
 
@@ -723,16 +723,16 @@ namespace Common.Coroutines
 
         #region Time
         public static IEnumerator CoTimeScale(float target, float duration, Func<float, float> easer = null)
-            => YieldValueTo(UTime.GetTimeScale, UTime.SetTimeScale, target, YieldRealtimeNormalized(duration).Eased(easer));
+            => YieldValueTo(UTime.GetTimeScale, UTime.SetTimeScale, target, YieldRealtimeEased(duration, easer));
 
         public static IEnumerator CoFixedDeltaTime(float target, float duration, Func<float, float> easer = null)
-            => YieldValueTo(UTime.GetFixedDeltaTime, UTime.SetFixedDeltaTime, target, YieldRealtimeNormalized(duration).Into(easer ?? Easings.SmoothStep));
+            => YieldValueTo(UTime.GetFixedDeltaTime, UTime.SetFixedDeltaTime, target, YieldRealtimeEased(duration, easer));
 
         public static IEnumerator CoMaximumDeltaTime(float target, float duration, Func<float, float> easer = null)
-            => YieldValueTo(UTime.GetMaximumDeltaTime, UTime.SetMaximumDeltaTime, target, YieldRealtimeNormalized(duration).Into(easer ?? Easings.SmoothStep));
+            => YieldValueTo(UTime.GetMaximumDeltaTime, UTime.SetMaximumDeltaTime, target, YieldRealtimeEased(duration, easer));
 
         public static IEnumerator CoMaximumParticleDeltaTime(float target, float duration, Func<float, float> easer = null)
-            => YieldValueTo(UTime.GetMaximumParticleDeltaTime, UTime.SetMaximumParticleDeltaTime, target, YieldRealtimeNormalized(duration).Into(easer ?? Easings.SmoothStep));
+            => YieldValueTo(UTime.GetMaximumParticleDeltaTime, UTime.SetMaximumParticleDeltaTime, target, YieldRealtimeEased(duration, easer));
         #endregion
     }
 }
