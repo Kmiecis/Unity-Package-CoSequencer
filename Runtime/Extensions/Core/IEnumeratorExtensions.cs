@@ -157,10 +157,10 @@ namespace Common.Coroutines
             return UCoroutine.YieldInto(self, easer ?? Easings.SmoothStep);
         }
 
-        public static IEnumerator<float> Flipped(this IEnumerator<float> self)
+        public static IEnumerator<float> Flipped(this IEnumerator<float> self, float duration = 1.0f)
         {
-            float OneMinus(float f) => 1.0f - f;
-            return UCoroutine.YieldInto(self, OneMinus);
+            float Flip(float f) => duration - f;
+            return UCoroutine.YieldInto(self, Flip);
         }
         #endregion
 
