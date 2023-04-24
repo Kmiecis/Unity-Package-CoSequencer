@@ -2,13 +2,24 @@
 
 ## Description
 
-Common scripts that assist in managing Coroutines
+Common scripts that assist in managing sequences of Coroutines
 
 ## Introduction
 
 Have you ever wondered how task sequencing can be done by using Unity Coroutines? Well, wonder no more!  
 This package is an attempt to utilize one of the most widely known feature of Unity and yet one that, in my opinion, is mostly underrated, due to its bad press.  
 By default, it should be used to ease creating sequences of actions, but also features some cool built-in methods, commonly known from other similar sequencers.  
+
+## Installation
+
+Add the package via Package Manager by adding it from git URL:  
+`https://github.com/kmiecis/unity-package-coroutines.git`  
+Package Manager can be found inside the Unity Editor in the Window tab
+
+OR
+
+Git add this repository as a submodule inside your Unity project Assets folder:  
+`git submodule add https://github.com/Kmiecis/Unity-Package-Coroutines`  
 
 ## Examples
 
@@ -171,14 +182,3 @@ void ExampleMethod2()
 
 </p>
 </details>
-
-## Installation
-
-Add the package via Package Manager by adding it from git URL:  
-`https://github.com/kmiecis/unity-package-coroutines.git`  
-Package Manager can be found inside the Unity Editor in the Window tab
-
-OR
-
-Git add this repository as a submodule inside your Unity project Assets folder:  
-`git submodule add https://github.com/Kmiecis/Unity-Package-Coroutines`
