@@ -94,12 +94,12 @@ namespace Common.Coroutines
         #endregion
 
         #region Wait
-        public static IEnumerator WaitSeconds(this Func<IEnumerator> self, float duration)
+        public static IEnumerator WaitTime(this Func<IEnumerator> self, float duration)
         {
             return self.Then(UCoroutine.YieldTime(duration));
         }
 
-        public static IEnumerator WaitSecondsRealtime(this Func<IEnumerator> self, float duration)
+        public static IEnumerator WaitRealtime(this Func<IEnumerator> self, float duration)
         {
             return self.Then(UCoroutine.YieldRealtime(duration));
         }
@@ -108,37 +108,54 @@ namespace Common.Coroutines
         {
             return self.Then(UCoroutine.YieldFrames(frames));
         }
+        #endregion
 
-        public static IEnumerator WaitTrue(this Func<IEnumerator> self, Func<bool> verifier)
+        #region Await
+        public static IEnumerator Await(this Func<IEnumerator> self, Func<bool> verifier)
         {
             return self.Then(UCoroutine.YieldAwait(verifier));
         }
 
-        public static IEnumerator WaitFinish(this Func<IEnumerator> self, Coroutine coroutine)
+        public static IEnumerator Await(this Func<IEnumerator> self, Coroutine coroutine)
         {
             return self.Then(UCoroutine.YieldAwait(coroutine));
         }
         #endregion
 
-        #region Execute
-        public static IEnumerator ExecuteIf(this Func<IEnumerator> self, Func<bool> verifier)
+        #region If
+        public static IEnumerator If(this Func<IEnumerator> self, Func<bool> verifier)
         {
             return UCoroutine.YieldIf(self, verifier);
         }
 
-        public static IEnumerator<T> ExecuteIf<T>(this Func<IEnumerator<T>> self, Func<bool> verifier)
+        public static IEnumerator<T> If<T>(this Func<IEnumerator<T>> self, Func<bool> verifier)
         {
             return UCoroutine.YieldIf(self, verifier);
         }
+        #endregion
 
-        public static IEnumerator ExecuteWhile(this Func<IEnumerator> self, Func<bool> verifier)
+        #region While
+        public static IEnumerator While(this Func<IEnumerator> self, Func<bool> verifier)
         {
             return UCoroutine.YieldWhile(self, verifier);
         }
 
-        public static IEnumerator<T> ExecuteWhile<T>(this Func<IEnumerator<T>> self, Func<bool> verifier)
+        public static IEnumerator<T> While<T>(this Func<IEnumerator<T>> self, Func<bool> verifier)
         {
             return UCoroutine.YieldWhile(self, verifier);
+        }
+        #endregion
+
+        #region Timer
+        public static IEnumerator<float> Eased(this Func<IEnumerator<float>> self, Func<float, float> easer = null)
+        {
+            return UCoroutine.YieldInto(self, easer ?? Easings.SmoothStep);
+        }
+
+        public static IEnumerator<float> Flipped(this Func<IEnumerator<float>> self, float duration = 1.0f)
+        {
+            float Flip(float f) => duration - f;
+            return UCoroutine.YieldInto(self, Flip);
         }
         #endregion
 
