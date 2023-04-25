@@ -28,7 +28,7 @@ Sample copy and paste examples, ready to go, to give a taste of how the code mig
 
 <details>
 <summary>
-Moving platform
+Moving and rotating platform
 </summary>
 <p>
 
