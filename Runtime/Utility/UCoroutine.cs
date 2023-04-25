@@ -32,7 +32,7 @@ namespace Common.Coroutines
             yield return value;
         }
 
-        /// <summary> Yields values </summary>
+        /// <summary> Yields values one by one each frame </summary>
         public static IEnumerator<T> Yield<T>(params T[] values)
         {
             for (int i = 0; i < values.Length; ++i)
@@ -41,14 +41,14 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes action and yields once </summary>
+        /// <summary> Executes 'action' method and yields </summary>
         public static IEnumerator Yield(Action action)
         {
             action();
             yield return null;
         }
 
-        /// <summary> Yields provided value once </summary>
+        /// <summary> Yields value once from 'provider' method </summary>
         public static IEnumerator<T> Yield<T>(Func<T> provider)
         {
             yield return provider();
@@ -72,7 +72,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine until it finishes </summary>
+        /// <summary> Executes coroutine from 'provider' method until it finishes </summary>
         public static IEnumerator Yield(Func<IEnumerator> provider)
         {
             var coroutine = provider();
@@ -82,7 +82,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine until it finishes </summary>
+        /// <summary> Executes coroutine from 'provider' method until it finishes </summary>
         public static IEnumerator<T> Yield<T>(Func<IEnumerator<T>> provider)
         {
             var coroutine = provider();
@@ -94,7 +94,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield into
-        /// <summary> Executes coroutine into consumer method </summary>
+        /// <summary> Executes coroutine into 'consumer' method </summary>
         public static IEnumerator YieldInto<T>(IEnumerator<T> coroutine, Action<T> consumer)
         {
             while (coroutine.MoveNext())
@@ -104,7 +104,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes coroutine into parser method </summary>
+        /// <summary> Executes coroutine into 'parser' method </summary>
         public static IEnumerator<U> YieldInto<T, U>(IEnumerator<T> coroutine, Func<T, U> parser)
         {
             while (coroutine.MoveNext())
@@ -113,7 +113,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine into consumer method </summary>
+        /// <summary> Executes coroutine from 'provider' method into 'consumer' method </summary>
         public static IEnumerator YieldInto<T>(Func<IEnumerator<T>> provider, Action<T> consumer)
         {
             var coroutine = provider();
@@ -124,7 +124,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine into parser method </summary>
+        /// <summary> Executes coroutine from 'provider' method into 'parser' method </summary>
         public static IEnumerator<U> YieldInto<T, U>(Func<IEnumerator<T>> provider, Func<T, U> parser)
         {
             var coroutine = provider();
@@ -136,7 +136,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield await
-        /// <summary> Suspends next coroutine execution until verifier evaluates to true </summary>
+        /// <summary> Awaits 'verifier' method evaluate to true before finishing </summary>
         public static IEnumerator YieldAwait(Func<bool> verifier)
         {
             while (!verifier())
@@ -145,13 +145,13 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Suspends next coroutine execution until yield instruction finishes </summary>
+        /// <summary> Awaits yield instruction finish </summary>
         public static IEnumerator YieldAwait(YieldInstruction yield)
         {
             yield return yield;
         }
 
-        /// <summary> Suspends next coroutine execution until coroutine finishes </summary>
+        /// <summary> Awaits coroutine finish </summary>
         public static IEnumerator YieldAwait(Coroutine coroutine)
         {
             yield return coroutine;
@@ -159,7 +159,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield if
-        /// <summary> Executes coroutine only if verifier evaluates to true </summary>
+        /// <summary> Executes coroutine only if 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldIf(IEnumerator coroutine, Func<bool> verifier)
         {
             if (verifier())
@@ -171,7 +171,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes coroutine only if verifier evaluates to true </summary>
+        /// <summary> Executes coroutine only if 'verifier' method evaluates to true </summary>
         public static IEnumerator<T> YieldIf<T>(IEnumerator<T> coroutine, Func<bool> verifier)
         {
             if (verifier())
@@ -183,7 +183,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine only if verifier evaluates to true </summary>
+        /// <summary> Executes coroutine from 'provider' method only if 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldIf(Func<IEnumerator> provider, Func<bool> verifier)
         {
             if (verifier())
@@ -196,7 +196,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine only if verifier evaluates to true </summary>
+        /// <summary> Executes coroutine from 'provider' method only if 'verifier' evaluates to true </summary>
         public static IEnumerator<T> YieldIf<T>(Func<IEnumerator<T>> provider, Func<bool> verifier)
         {
             if (verifier())
@@ -211,6 +211,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield while
+        /// <summary> Executes 'action' method while 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldWhile(Action action, Func<bool> verifier)
         {
             while (verifier())
@@ -220,6 +221,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Yields value from 'provider' method while 'verifier' method evaluates to true </summary>
         public static IEnumerator<T> YieldWhile<T>(Func<T> provider, Func<bool> verifier)
         {
             while (verifier())
@@ -228,7 +230,7 @@ namespace Common.Coroutines
             }
         }
         
-        /// <summary> Executes coroutine only if and as long as verifier evaluates to true </summary>
+        /// <summary> Executes coroutine while 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldWhile(IEnumerator coroutine, Func<bool> verifier)
         {
             while (verifier() && coroutine.MoveNext())
@@ -237,7 +239,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes coroutine only if and as long as verifier evaluates to true </summary>
+        /// <summary> Executes coroutine while 'verifier' method evaluates to true </summary>
         public static IEnumerator<T> YieldWhile<T>(IEnumerator<T> coroutine, Func<bool> verifier)
         {
             while (verifier() && coroutine.MoveNext())
@@ -246,7 +248,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes provided coroutine only if and as long as verifier evaluates to true </summary>
+        /// <summary> Executes coroutine from 'provider' method while 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldWhile(Func<IEnumerator> provider, Func<bool> verifier)
         {
             var coroutine = provider();
@@ -256,7 +258,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes provided coroutine only if and as long as verifier evaluates to true </summary>
+        /// <summary> Executes coroutine from 'provider' method while 'verifier' method evaluates to true </summary>
         public static IEnumerator<T> YieldWhile<T>(Func<IEnumerator<T>> provider, Func<bool> verifier)
         {
             var coroutine = provider();
@@ -268,7 +270,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield until
-        /// <summary> Executes action until coroutine finishes </summary>
+        /// <summary> Executes 'action' method until coroutine finishes </summary>
         public static IEnumerator YieldUntil(Action action, IEnumerator coroutine)
         {
             while (coroutine.MoveNext())
@@ -278,7 +280,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes action until coroutine finishes </summary>
+        /// <summary> Executes 'action' method until coroutine finishes </summary>
         public static IEnumerator<T> YieldUntil<T>(Action action, IEnumerator<T> coroutine)
         {
             while (coroutine.MoveNext())
@@ -288,7 +290,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes action until created coroutine finishes </summary>
+        /// <summary> Executes 'action' method until coroutine from 'provider' method finishes </summary>
         public static IEnumerator YieldUntil(Action action, Func<IEnumerator> provider)
         {
             var coroutine = provider();
@@ -299,7 +301,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes action until created coroutine finishes </summary>
+        /// <summary> Executes 'action; method until coroutine from 'provider' method finishes </summary>
         public static IEnumerator<T> YieldUntil<T>(Action action, Func<IEnumerator<T>> provider)
         {
             var coroutine = provider();
@@ -312,7 +314,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield repeat
-        /// <summary> Executes created coroutine a number of times </summary>
+        /// <summary> Executes coroutine from 'provider' method a number of times </summary>
         public static IEnumerator YieldRepeat(Func<IEnumerator> provider, int repeats)
         {
             while (repeats > 0)
@@ -326,7 +328,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes created coroutine a number of times </summary>
+        /// <summary> Executes coroutine from 'provider' method a number of times </summary>
         public static IEnumerator<T> YieldRepeat<T>(Func<IEnumerator<T>> provider, int repeats)
         {
             while (repeats > 0)
@@ -342,6 +344,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield infinitely
+        /// <summary> Yields nothing infinitely </summary>
         public static IEnumerator YieldInfinitely()
         {
             while (true)
@@ -350,6 +353,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes coroutine from 'provider' method infinite amount of times </summary>
         public static IEnumerator YieldInfinitely(Func<IEnumerator> provider)
         {
             while (true)
@@ -362,6 +366,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes coroutine from 'provider' method infinite amount of time </summary>
         public static IEnumerator<T> YieldInfinitely<T>(Func<IEnumerator<T>> provider)
         {
             while (true)
@@ -376,6 +381,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield sequentially
+        /// <summary> Executes two coroutines one after another </summary>
         public static IEnumerator YieldSequentially(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext())
@@ -388,6 +394,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes two coroutines one after another </summary>
         public static IEnumerator<T> YieldSequentially<T>(IEnumerator<T> first, IEnumerator<T> second)
         {
             while (first.MoveNext())
@@ -400,6 +407,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes an arbitrary amount of coroutines one after another </summary>
         public static IEnumerator YieldSequentially(params IEnumerator[] coroutines)
         {
             for (int i = 0; i < coroutines.Length; ++i)
@@ -412,6 +420,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes an arbitrary amount of coroutines one after another </summary>
         public static IEnumerator<T> YieldSequentially<T>(params IEnumerator<T>[] coroutines)
         {
             for (int i = 0; i < coroutines.Length; ++i)
@@ -426,6 +435,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield parallel
+        /// <summary> Executes two coroutines simultaenously </summary>
         public static IEnumerator YieldParallel(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext() | second.MoveNext())
@@ -434,6 +444,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes an arbitrary amount of coroutines simultaenously </summary>
         public static IEnumerator YieldParallel(params IEnumerator[] coroutines)
         {
             bool running;
@@ -454,6 +465,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield time
+        /// <summary> Yields delta time for a duration </summary>
         public static IEnumerator<float> YieldDeltaTime(float duration)
         {
             var deltaTime = Time.deltaTime;
@@ -469,6 +481,7 @@ namespace Common.Coroutines
             yield return duration;
         }
 
+        /// <summary> Yields unscaled delta time for a duration </summary>
         public static IEnumerator<float> YieldDeltaRealtime(float duration)
         {
             var deltaTime = Time.unscaledDeltaTime;
@@ -484,6 +497,7 @@ namespace Common.Coroutines
             yield return duration;
         }
 
+        /// <summary> Yields time for a duration </summary>
         public static IEnumerator<float> YieldTime(float duration)
         {
             float t = Time.deltaTime;
@@ -498,6 +512,7 @@ namespace Common.Coroutines
             yield return duration;
         }
 
+        /// <summary> Yields unscaled time for a duration </summary>
         public static IEnumerator<float> YieldRealtime(float duration)
         {
             float t = Time.unscaledDeltaTime;
@@ -512,6 +527,7 @@ namespace Common.Coroutines
             yield return duration;
         }
 
+        /// <summary> Yields normalized time for a duration </summary>
         public static IEnumerator<float> YieldTimeNormalized(float duration)
         {
             float n = 1.0f / duration;
@@ -527,6 +543,7 @@ namespace Common.Coroutines
             yield return 1.0f;
         }
 
+        /// <summary> Yields normalized unscaled time for a duration </summary>
         public static IEnumerator<float> YieldRealtimeNormalized(float duration)
         {
             float n = 1.0f / duration;
@@ -542,12 +559,14 @@ namespace Common.Coroutines
             yield return 1.0f;
         }
 
+        /// <summary> Yields normalized time, eased by 'easer' method </summary>
         public static IEnumerator<float> YieldTimeEased(float duration, Func<float, float> easer = null)
         {
             return YieldTimeNormalized(duration)
                 .Eased(easer);
         }
 
+        /// <summary> Yields normalized unscaled time, eased by 'easer' method </summary>
         public static IEnumerator<float> YieldRealtimeEased(float duration, Func<float, float> easer = null)
         {
             return YieldRealtimeNormalized(duration)
@@ -556,33 +575,38 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield frames
-        public static IEnumerator YieldFrames(int frames)
+        /// <summary> Yields frames for a number of frames </summary>
+        public static IEnumerator<int> YieldFrames(int frames)
         {
+            yield return frames;
             while (frames > 0)
             {
-                --frames;
-                yield return null;
+                yield return --frames;
             }
         }
         #endregion
 
         #region Yield value
+        /// <summary> Yields value from 'evaluator' method, fed by values from timer </summary>
         public static IEnumerator<T> YieldValue<T>(Func<float, T> evaluator, IEnumerator<float> timer)
         {
             return timer.Into(evaluator);
         }
-
+        
+        /// <summary> Yields value from 'evaluator' method, fed by values from timer, directly into 'setter' method </summary>
         public static IEnumerator YieldValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
         {
             return timer.Into(evaluator).Into(setter);
         }
 
+        /// <summary> Yields value from 'parser' method, fed by start, target and timer values </summary>
         public static IEnumerator<T> YieldValue<T>(T start, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             T Evaluator(float t) => parser(start, target, t);
             return YieldValue(Evaluator, timer);
         }
 
+        /// <summary> Yields value from 'parser' method, fed by values from timer, along with a start value from 'getter' method and target, into 'setter' method </summary>
         public static IEnumerator YieldValueTo<T>(Func<T> getter, Action<T> setter, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             var start = getter();
@@ -596,6 +620,7 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Yields value from 'parser' method, fed by values from timer, along with a start value from 'getter' method and target value from 'provider' method, into 'setter' method </summary>
         public static IEnumerator YieldValueTo<T>(Func<T> getter, Action<T> setter, Func<T> provider, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             var start = getter();
@@ -733,6 +758,11 @@ namespace Common.Coroutines
 
         public static IEnumerator CoMaximumParticleDeltaTime(float target, float duration, Func<float, float> easer = null)
             => YieldValueTo(UTime.GetMaximumParticleDeltaTime, UTime.SetMaximumParticleDeltaTime, target, YieldRealtimeEased(duration, easer));
+        #endregion
+
+        #region Wrap
+        public static Func<IEnumerator> Wrap(Func<IEnumerator> method)
+            => method;
         #endregion
     }
 }
