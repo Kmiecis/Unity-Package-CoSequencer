@@ -637,7 +637,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Floats
-        public static IEnumerator YieldValue(float start, float target, IEnumerator<float> timer)
+        public static IEnumerator<float> YieldValue(float start, float target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<float> getter, Action<float> setter, float target, IEnumerator<float> timer)
@@ -648,7 +648,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Ints
-        public static IEnumerator YieldValue(int start, int target, IEnumerator<float> timer)
+        public static IEnumerator<int> YieldValue(int start, int target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<int> getter, Action<int> setter, int target, IEnumerator<float> timer)
@@ -659,7 +659,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Vector2s
-        public static IEnumerator YieldValue(Vector2 start, Vector2 target, IEnumerator<float> timer)
+        public static IEnumerator<Vector2> YieldValue(Vector2 start, Vector2 target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Vector2> getter, Action<Vector2> setter, Vector2 target, IEnumerator<float> timer)
@@ -670,7 +670,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Vector2Ints
-        public static IEnumerator YieldValue(Vector2Int start, Vector2Int target, IEnumerator<float> timer)
+        public static IEnumerator<Vector2Int> YieldValue(Vector2Int start, Vector2Int target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Vector2Int> getter, Action<Vector2Int> setter, Vector2Int target, IEnumerator<float> timer)
@@ -681,7 +681,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Vector3s
-        public static IEnumerator YieldValue(Vector3 start, Vector3 target, IEnumerator<float> timer)
+        public static IEnumerator<Vector3> YieldValue(Vector3 start, Vector3 target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Vector3> getter, Action<Vector3> setter, Vector3 target, IEnumerator<float> timer)
@@ -692,7 +692,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Vector3Ints
-        public static IEnumerator YieldValue(Vector3Int start, Vector3Int target, IEnumerator<float> timer)
+        public static IEnumerator<Vector3Int> YieldValue(Vector3Int start, Vector3Int target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Vector3Int> getter, Action<Vector3Int> setter, Vector3Int target, IEnumerator<float> timer)
@@ -703,7 +703,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Vector4s
-        public static IEnumerator YieldValue(Vector4 start, Vector4 target, IEnumerator<float> timer)
+        public static IEnumerator<Vector4> YieldValue(Vector4 start, Vector4 target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Vector4> getter, Action<Vector4> setter, Vector4 target, IEnumerator<float> timer)
@@ -714,7 +714,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Quaternions
-        public static IEnumerator YieldValue(Quaternion start, Quaternion target, IEnumerator<float> timer)
+        public static IEnumerator<Quaternion> YieldValue(Quaternion start, Quaternion target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Quaternion> getter, Action<Quaternion> setter, Quaternion target, IEnumerator<float> timer)
@@ -725,7 +725,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Colors
-        public static IEnumerator YieldValue(Color start, Color target, IEnumerator<float> timer)
+        public static IEnumerator<Color> YieldValue(Color start, Color target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Color> getter, Action<Color> setter, Color target, IEnumerator<float> timer)
@@ -736,7 +736,7 @@ namespace Common.Coroutines
         #endregion
 
         #region Rects
-        public static IEnumerator YieldValue(Rect start, Rect target, IEnumerator<float> timer)
+        public static IEnumerator<Rect> YieldValue(Rect start, Rect target, IEnumerator<float> timer)
             => YieldValue(start, target, UMath.Lerp, timer);
 
         public static IEnumerator YieldValueTo(Func<Rect> getter, Action<Rect> setter, Rect target, IEnumerator<float> timer)
