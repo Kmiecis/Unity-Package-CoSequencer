@@ -2,13 +2,14 @@
 
 ## Description
 
-Common scripts that assist in managing sequences of Coroutines
+Common scripts that assist in managing sequences of Coroutines, both custom and build-in
 
 ## Introduction
 
-Have you ever wondered how task sequencing can be done by using Unity Coroutines? Well, wonder no more!  
+Have you ever wondered how task sequencing can be done easily by using Unity Coroutines? Well, wonder no more!  
 This package is an attempt to utilize one of the most widely known feature of Unity and yet one that, in my opinion, is mostly underrated, due to its bad press.  
 By default, it should be used to ease creating sequences of actions, but also features some cool built-in methods, commonly known from other similar sequencers.  
+Two things make it stands out in the sequencers field: it behaves just like Coroutines would (obviously) and it is packagable, which means it does not require any initialization. Just install and have the job done.  
 
 ## Installation
 
@@ -23,69 +24,48 @@ Git add this repository as a submodule inside your Unity project Assets folder:
 
 ## Examples
 
-<details>
-<summary>
-Creating and starting a sequence
-</summary>
-<p>
-
-To create a sequence, we have to start with an IEnumerator, which can be an arbitrary method or one of many provided with the package.  
-To start a sequence, we have to call Start(...) extension method, with a MonoBehaviour as an argument.  
-
-```cs
-IEnumerator Move()
-{
-...
-}
-
-IEnumerator Scale()
-{
-...
-}
-
-void ExampleCreateAndStartWithAnyMethod()
-{
-    Move()
-        .Wait(1.0f)
-        .Then(Scale)
-        .Start(this);
-}
-
-void ExampleCreateAndStartWithBuiltInMethod()
-{
-    UCoroutine.Yield()
-        .Then(Move)
-        .Wait(1.0f)
-        .Then(Scale)
-        .Start(this);
-}
-
-
-```
-
-</p>
-</details>
+Sample copy and paste examples, ready to go, to give a taste of how the code might look.
 
 <details>
 <summary>
-Stopping a sequence
+Moving platform
 </summary>
 <p>
 
-Just to be clear, sequences by themselves <b><i>DO NOT</i></b> require arbitrary stopping mechanism. They finish by themselves, just as any ordinary coroutine.  
-To stop a sequence, we have to cache it ourselves and call Stop(...) extension method on it, with a target MonoBehaviour as an argument.  
-
 ```cs
-private Coroutine _example;
+using UnityEngine;
+using Common.Coroutines;
 
-void ExampleStartSequence()
+namespace Common.Examples
 {
-    _example = Move().Start(this);
-}
+    public class LiftBehaviour : MonoBehaviour
+    {
+        public Vector3 liftOffset = Vector3.up;
+        public float liftDuration = 2.0f;
+        public float holdDuration = 2.0f;
 
-void ExampleStopSequence()
-{
-    _example.Stop(this);
+        private void Lift()
+        {
+            Vector3 liftPosition = transform.position + liftOffset; // Lift target position
+            Quaternion liftRotation = transform.localRotation * Quaternion.AngleAxis(180.0f, Vector3.up); // Lift target rotation
+
+            transform.CoMove(liftPosition, liftDuration) // Moves platform to target position
+                .With(transform.CoLocalRotate(liftRotation, liftDuration)) // Rotates platform to target rotation while platform is moving
+                .WaitTime(holdDuration) // Waits a certain amount of time
+                .Then(
+                    transform.CoMove(transform.position, liftDuration), // Moves platform to its original position
+                    transform.CoLocalRotate(transform.localRotation, liftDuration) // Rotates platform to its original rotation while platform is moving
+                )
+                .WaitTime(holdDuration) // Waits a certain amount of time
+                .Then(Lift) // Invokes itself again to schedule another run
+                .Start(this); // Starts coroutine on current MonoBehaviour
+        }
+
+        private void Start()
+        {
+            Lift();
+        }
+    }
 }
 ```
 
@@ -94,54 +74,61 @@ void ExampleStopSequence()
 
 <details>
 <summary>
-Using object manipulation extensions
+Doors opening when a target transform is in close proximity
 </summary>
 <p>
 
-There are many methods to create an object changing sequence. Below few will be found. For more it would be advisable to check the code yourself.  
-
-#### An infinitely moving platform, up and down:  
-
 ```cs
-void StartMovePlatform()
+using UnityEngine;
+using Common.Coroutines;
+
+namespace Common.Examples
 {
-    var height = 2.0f;
-    var time = 2.0f;
-    transform.CoMoveY(transform.position.y + height, time)
-        .Then(transform.CoMoveY(transform.position.y, time))
-        .Then(StartMovePlatform)
-        .Start(this);
-}
-```
+    public class DoorBehaviour : MonoBehaviour
+    {
+        public Transform targetTransform;
 
-#### A door opening method with automated closing system when target is far enough:  
+        public float openDistance = 2.0f;
+        public float openDuration = 2.0f;
+        public float closeDuration = 2.0f;
+        public float holdDuration = 1.0f;
 
-```cs
-private bool IsFarEnough()
-{
-    ...
-}
+        private Quaternion _startRotation;
+        private Quaternion _targetRotation;
 
-void OpenDoor()
-{
-    var duration = 3.0f;
-    transform.CoRotate(Quaternion.AngleAxis(90.0f, Vector3.up), duration)
-        .Wait(duration)
-        .Await(IsFarEnough)
-        .Then(transform.CoRotate(Quaternion.identity, duration))
-        .Start(this);
-}
-```
+        private bool IsCloseEnough()
+        {
+            return (targetTransform.position - transform.position).magnitude <= openDistance;
+        }
 
-#### A button scale & fade animation with callback on finish:  
+        private bool IsFarEnough()
+        {
+            return !IsCloseEnough();
+        }
 
-```cs
-void OnClick(Action onFinish)
-{
-    canvasGroup.CoFade(0.0f, duration, EEase.Linear.ToEaser())
-        .With(transform.CoLocalScale(Vector3.one * 1.3f, duration, EaseMath.InBounce))
-        .Then(onFinish)
-        .Start(this);
+        private void OpenMechanism()
+        {
+            UCoroutine.YieldAwait(IsCloseEnough) // Sequence awaits target to be close enough to run
+                .Then(transform.CoRotate(_targetRotation, openDuration)) // Rotates door to target rotation
+                .WaitTime(holdDuration) // Waits a certain amount of time before continuing
+                .Await(IsFarEnough) // Sequence awaits target to be far enough to continue
+                .Then(transform.CoRotate(_startRotation, closeDuration)) // Rotates door to its original rotation
+                .WaitTime(holdDuration) // Waits a certain amount of time before continuing
+                .Then(OpenMechanism) // Invokes itself to schedule another run
+                .Start(this); // Starts coroutine on current MonoBehaviour
+        }
+
+        private void Awake()
+        {
+            _startRotation = transform.rotation;
+            _targetRotation = _startRotation * Quaternion.AngleAxis(90.0f, Vector3.up);
+        }
+
+        private void Start()
+        {
+            OpenMechanism();
+        }
+    }
 }
 ```
 
@@ -150,33 +137,54 @@ void OnClick(Action onFinish)
 
 <details>
 <summary>
-<b>Word of knowledge</b>
+Button bounces and fades out when clicked
 </summary>
 <p>
 
-Under the hood, there is no manager class that handles the sequences. It is all coroutines, down to the core!  
-Which means that we have to be aware that building a sequence works top-down and by default it merges previously built coroutine into new one.  
-As a result, two example methods found below will have a different outcome.  
-
 ```cs
-void ExampleMethod1()
-{
-    UCoroutine.Yield()
-        .Wait(1.0f) // Waits 1 second
-        .Then(Move(1.0f)) // Moves for 1 second
-        .With(Scale(1.0f)) // Scales for 1 second while we are waiting
-        .Start(this);
-}
+using UnityEngine;
+using Common.Coroutines;
+using UnityEngine.UI;
 
-void ExampleMethod2()
+namespace Common.Examples
 {
-    UCoroutine.Yield()
-        .Wait(1.0f) // Waits 1 second
-        .Then(
-            Move(1.0f) // Moves for 1 second
-                .With(Scale(1.0f)) // Scales for 1 second while we are moving
-        )
-        .Start(this);
+    public class ButtonBehaviour : MonoBehaviour
+    {
+        public Button button;
+        public CanvasGroup canvasGroup;
+
+        public float bounceScale = 1.3f;
+        public float bounceDuration = 1.0f;
+        public float fadeDuration = 0.33f;
+
+        private Coroutine _bounceCoroutine;
+
+        private void Bounce()
+        {
+            _bounceCoroutine = transform.CoLocalScale(transform.localScale * bounceScale, bounceDuration) // Scale up over duration
+                .Then(transform.CoLocalScale(transform.localScale, bounceDuration)) // Scale down over duration
+                .Then(Bounce) // Invokes itself to schedule another run
+                .Start(this); // Starts coroutine on current MonoBehaviour and saves Coroutine to a variable for later use
+        }
+
+        private void FadeOut()
+        {
+            _bounceCoroutine.Stop(this); // Stops saved bouncing Coroutine
+            canvasGroup.CoFade(0.0f, fadeDuration) // Fades out every graphic under CanvasGroup component
+                .With(transform.CoLocalScale(transform.localScale * bounceScale, fadeDuration)) // Scales up while fading
+                .Start(this); // Starts coroutine on current MonoBehaviour
+        }
+
+        private void Awake()
+        {
+            button.onClick.AddListener(FadeOut);
+        }
+
+        private void Start()
+        {
+            Bounce();
+        }
+    }
 }
 ```
 
