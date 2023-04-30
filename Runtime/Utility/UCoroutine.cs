@@ -48,6 +48,16 @@ namespace Common.Coroutines
             yield return null;
         }
 
+        /// <summary> Executes 'actions' methods and yields </summary>
+        public static IEnumerator Yield(params Action[] actions)
+        {
+            for (int i = 0; i < actions.Length; ++i)
+            {
+                actions[i]();
+            }
+            yield return null;
+        }
+
         /// <summary> Yields value once from 'provider' method </summary>
         public static IEnumerator<T> Yield<T>(Func<T> provider)
         {

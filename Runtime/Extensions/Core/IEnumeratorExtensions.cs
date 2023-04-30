@@ -18,9 +18,14 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(coroutine));
         }
 
-        public static IEnumerator Then(this IEnumerator self, Action callback)
+        public static IEnumerator Then(this IEnumerator self, Action action)
         {
-            return self.Then(UCoroutine.Yield(callback));
+            return self.Then(UCoroutine.Yield(action));
+        }
+
+        public static IEnumerator Then(this IEnumerator self, params Action[] actions)
+        {
+            return self.Then(UCoroutine.Yield(actions));
         }
 
         public static IEnumerator<T> Then<T>(this IEnumerator<T> self, Func<T> provider)
