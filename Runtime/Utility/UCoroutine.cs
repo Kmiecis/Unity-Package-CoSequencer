@@ -774,5 +774,16 @@ namespace Common.Coroutines
         public static Func<IEnumerator> Wrap(Func<IEnumerator> method)
             => method;
         #endregion
+
+        #region Misc
+        public static void SafeStop(ref Coroutine coroutine, MonoBehaviour target)
+        {
+            if (coroutine != null)
+            {
+                coroutine.Stop(target);
+                coroutine = null;
+            }
+        }
+        #endregion
     }
 }
