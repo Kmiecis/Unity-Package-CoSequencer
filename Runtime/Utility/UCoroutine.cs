@@ -8,12 +8,6 @@ namespace Common.Coroutines
     public static class UCoroutine
     {
         #region Yield
-        /// <summary> Yields once </summary>
-        public static IEnumerator Yield()
-        {
-            yield return null;
-        }
-        
         /// <summary> Yields YieldInstruction </summary>
         public static IEnumerator Yield(YieldInstruction yield)
         {
@@ -585,6 +579,12 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield frames
+        /// <summary> Yields a frame </summary>
+        public static IEnumerator YieldFrame()
+        {
+            yield return null;
+        }
+
         /// <summary> Yields frames for a number of frames </summary>
         public static IEnumerator<int> YieldFrames(int frames)
         {
