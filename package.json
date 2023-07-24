@@ -2,7 +2,7 @@
   "name": "com.common.coroutines",
   "displayName": "Common Coroutines",
   "author": {
-    "name": "Slawomir Kmiecik",
+    "name": "Kmiecis",
     "email": "slawekkmiecik@gmail.com"
   },
   "description": "Common scripts that assist in managing Coroutines",
