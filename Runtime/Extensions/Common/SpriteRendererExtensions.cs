@@ -17,6 +17,15 @@ namespace Common.Coroutines
 
         public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoSize(this SpriteRenderer self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetSize, self.SetSize, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoSizeX(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetSizeX, self.SetSizeX, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoSizeY(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetSizeY, self.SetSizeY, target, UCoroutine.YieldTimeEased(duration, easer));
     }
 
     internal static class InternalSpriteRendererExtensions
@@ -51,6 +60,26 @@ namespace Common.Coroutines
 
         public static void SetColorA(this SpriteRenderer self, float value)
             => self.color = self.color.WithA(value);
+        #endregion
+
+        #region Size
+        public static Vector2 GetSize(this SpriteRenderer self)
+            => self.size;
+
+        public static void SetSize(this SpriteRenderer self, Vector2 value)
+            => self.size = value;
+
+        public static float GetSizeX(this SpriteRenderer self)
+            => self.size.x;
+
+        public static void SetSizeX(this SpriteRenderer self, float value)
+            => self.size = self.size.WithX(value);
+
+        public static float GetSizeY(this SpriteRenderer self)
+            => self.size.y;
+
+        public static void SetSizeY(this SpriteRenderer self, float value)
+            => self.size = self.size.WithY(value);
         #endregion
     }
 }
