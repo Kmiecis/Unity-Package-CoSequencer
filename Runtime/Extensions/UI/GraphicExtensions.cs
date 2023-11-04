@@ -15,6 +15,9 @@ namespace Common.Coroutines
 
         public static IEnumerator CoGradient(this Graphic self, Gradient target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoGradient(this Graphic self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
     }
 
     internal static class InternalGraphicExtensions

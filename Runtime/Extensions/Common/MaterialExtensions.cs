@@ -21,8 +21,14 @@ namespace Common.Coroutines
         public static IEnumerator CoGradient(this Material self, Gradient target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoGradient(this Material self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoGradient(this Material self, Gradient target, int propertyId, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(target.Evaluate, c => self.SetColor(propertyId, c), UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoGradient(this Material self, Gradient target, int propertyId, float from, float to, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), c => self.SetColor(propertyId, c), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoFloat(this Material self, float target, int propertyId, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(() => self.GetFloat(propertyId), f => self.SetFloat(propertyId, f), target, UCoroutine.YieldTimeEased(duration, easer));
