@@ -161,6 +161,16 @@ namespace Common.Coroutines
         {
             return UCoroutine.YieldWhile(self, verifier);
         }
+
+        public static IEnumerator DoWhile(this IEnumerator self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldDoWhile(self, verifier);
+        }
+
+        public static IEnumerator DoWhile<T>(this IEnumerator<T> self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldDoWhile(self, verifier);
+        }
         #endregion
 
         #region Timer
@@ -179,7 +189,9 @@ namespace Common.Coroutines
         public static Coroutine Start(this IEnumerator self, MonoBehaviour target)
         {
             if (target.isActiveAndEnabled)
+            {
                 return target.StartCoroutine(self);
+            }
             return null;
         }
     }

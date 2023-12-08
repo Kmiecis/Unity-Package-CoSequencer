@@ -271,6 +271,69 @@ namespace Common.Coroutines
                 yield return coroutine.Current;
             }
         }
+
+        /// <summary> Executes 'action' method at least once and while 'verifier' method evaluates to true </summary>
+        public static IEnumerator YieldDoWhile(Action action, Func<bool> verifier)
+        {
+            do
+            {
+                action();
+                yield return null;
+            }
+            while (verifier());
+        }
+
+        /// <summary> Yields value from 'provider' method at least once and while 'verifier' method evaluates to true </summary>
+        public static IEnumerator<T> YieldDoWhile<T>(Func<T> provider, Func<bool> verifier)
+        {
+            do
+            {
+                yield return provider();
+            }
+            while (verifier());
+        }
+
+        /// <summary> Executes coroutine at least once and while 'verifier' method evaluates to true </summary>
+        public static IEnumerator YieldDoWhile(IEnumerator coroutine, Func<bool> verifier)
+        {
+            do
+            {
+                yield return coroutine.Current;
+            }
+            while (verifier() && coroutine.MoveNext());
+        }
+
+        /// <summary> Executes coroutine at least once and while 'verifier' method evaluates to true </summary>
+        public static IEnumerator<T> YieldDoWhile<T>(IEnumerator<T> coroutine, Func<bool> verifier)
+        {
+            do
+            {
+                yield return coroutine.Current;
+            }
+            while (verifier() && coroutine.MoveNext());
+        }
+
+        /// <summary> Executes coroutine from 'provider' method at least once and while 'verifier' method evaluates to true </summary>
+        public static IEnumerator YieldDoWhile(Func<IEnumerator> provider, Func<bool> verifier)
+        {
+            var coroutine = provider();
+            do
+            {
+                yield return coroutine.Current;
+            }
+            while (verifier() && coroutine.MoveNext());
+        }
+
+        /// <summary> Executes coroutine from 'provider' method at least once and while 'verifier' method evaluates to true </summary>
+        public static IEnumerator<T> YieldDoWhile<T>(Func<IEnumerator<T>> provider, Func<bool> verifier)
+        {
+            var coroutine = provider();
+            do
+            {
+                yield return coroutine.Current;
+            }
+            while (verifier() && coroutine.MoveNext());
+        }
         #endregion
 
         #region Yield until
@@ -305,7 +368,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes 'action; method until coroutine from 'provider' method finishes </summary>
+        /// <summary> Executes 'action' method until coroutine from 'provider' method finishes </summary>
         public static IEnumerator<T> YieldUntil<T>(Action action, Func<IEnumerator<T>> provider)
         {
             var coroutine = provider();
