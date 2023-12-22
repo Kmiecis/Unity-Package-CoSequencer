@@ -666,17 +666,17 @@ namespace Common.Coroutines
             return timer.Into(evaluator);
         }
         
-        /// <summary> Yields value from 'evaluator' method, fed by values from timer, directly into 'setter' method </summary>
-        public static IEnumerator YieldValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
-        {
-            return timer.Into(evaluator).Into(setter);
-        }
-
         /// <summary> Yields value from 'parser' method, fed by start, target and timer values </summary>
         public static IEnumerator<T> YieldValue<T>(T start, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             T Evaluator(float t) => parser(start, target, t);
             return YieldValue(Evaluator, timer);
+        }
+        
+        /// <summary> Yields value from 'evaluator' method, fed by values from timer, directly into 'setter' method </summary>
+        public static IEnumerator YieldValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
+        {
+            return timer.Into(evaluator).Into(setter);
         }
 
         /// <summary> Yields value from 'parser' method, fed by values from timer, along with a start value from 'getter' method and target, into 'setter' method </summary>

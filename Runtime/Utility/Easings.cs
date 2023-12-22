@@ -232,9 +232,9 @@ namespace Common.Coroutines
             const float D1 = 2.75f;
             if (f < 1.0f / D1)
                 return N1 * f * f;
-            else if (f < 2.0f / D1)
+            if (f < 2.0f / D1)
                 return N1 * (f -= 1.5f / D1) * f + 0.75f;
-            else if (f < 2.5f / D1)
+            if (f < 2.5f / D1)
                 return N1 * (f -= 2.25f / D1) * f + 0.9375f;
             return N1 * (f -= 2.625f / D1) * f + 0.984375f;
         }

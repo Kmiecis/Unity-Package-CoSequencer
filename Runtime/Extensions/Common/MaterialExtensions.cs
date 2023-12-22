@@ -13,10 +13,10 @@ namespace Common.Coroutines
             => UCoroutine.YieldValueTo(() => self.GetColor(propertyId), c => self.SetColor(propertyId, c), target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoFade(this Material self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFade, self.SetFade, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoFade(this Material self, float target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetFade(propertyId), f => self.SetFade(propertyId, f), target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(() => self.GetColorA(propertyId), f => self.SetColorA(propertyId, f), target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoGradient(this Material self, Gradient target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
@@ -58,16 +58,16 @@ namespace Common.Coroutines
         public static void SetColor(this Material self, Color value)
             => self.color = value;
 
-        public static float GetFade(this Material self)
+        public static float GetColorA(this Material self)
             => self.color.a;
 
-        public static void SetFade(this Material self, float value)
+        public static void SetColorA(this Material self, float value)
             => self.color = self.color.WithA(value);
 
-        public static float GetFade(this Material self, int propertyId)
+        public static float GetColorA(this Material self, int propertyId)
             => self.GetColor(propertyId).a;
 
-        public static void SetFade(this Material self, int propertyId, float value)
+        public static void SetColorA(this Material self, int propertyId, float value)
             => self.SetColor(propertyId, self.GetColor(propertyId).WithA(value));
         #endregion
 

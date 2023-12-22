@@ -1,14 +1,17 @@
 {
-  "name": "com.common.coroutines",
-  "displayName": "Common Coroutines",
+  "name": "com.kmiecis.cosequences",
+  "displayName": "CoSequences",
   "author": {
     "name": "Kmiecis",
     "email": "slawekkmiecik@gmail.com"
   },
-  "description": "Common scripts that assist in managing Coroutines",
+  "description": "Scripts library built around Coroutines that allow their easy sequencing",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kmiecis/unity-package-coroutines"
+    "url": "https://github.com/kmiecis/unity-package-cosequences.git"
+  },
+  "dependencies": {
+    "com.unity.ugui": "1.0.0"
   }
 }

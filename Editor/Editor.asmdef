@@ -1,0 +1,16 @@
+{
+    "name": "CommonEditor.Coroutines",
+    "rootNamespace": "CommonEditor.Coroutines",
+    "references": [
+        "GUID:73361009f96a7ca428ba23e250403da4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
