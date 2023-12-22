@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kmiecis/unity-package-cosequences.git"
+    "url": "https://github.com/Kmiecis/Unity-Package-CoSequences.git"
   },
   "dependencies": {
     "com.unity.ugui": "1.0.0"
