@@ -9,7 +9,7 @@ Scripts that make creating sequences of Coroutines trivial
 Have you ever wondered how task sequencing can be done easily by using Unity Coroutines? Well, wonder no more!  
 This package is an attempt to utilize one of the most widely known feature of Unity and yet one that, in my opinion, is mostly underrated, due to its bad press.  
 By default, it should be used to ease creating sequences of actions, but also features some cool built-in methods, commonly known from other similar sequencers.  
-Two things make it stands out in the sequencers field: it behaves just like Coroutines would (obviously) and it is packagable, which means it does not require any initialization. Just install and have the job done.  
+Two things make it stands out in the sequencers field: it behaves just like Coroutines would (obviously) and it is packagable, which means it does not require any initialization. Just unpack and get the job done.  
 
 ## Installation
 
