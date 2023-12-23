@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
 {
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/" + nameof(CoSequence))]
     public class CoSequence : MonoBehaviour
     {
         [SerializeReference]
@@ -63,14 +65,12 @@ namespace Common.Coroutines
 
         public IEnumerator CoExecute()
         {
-            foreach (var segment in GetSegments())
+            var providers = new Func<IEnumerator>[_segments.Count];
+            for (int i = 0; i < _segments.Count; ++i)
             {
-                var coroutine = segment.CoExecute();
-                while (coroutine.MoveNext())
-                {
-                    yield return coroutine.Current;
-                }
+                providers[i] = _segments[i].CoExecute;
             }
+            return UCoroutine.YieldSequentially(providers);
         }
 
         private void OnValidate()
