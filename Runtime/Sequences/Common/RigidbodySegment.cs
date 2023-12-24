@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class RigidbodySegment<T> : Segment
+    public abstract class RigidbodySegment<T> : TimedSegment
     {
         [SerializeField] protected Rigidbody _rigidbody;
         [SerializeField] protected T _target;

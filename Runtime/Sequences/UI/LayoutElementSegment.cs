@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class LayoutElementSegment<T> : Segment
+    public abstract class LayoutElementSegment<T> : TimedSegment
     {
         [SerializeField] protected LayoutElement _element;
         [SerializeField] protected T _target;

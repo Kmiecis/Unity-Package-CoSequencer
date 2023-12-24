@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class ShadowSegment<T> : Segment
+    public abstract class ShadowSegment<T> : TimedSegment
     {
         [SerializeField] protected Shadow _outline;
         [SerializeField] protected T _target;

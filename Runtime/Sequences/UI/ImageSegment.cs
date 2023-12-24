@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class ImageSegment<T> : Segment
+    public abstract class ImageSegment<T> : TimedSegment
     {
         [SerializeField] protected Image _image;
         [SerializeField] protected T _target;

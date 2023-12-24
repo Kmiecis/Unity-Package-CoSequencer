@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class SliderSegment<T> : Segment
+    public abstract class SliderSegment<T> : TimedSegment
     {
         [SerializeField] protected Slider _slider;
         [SerializeField] protected T _target;

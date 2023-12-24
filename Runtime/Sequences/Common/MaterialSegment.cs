@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class MaterialSegment<T> : Segment
+    public abstract class MaterialSegment<T> : TimedSegment
     {
         [SerializeField] protected Material _material;
         [SerializeField] protected string _property;

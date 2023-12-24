@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class ScrollRectSegment<T> : Segment
+    public abstract class ScrollRectSegment<T> : TimedSegment
     {
         [SerializeField] protected ScrollRect _scroll;
         [SerializeField] protected T _target;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class TextSegment<T> : Segment
+    public abstract class TextSegment<T> : TimedSegment
     {
         [SerializeField] protected Text _text;
         [SerializeField] protected T _target;

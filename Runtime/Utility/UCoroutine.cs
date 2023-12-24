@@ -447,9 +447,9 @@ namespace Common.Coroutines
         }
         #endregion
 
-        #region Yield sequentially
+        #region Yield in sequence
         /// <summary> Executes two coroutines one after another </summary>
-        public static IEnumerator YieldSequentially(IEnumerator first, IEnumerator second)
+        public static IEnumerator YieldInSequence(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext())
             {
@@ -462,7 +462,7 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes two coroutines one after another </summary>
-        public static IEnumerator<T> YieldSequentially<T>(IEnumerator<T> first, IEnumerator<T> second)
+        public static IEnumerator<T> YieldInSequence<T>(IEnumerator<T> first, IEnumerator<T> second)
         {
             while (first.MoveNext())
             {
@@ -475,7 +475,7 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes an arbitrary amount of coroutines one after another </summary>
-        public static IEnumerator YieldSequentially(params IEnumerator[] coroutines)
+        public static IEnumerator YieldInSequence(params IEnumerator[] coroutines)
         {
             for (int i = 0; i < coroutines.Length; ++i)
             {
@@ -488,7 +488,7 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes an arbitrary amount of coroutines one after another </summary>
-        public static IEnumerator<T> YieldSequentially<T>(params IEnumerator<T>[] coroutines)
+        public static IEnumerator<T> YieldInSequence<T>(params IEnumerator<T>[] coroutines)
         {
             for (int i = 0; i < coroutines.Length; ++i)
             {
@@ -500,8 +500,8 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes two coroutines from methods one after another </summary>
-        public static IEnumerator YieldSequentially(Func<IEnumerator> first, Func<IEnumerator> second)
+        /// <summary> Executes two coroutines from 'first' and 'second' one after another </summary>
+        public static IEnumerator YieldInSequence(Func<IEnumerator> first, Func<IEnumerator> second)
         {
             var firstroutine = first();
             while (firstroutine.MoveNext())
@@ -515,8 +515,8 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes two coroutines from methods one after another </summary>
-        public static IEnumerator<T> YieldSequentially<T>(Func<IEnumerator<T>> first, Func<IEnumerator<T>> second)
+        /// <summary> Executes two coroutines from 'first' and 'second' one after another </summary>
+        public static IEnumerator<T> YieldInSequence<T>(Func<IEnumerator<T>> first, Func<IEnumerator<T>> second)
         {
             var firstroutine = first();
             while (firstroutine.MoveNext())
@@ -531,12 +531,11 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes an arbitrary amount of coroutines from 'providers' one after another </summary>
-        public static IEnumerator YieldSequentially(params Func<IEnumerator>[] providers)
+        public static IEnumerator YieldInSequence(params Func<IEnumerator>[] providers)
         {
             for (int i = 0; i < providers.Length; ++i)
             {
-                var provider = providers[i];
-                var coroutine = provider();
+                var coroutine = providers[i]();
                 while (coroutine.MoveNext())
                 {
                     yield return coroutine.Current;
@@ -545,12 +544,11 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes an arbitrary amount of coroutines from 'providers' one after another </summary>
-        public static IEnumerator<T> YieldSequentially<T>(params Func<IEnumerator<T>>[] providers)
+        public static IEnumerator<T> YieldInSequence<T>(params Func<IEnumerator<T>>[] providers)
         {
             for (int i = 0; i < providers.Length; ++i)
             {
-                var provider = providers[i];
-                var coroutine = provider();
+                var coroutine = providers[i]();
                 while (coroutine.MoveNext())
                 {
                     yield return coroutine.Current;
@@ -559,9 +557,9 @@ namespace Common.Coroutines
         }
         #endregion
 
-        #region Yield parallel
+        #region Yield in parallel
         /// <summary> Executes two coroutines simultaenously </summary>
-        public static IEnumerator YieldParallel(IEnumerator first, IEnumerator second)
+        public static IEnumerator YieldInParallel(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext() | second.MoveNext())
             {
@@ -570,26 +568,24 @@ namespace Common.Coroutines
         }
 
         /// <summary> Executes an arbitrary amount of coroutines simultaenously </summary>
-        public static IEnumerator YieldParallel(params IEnumerator[] coroutines)
+        public static IEnumerator YieldInParallel(params IEnumerator[] coroutines)
         {
             bool running;
             do
             {
                 running = false;
-
                 for (int i = 0; i < coroutines.Length; ++i)
                 {
                     var coroutine = coroutines[i];
                     running |= coroutine.MoveNext();
                 }
-
                 yield return null;
             }
             while (running);
         }
 
-        /// <summary> Executes two coroutines from methods simultaenously </summary>
-        public static IEnumerator YieldParallel(Func<IEnumerator> first, Func<IEnumerator> second)
+        /// <summary> Executes two coroutines from 'first' and 'second' simultaenously </summary>
+        public static IEnumerator YieldInParallel(Func<IEnumerator> first, Func<IEnumerator> second)
         {
             var firstroutine = first();
             var secondroutine = second();
@@ -599,25 +595,16 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes an arbitrary amount of coroutines from methods simultaenously </summary>
-        public static IEnumerator YieldParallel(params Func<IEnumerator>[] providers)
+        /// <summary> Executes an arbitrary amount of coroutines from 'providers' simultaenously </summary>
+        public static IEnumerator YieldInParallel(params Func<IEnumerator>[] providers)
         {
-            bool running;
-            do
+            var coroutines = new IEnumerator[providers.Length];
+            for (int i = 0; i < providers.Length; ++i)
             {
-                running = false;
-
-                for (int i = 0; i < providers.Length; ++i)
-                {
-                    var coroutine = providers[i]();
-                    running |= coroutine.MoveNext();
-                }
-
-                yield return null;
+                coroutines[i] = providers[i]();
             }
-            while (running);
+            return YieldInParallel(coroutines);
         }
-
         #endregion
 
         #region Yield time

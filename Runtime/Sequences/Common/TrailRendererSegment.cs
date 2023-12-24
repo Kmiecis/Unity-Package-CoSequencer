@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class TrailRendererSegment<T> : Segment
+    public abstract class TrailRendererSegment<T> : TimedSegment
     {
         [SerializeField] protected TrailRenderer _renderer;
         [SerializeField] protected T _target;

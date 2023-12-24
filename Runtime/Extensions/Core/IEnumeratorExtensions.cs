@@ -35,12 +35,12 @@ namespace Common.Coroutines
 
         public static IEnumerator Then(this IEnumerator self, IEnumerator coroutine)
         {
-            return UCoroutine.YieldSequentially(self, coroutine);
+            return UCoroutine.YieldInSequence(self, coroutine);
         }
 
         public static IEnumerator<T> Then<T>(this IEnumerator<T> self, IEnumerator<T> coroutine)
         {
-            return UCoroutine.YieldSequentially(self, coroutine);
+            return UCoroutine.YieldInSequence(self, coroutine);
         }
 
         public static IEnumerator Then(this IEnumerator self, Func<IEnumerator> provider)
@@ -55,12 +55,12 @@ namespace Common.Coroutines
 
         public static IEnumerator Then(this IEnumerator self, params IEnumerator[] coroutines)
         {
-            return self.Then(UCoroutine.YieldParallel(coroutines));
+            return self.Then(UCoroutine.YieldInParallel(coroutines));
         }
 
         public static IEnumerator Then<T>(this IEnumerator self, params IEnumerator<T>[] coroutines)
         {
-            return self.Then(UCoroutine.YieldParallel(coroutines));
+            return self.Then(UCoroutine.YieldInParallel(coroutines));
         }
         #endregion
 
@@ -77,7 +77,7 @@ namespace Common.Coroutines
 
         public static IEnumerator With(this IEnumerator self, IEnumerator coroutine)
         {
-            return UCoroutine.YieldParallel(self, coroutine);
+            return UCoroutine.YieldInParallel(self, coroutine);
         }
 
         public static IEnumerator With(this IEnumerator self, Func<IEnumerator> provider)

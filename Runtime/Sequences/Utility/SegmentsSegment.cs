@@ -1,31 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections;
 
 namespace Common.Coroutines
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/" + nameof(CoSequence))]
-    public class CoSequence : SegmentBehaviour
+    [Serializable]
+    public abstract class SegmentsSegment : Segment
     {
         [SerializeReference]
         protected List<Segment> _segments;
 
+        public abstract override IEnumerator CoExecute();
+
         public int SegmentCount
             => _segments.Count;
 
-        public CoSequence()
+        public override void OnAdded()
         {
             _segments = new List<Segment>();
-        }
-
-        public override IEnumerator CoExecute()
-        {
-            var providers = new IEnumerator[_segments.Count];
-            for (int i = 0; i < _segments.Count; ++i)
-            {
-                providers[i] = _segments[i].CoExecute();
-            }
-            return UCoroutine.YieldInSequence(providers);
         }
 
         public void AddSegment(Segment item)
@@ -67,12 +60,7 @@ namespace Common.Coroutines
             CoExecute().Start(target);
         }
 
-        public void Execute()
-        {
-            Execute(this);
-        }
-
-        private void OnValidate()
+        public override void OnValidate()
         {
             foreach (var segment in GetSegments())
             {
@@ -81,6 +69,34 @@ namespace Common.Coroutines
                     segment.OnValidate();
                 }
             }
+        }
+    }
+
+    [SegmentMenu("Utility", "Sequence")]
+    public class SequenceSegment : SegmentsSegment
+    {
+        public override IEnumerator CoExecute()
+        {
+            var providers = new IEnumerator[_segments.Count];
+            for (int i = 0; i < _segments.Count; ++i)
+            {
+                providers[i] = _segments[i].CoExecute();
+            }
+            return UCoroutine.YieldInSequence(providers);
+        }
+    }
+
+    [SegmentMenu("Utility", "Parallel")]
+    public class ParallelSegment : SegmentsSegment
+    {
+        public override IEnumerator CoExecute()
+        {
+            var providers = new IEnumerator[_segments.Count];
+            for (int i = 0; i < _segments.Count; ++i)
+            {
+                providers[i] = _segments[i].CoExecute();
+            }
+            return UCoroutine.YieldInParallel(providers);
         }
     }
 }

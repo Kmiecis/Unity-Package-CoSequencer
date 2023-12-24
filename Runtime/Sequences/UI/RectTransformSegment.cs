@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class RectTransformSegment<T> : Segment
+    public abstract class RectTransformSegment<T> : TimedSegment
     {
         [SerializeField] protected RectTransform _transform;
         [SerializeField] protected T _target;

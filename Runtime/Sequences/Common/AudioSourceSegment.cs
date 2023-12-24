@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class AudioSourceSegment<T> : Segment
+    public abstract class AudioSourceSegment<T> : TimedSegment
     {
         [SerializeField] protected AudioSource _audio;
         [SerializeField] protected T _target;

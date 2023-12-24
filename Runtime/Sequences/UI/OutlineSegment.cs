@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class OutlineSegment<T> : Segment
+    public abstract class OutlineSegment<T> : TimedSegment
     {
         [SerializeField] protected Outline _outline;
         [SerializeField] protected T _target;

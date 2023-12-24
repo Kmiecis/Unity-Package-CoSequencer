@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class CameraSegment<T> : Segment
+    public abstract class CameraSegment<T> : TimedSegment
     {
         [SerializeField] protected Camera _camera;
         [SerializeField] protected T _target;

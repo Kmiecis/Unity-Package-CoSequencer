@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class LineRendererSegment<T> : Segment
+    public abstract class LineRendererSegment<T> : TimedSegment
     {
         [SerializeField] protected LineRenderer _renderer;
         [SerializeField] protected T _target;

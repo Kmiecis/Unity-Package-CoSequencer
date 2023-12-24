@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class GraphicSegment<T> : Segment
+    public abstract class GraphicSegment<T> : TimedSegment
     {
         [SerializeField] protected Graphic _graphic;
         [SerializeField] protected T _target;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class LightSegment<T> : Segment
+    public abstract class LightSegment<T> : TimedSegment
     {
         [SerializeField] protected Light _light;
         [SerializeField] protected T _target;

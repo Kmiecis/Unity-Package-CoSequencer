@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [Serializable]
-    public abstract class CanvasGroupSegment<T> : Segment
+    public abstract class CanvasGroupSegment<T> : TimedSegment
     {
         [SerializeField] protected CanvasGroup _canvas;
         [SerializeField] protected T _target;
