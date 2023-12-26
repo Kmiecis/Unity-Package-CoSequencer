@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Common.Coroutines
 {
@@ -23,9 +24,14 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(action));
         }
 
-        public static IEnumerator Then(this Func<IEnumerator> self, params Action[] actions)
+        public static IEnumerator Then(this Func<IEnumerator> self, UnityAction action)
         {
-            return self.Then(UCoroutine.Yield(actions));
+            return self.Then(UCoroutine.Yield(action));
+        }
+
+        public static IEnumerator Then(this Func<IEnumerator> self, UnityEvent action)
+        {
+            return self.Then(UCoroutine.Yield(action));
         }
 
         public static IEnumerator<T> Then<T>(this Func<IEnumerator<T>> self, Func<T> provider)
@@ -75,6 +81,16 @@ namespace Common.Coroutines
             return UCoroutine.YieldUntil(action, self);
         }
 
+        public static IEnumerator With(this Func<IEnumerator> self, UnityAction action)
+        {
+            return UCoroutine.YieldUntil(action, self);
+        }
+
+        public static IEnumerator With(this Func<IEnumerator> self, UnityEvent action)
+        {
+            return UCoroutine.YieldUntil(action, self);
+        }
+
         public static IEnumerator With(this Func<IEnumerator> self, IEnumerator coroutine)
         {
             return UCoroutine.Yield(self).With(coroutine);
@@ -88,6 +104,16 @@ namespace Common.Coroutines
 
         #region Into
         public static IEnumerator Into<T>(this Func<IEnumerator<T>> self, Action<T> consumer)
+        {
+            return UCoroutine.YieldInto(self, consumer);
+        }
+
+        public static IEnumerator Into<T>(this Func<IEnumerator<T>> self, UnityAction<T> consumer)
+        {
+            return UCoroutine.YieldInto(self, consumer);
+        }
+
+        public static IEnumerator Into<T>(this Func<IEnumerator<T>> self, UnityEvent<T> consumer)
         {
             return UCoroutine.YieldInto(self, consumer);
         }

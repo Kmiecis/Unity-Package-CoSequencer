@@ -16,7 +16,7 @@ namespace Common.Coroutines
         public int SegmentCount
             => _segments.Count;
 
-        public override void OnAdded()
+        public SegmentsSegment()
         {
             _segments = new List<Segment>();
         }
