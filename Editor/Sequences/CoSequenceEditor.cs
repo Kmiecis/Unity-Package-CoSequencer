@@ -55,11 +55,21 @@ namespace CommonEditor.Coroutines
 
         private void OnMenuAdd(object type)
         {
-            var instance = (Segment)Activator.CreateInstance((Type)type);
-            
+            AddSegmentOfType((Type)type);
+        }
+        
+        private void AddSegment(Segment instance)
+        {
             _target.AddSegment(instance);
 
             _count = _target.SegmentCount;
+        }
+
+        private void AddSegmentOfType(Type type)
+        {
+            var instance = (Segment)Activator.CreateInstance(type);
+
+            AddSegment(instance);
         }
 
         private void CheckSequenceChange()
@@ -67,9 +77,17 @@ namespace CommonEditor.Coroutines
             var current = _target.SegmentCount;
             if (current > _count)
             {
+                var added = _target.GetLastSegment();
                 _target.RemoveLastSegment();
-                
-                ShowAddMenu();
+
+                if (added == null)
+                {
+                    ShowAddMenu();
+                }
+                else
+                {
+                    AddSegmentOfType(added.GetType());
+                }
             }
             else
             {

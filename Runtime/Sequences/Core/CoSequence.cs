@@ -18,16 +18,6 @@ namespace Common.Coroutines
             _segments = new List<Segment>();
         }
 
-        public override IEnumerator CoExecute()
-        {
-            var providers = new IEnumerator[_segments.Count];
-            for (int i = 0; i < _segments.Count; ++i)
-            {
-                providers[i] = _segments[i].CoExecute();
-            }
-            return UCoroutine.YieldInSequence(providers);
-        }
-
         public void AddSegment(Segment item)
         {
             _segments.Add(item);
@@ -43,6 +33,16 @@ namespace Common.Coroutines
         public void RemoveLastSegment()
         {
             RemoveSegmentAt(_segments.Count - 1);
+        }
+
+        public Segment GetSegmentAt(int index)
+        {
+            return _segments[index];
+        }
+
+        public Segment GetLastSegment()
+        {
+            return GetSegmentAt(SegmentCount - 1);
         }
 
         public IEnumerable<Segment> GetSegments()
@@ -62,14 +62,24 @@ namespace Common.Coroutines
             }
         }
 
+        public void Execute()
+        {
+            Execute(this);
+        }
+
         public void Execute(MonoBehaviour target)
         {
             CoExecute().Start(target);
         }
 
-        public void Execute()
+        public override IEnumerator CoExecute()
         {
-            Execute(this);
+            var providers = new IEnumerator[_segments.Count];
+            for (int i = 0; i < _segments.Count; ++i)
+            {
+                providers[i] = _segments[i].CoExecute();
+            }
+            return UCoroutine.YieldInSequence(providers);
         }
 
         private void OnValidate()

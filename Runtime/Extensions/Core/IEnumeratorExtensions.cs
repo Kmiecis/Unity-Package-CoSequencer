@@ -139,15 +139,13 @@ namespace Common.Coroutines
         {
             return self.Then(UCoroutine.YieldRealtime(duration));
         }
-        #endregion
 
-        #region Skip
-        public static IEnumerator SkipFrame(this IEnumerator self)
+        public static IEnumerator WaitFrame(this IEnumerator self)
         {
             return self.Then(UCoroutine.YieldFrame());
         }
 
-        public static IEnumerator SkipFrames(this IEnumerator self, int frames)
+        public static IEnumerator WaitFrames(this IEnumerator self, int frames)
         {
             return self.Then(UCoroutine.YieldFrames(frames));
         }

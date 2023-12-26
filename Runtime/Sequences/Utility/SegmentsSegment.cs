@@ -11,8 +11,6 @@ namespace Common.Coroutines
         [SerializeReference]
         protected List<Segment> _segments;
 
-        public abstract override IEnumerator CoExecute();
-
         public int SegmentCount
             => _segments.Count;
 
@@ -38,6 +36,16 @@ namespace Common.Coroutines
             RemoveSegmentAt(_segments.Count - 1);
         }
 
+        public Segment GetSegmentAt(int index)
+        {
+            return _segments[index];
+        }
+
+        public Segment GetLastSegment()
+        {
+            return GetSegmentAt(SegmentCount - 1);
+        }
+
         public IEnumerable<Segment> GetSegments()
         {
             return _segments;
@@ -59,6 +67,8 @@ namespace Common.Coroutines
         {
             CoExecute().Start(target);
         }
+
+        public abstract override IEnumerator CoExecute();
 
         public override void OnValidate()
         {
