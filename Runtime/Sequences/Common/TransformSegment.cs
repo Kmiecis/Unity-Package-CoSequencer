@@ -70,6 +70,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Transform), "Rotate")]
     public sealed class TransformRotateSegment : TransformSegment<Quaternion>
     {
+        public override void OnAdded()
+            => _target = Quaternion.identity;
+
         public override IEnumerator CoExecute()
             => _transform.CoRotate(_target, _duration, _easer.Evaluate);
     }
@@ -77,6 +80,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Transform), "LocalRotate")]
     public sealed class TransformLocalRotateSegment : TransformSegment<Quaternion>
     {
+        public override void OnAdded()
+            => _target = Quaternion.identity;
+
         public override IEnumerator CoExecute()
             => _transform.CoLocalRotate(_target, _duration, _easer.Evaluate);
     }

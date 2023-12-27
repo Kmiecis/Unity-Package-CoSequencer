@@ -25,6 +25,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Image), "Color")]
     public sealed class ImageColorSegment : ImageSegment<Color>
     {
+        public override void OnAdded()
+            => _target = Color.white;
+
         public override IEnumerator CoExecute()
             => _image.CoColor(_target, _duration, _easer.Evaluate);
     }

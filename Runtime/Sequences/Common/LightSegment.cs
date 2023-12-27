@@ -14,6 +14,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Light), "Color")]
     public sealed class LightColorSegment : LightSegment<Color>
     {
+        public override void OnAdded()
+            => _target = Color.white;
+
         public override IEnumerator CoExecute()
             => _light.CoColor(_target, _duration, _easer.Evaluate);
     }

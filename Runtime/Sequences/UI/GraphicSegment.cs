@@ -15,6 +15,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Graphic), "Color")]
     public sealed class GraphicColorSegment : GraphicSegment<Color>
     {
+        public override void OnAdded()
+            => _target = Color.white;
+
         public override IEnumerator CoExecute()
             => _graphic.CoColor(_target, _duration, _easer.Evaluate);
     }

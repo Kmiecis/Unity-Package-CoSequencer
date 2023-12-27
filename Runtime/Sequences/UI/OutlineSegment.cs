@@ -15,6 +15,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Outline), "EffectColor")]
     public sealed class OutlineEffectColorSegment : OutlineSegment<Color>
     {
+        public override void OnAdded()
+            => _target = Color.white;
+
         public override IEnumerator CoExecute()
             => _outline.CoEffectColor(_target, _duration, _easer.Evaluate);
     }

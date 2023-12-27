@@ -15,6 +15,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Shadow), "EffectColor")]
     public sealed class ShadowEffectColorSegment : ShadowSegment<Color>
     {
+        public override void OnAdded()
+            => _target = Color.white;
+
         public override IEnumerator CoExecute()
             => _outline.CoEffectColor(_target, _duration, _easer.Evaluate);
     }

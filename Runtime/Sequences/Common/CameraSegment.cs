@@ -21,6 +21,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Camera), "BackgroundColor")]
     public sealed class CameraBackgroundColorSegment : CameraSegment<Color>
     {
+        public override void OnAdded()
+            => _target = Color.white;
+
         public override IEnumerator CoExecute()
             => _camera.CoBackgroundColor(_target, _duration, _easer.Evaluate);
     }
@@ -65,6 +68,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Camera), "Rect")]
     public sealed class CameraRectSegment : CameraSegment<Rect>
     {
+        public override void OnAdded()
+            => _target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
         public override IEnumerator CoExecute()
             => _camera.CoRect(_target, _duration, _easer.Evaluate);
     }
@@ -72,6 +78,9 @@ namespace Common.Coroutines
     [SegmentMenu(nameof(Camera), "PixelRect")]
     public sealed class CameraPixelRectSegment : CameraSegment<Rect>
     {
+        public override void OnAdded()
+            => _target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
         public override IEnumerator CoExecute()
             => _camera.CoPixelRect(_target, _duration, _easer.Evaluate);
     }
