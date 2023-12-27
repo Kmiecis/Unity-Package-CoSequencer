@@ -9,8 +9,14 @@ namespace Common.Coroutines
         public static IEnumerator CoStartColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoStartFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetStartColorA, self.SetStartColorA, target, UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoEndColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoEndFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetEndColorA, self.SetEndColorA, target, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoTime(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetTime, self.SetTime, target, UCoroutine.YieldTimeEased(duration, easer));
@@ -31,19 +37,23 @@ namespace Common.Coroutines
         public static void SetStartColor(this TrailRenderer self, Color value)
             => self.startColor = value;
 
+        public static float GetStartColorA(this TrailRenderer self)
+            => self.startColor.a;
+
+        public static void SetStartColorA(this TrailRenderer self, float value)
+            => self.startColor = self.startColor.WithA(value);
+
         public static Color GetEndColor(this TrailRenderer self)
             => self.endColor;
 
         public static void SetEndColor(this TrailRenderer self, Color value)
             => self.endColor = value;
-        #endregion
 
-        #region Time
-        public static float GetTime(this TrailRenderer self)
-            => self.time;
+        public static float GetEndColorA(this TrailRenderer self)
+            => self.endColor.a;
 
-        public static void SetTime(this TrailRenderer self, float value)
-            => self.time = value;
+        public static void SetEndColorA(this TrailRenderer self, float value)
+            => self.endColor = self.endColor.WithA(value);
         #endregion
 
         #region Width
@@ -58,6 +68,14 @@ namespace Common.Coroutines
 
         public static void SetEndWidth(this TrailRenderer self, float value)
             => self.endWidth = value;
+        #endregion
+
+        #region Time
+        public static float GetTime(this TrailRenderer self)
+            => self.time;
+
+        public static void SetTime(this TrailRenderer self, float value)
+            => self.time = value;
         #endregion
     }
 }

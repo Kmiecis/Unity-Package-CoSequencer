@@ -17,14 +17,34 @@ namespace Common.Coroutines
         public override IEnumerator CoExecute()
             => _renderer.CoStartColor(_target, _duration, _easer.Evaluate);
     }
-    
+
+    [SegmentMenu(nameof(LineRenderer), "StartFade")]
+    public sealed class LineRendererStartFadeSegment : LineRendererSegment<float>
+    {
+        public override void OnValidate()
+            => _target = Mathf.Clamp(_target, 0.0f, 1.0f);
+
+        public override IEnumerator CoExecute()
+            => _renderer.CoStartFade(_target, _duration, _easer.Evaluate);
+    }
+
     [SegmentMenu(nameof(LineRenderer), "EndColor")]
     public sealed class LineRendererEndColorSegment : LineRendererSegment<Color>
     {
         public override IEnumerator CoExecute()
             => _renderer.CoEndColor(_target, _duration, _easer.Evaluate);
     }
-    
+
+    [SegmentMenu(nameof(LineRenderer), "EndFade")]
+    public sealed class LineRendererEndFadeSegment : LineRendererSegment<float>
+    {
+        public override void OnValidate()
+            => _target = Mathf.Clamp(_target, 0.0f, 1.0f);
+
+        public override IEnumerator CoExecute()
+            => _renderer.CoEndFade(_target, _duration, _easer.Evaluate);
+    }
+
     [SegmentMenu(nameof(LineRenderer), "StartWidth")]
     public sealed class LineRendererStartWidthSegment : LineRendererSegment<float>
     {
