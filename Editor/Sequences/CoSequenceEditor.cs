@@ -55,21 +55,41 @@ namespace CommonEditor.Coroutines
 
         private void OnMenuAdd(object type)
         {
-            AddSegmentOfType((Type)type);
-        }
-        
-        private void AddSegment(Segment instance)
-        {
-            _target.AddSegment(instance);
+            var instance = CreateSegmentOfType((Type)type);
 
+            _target.AddSegment(instance);
             _count = _target.SegmentCount;
         }
 
-        private void AddSegmentOfType(Type type)
+        private void ReplaceSegment(Segment segment)
         {
-            var instance = (Segment)Activator.CreateInstance(type);
+            var index = _target.IndexOf(segment);
+            _target.RemoveSegmentAt(index);
 
-            AddSegment(instance);
+            var replace = CreateSegmentOfType(segment.GetType());
+            _target.AddSegmentAt(index, replace);
+            _count = _target.SegmentCount;
+
+            EditorUtility.CopySerializedManagedFieldsOnly(segment, replace);
+        }
+        
+        private Segment CreateSegmentOfType(Type type)
+        {
+            return (Segment)Activator.CreateInstance(type);
+        }
+
+        private Segment FindDuplicate()
+        {
+            var previous = (Segment)null;
+            foreach (var segment in _target.GetSegments())
+            {
+                if (previous == segment)
+                {
+                    return segment;
+                }
+                previous = segment;
+            }
+            return null;
         }
 
         private void CheckSequenceChange()
@@ -77,16 +97,22 @@ namespace CommonEditor.Coroutines
             var current = _target.SegmentCount;
             if (current > _count)
             {
-                var added = _target.GetLastSegment();
-                _target.RemoveLastSegment();
+                var last = _target.GetLastSegment();
 
-                if (added == null)
+                if (last == null)
                 {
+                    _target.RemoveLastSegment();
+
                     ShowAddMenu();
                 }
                 else
                 {
-                    AddSegmentOfType(added.GetType());
+                    var added = FindDuplicate();
+
+                    if (added != null)
+                    {
+                        ReplaceSegment(added);
+                    }
                 }
             }
             else

@@ -26,6 +26,13 @@ namespace Common.Coroutines
             item.OnAdded();
         }
 
+        public void AddSegmentAt(int index, Segment item)
+        {
+            _segments.Insert(index, item);
+
+            item.OnAdded();
+        }
+
         public void RemoveSegmentAt(int index)
         {
             _segments.RemoveAt(index);
@@ -49,6 +56,11 @@ namespace Common.Coroutines
         public IEnumerable<Segment> GetSegments()
         {
             return _segments;
+        }
+
+        public int IndexOf(Segment item)
+        {
+            return _segments.IndexOf(item);
         }
 
         public IEnumerable<T> GetSegments<T>()
