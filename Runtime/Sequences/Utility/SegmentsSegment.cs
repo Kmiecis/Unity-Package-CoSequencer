@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     public abstract class SegmentsSegment : Segment

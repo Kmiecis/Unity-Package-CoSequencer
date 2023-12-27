@@ -2,86 +2,86 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     public abstract class CameraSegment<T> : TimedSegment
     {
-        [SerializeField] protected Camera _camera;
-        [SerializeField] protected T _target;
+        public Camera camera;
+        public T target;
     }
     
     [SegmentMenu(nameof(Camera), "Aspect")]
     public sealed class CameraAspectSegment : CameraSegment<float>
     {
         public override IEnumerator CoExecute()
-            => _camera.CoAspect(_target, _duration, _easer.Evaluate);
+            => camera.CoAspect(target, duration, easer.Evaluate);
     }
 
     [SegmentMenu(nameof(Camera), "BackgroundColor")]
     public sealed class CameraBackgroundColorSegment : CameraSegment<Color>
     {
         public override void OnAdded()
-            => _target = Color.white;
+            => target = Color.white;
 
         public override IEnumerator CoExecute()
-            => _camera.CoBackgroundColor(_target, _duration, _easer.Evaluate);
+            => camera.CoBackgroundColor(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Camera), "NearClipPlane")]
     public sealed class CameraNearClipPlaneSegment : CameraSegment<float>
     {
         public override void OnAdded()
-            => _target = 0.3f;
+            => target = 0.3f;
 
         public override void OnValidate()
-            => _target = Mathf.Max(_target, 1e-02f);
+            => target = Mathf.Max(target, 1e-02f);
         
         public override IEnumerator CoExecute()
-            => _camera.CoNearClipPlane(_target, _duration, _easer.Evaluate);
+            => camera.CoNearClipPlane(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Camera), "FarClipPlane")]
     public sealed class CameraFarClipPlaneSegment : CameraSegment<float>
     {
         public override IEnumerator CoExecute()
-            => _camera.CoFarClipPlane(_target, _duration, _easer.Evaluate);
+            => camera.CoFarClipPlane(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Camera), "FieldOfView")]
     public sealed class CameraFieldOfViewSegment : CameraSegment<float>
     {
         public override void OnValidate()
-            => _target = Mathf.Clamp(_target, 1e-05f, 180.0f - 1e-05f);
+            => target = Mathf.Clamp(target, 1e-05f, 180.0f - 1e-05f);
 
         public override IEnumerator CoExecute()
-            => _camera.CoFieldOfView(_target, _duration, _easer.Evaluate);
+            => camera.CoFieldOfView(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Camera), "OrthographicSize")]
     public sealed class CameraOrthographicSizeSegment : CameraSegment<float>
     {
         public override IEnumerator CoExecute()
-            => _camera.CoOrthographicSize(_target, _duration, _easer.Evaluate);
+            => camera.CoOrthographicSize(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Camera), "Rect")]
     public sealed class CameraRectSegment : CameraSegment<Rect>
     {
         public override void OnAdded()
-            => _target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+            => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
         public override IEnumerator CoExecute()
-            => _camera.CoRect(_target, _duration, _easer.Evaluate);
+            => camera.CoRect(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Camera), "PixelRect")]
     public sealed class CameraPixelRectSegment : CameraSegment<Rect>
     {
         public override void OnAdded()
-            => _target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+            => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
         public override IEnumerator CoExecute()
-            => _camera.CoPixelRect(_target, _duration, _easer.Evaluate);
+            => camera.CoPixelRect(target, duration, easer.Evaluate);
     }
 }

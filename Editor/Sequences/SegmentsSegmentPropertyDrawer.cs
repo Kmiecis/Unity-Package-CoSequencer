@@ -1,11 +1,12 @@
 using Common.Coroutines;
+using Common.Coroutines.Segments;
+using System;
 using System.Linq;
 using System.Reflection;
-using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace CommonEditor.Coroutines
+namespace CommonEditor.Coroutines.Segments
 {
     [CustomPropertyDrawer(typeof(SegmentsSegment), true)]
     public class SegmentsSegmentPropertyDrawer : PropertyDrawer

@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     public abstract class DebugSegment : Segment
     {
-        [SerializeField] protected string _message;
+        public string message;
     }
 
     [SegmentMenu(nameof(Debug), "Log")]
@@ -15,7 +15,7 @@ namespace Common.Coroutines
     {
         public override IEnumerator CoExecute()
         {
-            Debug.Log(_message);
+            Debug.Log(message);
             yield return null;
         }
     }
@@ -25,7 +25,7 @@ namespace Common.Coroutines
     {
         public override IEnumerator CoExecute()
         {
-            Debug.LogWarning(_message);
+            Debug.LogWarning(message);
             yield return null;
         }
     }
@@ -35,7 +35,7 @@ namespace Common.Coroutines
     {
         public override IEnumerator CoExecute()
         {
-            Debug.LogError(_message);
+            Debug.LogError(message);
             yield return null;
         }
     }

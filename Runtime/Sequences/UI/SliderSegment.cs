@@ -3,29 +3,29 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     public abstract class SliderSegment<T> : TimedSegment
     {
-        [SerializeField] protected Slider _slider;
-        [SerializeField] protected T _target;
+        public Slider slider;
+        public T target;
     }
     
     [SegmentMenu(nameof(Slider), "Value")]
     public sealed class SliderValueSegment : SliderSegment<float>
     {
         public override IEnumerator CoExecute()
-            => _slider.CoValue(_target, _duration, _easer.Evaluate);
+            => slider.CoValue(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(Slider), "NormalizedValue")]
     public sealed class SliderNormalizedValueSegment : SliderSegment<float>
     {
         public override void OnValidate()
-            => _target = Mathf.Clamp(_target, 0.0f, 1.0f);
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
         public override IEnumerator CoExecute()
-            => _slider.CoNormalizedValue(_target, _duration, _easer.Evaluate);
+            => slider.CoNormalizedValue(target, duration, easer.Evaluate);
     }
 }

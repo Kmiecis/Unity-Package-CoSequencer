@@ -2,66 +2,66 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     public abstract class LineRendererSegment<T> : TimedSegment
     {
-        [SerializeField] protected LineRenderer _renderer;
-        [SerializeField] protected T _target;
+        public LineRenderer renderer;
+        public T target;
     }
     
     [SegmentMenu(nameof(LineRenderer), "StartColor")]
     public sealed class LineRendererStartColorSegment : LineRendererSegment<Color>
     {
         public override void OnAdded()
-            => _target = Color.white;
+            => target = Color.white;
 
         public override IEnumerator CoExecute()
-            => _renderer.CoStartColor(_target, _duration, _easer.Evaluate);
+            => renderer.CoStartColor(target, duration, easer.Evaluate);
     }
 
     [SegmentMenu(nameof(LineRenderer), "StartFade")]
     public sealed class LineRendererStartFadeSegment : LineRendererSegment<float>
     {
         public override void OnValidate()
-            => _target = Mathf.Clamp(_target, 0.0f, 1.0f);
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator CoExecute()
-            => _renderer.CoStartFade(_target, _duration, _easer.Evaluate);
+            => renderer.CoStartFade(target, duration, easer.Evaluate);
     }
 
     [SegmentMenu(nameof(LineRenderer), "EndColor")]
     public sealed class LineRendererEndColorSegment : LineRendererSegment<Color>
     {
         public override void OnAdded()
-            => _target = Color.white;
+            => target = Color.white;
 
         public override IEnumerator CoExecute()
-            => _renderer.CoEndColor(_target, _duration, _easer.Evaluate);
+            => renderer.CoEndColor(target, duration, easer.Evaluate);
     }
 
     [SegmentMenu(nameof(LineRenderer), "EndFade")]
     public sealed class LineRendererEndFadeSegment : LineRendererSegment<float>
     {
         public override void OnValidate()
-            => _target = Mathf.Clamp(_target, 0.0f, 1.0f);
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator CoExecute()
-            => _renderer.CoEndFade(_target, _duration, _easer.Evaluate);
+            => renderer.CoEndFade(target, duration, easer.Evaluate);
     }
 
     [SegmentMenu(nameof(LineRenderer), "StartWidth")]
     public sealed class LineRendererStartWidthSegment : LineRendererSegment<float>
     {
         public override IEnumerator CoExecute()
-            => _renderer.CoStartWidth(_target, _duration, _easer.Evaluate);
+            => renderer.CoStartWidth(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu(nameof(LineRenderer), "EndWidth")]
     public sealed class LineRendererEndWidthSegment : LineRendererSegment<float>
     {
         public override IEnumerator CoExecute()
-            => _renderer.CoEndWidth(_target, _duration, _easer.Evaluate);
+            => renderer.CoEndWidth(target, duration, easer.Evaluate);
     }
 }

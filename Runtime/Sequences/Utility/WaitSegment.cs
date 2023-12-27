@@ -1,36 +1,35 @@
 using System;
 using System.Collections;
-using UnityEngine;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     [SegmentMenu("Utility", "WaitTime")]
     public class WaitTimeSegment : Segment
     {
-        [SerializeField] private float _duration;
+        public float duration;
 
         public override IEnumerator CoExecute()
-            => UCoroutine.YieldTime(_duration);
+            => UCoroutine.YieldTime(duration);
     }
 
     [Serializable]
     [SegmentMenu("Utility", "WaitRealtime")]
     public class WaitRealtimeSegment : Segment
     {
-        [SerializeField] private float _duration;
+        public float duration;
 
         public override IEnumerator CoExecute()
-            => UCoroutine.YieldRealtime(_duration);
+            => UCoroutine.YieldRealtime(duration);
     }
 
     [Serializable]
     [SegmentMenu("Utility", "WaitFrames")]
     public class WaitFramesSegment : Segment
     {
-        [SerializeField] private int _frames;
+        public int frames;
 
         public override IEnumerator CoExecute()
-            => UCoroutine.YieldFrames(_frames);
+            => UCoroutine.YieldFrames(frames);
     }
 }

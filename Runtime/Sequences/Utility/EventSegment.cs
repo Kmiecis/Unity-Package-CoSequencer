@@ -1,17 +1,16 @@
 using System;
 using System.Collections;
-using UnityEngine;
 using UnityEngine.Events;
 
-namespace Common.Coroutines
+namespace Common.Coroutines.Segments
 {
     [Serializable]
     [SegmentMenu("Utility", "Event")]
     public class EventSegment : Segment
     {
-        [SerializeField] private UnityEvent _action;
+        public UnityEvent action;
 
         public override IEnumerator CoExecute()
-            => UCoroutine.Yield(_action);
+            => UCoroutine.Yield(action);
     }
 }
