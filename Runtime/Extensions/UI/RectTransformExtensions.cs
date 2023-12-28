@@ -9,6 +9,9 @@ namespace Common.Coroutines
         public static IEnumerator CoAnchorMin(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetAnchorMin, self.SetAnchorMin, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoAnchorMinBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetAnchorMin, self.SetAnchorMin, () => self.GetAnchorMinBy(target), UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoAnchorMinX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetAnchorMinX, self.SetAnchorMinX, target, UCoroutine.YieldTimeEased(duration, easer));
 
@@ -17,6 +20,9 @@ namespace Common.Coroutines
 
         public static IEnumerator CoAnchorMax(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetAnchorMax, self.SetAnchorMax, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoAnchorMaxBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetAnchorMax, self.SetAnchorMax, () => self.GetAnchorMaxBy(target), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoAnchorMaxX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetAnchorMaxX, self.SetAnchorMaxX, target, UCoroutine.YieldTimeEased(duration, easer));
@@ -27,6 +33,9 @@ namespace Common.Coroutines
         public static IEnumerator CoAnchorMove(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetAnchorPosition, self.SetAnchorPosition, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoAnchorMoveBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetAnchorPosition, self.SetAnchorPosition, () => self.GetAnchorPositionBy(target), UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoAnchorMoveX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetAnchorPositionX, self.SetAnchorPositionX, target, UCoroutine.YieldTimeEased(duration, easer));
 
@@ -35,6 +44,9 @@ namespace Common.Coroutines
 
         public static IEnumerator CoOffsetMin(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetOffsetMin, self.SetOffsetMin, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoOffsetMinBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetOffsetMin, self.SetOffsetMin, () => self.GetOffsetMinBy(target), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoOffsetMinX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetOffsetMinX, self.SetOffsetMinX, target, UCoroutine.YieldTimeEased(duration, easer));
@@ -45,6 +57,9 @@ namespace Common.Coroutines
         public static IEnumerator CoOffsetMax(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetOffsetMax, self.SetOffsetMax, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoOffsetMaxBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetOffsetMax, self.SetOffsetMax, () => self.GetOffsetMaxBy(target), UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoOffsetMaxX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetOffsetMaxX, self.SetOffsetMaxX, target, UCoroutine.YieldTimeEased(duration, easer));
 
@@ -54,6 +69,9 @@ namespace Common.Coroutines
         public static IEnumerator CoPivot(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetPivot, self.SetPivot, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoPivotBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetPivot, self.SetPivot, () => self.GetPivotBy(target), UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoPivotX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetPivotX, self.SetPivotX, target, UCoroutine.YieldTimeEased(duration, easer));
 
@@ -62,6 +80,9 @@ namespace Common.Coroutines
 
         public static IEnumerator CoSizeDelta(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetSizeDelta, self.SetSizeDelta, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoSizeDeltaBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetSizeDelta, self.SetSizeDelta, () => self.GetSizeDeltaBy(target), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoSizeDeltaX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetSizeDeltaX, self.SetSizeDeltaX, target, UCoroutine.YieldTimeEased(duration, easer));
@@ -78,6 +99,12 @@ namespace Common.Coroutines
 
         public static void SetAnchorMin(this RectTransform self, Vector2 value)
             => self.anchorMin = value;
+
+        public static Vector2 GetAnchorMinBy(this RectTransform self, Vector2 value)
+            => self.anchorMin + value;
+
+        public static void SetAnchorMinBy(this RectTransform self, Vector2 value)
+            => self.anchorMin += value;
 
         public static float GetAnchorMinX(this RectTransform self)
             => self.anchorMin.x;
@@ -96,6 +123,12 @@ namespace Common.Coroutines
 
         public static void SetAnchorMax(this RectTransform self, Vector2 value)
             => self.anchorMax = value;
+
+        public static Vector2 GetAnchorMaxBy(this RectTransform self, Vector2 value)
+            => self.anchorMax + value;
+
+        public static void SetAnchorMaxBy(this RectTransform self, Vector2 value)
+            => self.anchorMax += value;
 
         public static float GetAnchorMaxX(this RectTransform self)
             => self.anchorMax.x;
@@ -117,6 +150,12 @@ namespace Common.Coroutines
         public static void SetAnchorPosition(this RectTransform self, Vector2 value)
             => self.anchoredPosition = value;
 
+        public static Vector2 GetAnchorPositionBy(this RectTransform self, Vector2 value)
+            => self.anchoredPosition + value;
+
+        public static void SetAnchorPositionBy(this RectTransform self, Vector2 value)
+            => self.anchoredPosition += value;
+
         public static float GetAnchorPositionX(this RectTransform self)
             => self.anchoredPosition.x;
 
@@ -137,6 +176,12 @@ namespace Common.Coroutines
         public static void SetOffsetMin(this RectTransform self, Vector2 value)
             => self.offsetMin = value;
 
+        public static Vector2 GetOffsetMinBy(this RectTransform self, Vector2 value)
+            => self.offsetMin + value;
+
+        public static void SetOffsetMinBy(this RectTransform self, Vector2 value)
+            => self.offsetMin += value;
+
         public static float GetOffsetMinX(this RectTransform self)
             => self.offsetMin.x;
 
@@ -154,6 +199,12 @@ namespace Common.Coroutines
 
         public static void SetOffsetMax(this RectTransform self, Vector2 value)
             => self.offsetMax = value;
+
+        public static Vector2 GetOffsetMaxBy(this RectTransform self, Vector2 value)
+            => self.offsetMax + value;
+
+        public static void SetOffsetMaxBy(this RectTransform self, Vector2 value)
+            => self.offsetMax += value;
 
         public static float GetOffsetMaxX(this RectTransform self)
             => self.offsetMax.x;
@@ -186,6 +237,12 @@ namespace Common.Coroutines
 
         public static void SetPivotY(this RectTransform self, float value)
             => self.pivot = self.pivot.WithY(value);
+
+        public static Vector2 GetPivotBy(this RectTransform self, Vector2 value)
+            => self.pivot + value;
+
+        public static void SetPivotBy(this RectTransform self, Vector2 value)
+            => self.pivot += value;
         #endregion
 
         #region Size delta
@@ -194,6 +251,12 @@ namespace Common.Coroutines
 
         public static void SetSizeDelta(this RectTransform self, Vector2 value)
             => self.sizeDelta = value;
+
+        public static Vector2 GetSizeDeltaBy(this RectTransform self, Vector2 value)
+            => self.sizeDelta + value;
+
+        public static void SetSizeDeltaBy(this RectTransform self, Vector2 value)
+            => self.sizeDelta += value;
 
         public static float GetSizeDeltaX(this RectTransform self)
             => self.sizeDelta.x;
