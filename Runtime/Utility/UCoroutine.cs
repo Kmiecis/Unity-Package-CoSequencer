@@ -36,21 +36,21 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes 'action' method and yields </summary>
+        /// <summary> Executes 'action' method once </summary>
         public static IEnumerator Yield(Action action)
         {
             action();
             yield return null;
         }
 
-        /// <summary> Executes 'action' method and yields </summary>
+        /// <summary> Executes 'action' method once </summary>
         public static IEnumerator Yield(UnityAction action)
         {
             action();
             yield return null;
         }
 
-        /// <summary> Executes 'action' uevent and yields </summary>
+        /// <summary> Executes 'action' uevent once </summary>
         public static IEnumerator Yield(UnityEvent action)
         {
             action.Invoke();
@@ -103,6 +103,27 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield into
+        /// <summary> Executes 'provider' method into 'consumer' method once </summary>
+        public static IEnumerator YieldInto<T>(Func<T> provider, Action<T> consumer)
+        {
+            consumer(provider());
+            yield return null;
+        }
+
+        /// <summary> Executes 'provider' method into 'consumer' method once </summary>
+        public static IEnumerator YieldInto<T>(Func<T> provider, UnityAction<T> consumer)
+        {
+            consumer(provider());
+            yield return null;
+        }
+
+        /// <summary> Executes 'provider' method into 'consumer' event once </summary>
+        public static IEnumerator YieldInto<T>(Func<T> provider, UnityEvent<T> consumer)
+        {
+            consumer.Invoke(provider());
+            yield return null;
+        }
+
         /// <summary> Executes coroutine into 'consumer' method </summary>
         public static IEnumerator YieldInto<T>(IEnumerator<T> coroutine, Action<T> consumer)
         {
