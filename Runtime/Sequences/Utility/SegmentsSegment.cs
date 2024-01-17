@@ -6,7 +6,7 @@ using System.Collections;
 namespace Common.Coroutines.Segments
 {
     [Serializable]
-    public abstract class SegmentsSegment : Segment
+    public abstract class SegmentsSegment : Segment, ISegments
     {
         [SerializeReference]
         protected List<Segment> _segments;

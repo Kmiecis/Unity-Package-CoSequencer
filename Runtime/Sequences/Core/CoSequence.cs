@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/" + nameof(CoSequence))]
-    public class CoSequence : SegmentBehaviour
+    public class CoSequence : SegmentBehaviour, ISegments
     {
         [SerializeReference]
         protected List<Segment> _segments;
