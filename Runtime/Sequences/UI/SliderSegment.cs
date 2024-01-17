@@ -12,14 +12,14 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(Slider), "Value")]
+    [SegmentMenu("Value", SegmentPath.Slider, SegmentGroup.UI)]
     public sealed class SliderValueSegment : SliderSegment<float>
     {
         public override IEnumerator CoExecute()
             => slider.CoValue(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Slider), "NormalizedValue")]
+    [SegmentMenu("NormalizedValue", SegmentPath.Slider, SegmentGroup.UI)]
     public sealed class SliderNormalizedValueSegment : SliderSegment<float>
     {
         public override void OnValidate()

@@ -10,7 +10,7 @@ namespace Common.Coroutines.Segments
         public string message;
     }
 
-    [SegmentMenu(nameof(Debug), "Log")]
+    [SegmentMenu("Log", SegmentPath.Debug, SegmentGroup.Utility)]
     public class DebugLogSegment : DebugSegment
     {
         public override IEnumerator CoExecute()
@@ -20,7 +20,7 @@ namespace Common.Coroutines.Segments
         }
     }
 
-    [SegmentMenu(nameof(Debug), "Warning")]
+    [SegmentMenu("Warning", SegmentPath.Debug, SegmentGroup.Utility)]
     public class DebugWarningSegment : DebugSegment
     {
         public override IEnumerator CoExecute()
@@ -30,7 +30,7 @@ namespace Common.Coroutines.Segments
         }
     }
 
-    [SegmentMenu(nameof(Debug), "Error")]
+    [SegmentMenu("Error", SegmentPath.Debug, SegmentGroup.Utility)]
     public class DebugErrorSegment : DebugSegment
     {
         public override IEnumerator CoExecute()

@@ -12,7 +12,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(Graphic), "Color")]
+    [SegmentMenu("Color", SegmentPath.Graphic, SegmentGroup.UI)]
     public sealed class GraphicColorSegment : GraphicSegment<Color>
     {
         public override void OnAdded()
@@ -22,7 +22,7 @@ namespace Common.Coroutines.Segments
             => graphic.CoColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Graphic), "Fade")]
+    [SegmentMenu("Fade", SegmentPath.Graphic, SegmentGroup.UI)]
     public sealed class GraphicFadeSegment : GraphicSegment<float>
     {
         public override void OnValidate()
@@ -32,7 +32,7 @@ namespace Common.Coroutines.Segments
             => graphic.CoFade(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Graphic), "Gradient")]
+    [SegmentMenu("Gradient", SegmentPath.Graphic, SegmentGroup.UI)]
     public sealed class GraphicGradientSegment : GraphicSegment<Gradient>
     {
         public override IEnumerator CoExecute()

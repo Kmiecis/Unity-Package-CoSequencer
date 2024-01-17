@@ -23,7 +23,7 @@ namespace Common.Coroutines
         {
             var type = GetType();
             var attribute = type.GetCustomAttribute<SegmentMenuAttribute>();
-            var menuPath = attribute.GetMenuPathOrDefault("Custom");
+            var menuPath = attribute.GetMenuPathOrDefault(SegmentPath.Custom);
             var fileName = attribute.GetFileNameOrDefault(type.Name);
 
             return $"{menuPath} - {fileName}";

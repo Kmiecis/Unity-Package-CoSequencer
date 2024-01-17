@@ -12,7 +12,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
 
-    [SegmentMenu(nameof(Text), "FontSize")]
+    [SegmentMenu("FontSize", SegmentPath.Text, SegmentGroup.UI)]
     public sealed class TextFontSizeSegment : TextSegment<int>
     {
         public override void OnValidate()
@@ -22,7 +22,7 @@ namespace Common.Coroutines.Segments
             => text.CoFontSize(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Text), "Color")]
+    [SegmentMenu("Color", SegmentPath.Text, SegmentGroup.UI)]
     public sealed class TextColorSegment : TextSegment<Color>
     {
         public override void OnAdded()
@@ -32,7 +32,7 @@ namespace Common.Coroutines.Segments
             => text.CoColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Text), "Fade")]
+    [SegmentMenu("Fade", SegmentPath.Text, SegmentGroup.UI)]
     public sealed class TextFadeSegment : TextSegment<float>
     {
         public override void OnValidate()
@@ -42,7 +42,7 @@ namespace Common.Coroutines.Segments
             => text.CoFade(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Text), "Gradient")]
+    [SegmentMenu("Gradient", SegmentPath.Text, SegmentGroup.UI)]
     public sealed class TextGradientSegment : TextSegment<Gradient>
     {
         public override IEnumerator CoExecute()

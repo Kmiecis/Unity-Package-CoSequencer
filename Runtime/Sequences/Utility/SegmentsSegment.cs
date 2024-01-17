@@ -94,7 +94,7 @@ namespace Common.Coroutines.Segments
         }
     }
 
-    [SegmentMenu("Utility", "Sequence")]
+    [SegmentMenu("Sequence", SegmentPath.Utility, SegmentGroup.Utility)]
     public class SequenceSegment : SegmentsSegment
     {
         public override IEnumerator CoExecute()
@@ -108,7 +108,7 @@ namespace Common.Coroutines.Segments
         }
     }
 
-    [SegmentMenu("Utility", "Parallel")]
+    [SegmentMenu("Parallel", SegmentPath.Utility, SegmentGroup.Utility)]
     public class ParallelSegment : SegmentsSegment
     {
         public override IEnumerator CoExecute()

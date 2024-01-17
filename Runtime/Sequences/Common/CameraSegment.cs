@@ -11,14 +11,14 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(Camera), "Aspect")]
+    [SegmentMenu("Aspect", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraAspectSegment : CameraSegment<float>
     {
         public override IEnumerator CoExecute()
             => camera.CoAspect(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu(nameof(Camera), "BackgroundColor")]
+    [SegmentMenu("BackgroundColor", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraBackgroundColorSegment : CameraSegment<Color>
     {
         public override void OnAdded()
@@ -28,7 +28,7 @@ namespace Common.Coroutines.Segments
             => camera.CoBackgroundColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Camera), "NearClipPlane")]
+    [SegmentMenu("NearClipPlane", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraNearClipPlaneSegment : CameraSegment<float>
     {
         public override void OnAdded()
@@ -41,14 +41,14 @@ namespace Common.Coroutines.Segments
             => camera.CoNearClipPlane(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Camera), "FarClipPlane")]
+    [SegmentMenu("FarClipPlane", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraFarClipPlaneSegment : CameraSegment<float>
     {
         public override IEnumerator CoExecute()
             => camera.CoFarClipPlane(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Camera), "FieldOfView")]
+    [SegmentMenu("FieldOfView", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraFieldOfViewSegment : CameraSegment<float>
     {
         public override void OnValidate()
@@ -58,14 +58,14 @@ namespace Common.Coroutines.Segments
             => camera.CoFieldOfView(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Camera), "OrthographicSize")]
+    [SegmentMenu("OrthographicSize", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraOrthographicSizeSegment : CameraSegment<float>
     {
         public override IEnumerator CoExecute()
             => camera.CoOrthographicSize(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Camera), "Rect")]
+    [SegmentMenu("Rect", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraRectSegment : CameraSegment<Rect>
     {
         public override void OnAdded()
@@ -75,7 +75,7 @@ namespace Common.Coroutines.Segments
             => camera.CoRect(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Camera), "PixelRect")]
+    [SegmentMenu("PixelRect", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraPixelRectSegment : CameraSegment<Rect>
     {
         public override void OnAdded()

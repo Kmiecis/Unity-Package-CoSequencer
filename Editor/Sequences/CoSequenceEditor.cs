@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Common.Coroutines;
@@ -11,6 +12,13 @@ namespace CommonEditor.Coroutines
     [CustomEditor(typeof(CoSequence))]
     public class CoSequenceEditor : Editor
     {
+        private class SegmentData
+        {
+            public string menuPath;
+            public string fileName;
+            public Type type;
+        }
+
         private readonly Type SubclassType = typeof(Segment);
 
         private CoSequence _target;
@@ -21,35 +29,49 @@ namespace CommonEditor.Coroutines
             var menu = new GenericMenu();
             
             var added = 0;
-            
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            for (int i = 0; i < assemblies.Length; ++i)
-            {
-                var assembly = assemblies[i];
-                
-                var types = assembly.FindTypes(t => t.IsSubclassOf(SubclassType) && !t.IsAbstract);
-                
-                if (types.Any())
-                {
-                    if (added > 0)
-                    {
-                        menu.AddSeparator(string.Empty);
-                    }
-                    added += 1;
-                }
-                
-                foreach (var type in types)
-                {
-                    var attribute = type.GetCustomAttribute<SegmentMenuAttribute>();
-                    var menuPath = attribute.GetMenuPathOrDefault("Custom");
-                    var fileName = attribute.GetFileNameOrDefault(type.Name);
 
-                    var path = $"{menuPath}/{fileName}";
-                
-                    menu.AddItem(new GUIContent(path), false, OnMenuAdd, type);
+            var map = new Dictionary<int, List<SegmentData>>();
+
+            var types = AppDomain.CurrentDomain.FindTypes(t => t.IsSubclassOf(SubclassType) && !t.IsAbstract);
+            foreach (var type in types)
+            {
+                var attribute = type.GetCustomAttribute<SegmentMenuAttribute>();
+
+                var group = attribute.group;
+                var menuPath = attribute.GetMenuPathOrDefault(SegmentPath.Custom);
+                var fileName = attribute.GetFileNameOrDefault(type.Name);
+
+                var data = new SegmentData
+                {
+                    menuPath = menuPath,
+                    fileName = fileName,
+                    type = type
+                };
+
+                if (!map.TryGetValue(group, out var target))
+                {
+                    map[group] = target = new List<SegmentData>();
+                }
+                target.Add(data);
+            }
+
+            var mapped = map.OrderBy(kv => kv.Key);
+            foreach (var kv in mapped)
+            {
+                if (added > 0)
+                {
+                    menu.AddSeparator(string.Empty);
+                }
+                added += 1;
+
+                foreach (var data in kv.Value)
+                {
+                    var path = $"{data.menuPath}/{data.fileName}";
+
+                    menu.AddItem(new GUIContent(path), false, OnMenuAdd, data.type);
                 }
             }
-            
+
             menu.ShowAsContext();
         }
 

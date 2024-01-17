@@ -4,7 +4,7 @@ using System.Collections;
 namespace Common.Coroutines.Segments
 {
     [Serializable]
-    [SegmentMenu("Utility", "WaitTime")]
+    [SegmentMenu("WaitTime", SegmentPath.Utility, SegmentGroup.Utility)]
     public class WaitTimeSegment : Segment
     {
         public float duration;
@@ -14,7 +14,7 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Utility", "WaitRealtime")]
+    [SegmentMenu("WaitRealtime", SegmentPath.Utility, SegmentGroup.Utility)]
     public class WaitRealtimeSegment : Segment
     {
         public float duration;
@@ -24,7 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Utility", "WaitFrames")]
+    [SegmentMenu("WaitFrames", SegmentPath.Utility, SegmentGroup.Utility)]
     public class WaitFramesSegment : Segment
     {
         public int frames;

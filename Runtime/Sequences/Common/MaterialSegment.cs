@@ -35,7 +35,7 @@ namespace Common.Coroutines.Segments
         }
     }
     
-    [SegmentMenu(nameof(Material), "Color")]
+    [SegmentMenu("Color", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialColorSegment : MaterialSegment<Color>
     {
         public override void OnAdded()
@@ -45,7 +45,7 @@ namespace Common.Coroutines.Segments
             => material.CoColor(target, _propertyId, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Material), "Fade")]
+    [SegmentMenu("Fade", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialFadeSegment : MaterialSegment<float>
     {
         public override void OnValidate()
@@ -55,35 +55,35 @@ namespace Common.Coroutines.Segments
             => material.CoFade(target, _propertyId, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Material), "Gradient")]
+    [SegmentMenu("Gradient", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialGradientSegment : MaterialSegment<Gradient>
     {
         public override IEnumerator CoExecute()
             => material.CoGradient(target, _propertyId, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Material), "Float")]
+    [SegmentMenu("Float", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialFloatSegment : MaterialSegment<float>
     {
         public override IEnumerator CoExecute()
             => material.CoFloat(target, _propertyId, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Material), "Tiling")]
+    [SegmentMenu("Tiling", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialTilingSegment : MaterialSegment<Vector2>
     {
         public override IEnumerator CoExecute()
             => material.CoTiling(target, _propertyId, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Material), "Offset")]
+    [SegmentMenu("Offset", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialOffsetSegment : MaterialSegment<Vector2>
     {
         public override IEnumerator CoExecute()
             => material.CoOffset(target, _propertyId, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Material), "Vector")]
+    [SegmentMenu("Vector", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialVectorSegment : MaterialSegment<Vector4>
     {
         public override IEnumerator CoExecute()

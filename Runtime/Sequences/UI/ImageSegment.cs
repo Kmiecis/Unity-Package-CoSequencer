@@ -12,7 +12,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(Image), "FillAmount")]
+    [SegmentMenu("FillAmount", SegmentPath.Image, SegmentGroup.UI)]
     public sealed class ImageFillAmountSegment : ImageSegment<float>
     {
         public override void OnValidate()
@@ -22,7 +22,7 @@ namespace Common.Coroutines.Segments
             => image.CoFillAmount(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Image), "Color")]
+    [SegmentMenu("Color", SegmentPath.Image, SegmentGroup.UI)]
     public sealed class ImageColorSegment : ImageSegment<Color>
     {
         public override void OnAdded()
@@ -32,7 +32,7 @@ namespace Common.Coroutines.Segments
             => image.CoColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Image), "Fade")]
+    [SegmentMenu("Fade", SegmentPath.Image, SegmentGroup.UI)]
     public sealed class ImageFadeSegment : ImageSegment<float>
     {
         public override void OnValidate()
@@ -42,7 +42,7 @@ namespace Common.Coroutines.Segments
             => image.CoFade(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Image), "Gradient")]
+    [SegmentMenu("Gradient", SegmentPath.Image, SegmentGroup.UI)]
     public sealed class ImageGradientSegment : ImageSegment<Gradient>
     {
         public override IEnumerator CoExecute()

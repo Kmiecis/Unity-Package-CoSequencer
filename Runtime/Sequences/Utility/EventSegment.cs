@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Coroutines.Segments
 {
     [Serializable]
-    [SegmentMenu("Utility", "Event")]
+    [SegmentMenu("Event", SegmentPath.Utility, SegmentGroup.Utility)]
     public class EventSegment : Segment
     {
         public UnityEvent action;

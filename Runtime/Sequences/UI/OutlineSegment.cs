@@ -12,7 +12,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(Outline), "EffectColor")]
+    [SegmentMenu("EffectColor", SegmentPath.Outline, SegmentGroup.UI)]
     public sealed class OutlineEffectColorSegment : OutlineSegment<Color>
     {
         public override void OnAdded()
@@ -22,7 +22,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Outline), "EffectFade")]
+    [SegmentMenu("EffectFade", SegmentPath.Outline, SegmentGroup.UI)]
     public sealed class OutlineEffectFadeSegment : OutlineSegment<float>
     {
         public override void OnValidate()
@@ -32,7 +32,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectFade(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Outline), "EffectGradient")]
+    [SegmentMenu("EffectGradient", SegmentPath.Outline, SegmentGroup.UI)]
     public sealed class OutlineEffectGradientSegment : OutlineSegment<Gradient>
     {
         public override IEnumerator CoExecute()

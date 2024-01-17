@@ -11,7 +11,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
 
-    [SegmentMenu(nameof(AudioSource), "Pitch")]
+    [SegmentMenu("Pitch", SegmentPath.AudioSource, SegmentGroup.Core)]
     public sealed class AudioSourcePitchSegment : AudioSourceSegment<float>
     {
         public override void OnValidate()
@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
             => audio.CoPitch(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(AudioSource), "Volume")]
+    [SegmentMenu("Volume", SegmentPath.AudioSource, SegmentGroup.Core)]
     public sealed class AudioSourceVolumeSegment : AudioSourceSegment<float>
     {
         public override void OnValidate()

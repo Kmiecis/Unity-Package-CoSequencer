@@ -11,7 +11,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(SpriteRenderer), "Color")]
+    [SegmentMenu("Color", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererColorSegment : SpriteRendererSegment<Color>
     {
         public override void OnAdded()
@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(SpriteRenderer), "Fade")]
+    [SegmentMenu("Fade", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererFadeSegment : SpriteRendererSegment<float>
     {
         public override void OnValidate()
@@ -31,28 +31,28 @@ namespace Common.Coroutines.Segments
             => renderer.CoFade(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(SpriteRenderer), "Gradient")]
+    [SegmentMenu("Gradient", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererGradientSegment : SpriteRendererSegment<Gradient>
     {
         public override IEnumerator CoExecute()
             => renderer.CoGradient(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(SpriteRenderer), "Size")]
+    [SegmentMenu("Size", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeSegment : SpriteRendererSegment<Vector2>
     {
         public override IEnumerator CoExecute()
             => renderer.CoSize(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu(nameof(SpriteRenderer), "SizeX")]
+    [SegmentMenu("SizeX", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeXSegment : SpriteRendererSegment<float>
     {
         public override IEnumerator CoExecute()
             => renderer.CoSizeX(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(SpriteRenderer), "SizeY")]
+    [SegmentMenu("SizeY", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeYSegment : SpriteRendererSegment<float>
     {
         public override IEnumerator CoExecute()

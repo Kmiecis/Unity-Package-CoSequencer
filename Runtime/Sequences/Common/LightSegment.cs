@@ -11,7 +11,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(Light), "Color")]
+    [SegmentMenu("Color", SegmentPath.Light, SegmentGroup.Core)]
     public sealed class LightColorSegment : LightSegment<Color>
     {
         public override void OnAdded()
@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
             => light.CoColor(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Light), "Intensity")]
+    [SegmentMenu("Intensity", SegmentPath.Light, SegmentGroup.Core)]
     public sealed class LightIntensitySegment : LightSegment<float>
     {
         public override void OnValidate()
@@ -31,14 +31,14 @@ namespace Common.Coroutines.Segments
             => light.CoIntensity(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Light), "Range")]
+    [SegmentMenu("Range", SegmentPath.Light, SegmentGroup.Core)]
     public sealed class LightRangeSegment : LightSegment<float>
     {
         public override IEnumerator CoExecute()
             => light.CoRange(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Light), "ShadowStrength")]
+    [SegmentMenu("ShadowStrength", SegmentPath.Light, SegmentGroup.Core)]
     public sealed class LightShadowStrengthSegment : LightSegment<float>
     {
         public override void OnValidate()

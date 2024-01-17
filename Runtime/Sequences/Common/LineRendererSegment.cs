@@ -11,7 +11,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(LineRenderer), "StartColor")]
+    [SegmentMenu("StartColor", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererStartColorSegment : LineRendererSegment<Color>
     {
         public override void OnAdded()
@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu(nameof(LineRenderer), "StartFade")]
+    [SegmentMenu("StartFade", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererStartFadeSegment : LineRendererSegment<float>
     {
         public override void OnValidate()
@@ -31,7 +31,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu(nameof(LineRenderer), "EndColor")]
+    [SegmentMenu("EndColor", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererEndColorSegment : LineRendererSegment<Color>
     {
         public override void OnAdded()
@@ -41,7 +41,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndColor(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu(nameof(LineRenderer), "EndFade")]
+    [SegmentMenu("EndFade", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererEndFadeSegment : LineRendererSegment<float>
     {
         public override void OnValidate()
@@ -51,14 +51,14 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndFade(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu(nameof(LineRenderer), "StartWidth")]
+    [SegmentMenu("StartWidth", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererStartWidthSegment : LineRendererSegment<float>
     {
         public override IEnumerator CoExecute()
             => renderer.CoStartWidth(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(LineRenderer), "EndWidth")]
+    [SegmentMenu("EndWidth", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererEndWidthSegment : LineRendererSegment<float>
     {
         public override IEnumerator CoExecute()

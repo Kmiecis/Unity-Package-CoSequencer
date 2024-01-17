@@ -5,23 +5,19 @@ namespace Common.Coroutines
     [AttributeUsage(AttributeTargets.Class)]
     public class SegmentMenuAttribute : Attribute
     {
-        public readonly string menuPath;
         public readonly string fileName;
+        public readonly string menuPath;
+        public readonly int group;
 
-        public SegmentMenuAttribute(string menuPath, string fileName)
+        public SegmentMenuAttribute(
+            string fileName = null,
+            string menuPath = SegmentPath.Custom,
+            int group = SegmentGroup.Custom
+        )
         {
             this.menuPath = menuPath;
             this.fileName = fileName;
-        }
-
-        public SegmentMenuAttribute(string fileName) :
-            this(null, fileName)
-        {
-        }
-
-        public SegmentMenuAttribute() :
-            this(null, null)
-        {
+            this.group = group;
         }
     }
 

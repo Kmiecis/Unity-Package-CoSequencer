@@ -11,7 +11,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
 
-    [SegmentMenu(nameof(CanvasGroup), "Fade")]
+    [SegmentMenu("Fade", SegmentPath.CanvasGroup, SegmentGroup.UI)]
     public sealed class CanvasGroupFadeSegment : CanvasGroupSegment<float>
     {
         public override void OnValidate()

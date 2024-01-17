@@ -12,7 +12,7 @@ namespace Common.Coroutines.Segments
         public T target;
     }
     
-    [SegmentMenu(nameof(ScrollRect), "Position")]
+    [SegmentMenu("Position", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectPositionSegment : ScrollRectSegment<Vector2>
     {
         public override void OnValidate()
@@ -22,7 +22,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoPosition(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(ScrollRect), "HorizontalPosition")]
+    [SegmentMenu("HorizontalPosition", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalPositionSegment : ScrollRectSegment<float>
     {
         public override void OnValidate()
@@ -32,7 +32,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoHorizontalPosition(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(ScrollRect), "VerticalPosition")]
+    [SegmentMenu("VerticalPosition", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalPositionSegment : ScrollRectSegment<float>
     {
         public override void OnValidate()
@@ -42,21 +42,21 @@ namespace Common.Coroutines.Segments
             => scroll.CoVerticalPosition(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(ScrollRect), "Velocity")]
+    [SegmentMenu("Velocity", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectVelocitySegment : ScrollRectSegment<Vector2>
     {
         public override IEnumerator CoExecute()
             => scroll.CoVelocity(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(ScrollRect), "HorizontalVelocity")]
+    [SegmentMenu("HorizontalVelocity", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalVelocitySegment : ScrollRectSegment<float>
     {
         public override IEnumerator CoExecute()
             => scroll.CoHorizontalVelocity(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(ScrollRect), "VerticalVelocity")]
+    [SegmentMenu("VerticalVelocity", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalVelocitySegment : ScrollRectSegment<float>
     {
         public override IEnumerator CoExecute()

@@ -11,28 +11,28 @@ namespace Common.Coroutines.Segments
         public T target;
     }
 
-    [SegmentMenu(nameof(Rigidbody2D), "Move")]
+    [SegmentMenu("Move", SegmentPath.Rigidbody2D, SegmentGroup.Core)]
     public sealed class Rigidbody2DMoveSegment : Rigidbody2DSegment<Vector2>
     {
         public override IEnumerator CoExecute()
             => rigidbody.CoMove(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Rigidbody2D), "MoveX")]
+    [SegmentMenu("MoveX", SegmentPath.Rigidbody2D, SegmentGroup.Core)]
     public sealed class Rigidbody2DMoveXSegment : Rigidbody2DSegment<float>
     {
         public override IEnumerator CoExecute()
             => rigidbody.CoMoveX(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Rigidbody2D), "MoveY")]
+    [SegmentMenu("MoveY", SegmentPath.Rigidbody2D, SegmentGroup.Core)]
     public sealed class Rigidbody2DMoveYSegment : Rigidbody2DSegment<float>
     {
         public override IEnumerator CoExecute()
             => rigidbody.CoMoveY(target, duration, easer.Evaluate);
     }
     
-    [SegmentMenu(nameof(Rigidbody2D), "Rotate")]
+    [SegmentMenu("Rotate", SegmentPath.Rigidbody2D, SegmentGroup.Core)]
     public sealed class Rigidbody2DRotateSegment : Rigidbody2DSegment<float>
     {
         public override IEnumerator CoExecute()
