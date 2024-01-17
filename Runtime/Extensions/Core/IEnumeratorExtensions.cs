@@ -49,16 +49,6 @@ namespace Common.Coroutines
             return UCoroutine.YieldInSequence(self, coroutine);
         }
 
-        public static IEnumerator Then(this IEnumerator self, Func<IEnumerator> provider)
-        {
-            return self.Then(UCoroutine.Yield(provider));
-        }
-
-        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, Func<IEnumerator<T>> provider)
-        {
-            return self.Then(UCoroutine.Yield(provider));
-        }
-
         public static IEnumerator Then(this IEnumerator self, params IEnumerator[] coroutines)
         {
             return self.Then(UCoroutine.YieldInParallel(coroutines));
@@ -86,11 +76,6 @@ namespace Common.Coroutines
             return UCoroutine.YieldInParallel(self, coroutine);
         }
 
-        public static IEnumerator With(this IEnumerator self, Func<IEnumerator> provider)
-        {
-            return self.With(UCoroutine.Yield(provider));
-        }
-        
         public static IEnumerator With(this IEnumerator self, Action action)
         {
             return UCoroutine.YieldUntil(action, self);
