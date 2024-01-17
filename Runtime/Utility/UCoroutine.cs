@@ -359,7 +359,9 @@ namespace Common.Coroutines
                 yield return coroutine.Current;
             }
         }
+        #endregion
 
+        #region Yield do while
         /// <summary> Executes 'action' method at least once and while 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldDoWhile(Action action, Func<bool> verifier)
         {
@@ -570,6 +572,47 @@ namespace Common.Coroutines
             {
                 action.Invoke();
                 yield return coroutine.Current;
+            }
+        }
+        #endregion
+
+        #region Yield when
+        /// <summary> Executes coroutine only when 'verifier' method evaluates to true, otherwise awaits </summary>
+        public static IEnumerator YieldWhen(IEnumerator coroutine, Func<bool> verifier)
+        {
+            while (true)
+            {
+                if (verifier())
+                {
+                    if (coroutine.MoveNext())
+                    {
+                        yield return coroutine.Current;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary> Executes coroutine from 'provider' method only when 'verifier' method evaluates to true, otherwise awaits </summary>
+        public static IEnumerator YieldWhen(Func<IEnumerator> provider, Func<bool> verifier)
+        {
+            var coroutine = provider();
+            while (true)
+            {
+                if (verifier())
+                {
+                    if (coroutine.MoveNext())
+                    {
+                        yield return coroutine.Current;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
         }
         #endregion

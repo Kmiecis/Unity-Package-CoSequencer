@@ -53,14 +53,14 @@ namespace Common.Coroutines.Segments
             return GetSegmentAt(SegmentCount - 1);
         }
 
-        public IEnumerable<Segment> GetSegments()
-        {
-            return _segments;
-        }
-
         public int IndexOf(Segment item)
         {
             return _segments.IndexOf(item);
+        }
+
+        public IEnumerable<Segment> GetSegments()
+        {
+            return _segments;
         }
 
         public IEnumerable<T> GetSegments<T>()
@@ -73,11 +73,6 @@ namespace Common.Coroutines.Segments
                     yield return item;
                 }
             }
-        }
-
-        public void Execute(MonoBehaviour target)
-        {
-            CoExecute().Start(target);
         }
 
         public abstract override IEnumerator CoExecute();

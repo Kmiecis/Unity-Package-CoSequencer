@@ -91,14 +91,15 @@ namespace Common.Coroutines
 
         public override IEnumerator CoExecute()
         {
-            var providers = new IEnumerator[_segments.Count];
+            var coroutines = new IEnumerator[_segments.Count];
             for (int i = 0; i < _segments.Count; ++i)
             {
-                providers[i] = _segments[i].CoExecute();
+                coroutines[i] = _segments[i].CoExecute();
             }
-            return UCoroutine.YieldInSequence(providers);
+            return UCoroutine.YieldInSequence(coroutines);
         }
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             foreach (var segment in GetSegments())
@@ -109,5 +110,6 @@ namespace Common.Coroutines
                 }
             }
         }
+#endif
     }
 }

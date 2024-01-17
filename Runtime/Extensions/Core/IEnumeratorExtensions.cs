@@ -185,7 +185,9 @@ namespace Common.Coroutines
         {
             return UCoroutine.YieldWhile(self, verifier);
         }
+        #endregion
 
+        #region Do while
         public static IEnumerator DoWhile(this IEnumerator self, Func<bool> verifier)
         {
             return UCoroutine.YieldDoWhile(self, verifier);
@@ -194,6 +196,13 @@ namespace Common.Coroutines
         public static IEnumerator DoWhile<T>(this IEnumerator<T> self, Func<bool> verifier)
         {
             return UCoroutine.YieldDoWhile(self, verifier);
+        }
+        #endregion
+
+        #region When
+        public static IEnumerator When(this IEnumerator self, Func<bool> verifier)
+        {
+            return UCoroutine.YieldWhen(self, verifier);
         }
         #endregion
 
