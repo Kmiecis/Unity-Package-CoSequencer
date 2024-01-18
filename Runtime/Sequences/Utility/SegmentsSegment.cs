@@ -9,24 +9,24 @@ namespace Common.Coroutines.Segments
     public abstract class SegmentsSegment : Segment, ISegments
     {
         [SerializeReference]
-        protected List<Segment> _segments;
+        protected List<ISegment> _segments;
 
         public int SegmentCount
             => _segments.Count;
 
         public SegmentsSegment()
         {
-            _segments = new List<Segment>();
+            _segments = new List<ISegment>();
         }
 
-        public void AddSegment(Segment item)
+        public void AddSegment(ISegment item)
         {
             _segments.Add(item);
 
             item.OnAdded();
         }
 
-        public void AddSegmentAt(int index, Segment item)
+        public void AddSegmentAt(int index, ISegment item)
         {
             _segments.Insert(index, item);
 
@@ -43,28 +43,28 @@ namespace Common.Coroutines.Segments
             RemoveSegmentAt(_segments.Count - 1);
         }
 
-        public Segment GetSegmentAt(int index)
+        public ISegment GetSegmentAt(int index)
         {
             return _segments[index];
         }
 
-        public Segment GetLastSegment()
+        public ISegment GetLastSegment()
         {
             return GetSegmentAt(SegmentCount - 1);
         }
 
-        public int IndexOf(Segment item)
+        public int IndexOf(ISegment item)
         {
             return _segments.IndexOf(item);
         }
 
-        public IEnumerable<Segment> GetSegments()
+        public IEnumerable<ISegment> GetSegments()
         {
             return _segments;
         }
 
         public IEnumerable<T> GetSegments<T>()
-            where T : Segment
+            where T : ISegment
         {
             foreach (var segment in GetSegments())
             {

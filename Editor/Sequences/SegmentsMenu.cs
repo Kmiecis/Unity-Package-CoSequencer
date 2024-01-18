@@ -116,7 +116,7 @@ namespace CommonEditor.Coroutines
             _count = _target.SegmentCount;
         }
 
-        private void ReplaceSegment(Segment segment)
+        private void ReplaceSegment(ISegment segment)
         {
             var index = _target.IndexOf(segment);
             _target.RemoveSegmentAt(index);
@@ -128,14 +128,14 @@ namespace CommonEditor.Coroutines
             EditorUtility.CopySerializedManagedFieldsOnly(segment, replace);
         }
 
-        private Segment CreateSegmentOfType(Type type)
+        private ISegment CreateSegmentOfType(Type type)
         {
-            return (Segment)Activator.CreateInstance(type);
+            return (ISegment)Activator.CreateInstance(type);
         }
 
-        private Segment FindDuplicateSegment()
+        private ISegment FindDuplicateSegment()
         {
-            var previous = (Segment)null;
+            var previous = (ISegment)null;
             foreach (var segment in _target.GetSegments())
             {
                 if (previous == segment)

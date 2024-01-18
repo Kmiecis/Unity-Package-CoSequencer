@@ -6,18 +6,18 @@ namespace Common.Coroutines
     {
         int SegmentCount { get; }
 
-        void AddSegment(Segment item);
+        void AddSegment(ISegment item);
 
-        void AddSegmentAt(int index, Segment item);
+        void AddSegmentAt(int index, ISegment item);
 
         void RemoveSegmentAt(int index);
 
-        Segment GetLastSegment();
+        ISegment GetLastSegment();
 
         void RemoveLastSegment();
 
-        int IndexOf(Segment item);
+        int IndexOf(ISegment item);
 
-        IEnumerable<Segment> GetSegments();
+        IEnumerable<ISegment> GetSegments();
     }
 }
