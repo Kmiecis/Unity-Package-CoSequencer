@@ -1,6 +1,6 @@
 ﻿namespace Common.Coroutines
 {
-    public enum EEaseType
+    public enum EEaserType
     {
         Linear,
         Step,

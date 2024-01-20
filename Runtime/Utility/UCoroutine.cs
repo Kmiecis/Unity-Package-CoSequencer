@@ -9,6 +9,12 @@ namespace Common.Coroutines
     public static class UCoroutine
     {
         #region Yield
+        /// <summary> Yields nothing </summary>
+        public static IEnumerator Yield()
+        {
+            yield return null;
+        }
+
         /// <summary> Yields YieldInstruction </summary>
         public static IEnumerator Yield(YieldInstruction yield)
         {

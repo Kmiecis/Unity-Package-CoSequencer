@@ -194,7 +194,7 @@ namespace Common.Coroutines
         #region Timer
         public static IEnumerator<float> Eased(this IEnumerator<float> self, Func<float, float> easer = null)
         {
-            return UCoroutine.YieldInto(self, easer ?? Easings.SmoothStep);
+            return UCoroutine.YieldInto(self, easer ?? Easers.SmoothStep);
         }
 
         public static IEnumerator<float> Flipped(this IEnumerator<float> self, float duration = 1.0f)

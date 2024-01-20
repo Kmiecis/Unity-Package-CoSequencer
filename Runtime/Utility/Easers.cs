@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Common.Coroutines
 {
-    public static class Easings
+    public static class Easers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Linear(float f)

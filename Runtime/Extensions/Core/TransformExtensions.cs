@@ -9,6 +9,9 @@ namespace Common.Coroutines
         public static IEnumerator CoMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetPosition, self.SetPosition, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoMove(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetPosition, self.SetPosition, target.GetPosition, UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoMoveBy(this Transform self, Vector3 offset, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetPosition, self.SetPosition, () => self.GetPositionBy(offset), UCoroutine.YieldTimeEased(duration, easer));
 
@@ -23,6 +26,9 @@ namespace Common.Coroutines
 
         public static IEnumerator CoLocalMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalPosition, self.SetLocalPosition, target, UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoLocalMove(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetLocalPosition, self.SetLocalPosition, target.GetLocalPosition, UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoLocalMoveBy(this Transform self, Vector3 offset, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalPosition, self.SetLocalPosition, () => self.GetLocalPositionBy(offset), UCoroutine.YieldTimeEased(duration, easer));
@@ -39,24 +45,39 @@ namespace Common.Coroutines
         public static IEnumerator CoRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoRotate(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, target.GetRotation, UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoRotateBy(this Transform self, Quaternion offset, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, () => self.GetRotationBy(offset), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoLocalRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoLocalRotate(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, target.GetLocalRotation, UCoroutine.YieldTimeEased(duration, easer));
+        
         public static IEnumerator CoLocalRotateBy(this Transform self, Quaternion offset, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, () => self.GetLocalRotationBy(offset), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoLookAt(this Transform self, Vector3 position, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, () => self.GetLookAtRotation(position), UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoLookAt(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetRotation, self.SetRotation, () => self.GetLookAtRotation(target), UCoroutine.YieldTimeEased(duration, easer));
+
         public static IEnumerator CoLocalLookAt(this Transform self, Vector3 position, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, () => self.GetLocalLookAtRotation(position), UCoroutine.YieldTimeEased(duration, easer));
+
+        public static IEnumerator CoLocalLookAt(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetLocalRotation, self.SetLocalRotation, () => self.GetLocalLookAtRotation(target), UCoroutine.YieldTimeEased(duration, easer));
 
         public static IEnumerator CoLocalScale(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, target, UCoroutine.YieldTimeEased(duration, easer));
 
+        public static IEnumerator CoLocalScale(this Transform self, Transform target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, target.GetLocalScale, UCoroutine.YieldTimeEased(duration, easer));
+        
         public static IEnumerator CoLocalScaleBy(this Transform self, Vector3 offset, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(self.GetLocalScale, self.SetLocalScale, () => self.GetLocalScaleBy(offset), UCoroutine.YieldTimeEased(duration, easer));
 
@@ -175,6 +196,9 @@ namespace Common.Coroutines
 
         public static Quaternion GetLookAtRotation(this Transform self, Vector3 value)
             => Quaternion.LookRotation((value - self.position).normalized);
+
+        public static Quaternion GetLookAtRotation(this Transform self, Transform value)
+            => Quaternion.LookRotation((value.position - self.position).normalized);
         #endregion
 
         #region Local rotation
@@ -216,6 +240,9 @@ namespace Common.Coroutines
 
         public static Quaternion GetLocalLookAtRotation(this Transform self, Vector3 value)
             => Quaternion.LookRotation((value - self.localPosition).normalized);
+
+        public static Quaternion GetLocalLookAtRotation(this Transform self, Transform value)
+            => Quaternion.LookRotation((value.localPosition - self.localPosition).normalized);
         #endregion
 
         #region Local scale

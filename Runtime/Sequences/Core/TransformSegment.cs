@@ -18,6 +18,13 @@ namespace Common.Coroutines.Segments
             => transform.CoMove(target, duration, easer.Evaluate);
     }
 
+    [SegmentMenu("Move (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformMoveToSegment : TransformSegment<Transform>
+    {
+        public override IEnumerator CoExecute()
+            => transform.CoMove(target, duration, easer.Evaluate);
+    }
+    
     [SegmentMenu("MoveBy", SegmentPath.Transform, SegmentGroup.Core)]
     public sealed class TransformMoveBySegment : TransformSegment<Vector3>
     {
@@ -48,6 +55,13 @@ namespace Common.Coroutines.Segments
     
     [SegmentMenu("LocalMove", SegmentPath.Transform, SegmentGroup.Core)]
     public sealed class TransformLocalMoveSegment : TransformSegment<Vector3>
+    {
+        public override IEnumerator CoExecute()
+            => transform.CoLocalMove(target, duration, easer.Evaluate);
+    }
+
+    [SegmentMenu("LocalMove (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformLocalMoveToSegment : TransformSegment<Transform>
     {
         public override IEnumerator CoExecute()
             => transform.CoLocalMove(target, duration, easer.Evaluate);
@@ -91,6 +105,13 @@ namespace Common.Coroutines.Segments
             => transform.CoRotate(target, duration, easer.Evaluate);
     }
 
+    [SegmentMenu("Rotate (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformRotateAsSegment : TransformSegment<Transform>
+    {
+        public override IEnumerator CoExecute()
+            => transform.CoRotate(target, duration, easer.Evaluate);
+    }
+
     [SegmentMenu("RotateBy", SegmentPath.Transform, SegmentGroup.Core)]
     public sealed class TransformRotateBySegment : TransformSegment<Quaternion>
     {
@@ -111,6 +132,13 @@ namespace Common.Coroutines.Segments
             => transform.CoLocalRotate(target, duration, easer.Evaluate);
     }
 
+    [SegmentMenu("LocalRotate (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformLocalRotateAsSegment : TransformSegment<Transform>
+    {
+        public override IEnumerator CoExecute()
+            => transform.CoLocalRotate(target, duration, easer.Evaluate);
+    }
+
     [SegmentMenu("LocalRotateBy", SegmentPath.Transform, SegmentGroup.Core)]
     public sealed class TransformLocalRotateBySegment : TransformSegment<Quaternion>
     {
@@ -121,15 +149,29 @@ namespace Common.Coroutines.Segments
             => transform.CoLocalRotateBy(target, duration, easer.Evaluate);
     }
 
-    [SegmentMenu("LookAt", SegmentPath.Transform, SegmentGroup.Core)]
-    public sealed class TransformLookAtSegment : TransformSegment<Vector3>
+    [SegmentMenu("LookAtPosition", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformLookAtPositionSegment : TransformSegment<Vector3>
     {
         public override IEnumerator CoExecute()
             => transform.CoLookAt(target, duration, easer.Evaluate);
     }
-    
+
+    [SegmentMenu("LookAtTransform", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformLookAtTransformSegment : TransformSegment<Transform>
+    {
+        public override IEnumerator CoExecute()
+            => transform.CoLookAt(target, duration, easer.Evaluate);
+    }
+
     [SegmentMenu("LocalScale", SegmentPath.Transform, SegmentGroup.Core)]
     public sealed class TransformLocalScaleSegment : TransformSegment<Vector3>
+    {
+        public override IEnumerator CoExecute()
+            => transform.CoLocalScale(target, duration, easer.Evaluate);
+    }
+
+    [SegmentMenu("LocalScale (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
+    public sealed class TransformLocalScaleAsSegment : TransformSegment<Transform>
     {
         public override IEnumerator CoExecute()
             => transform.CoLocalScale(target, duration, easer.Evaluate);

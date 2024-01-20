@@ -99,7 +99,6 @@ namespace Common.Coroutines
             return UCoroutine.YieldInSequence(coroutines);
         }
 
-#if UNITY_EDITOR
         public override void OnValidate()
         {
             foreach (var segment in GetSegments())
@@ -110,6 +109,5 @@ namespace Common.Coroutines
                 }
             }
         }
-#endif
     }
 }

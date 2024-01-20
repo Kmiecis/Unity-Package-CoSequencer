@@ -11,10 +11,8 @@ namespace Common.Coroutines
         {
         }
 
-#if UNITY_EDITOR
         public virtual void OnValidate()
         {
         }
-#endif
     }
 }

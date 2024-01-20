@@ -57,22 +57,28 @@ namespace CommonEditor.Coroutines
             }
         }
 
+        private bool IsValidSegmentType(Type type)
+        {
+            return (
+                type.IsSubclassOf(SubclassType) &&
+                !type.IsAbstract
+            );
+        }
+
         private void ShowAddMenu()
         {
             var menu = new GenericMenu();
 
-            var added = 0;
-
             var map = new Dictionary<int, List<SegmentData>>();
 
-            var types = AppDomain.CurrentDomain.FindTypes(t => t.IsSubclassOf(SubclassType) && !t.IsAbstract);
+            var types = AppDomain.CurrentDomain.FindTypes(IsValidSegmentType);
             foreach (var type in types)
             {
                 var attribute = type.GetCustomAttribute<SegmentMenuAttribute>();
 
-                var group = attribute.group;
                 var menuPath = attribute.GetMenuPathOrDefault(SegmentPath.Custom);
                 var fileName = attribute.GetFileNameOrDefault(type.Name);
+                var group = attribute.GetGroupOrDefault(SegmentGroup.Custom);
 
                 var data = new SegmentData
                 {
@@ -87,6 +93,8 @@ namespace CommonEditor.Coroutines
                 }
                 target.Add(data);
             }
+
+            var added = 0;
 
             var mapped = map.OrderBy(kv => kv.Key);
             foreach (var kv in mapped)

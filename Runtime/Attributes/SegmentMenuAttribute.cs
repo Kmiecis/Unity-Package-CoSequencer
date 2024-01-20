@@ -23,7 +23,7 @@ namespace Common.Coroutines
 
     public static class SegmentMenuAttributeExtensions
     {
-        public static string GetMenuPathOrDefault(this SegmentMenuAttribute self, string defaultValue = null)
+        public static string GetMenuPathOrDefault(this SegmentMenuAttribute self, string defaultValue = SegmentPath.Custom)
         {
             return (self == null || self.menuPath == null) ? defaultValue : self.menuPath;
         }
@@ -31,6 +31,11 @@ namespace Common.Coroutines
         public static string GetFileNameOrDefault(this SegmentMenuAttribute self, string defaultValue = null)
         {
             return (self == null || self.fileName == null) ? defaultValue : self.fileName;
+        }
+
+        public static int GetGroupOrDefault(this SegmentMenuAttribute self, int defaultValue = SegmentGroup.Custom)
+        {
+            return (self == null) ? defaultValue : self.group;
         }
     }
 }
