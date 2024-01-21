@@ -49,13 +49,6 @@ namespace Common.Coroutines
             yield return null;
         }
 
-        /// <summary> Executes 'action' method once </summary>
-        public static IEnumerator Yield(UnityAction action)
-        {
-            action();
-            yield return null;
-        }
-
         /// <summary> Executes 'action' uevent once </summary>
         public static IEnumerator Yield(UnityEvent action)
         {
@@ -96,13 +89,6 @@ namespace Common.Coroutines
             yield return null;
         }
 
-        /// <summary> Executes 'provider' method into 'consumer' method once </summary>
-        public static IEnumerator YieldInto<T>(Func<T> provider, UnityAction<T> consumer)
-        {
-            consumer(provider());
-            yield return null;
-        }
-
         /// <summary> Executes 'provider' method into 'consumer' event once </summary>
         public static IEnumerator YieldInto<T>(Func<T> provider, UnityEvent<T> consumer)
         {
@@ -112,16 +98,6 @@ namespace Common.Coroutines
 
         /// <summary> Executes coroutine into 'consumer' method </summary>
         public static IEnumerator YieldInto<T>(IEnumerator<T> coroutine, Action<T> consumer)
-        {
-            while (coroutine.MoveNext())
-            {
-                consumer(coroutine.Current);
-                yield return null;
-            }
-        }
-
-        /// <summary> Executes coroutine into 'consumer' method </summary>
-        public static IEnumerator YieldInto<T>(IEnumerator<T> coroutine, UnityAction<T> consumer)
         {
             while (coroutine.MoveNext())
             {
@@ -210,16 +186,6 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes 'action' method while 'verifier' method evaluates to true </summary>
-        public static IEnumerator YieldWhile(UnityAction action, Func<bool> verifier)
-        {
-            while (verifier())
-            {
-                action();
-                yield return null;
-            }
-        }
-
         /// <summary> Executes 'action' uevent while 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldWhile(UnityEvent action, Func<bool> verifier)
         {
@@ -261,17 +227,6 @@ namespace Common.Coroutines
         #region Yield do while
         /// <summary> Executes 'action' method at least once and while 'verifier' method evaluates to true </summary>
         public static IEnumerator YieldDoWhile(Action action, Func<bool> verifier)
-        {
-            do
-            {
-                action();
-                yield return null;
-            }
-            while (verifier());
-        }
-
-        /// <summary> Executes 'action' method at least once and while 'verifier' method evaluates to true </summary>
-        public static IEnumerator YieldDoWhile(UnityAction action, Func<bool> verifier)
         {
             do
             {
@@ -334,16 +289,6 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes 'action' method until coroutine finishes </summary>
-        public static IEnumerator YieldUntil(UnityAction action, IEnumerator coroutine)
-        {
-            while (coroutine.MoveNext())
-            {
-                action();
-                yield return coroutine.Current;
-            }
-        }
-
         /// <summary> Executes 'action' uevent until coroutine finishes </summary>
         public static IEnumerator YieldUntil(UnityEvent action, IEnumerator coroutine)
         {
@@ -356,16 +301,6 @@ namespace Common.Coroutines
 
         /// <summary> Executes 'action' method until coroutine finishes </summary>
         public static IEnumerator<T> YieldUntil<T>(Action action, IEnumerator<T> coroutine)
-        {
-            while (coroutine.MoveNext())
-            {
-                action();
-                yield return coroutine.Current;
-            }
-        }
-
-        /// <summary> Executes 'action' method until coroutine finishes </summary>
-        public static IEnumerator<T> YieldUntil<T>(UnityAction action, IEnumerator<T> coroutine)
         {
             while (coroutine.MoveNext())
             {

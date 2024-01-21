@@ -24,11 +24,6 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(action));
         }
 
-        public static IEnumerator Then(this IEnumerator self, UnityAction action)
-        {
-            return self.Then(UCoroutine.Yield(action));
-        }
-
         public static IEnumerator Then(this IEnumerator self, UnityEvent action)
         {
             return self.Then(UCoroutine.Yield(action));
@@ -81,11 +76,6 @@ namespace Common.Coroutines
             return UCoroutine.YieldUntil(action, self);
         }
 
-        public static IEnumerator With(this IEnumerator self, UnityAction action)
-        {
-            return UCoroutine.YieldUntil(action, self);
-        }
-
         public static IEnumerator With(this IEnumerator self, UnityEvent action)
         {
             return UCoroutine.YieldUntil(action, self);
@@ -94,11 +84,6 @@ namespace Common.Coroutines
 
         #region Into
         public static IEnumerator Into<T>(this IEnumerator<T> self, Action<T> consumer)
-        {
-            return UCoroutine.YieldInto(self, consumer);
-        }
-
-        public static IEnumerator Into<T>(this IEnumerator<T> self, UnityAction<T> consumer)
         {
             return UCoroutine.YieldInto(self, consumer);
         }
