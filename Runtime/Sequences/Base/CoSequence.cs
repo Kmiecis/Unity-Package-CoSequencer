@@ -79,14 +79,14 @@ namespace Common.Coroutines
             }
         }
 
-        public void Execute()
+        public Coroutine Execute()
         {
-            Execute(this);
+            return Execute(this);
         }
 
-        public void Execute(MonoBehaviour target)
+        public Coroutine Execute(MonoBehaviour target)
         {
-            CoExecute().Start(target);
+            return CoExecute().Start(target);
         }
 
         public override IEnumerator CoExecute()
