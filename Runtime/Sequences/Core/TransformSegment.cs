@@ -96,13 +96,10 @@ namespace Common.Coroutines.Segments
     }
 
     [SegmentMenu("Rotate", SegmentPath.Transform, SegmentGroup.Core)]
-    public sealed class TransformRotateSegment : TransformSegment<Quaternion>
+    public sealed class TransformRotateSegment : TransformSegment<Vector3>
     {
-        public override void OnAdded()
-            => target = Quaternion.identity;
-
         public override IEnumerator CoExecute()
-            => transform.CoRotate(target, duration, easer.Evaluate);
+            => transform.CoRotate(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [SegmentMenu("Rotate (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
@@ -113,23 +110,17 @@ namespace Common.Coroutines.Segments
     }
 
     [SegmentMenu("RotateBy", SegmentPath.Transform, SegmentGroup.Core)]
-    public sealed class TransformRotateBySegment : TransformSegment<Quaternion>
+    public sealed class TransformRotateBySegment : TransformSegment<Vector3>
     {
-        public override void OnAdded()
-            => target = Quaternion.identity;
-
         public override IEnumerator CoExecute()
-            => transform.CoRotateBy(target, duration, easer.Evaluate);
+            => transform.CoRotateBy(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [SegmentMenu("LocalRotate", SegmentPath.Transform, SegmentGroup.Core)]
-    public sealed class TransformLocalRotateSegment : TransformSegment<Quaternion>
+    public sealed class TransformLocalRotateSegment : TransformSegment<Vector3>
     {
-        public override void OnAdded()
-            => target = Quaternion.identity;
-
         public override IEnumerator CoExecute()
-            => transform.CoLocalRotate(target, duration, easer.Evaluate);
+            => transform.CoLocalRotate(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [SegmentMenu("LocalRotate (Transform)", SegmentPath.Transform, SegmentGroup.Core)]
@@ -140,13 +131,10 @@ namespace Common.Coroutines.Segments
     }
 
     [SegmentMenu("LocalRotateBy", SegmentPath.Transform, SegmentGroup.Core)]
-    public sealed class TransformLocalRotateBySegment : TransformSegment<Quaternion>
+    public sealed class TransformLocalRotateBySegment : TransformSegment<Vector3>
     {
-        public override void OnAdded()
-            => target = Quaternion.identity;
-
         public override IEnumerator CoExecute()
-            => transform.CoLocalRotateBy(target, duration, easer.Evaluate);
+            => transform.CoLocalRotateBy(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [SegmentMenu("LookAtPosition", SegmentPath.Transform, SegmentGroup.Core)]

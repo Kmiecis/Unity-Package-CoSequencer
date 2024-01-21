@@ -40,9 +40,9 @@ namespace Common.Coroutines.Segments
     }
     
     [SegmentMenu("Rotate", SegmentPath.Rigidbody, SegmentGroup.Core)]
-    public sealed class RigidbodyRotateSegment : RigidbodySegment<Quaternion>
+    public sealed class RigidbodyRotateSegment : RigidbodySegment<Vector3>
     {
         public override IEnumerator CoExecute()
-            => rigidbody.CoRotate(target, duration, easer.Evaluate);
+            => rigidbody.CoRotate(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 }
