@@ -4,6 +4,8 @@ namespace Common.Coroutines
     {
         public const string Custom = "Custom";
         public const string Utility = "Utility";
+        public const string Wait = "Wait";
+
         public const string Debug = nameof(UnityEngine.Debug);
 
         public const string AudioSource = nameof(UnityEngine.AudioSource);
