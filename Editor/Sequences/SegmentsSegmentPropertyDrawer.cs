@@ -9,27 +9,31 @@ namespace CommonEditor.Coroutines.Segments
     [CustomPropertyDrawer(typeof(SegmentsSegment), true)]
     public class SegmentsSegmentPropertyDrawer : PropertyDrawer
     {
-        private Dictionary<long, SegmentsMenu> _menus;
+        private readonly Dictionary<object, SegmentsMenu> _menus;
 
         public SegmentsSegmentPropertyDrawer()
         {
-            _menus = new Dictionary<long, SegmentsMenu>();
+            _menus = new Dictionary<object, SegmentsMenu>();
+        }
+
+        private SegmentsSegment GetValue(SerializedProperty property)
+        {
+            return (SegmentsSegment)property.GetValue();
         }
 
         private void EnsureMenu(SerializedProperty property)
         {
-            var key = property.managedReferenceId;
-            if (!_menus.ContainsKey(key))
+            var value = GetValue(property);
+            if (!_menus.ContainsKey(value))
             {
-                var value = property.managedReferenceValue;
-                _menus[key] = new SegmentsMenu((SegmentsSegment)value);
+                _menus[value] = new SegmentsMenu(value);
             }
         }
 
         private SegmentsMenu GetMenu(SerializedProperty property)
         {
-            var key = property.managedReferenceId;
-            return _menus[key];
+            var value = GetValue(property);
+            return _menus[value];
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
