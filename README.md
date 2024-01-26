@@ -1,4 +1,4 @@
-# CoSequences
+# CoSequencer
 
 ## Description
 
