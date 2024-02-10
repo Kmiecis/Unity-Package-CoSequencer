@@ -1,4 +1,5 @@
 using Common.Coroutines.Segments;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,30 +17,23 @@ namespace CommonEditor.Coroutines.Segments
             _menus = new Dictionary<object, SegmentsMenu>();
         }
 
-        private SegmentsSegment GetValue(SerializedProperty property)
+        private IList GetList(SerializedProperty property)
         {
-            return (SegmentsSegment)property.GetValue();
-        }
-
-        private void EnsureMenu(SerializedProperty property)
-        {
-            var value = GetValue(property);
-            if (!_menus.ContainsKey(value))
-            {
-                _menus[value] = new SegmentsMenu(value);
-            }
+            return (IList)property.GetValue();
         }
 
         private SegmentsMenu GetMenu(SerializedProperty property)
         {
-            var value = GetValue(property);
-            return _menus[value];
+            var list = GetList(property);
+            if (!_menus.TryGetValue(list, out var menu))
+            {
+                _menus[list] = menu = new SegmentsMenu(list);
+            }
+            return menu;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EnsureMenu(property);
-
             EditorGUI.PropertyField(position, property, label, true);
 
             GetMenu(property).OnGUI();

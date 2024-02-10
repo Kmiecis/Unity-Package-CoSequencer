@@ -14,7 +14,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("StartColor", SegmentPath.TrailRenderer, SegmentGroup.Core)]
     public sealed class TrailRendererStartColorSegment : TrailRendererSegment<Color>
     {
-        public override void OnAdded()
+        public TrailRendererStartColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()
@@ -34,7 +34,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("EndColor", SegmentPath.TrailRenderer, SegmentGroup.Core)]
     public sealed class TrailRendererEndColorSegment : TrailRendererSegment<Color>
     {
-        public override void OnAdded()
+        public TrailRendererEndColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

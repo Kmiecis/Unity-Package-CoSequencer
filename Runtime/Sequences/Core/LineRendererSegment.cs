@@ -14,7 +14,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("StartColor", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererStartColorSegment : LineRendererSegment<Color>
     {
-        public override void OnAdded()
+        public LineRendererStartColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()
@@ -34,7 +34,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("EndColor", SegmentPath.LineRenderer, SegmentGroup.Core)]
     public sealed class LineRendererEndColorSegment : LineRendererSegment<Color>
     {
-        public override void OnAdded()
+        public LineRendererEndColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

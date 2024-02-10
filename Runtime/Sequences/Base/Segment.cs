@@ -8,8 +8,9 @@ namespace Common.Coroutines
     [Serializable]
     public abstract class Segment : ISegment
     {
-        // Exists only for Editor purposes
-        [SerializeField][HideInInspector] private string _name;
+#if UNITY_EDITOR
+        [SerializeField] [HideInInspector] private string _name;
+#endif
 
         public Segment()
         {
@@ -31,10 +32,6 @@ namespace Common.Coroutines
 #endif
 
         public abstract IEnumerator CoExecute();
-
-        public virtual void OnAdded()
-        {
-        }
 
         public virtual void OnValidate()
         {

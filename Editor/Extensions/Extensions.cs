@@ -7,12 +7,12 @@ namespace CommonEditor.Coroutines
 {
     internal static class Extensions
     {
-        #region Assembly
-        public static IEnumerable<Type> FindTypes(this Assembly self, Predicate<Type> match)
+        #region AppDomain
+        public static IEnumerable<Type> FindTypes(this AppDomain self, Predicate<Type> match)
         {
-            foreach (var type in self.GetTypes())
+            foreach (var assembly in self.GetAssemblies())
             {
-                if (match(type))
+                foreach (var type in assembly.FindTypes(match))
                 {
                     yield return type;
                 }
@@ -20,12 +20,12 @@ namespace CommonEditor.Coroutines
         }
         #endregion
 
-        #region Domain
-        public static IEnumerable<Type> FindTypes(this AppDomain self, Predicate<Type> match)
+        #region Assembly
+        public static IEnumerable<Type> FindTypes(this Assembly self, Predicate<Type> match)
         {
-            foreach (var assembly in self.GetAssemblies())
+            foreach (var type in self.GetTypes())
             {
-                foreach (var type in assembly.FindTypes(match))
+                if (match(type))
                 {
                     yield return type;
                 }
@@ -90,6 +90,21 @@ namespace CommonEditor.Coroutines
                 type = type.BaseType;
             }
             return null;
+        }
+        #endregion
+
+        #region Type
+        public static bool HasInterface(this Type self, Type target)
+        {
+            var interfaces = self.GetInterfaces();
+            foreach (var item in interfaces)
+            {
+                if (Equals(item, target))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
     }

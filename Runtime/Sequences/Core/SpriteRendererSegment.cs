@@ -14,7 +14,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Color", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererColorSegment : SpriteRendererSegment<Color>
     {
-        public override void OnAdded()
+        public SpriteRendererColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

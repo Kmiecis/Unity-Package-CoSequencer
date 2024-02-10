@@ -1,53 +1,56 @@
 using Common.Coroutines;
-using System.Collections.Generic;
-using System.Reflection;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
 
 namespace CommonEditor.Coroutines
 {
     public class SegmentsMenu
     {
-        private class SegmentData
+        private class EntryData
         {
             public string menuPath;
             public string fileName;
             public Type type;
         }
 
-        private readonly Type SubclassType = typeof(Segment);
+        private readonly IList _list;
+        private readonly Type _type;
 
-        private readonly ISegments _target;
         private int _count;
 
-        public SegmentsMenu(ISegments target)
+        public SegmentsMenu(IList list)
         {
-            _target = target;
-            _count = target.SegmentCount;
+            _list = list;
+            _type = list.GetType().GetGenericArguments()[0];
+
+            _count = list.Count;
         }
 
         public void OnGUI()
         {
-            var current = _target.SegmentCount;
+            var current = _list.Count;
             if (current > _count)
             {
-                var last = _target.GetLastSegment();
+                var last = _list[_list.Count - 1];
 
                 if (last == null)
                 {
-                    _target.RemoveLastSegment();
+                    _list.RemoveAt(_list.Count - 1);
 
                     ShowAddMenu();
                 }
                 else
                 {
-                    var added = FindDuplicateSegment();
+                    var added = FindDuplicate();
 
                     if (added != null)
                     {
-                        ReplaceSegment(added);
+                        Replace(added);
                     }
                 }
             }
@@ -57,11 +60,13 @@ namespace CommonEditor.Coroutines
             }
         }
 
-        private bool IsValidSegmentType(Type type)
+        private bool IsValidType(Type type)
         {
             return (
-                type.IsSubclassOf(SubclassType) &&
-                !type.IsAbstract
+                type.HasInterface(_type) &&
+                !type.IsInterface &&
+                !type.IsAbstract &&
+                !type.IsSubclassOf(typeof(MonoBehaviour))
             );
         }
 
@@ -69,18 +74,18 @@ namespace CommonEditor.Coroutines
         {
             var menu = new GenericMenu();
 
-            var map = new Dictionary<int, List<SegmentData>>();
+            var map = new Dictionary<int, List<EntryData>>();
 
-            var types = AppDomain.CurrentDomain.FindTypes(IsValidSegmentType);
+            var types = AppDomain.CurrentDomain.FindTypes(IsValidType);
             foreach (var type in types)
             {
                 var attribute = type.GetCustomAttribute<SegmentMenuAttribute>();
 
-                var menuPath = attribute.GetMenuPathOrDefault(SegmentPath.Custom);
+                var menuPath = attribute.GetMenuPathOrDefault();
                 var fileName = attribute.GetFileNameOrDefault(type.Name);
-                var group = attribute.GetGroupOrDefault(SegmentGroup.Custom);
+                var group = attribute.GetGroupOrDefault();
 
-                var data = new SegmentData
+                var data = new EntryData
                 {
                     menuPath = menuPath,
                     fileName = fileName,
@@ -89,7 +94,7 @@ namespace CommonEditor.Coroutines
 
                 if (!map.TryGetValue(group, out var target))
                 {
-                    map[group] = target = new List<SegmentData>();
+                    map[group] = target = new List<EntryData>();
                 }
                 target.Add(data);
             }
@@ -118,41 +123,42 @@ namespace CommonEditor.Coroutines
 
         private void OnMenuAdd(object type)
         {
-            var instance = CreateSegmentOfType((Type)type);
+            var instance = CreateObjectOfType((Type)type);
 
-            _target.AddSegment(instance);
-            _count = _target.SegmentCount;
+            _list.Add(instance);
+
+            _count = _list.Count;
         }
 
-        private void ReplaceSegment(ISegment segment)
+        private void Replace(object item)
         {
-            var index = _target.IndexOf(segment);
-            _target.RemoveSegmentAt(index);
+            var index = _list.IndexOf(item);
+            _list.RemoveAt(index);
 
-            var replace = CreateSegmentOfType(segment.GetType());
-            _target.AddSegmentAt(index, replace);
-            _count = _target.SegmentCount;
+            var replace = CreateObjectOfType(item.GetType());
+            _list.Insert(index, replace);
+            _count = _list.Count;
 
-            EditorUtility.CopySerializedManagedFieldsOnly(segment, replace);
+            EditorUtility.CopySerializedManagedFieldsOnly(item, replace);
         }
 
-        private ISegment CreateSegmentOfType(Type type)
+        private object CreateObjectOfType(Type type)
         {
-            return (ISegment)Activator.CreateInstance(type);
+            return Activator.CreateInstance(type);
         }
 
-        private ISegment FindDuplicateSegment()
+        private object FindDuplicate()
         {
-            var previous = (ISegment)null;
-            foreach (var segment in _target.GetSegments())
+            var previous = (object)null;
+            foreach (var child in _list)
             {
-                if (previous == segment)
+                if (Equals(previous, child))
                 {
-                    return segment;
+                    return child;
                 }
-                previous = segment;
+                previous = child;
             }
-            return null;
+            return previous;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Color", SegmentPath.Image, SegmentGroup.UI)]
     public sealed class ImageColorSegment : ImageSegment<Color>
     {
-        public override void OnAdded()
+        public ImageColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

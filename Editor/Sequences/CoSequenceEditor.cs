@@ -1,4 +1,5 @@
 using Common.Coroutines;
+using System.Collections;
 using UnityEditor;
 
 namespace CommonEditor.Coroutines
@@ -8,18 +9,20 @@ namespace CommonEditor.Coroutines
     public class CoSequenceEditor : Editor
     {
         private SegmentsMenu _menu;
-        
-        private void OnEnable()
-        {
-            var sequence = (CoSequence)target;
-            _menu = new SegmentsMenu(sequence);
-        }
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
             _menu.OnGUI();
+        }
+
+        private void OnEnable()
+        {
+            var segmentsProperty = serializedObject.FindProperty("_segments");
+            var list = (IList)segmentsProperty.GetValue();
+
+            _menu = new SegmentsMenu(list);
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Common.Coroutines
     {
         IEnumerator CoExecute();
 
-        void OnAdded();
-
         void OnValidate();
     }
 }

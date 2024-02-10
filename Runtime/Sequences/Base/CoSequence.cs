@@ -5,78 +5,19 @@ using UnityEngine;
 namespace Common.Coroutines
 {
     [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/" + nameof(CoSequence))]
-    public class CoSequence : SegmentBehaviour, ISegments
+    public class CoSequence : SegmentBehaviour
     {
         [SerializeReference]
         protected List<ISegment> _segments;
-
-        public int SegmentCount
-            => _segments.Count;
 
         public CoSequence()
         {
             _segments = new List<ISegment>();
         }
 
-        public void AddSegment(ISegment item)
-        {
-            _segments.Add(item);
-
-            item.OnAdded();
-        }
-
-        public void AddSegmentAt(int index, ISegment item)
-        {
-            _segments.Insert(index, item);
-
-            item.OnAdded();
-        }
-
-        public bool RemoveSegment(ISegment item)
-        {
-            return _segments.Remove(item);
-        }
-
-        public void RemoveSegmentAt(int index)
-        {
-            _segments.RemoveAt(index);
-        }
-
-        public void RemoveLastSegment()
-        {
-            RemoveSegmentAt(_segments.Count - 1);
-        }
-
-        public ISegment GetSegmentAt(int index)
-        {
-            return _segments[index];
-        }
-
-        public ISegment GetLastSegment()
-        {
-            return GetSegmentAt(SegmentCount - 1);
-        }
-
-        public int IndexOf(ISegment item)
-        {
-            return _segments.IndexOf(item);
-        }
-
         public IEnumerable<ISegment> GetSegments()
         {
             return _segments;
-        }
-
-        public IEnumerable<T> GetSegments<T>()
-            where T : ISegment
-        {
-            foreach (var segment in GetSegments())
-            {
-                if (segment is T item)
-                {
-                    yield return item;
-                }
-            }
         }
 
         public Coroutine Execute()
@@ -106,6 +47,21 @@ namespace Common.Coroutines
                 if (segment != null)
                 {
                     segment.OnValidate();
+                }
+            }
+        }
+    }
+
+    public static class CoSequenceExtensions
+    {
+        public static IEnumerable<T> GetSegments<T>(this CoSequence self)
+            where T : ISegment
+        {
+            foreach (var segment in self.GetSegments())
+            {
+                if (segment is T item)
+                {
+                    yield return item;
                 }
             }
         }

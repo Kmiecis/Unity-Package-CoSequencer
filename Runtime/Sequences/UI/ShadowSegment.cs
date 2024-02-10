@@ -15,7 +15,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("EffectColor", SegmentPath.Shadow, SegmentGroup.UI)]
     public sealed class ShadowEffectColorSegment : ShadowSegment<Color>
     {
-        public override void OnAdded()
+        public ShadowEffectColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

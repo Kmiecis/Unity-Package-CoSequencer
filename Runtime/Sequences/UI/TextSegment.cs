@@ -25,7 +25,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Color", SegmentPath.Text, SegmentGroup.UI)]
     public sealed class TextColorSegment : TextSegment<Color>
     {
-        public override void OnAdded()
+        public TextColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

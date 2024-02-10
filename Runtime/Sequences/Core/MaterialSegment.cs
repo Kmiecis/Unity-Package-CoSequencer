@@ -38,7 +38,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Color", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialColorSegment : MaterialSegment<Color>
     {
-        public override void OnAdded()
+        public MaterialColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()

@@ -7,10 +7,6 @@ namespace Common.Coroutines
     {
         public abstract IEnumerator CoExecute();
 
-        public virtual void OnAdded()
-        {
-        }
-
         public virtual void OnValidate()
         {
         }

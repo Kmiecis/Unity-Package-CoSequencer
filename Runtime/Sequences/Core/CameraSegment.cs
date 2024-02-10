@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("BackgroundColor", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraBackgroundColorSegment : CameraSegment<Color>
     {
-        public override void OnAdded()
+        public CameraBackgroundColorSegment()
             => target = Color.white;
 
         public override IEnumerator CoExecute()
@@ -31,7 +31,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("NearClipPlane", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraNearClipPlaneSegment : CameraSegment<float>
     {
-        public override void OnAdded()
+        public CameraNearClipPlaneSegment()
             => target = 0.3f;
 
         public override void OnValidate()
@@ -68,7 +68,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Rect", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraRectSegment : CameraSegment<Rect>
     {
-        public override void OnAdded()
+        public CameraRectSegment()
             => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
         public override IEnumerator CoExecute()
@@ -78,7 +78,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("PixelRect", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraPixelRectSegment : CameraSegment<Rect>
     {
-        public override void OnAdded()
+        public CameraPixelRectSegment()
             => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
         public override IEnumerator CoExecute()
