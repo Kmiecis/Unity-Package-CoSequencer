@@ -1,6 +1,6 @@
 {
-  "name": "com.kmiecis.cosequences",
-  "displayName": "CoSequences",
+  "name": "com.kmiecis.cosequencer",
+  "displayName": "CoSequencer",
   "author": {
     "name": "Kmiecis",
     "email": "slawekkmiecik@gmail.com"
@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Kmiecis/Unity-Package-CoSequences.git"
+    "url": "https://github.com/Kmiecis/Unity-Package-CoSequencer.git"
   },
   "dependencies": {
     "com.unity.ugui": "1.0.0"
