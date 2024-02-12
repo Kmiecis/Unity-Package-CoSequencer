@@ -2,25 +2,30 @@
 
 ## Description
 
-Scripts that make creating sequences of Coroutines trivial
+Create your single or sequenced animations followed by actions or custom tasks with ease using highly optimized and precise coroutine sequencer.  
+Schedule and control them with many custom made methods.  
+
+There is no manager class or additional scripts required, only good ol' coroutines, down to the very core.  
+This means that there is no initialization needed and all sequences behave exactly as any handmade coroutine would.
 
 ## Introduction
 
-Have you ever wondered how task sequencing can be done easily by using Unity Coroutines? Well, wonder no more!  
-This package is an attempt to utilize one of the most widely known feature of Unity and yet one that, in my opinion, is mostly underrated, due to its bad press.  
+Have you ever wondered how task sequencing can be done easily by using Unity Coroutines? Well, you can wonder no more!  
+This package is a successful attempt to utilize one of the most widely known feature of Unity and yet one that, in my opinion, is mostly underrated, due to its bad press.  
 By default, it should be used to ease creating sequences of actions, but also features some cool built-in methods, commonly known from other similar sequencers.  
-Two things make it stands out in the sequencers field: it behaves just like Coroutines would (obviously) and it is packagable, which means it does not require any initialization. Just unpack and get the job done.  
+Two things make it stands out in the sequencers field: it behaves just like Coroutines would (obviously) and it is packagable, which means it does not require any initialization. Just install and get the job done.  
 
 ## Installation
 
 Add the package via Package Manager by adding it from git URL:  
-`https://github.com/Kmiecis/Unity-Package-CoSequences.git`  
-Package Manager can be found inside the Unity Editor in the Window tab
+`https://github.com/Kmiecis/Unity-Package-CoSequencer.git`  
+
+For more information about how it can be done, visit [Unity website](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
 
 OR
 
 Git add this repository as a submodule inside your Unity project Assets folder:  
-`git submodule add https://github.com/Kmiecis/Unity-Package-CoSequences`  
+`git submodule add https://github.com/Kmiecis/Unity-Package-CoSequencer`  
 
 ## Examples
 
