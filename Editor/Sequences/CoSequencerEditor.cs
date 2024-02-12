@@ -5,10 +5,16 @@ using UnityEditor;
 namespace CommonEditor.Coroutines
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(CoSequence))]
-    public class CoSequenceEditor : Editor
+    [CustomEditor(typeof(CoSequencer))]
+    public class CoSequencerEditor : Editor
     {
         private SegmentsMenu _menu;
+
+        private IList GetList()
+        {
+            var property = serializedObject.FindProperty("_segments");
+            return (IList)property.GetValue();
+        }
 
         public override void OnInspectorGUI()
         {
@@ -19,9 +25,8 @@ namespace CommonEditor.Coroutines
 
         private void OnEnable()
         {
-            var segmentsProperty = serializedObject.FindProperty("_segments");
-            var list = (IList)segmentsProperty.GetValue();
-
+            var list = GetList();
+            
             _menu = new SegmentsMenu(list);
         }
     }

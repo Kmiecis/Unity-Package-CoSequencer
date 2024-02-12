@@ -8,26 +8,27 @@ namespace CommonEditor.Coroutines.Segments
 {
     [CanEditMultipleObjects]
     [CustomPropertyDrawer(typeof(SegmentsSegment), true)]
-    public class SegmentsSegmentPropertyDrawer : PropertyDrawer
+    public class SegmentsSegmentDrawer : PropertyDrawer
     {
         private readonly Dictionary<object, SegmentsMenu> _menus;
 
-        public SegmentsSegmentPropertyDrawer()
+        public SegmentsSegmentDrawer()
         {
             _menus = new Dictionary<object, SegmentsMenu>();
         }
 
         private IList GetList(SerializedProperty property)
         {
-            return (IList)property.GetValue();
+            var subproperty = property.FindPropertyRelative("_segments");
+            return (IList)subproperty.GetValue();
         }
 
         private SegmentsMenu GetMenu(SerializedProperty property)
         {
-            var list = GetList(property);
-            if (!_menus.TryGetValue(list, out var menu))
+            if (!_menus.TryGetValue(property.propertyPath, out var menu))
             {
-                _menus[list] = menu = new SegmentsMenu(list);
+                var list = GetList(property);
+                _menus[property.propertyPath] = menu = new SegmentsMenu(list);
             }
             return menu;
         }

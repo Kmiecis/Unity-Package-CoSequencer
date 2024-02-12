@@ -14,7 +14,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Aspect", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraAspectSegment : CameraSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoAspect(target, duration, easer.Evaluate);
     }
 
@@ -24,7 +24,7 @@ namespace Common.Coroutines.Segments
         public CameraBackgroundColorSegment()
             => target = Color.white;
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoBackgroundColor(target, duration, easer.Evaluate);
     }
     
@@ -37,14 +37,14 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Max(target, 1e-02f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoNearClipPlane(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("FarClipPlane", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraFarClipPlaneSegment : CameraSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoFarClipPlane(target, duration, easer.Evaluate);
     }
     
@@ -54,14 +54,14 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 1e-05f, 180.0f - 1e-05f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoFieldOfView(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("OrthographicSize", SegmentPath.Camera, SegmentGroup.Core)]
     public sealed class CameraOrthographicSizeSegment : CameraSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoOrthographicSize(target, duration, easer.Evaluate);
     }
     
@@ -71,7 +71,7 @@ namespace Common.Coroutines.Segments
         public CameraRectSegment()
             => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoRect(target, duration, easer.Evaluate);
     }
     
@@ -81,7 +81,7 @@ namespace Common.Coroutines.Segments
         public CameraPixelRectSegment()
             => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => camera.CoPixelRect(target, duration, easer.Evaluate);
     }
 }

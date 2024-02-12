@@ -15,7 +15,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Value", SegmentPath.Slider, SegmentGroup.UI)]
     public sealed class SliderValueSegment : SliderSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => slider.CoValue(target, duration, easer.Evaluate);
     }
     
@@ -25,7 +25,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => slider.CoNormalizedValue(target, duration, easer.Evaluate);
     }
 }

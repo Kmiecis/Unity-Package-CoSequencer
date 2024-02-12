@@ -31,7 +31,7 @@ namespace Common.Coroutines
         }
 #endif
 
-        public abstract IEnumerator CoExecute();
+        public abstract IEnumerator GetSequence();
 
         public virtual void OnValidate()
         {

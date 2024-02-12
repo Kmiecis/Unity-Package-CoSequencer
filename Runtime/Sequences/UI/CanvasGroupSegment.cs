@@ -17,7 +17,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => canvas.CoFade(target, duration, easer.Evaluate);
     }
 }

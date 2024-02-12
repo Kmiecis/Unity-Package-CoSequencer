@@ -4,7 +4,7 @@ namespace Common.Coroutines
 {
     public interface ISegment
     {
-        IEnumerator CoExecute();
+        IEnumerator GetSequence();
 
         void OnValidate();
     }

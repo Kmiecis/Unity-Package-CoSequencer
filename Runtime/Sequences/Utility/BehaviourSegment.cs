@@ -9,7 +9,7 @@ namespace Common.Coroutines.Segments
     {
         public SegmentBehaviour behaviour;
 
-        public override IEnumerator CoExecute()
-            => behaviour.CoExecute();
+        public override IEnumerator GetSequence()
+            => behaviour.GetSequence();
     }
 }

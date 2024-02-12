@@ -18,7 +18,7 @@ namespace Common.Coroutines.Segments
         public ShadowEffectColorSegment()
             => target = Color.white;
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => outline.CoEffectColor(target, duration, easer.Evaluate);
     }
     
@@ -28,14 +28,14 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => outline.CoEffectFade(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("EffectGradient", SegmentPath.Shadow, SegmentGroup.UI)]
     public sealed class ShadowEffectGradientSegment : ShadowSegment<Gradient>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => outline.CoEffectGradient(target, duration, easer.Evaluate);
     }
 }

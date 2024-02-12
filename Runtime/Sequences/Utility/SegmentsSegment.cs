@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
             return _segments;
         }
 
-        public abstract override IEnumerator CoExecute();
+        public abstract override IEnumerator GetSequence();
 
         public override void OnValidate()
         {
@@ -38,12 +38,12 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Sequence", SegmentPath.Utility, SegmentGroup.Utility)]
     public class SequenceSegment : SegmentsSegment
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
         {
             var providers = new IEnumerator[_segments.Count];
             for (int i = 0; i < _segments.Count; ++i)
             {
-                providers[i] = _segments[i].CoExecute();
+                providers[i] = _segments[i].GetSequence();
             }
             return UCoroutine.YieldInSequence(providers);
         }
@@ -52,12 +52,12 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Parallel", SegmentPath.Utility, SegmentGroup.Utility)]
     public class ParallelSegment : SegmentsSegment
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
         {
             var providers = new IEnumerator[_segments.Count];
             for (int i = 0; i < _segments.Count; ++i)
             {
-                providers[i] = _segments[i].CoExecute();
+                providers[i] = _segments[i].GetSequence();
             }
             return UCoroutine.YieldInParallel(providers);
         }

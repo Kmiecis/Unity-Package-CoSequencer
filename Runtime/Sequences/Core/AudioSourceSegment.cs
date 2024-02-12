@@ -17,7 +17,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, -3.0f, 3.0f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => audio.CoPitch(target, duration, easer.Evaluate);
     }
     
@@ -27,7 +27,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => audio.CoVolume(target, duration, easer.Evaluate);
     }
 }

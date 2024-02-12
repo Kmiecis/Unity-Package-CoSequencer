@@ -18,7 +18,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => image.CoFillAmount(target, duration, easer.Evaluate);
     }
     
@@ -28,7 +28,7 @@ namespace Common.Coroutines.Segments
         public ImageColorSegment()
             => target = Color.white;
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => image.CoColor(target, duration, easer.Evaluate);
     }
     
@@ -38,14 +38,14 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => image.CoFade(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("Gradient", SegmentPath.Image, SegmentGroup.UI)]
     public sealed class ImageGradientSegment : ImageSegment<Gradient>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => image.CoGradient(target, duration, easer.Evaluate);
     }
 }

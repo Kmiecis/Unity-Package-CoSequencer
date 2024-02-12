@@ -17,7 +17,7 @@ namespace Common.Coroutines.Segments
         public LightColorSegment()
             => target = Color.white;
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => light.CoColor(target, duration, easer.Evaluate);
     }
     
@@ -27,14 +27,14 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Max(target, 0.0f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => light.CoIntensity(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("Range", SegmentPath.Light, SegmentGroup.Core)]
     public sealed class LightRangeSegment : LightSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => light.CoRange(target, duration, easer.Evaluate);
     }
     
@@ -44,7 +44,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => light.CoShadowStrength(target, duration, easer.Evaluate);
     }
 }

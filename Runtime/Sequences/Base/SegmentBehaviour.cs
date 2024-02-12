@@ -5,7 +5,7 @@ namespace Common.Coroutines
 {
     public abstract class SegmentBehaviour : MonoBehaviour, ISegment
     {
-        public abstract IEnumerator CoExecute();
+        public abstract IEnumerator GetSequence();
 
         public virtual void OnValidate()
         {

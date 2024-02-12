@@ -18,7 +18,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = new Vector2(Mathf.Clamp(target.x, 0.0f, 1.0f), Mathf.Clamp(target.y, 0.0f, 1.0f));
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => scroll.CoPosition(target, duration, easer.Evaluate);
     }
     
@@ -28,7 +28,7 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => scroll.CoHorizontalPosition(target, duration, easer.Evaluate);
     }
     
@@ -38,28 +38,28 @@ namespace Common.Coroutines.Segments
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => scroll.CoVerticalPosition(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("Velocity", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectVelocitySegment : ScrollRectSegment<Vector2>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => scroll.CoVelocity(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("HorizontalVelocity", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalVelocitySegment : ScrollRectSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => scroll.CoHorizontalVelocity(target, duration, easer.Evaluate);
     }
     
     [SegmentMenu("VerticalVelocity", SegmentPath.ScrollRect, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalVelocitySegment : ScrollRectSegment<float>
     {
-        public override IEnumerator CoExecute()
+        public override IEnumerator GetSequence()
             => scroll.CoVerticalVelocity(target, duration, easer.Evaluate);
     }
 }
