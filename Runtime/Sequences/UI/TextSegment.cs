@@ -48,4 +48,11 @@ namespace Common.Coroutines.Segments
         public override IEnumerator GetSequence()
             => text.CoGradient(target, duration, easer.Evaluate);
     }
+
+    [SegmentMenu("Text", SegmentPath.Text, SegmentGroup.UI)]
+    public sealed class TextTextSegment : TextSegment<string>
+    {
+        public override IEnumerator GetSequence()
+            => text.CoText(target, duration, easer.Evaluate);
+    }
 }
