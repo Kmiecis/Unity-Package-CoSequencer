@@ -34,6 +34,25 @@ namespace CommonEditor.Coroutines
         #endregion
 
         #region SerializedProperty
+        public static IEnumerable<SerializedProperty> GetChildren(this SerializedProperty self)
+        {
+            var iterator = self.Copy();
+            var end = iterator.GetEndProperty();
+
+            if (iterator.NextVisible(true))
+            {
+                do
+                {
+                    if (SerializedProperty.EqualContents(iterator, end))
+                    {
+                        break;
+                    }
+                    yield return iterator;
+                }
+                while (iterator.NextVisible(false));
+            }
+        }
+
         public static object GetValue(this SerializedProperty self)
         {
             var sanitizedPath = self.propertyPath.Replace(".Array.data[", "[");
@@ -44,10 +63,7 @@ namespace CommonEditor.Coroutines
             {
                 if (element.Contains("["))
                 {
-                    var elementName = element.Substring(0, element.IndexOf("["));
-                    var strIndex = element.Substring(element.IndexOf("[")).Replace("[", string.Empty).Replace("]", string.Empty);
-                    var index = int.Parse(strIndex);
-                    result = GetValueFromEnumerable(result, elementName, index);
+                    result = GetValueFromList(result, element);
                 }
                 else
                 {
@@ -57,15 +73,19 @@ namespace CommonEditor.Coroutines
             return result;
         }
 
-        private static object GetValueFromEnumerable(object source, string name, int index)
+        private static object GetValueFromList(object source, string subpath)
         {
-            var enumerable = GetValueFromType(source, name) as System.Collections.IEnumerable;
-            foreach (var value in enumerable)
+            var indexBegin = subpath.IndexOf("[");
+            var indexEnd = subpath.IndexOf("]");
+            var strIndex = subpath.Substring(indexBegin + 1, indexEnd - (indexBegin + 1));
+            var index = int.Parse(strIndex);
+
+            var name = subpath.Substring(0, indexBegin);
+
+            var list = GetValueFromType(source, name) as System.Collections.IList;
+            if (list != null)
             {
-                if (index-- == 0)
-                {
-                    return value;
-                }
+                return list[index];
             }
             return null;
         }

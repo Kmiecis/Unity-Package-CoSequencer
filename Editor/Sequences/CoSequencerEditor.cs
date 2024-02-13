@@ -26,7 +26,6 @@ namespace CommonEditor.Coroutines
         private void OnEnable()
         {
             var list = GetList();
-            
             _menu = new SegmentsMenu(list);
         }
     }
