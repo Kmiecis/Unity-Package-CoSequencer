@@ -8,16 +8,16 @@ namespace Common.Coroutines
     public static class GraphicExtensions
     {
         public static IEnumerator CoColor(this Graphic self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoFade(this Graphic self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoGradient(this Graphic self, Gradient target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoGradient(this Graphic self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTime(duration, easer));
     }
 
     internal static class InternalGraphicExtensions

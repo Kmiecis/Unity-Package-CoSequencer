@@ -7,10 +7,10 @@ namespace Common.Coroutines
     public static class SliderExtensions
     {
         public static IEnumerator CoValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetValue, self.SetValue, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetValue, self.SetValue, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoNormalizedValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetNormalizedValue, self.SetNormalizedValue, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetNormalizedValue, self.SetNormalizedValue, target, UCoroutine.YieldTime(duration, easer));
     }
 
     internal static class InternalSliderExtensions

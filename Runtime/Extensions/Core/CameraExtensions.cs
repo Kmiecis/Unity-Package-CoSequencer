@@ -7,28 +7,28 @@ namespace Common.Coroutines
     public static class CameraExtensions
     {
         public static IEnumerator CoAspect(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAspect, self.SetAspect, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetAspect, self.SetAspect, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoBackgroundColor(this Camera self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetBackgroundColor, self.SetBackgroundColor, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetBackgroundColor, self.SetBackgroundColor, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoNearClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetNearClipPlane, self.SetNearClipPlane, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetNearClipPlane, self.SetNearClipPlane, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoFarClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFarClipPlane, self.SetFarClipPlane, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetFarClipPlane, self.SetFarClipPlane, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoFieldOfView(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFieldOfView, self.SetFieldOfView, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetFieldOfView, self.SetFieldOfView, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoOrthographicSize(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOrthographicSize, self.SetOrthographicSize, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetOrthographicSize, self.SetOrthographicSize, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoPixelRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPixelRect, self.SetPixelRect, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetPixelRect, self.SetPixelRect, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRect, self.SetRect, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetRect, self.SetRect, target, UCoroutine.YieldTime(duration, easer));
     }
 
     internal static class InternalCameraExtensions

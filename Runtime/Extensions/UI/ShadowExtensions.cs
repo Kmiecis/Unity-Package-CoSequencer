@@ -8,16 +8,16 @@ namespace Common.Coroutines
     public static class ShadowExtensions
     {
         public static IEnumerator CoEffectColor(this Shadow self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEffectColor, self.SetEffectColor, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetEffectColor, self.SetEffectColor, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoEffectFade(this Shadow self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEffectColorA, self.SetEffectColorA, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetEffectColorA, self.SetEffectColorA, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoEffectGradient(this Shadow self, Gradient target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(target.Evaluate, self.SetEffectColor, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(target.Evaluate, self.SetEffectColor, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoGradient(this Shadow self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetEffectColor, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetEffectColor, UCoroutine.YieldTime(duration, easer));
     }
 
     internal static class InternalShadowExtensions

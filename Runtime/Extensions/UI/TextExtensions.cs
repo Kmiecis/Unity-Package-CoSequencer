@@ -7,10 +7,10 @@ namespace Common.Coroutines
     public static class TextExtensions
     {
         public static IEnumerator CoFontSize(this Text self, int target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFontSize, self.SetFontSize, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetFontSize, self.SetFontSize, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoText(this Text self, string target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => target.Substring(t), self.SetText, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(t => target.Substring(t), self.SetText, UCoroutine.YieldTime(duration, easer));
     }
 
     internal static class InternalTextExtensions

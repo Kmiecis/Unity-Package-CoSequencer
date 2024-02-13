@@ -7,16 +7,16 @@ namespace Common.Coroutines
     public static class Rigidbody2DExtensions
     {
         public static IEnumerator CoMove(this Rigidbody2D self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPosition, self.MovePosition, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetPosition, self.MovePosition, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoMoveX(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionX, self.MovePositionX, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetPositionX, self.MovePositionX, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoMoveY(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionY, self.MovePositionY, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetPositionY, self.MovePositionY, target, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoRotate(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRotation, self.MoveRotation, target, UCoroutine.YieldTimeEased(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetRotation, self.MoveRotation, target, UCoroutine.YieldTime(duration, easer));
     }
 
     internal static class InternalRigidbody2DExtensions
