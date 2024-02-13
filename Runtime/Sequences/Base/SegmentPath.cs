@@ -29,5 +29,6 @@ namespace Common.Coroutines
         public const string Shadow = nameof(UnityEngine.UI.Shadow);
         public const string Slider = nameof(UnityEngine.UI.Slider);
         public const string Text = nameof(UnityEngine.UI.Text);
+        public const string Time = nameof(UnityEngine.Time);
     }
 }
