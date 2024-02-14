@@ -7,7 +7,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Time", SegmentPath.Wait, SegmentGroup.Utility)]
     public class WaitTimeSegment : Segment
     {
-        public float duration;
+        public float duration = 1.0f;
 
         public override IEnumerator GetSequence()
             => UCoroutine.YieldTime(duration);
@@ -17,7 +17,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Realtime", SegmentPath.Wait, SegmentGroup.Utility)]
     public class WaitRealtimeSegment : Segment
     {
-        public float duration;
+        public float duration = 1.0f;
 
         public override IEnumerator GetSequence()
             => UCoroutine.YieldRealtime(duration);
@@ -27,7 +27,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Frames", SegmentPath.Wait, SegmentGroup.Utility)]
     public class WaitFramesSegment : Segment
     {
-        public int frames;
+        public int frames = 1;
 
         public override IEnumerator GetSequence()
             => UCoroutine.YieldFrames(frames);
