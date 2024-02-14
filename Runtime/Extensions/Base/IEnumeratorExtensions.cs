@@ -29,6 +29,11 @@ namespace Common.Coroutines
             return self.Then(UCoroutine.Yield(action));
         }
 
+        public static IEnumerator Then<T>(this IEnumerator self, Func<T> provider)
+        {
+            return self.Then(UCoroutine.Yield(provider));
+        }
+
         public static IEnumerator<T> Then<T>(this IEnumerator<T> self, Func<T> provider)
         {
             return self.Then(UCoroutine.Yield(provider));
@@ -42,6 +47,16 @@ namespace Common.Coroutines
         public static IEnumerator<T> Then<T>(this IEnumerator<T> self, IEnumerator<T> coroutine)
         {
             return UCoroutine.YieldInSequence(self, coroutine);
+        }
+
+        public static IEnumerator Then(this IEnumerator self, Func<IEnumerator> provider)
+        {
+            return self.Then(UCoroutine.Yield(provider));
+        }
+
+        public static IEnumerator<T> Then<T>(this IEnumerator<T> self, Func<IEnumerator<T>> provider)
+        {
+            return self.Then(UCoroutine.Yield(provider));
         }
 
         public static IEnumerator Then(this IEnumerator self, params IEnumerator[] coroutines)

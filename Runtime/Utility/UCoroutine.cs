@@ -79,6 +79,24 @@ namespace Common.Coroutines
                 yield return coroutine.Current;
             }
         }
+
+        public static IEnumerator Yield(Func<IEnumerator> provider)
+        {
+            var coroutine = provider();
+            while (coroutine.MoveNext())
+            {
+                yield return coroutine.Current;
+            }
+        }
+
+        public static IEnumerator<T> Yield<T>(Func<IEnumerator<T>> provider)
+        {
+            var coroutine = provider();
+            while (coroutine.MoveNext())
+            {
+                yield return coroutine.Current;
+            }
+        }
         #endregion
 
         #region Yield into
