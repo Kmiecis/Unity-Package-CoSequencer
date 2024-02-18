@@ -9,13 +9,16 @@ using UnityEngine;
 
 namespace CommonEditor.Coroutines
 {
-    public class SegmentsMenu
+    internal class SegmentsMenu
     {
-        private class EntryData
+        private class EntryData : IComparable<EntryData>
         {
-            public string menuPath;
-            public string fileName;
+            public string path;
+            public int group;
             public Type type;
+
+            public int CompareTo(EntryData other)
+                => this.group - other.group;
         }
 
         private readonly IList _list;
@@ -84,17 +87,18 @@ namespace CommonEditor.Coroutines
                 var menuPath = attribute.GetMenuPathOrDefault();
                 var fileName = attribute.GetFileNameOrDefault(type.Name);
                 var group = attribute.GetGroupOrDefault();
-
+                
                 var data = new EntryData
                 {
-                    menuPath = menuPath,
-                    fileName = fileName,
+                    path = $"{menuPath}/{fileName}",
+                    group = group,
                     type = type
                 };
 
-                if (!map.TryGetValue(group, out var target))
+                var order = group / 1000;
+                if (!map.TryGetValue(order, out var target))
                 {
-                    map[group] = target = new List<EntryData>();
+                    map[order] = target = new List<EntryData>();
                 }
                 target.Add(data);
             }
@@ -110,11 +114,12 @@ namespace CommonEditor.Coroutines
                 }
                 added += 1;
 
-                foreach (var data in kv.Value)
-                {
-                    var path = $"{data.menuPath}/{data.fileName}";
+                var entries = kv.Value;
+                entries.Sort();
 
-                    menu.AddItem(new GUIContent(path), false, OnMenuAdd, data.type);
+                foreach (var entry in entries)
+                {
+                    menu.AddItem(new GUIContent(entry.path), false, OnMenuAdd, entry.type);
                 }
             }
 
