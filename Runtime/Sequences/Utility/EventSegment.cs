@@ -10,7 +10,7 @@ namespace Common.Coroutines.Segments
     {
         public UnityEvent action;
 
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
             => UCoroutine.Yield(action);
     }
 }

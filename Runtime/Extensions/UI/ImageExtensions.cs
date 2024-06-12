@@ -6,8 +6,14 @@ namespace Common.Coroutines
 {
     public static class ImageExtensions
     {
+        public static IEnumerator CoFillAmount(this Image self, float target)
+            => UCoroutine.Yield(self.SetFillAmount, target);
+
         public static IEnumerator CoFillAmount(this Image self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFillAmount, self.SetFillAmount, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetFillAmount, target, self.SetFillAmount, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoFillAmount(this Image self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetFillAmount, UCoroutine.YieldTime(duration, easer));
     }
     
     internal static class InternalImageExtensions

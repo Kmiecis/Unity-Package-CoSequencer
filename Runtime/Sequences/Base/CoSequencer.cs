@@ -24,19 +24,27 @@ namespace Common.Coroutines
             return _segments;
         }
 
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
         {
-            var coroutines = new IEnumerator[_segments.Count];
-            for (int i = 0; i < _segments.Count; ++i)
+            var prev = (ILink)_segments[0];
+            for (int i = 1; i < _segments.Count; ++i)
             {
-                coroutines[i] = _segments[i].GetSequence();
+                var next = _segments[i];
+                if (next is IDecorator decorator)
+                {
+                    prev = new DecoratorLink(prev, decorator);
+                }
+                else
+                {
+                    prev = new ThenLink(prev, next);
+                }
             }
-            return UCoroutine.YieldInSequence(coroutines);
+            return prev.Build();
         }
 
         public Coroutine Play(MonoBehaviour target)
         {
-            return GetSequence().Start(target);
+            return Build().Start(target);
         }
 
         public void Play()

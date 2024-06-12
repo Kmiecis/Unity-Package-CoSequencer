@@ -27,11 +27,12 @@ namespace Common.Coroutines
             var menuPath = attribute.GetMenuPathOrDefault(SegmentPath.Custom);
             var fileName = attribute.GetFileNameOrDefault(type.Name);
 
+            menuPath = menuPath.Replace("/", " - ");
             return $"{menuPath} - {fileName}";
         }
 #endif
 
-        public abstract IEnumerator GetSequence();
+        public abstract IEnumerator Build();
 
         public virtual void OnValidate()
         {

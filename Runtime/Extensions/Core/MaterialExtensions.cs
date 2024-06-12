@@ -6,47 +6,121 @@ namespace Common.Coroutines
 {
     public static class MaterialExtensions
     {
-        public static IEnumerator CoColor(this Material self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, UCoroutine.YieldTime(duration, easer));
+        #region Color
+        public static IEnumerator CoColor(this Material self, Color target)
+            => UCoroutine.Yield(self.SetColor, target);
 
-        public static IEnumerator CoColor(this Material self, Color target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetColor(propertyId), c => self.SetColor(propertyId, c), target, UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoColor(this Material self, int propertyId, Color target)
+            => UCoroutine.Yield(v => self.SetColor(propertyId, v), target);
+
+        public static IEnumerator CoColor(this Material self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetColor, target, self.SetColor, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoColor(this Material self, Color start, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetColor, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoColor(this Material self, int propertyId, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(() => self.GetColor(propertyId), target, c => self.SetColor(propertyId, c), UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoColor(this Material self, int propertyId, Color start, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, c => self.SetColor(propertyId, c), UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Fade
+        public static IEnumerator CoFade(this Material self, float target)
+            => UCoroutine.Yield(self.SetColorA, target);
+
+        public static IEnumerator CoFade(this Material self, int propertyId, float target)
+            => UCoroutine.Yield(v => self.SetColorA(propertyId, v), target);
 
         public static IEnumerator CoFade(this Material self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColorA, self.SetColorA, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetColorA, target, self.SetColorA, UCoroutine.YieldTime(duration, easer));
 
-        public static IEnumerator CoFade(this Material self, float target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetColorA(propertyId), f => self.SetColorA(propertyId, f), target, UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoFade(this Material self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetColorA, UCoroutine.YieldTime(duration, easer));
 
+        public static IEnumerator CoFade(this Material self, int propertyId, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(() => self.GetColorA(propertyId), target, f => self.SetColorA(propertyId, f), UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoFade(this Material self, int propertyId, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, f => self.SetColorA(propertyId, f), UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Gradient
         public static IEnumerator CoGradient(this Material self, Gradient target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(target.Evaluate, self.SetColor, UCoroutine.YieldTime(duration, easer));
 
         public static IEnumerator CoGradient(this Material self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(time => target.Evaluate(UMath.Lerp(from, to, time)), self.SetColor, UCoroutine.YieldTime(duration, easer));
 
-        public static IEnumerator CoGradient(this Material self, Gradient target, int propertyId, float duration, Func<float, float> easer = null)
+        public static IEnumerator CoGradient(this Material self, int propertyId, Gradient target, float duration, Func<float, float> easer = null)
             => UCoroutine.YieldValueTo(target.Evaluate, c => self.SetColor(propertyId, c), UCoroutine.YieldTime(duration, easer));
 
-        public static IEnumerator CoGradient(this Material self, Gradient target, int propertyId, float from, float to, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), c => self.SetColor(propertyId, c), UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoGradient(this Material self, int propertyId, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(time => target.Evaluate(UMath.Lerp(from, to, time)), c => self.SetColor(propertyId, c), UCoroutine.YieldTime(duration, easer));
+        #endregion
 
-        public static IEnumerator CoFloat(this Material self, float target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetFloat(propertyId), f => self.SetFloat(propertyId, f), target, UCoroutine.YieldTime(duration, easer));
+        #region Float
+        public static IEnumerator CoFloat(this Material self, int propertyId, float target)
+            => UCoroutine.Yield(v => self.SetFloat(propertyId, v), target);
+
+        public static IEnumerator CoFloat(this Material self, int propertyId, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(() => self.GetFloat(propertyId), target, f => self.SetFloat(propertyId, f), UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoFloat(this Material self, int propertyId, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, f => self.SetFloat(propertyId, f), UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Tiling
+        public static IEnumerator CoTiling(this Material self, Vector2 target)
+            => UCoroutine.Yield(self.SetTextureScale, target);
+
+        public static IEnumerator CoTiling(this Material self, int propertyId, Vector2 target)
+            => UCoroutine.Yield(v => self.SetTextureScale(propertyId, v), target);
 
         public static IEnumerator CoTiling(this Material self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetTextureScale, self.SetTextureScale, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetTextureScale, target, self.SetTextureScale, UCoroutine.YieldTime(duration, easer));
 
-        public static IEnumerator CoTiling(this Material self, Vector2 target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetTextureScale(propertyId), v => self.SetTextureScale(propertyId, v), target, UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoTiling(this Material self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetTextureScale, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoTiling(this Material self, int propertyId, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(() => self.GetTextureScale(propertyId), target, v => self.SetTextureScale(propertyId, v), UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoTiling(this Material self, int propertyId, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, v => self.SetTextureScale(propertyId, v), UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Offset
+        public static IEnumerator CoOffset(this Material self, Vector2 target)
+            => UCoroutine.Yield(self.SetTextureOffset, target);
+
+        public static IEnumerator CoOffset(this Material self, int propertyId, Vector2 target)
+            => UCoroutine.Yield(v => self.SetTextureOffset(propertyId, v), target);
 
         public static IEnumerator CoOffset(this Material self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetTextureOffset, self.SetTextureOffset, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetTextureOffset, target, self.SetTextureOffset, UCoroutine.YieldTime(duration, easer));
 
-        public static IEnumerator CoOffset(this Material self, Vector2 target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetTextureOffset(propertyId), v => self.SetTextureOffset(propertyId, v), target, UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoOffset(this Material self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetTextureOffset, UCoroutine.YieldTime(duration, easer));
 
-        public static IEnumerator CoVector(this Material self, Vector4 target, int propertyId, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(() => self.GetVector(propertyId), v => self.SetVector(propertyId, v), target, UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoOffset(this Material self, int propertyId, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(() => self.GetTextureOffset(propertyId), target, v => self.SetTextureOffset(propertyId, v), UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoOffset(this Material self, int propertyId, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, v => self.SetTextureOffset(propertyId, v), UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Vector
+        public static IEnumerator CoVector(this Material self, int propertyId, Vector4 target)
+            => UCoroutine.Yield(v => self.SetVector(propertyId, v), target);
+
+        public static IEnumerator CoVector(this Material self, int propertyId, Vector4 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(() => self.GetVector(propertyId), target, v => self.SetVector(propertyId, v), UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoVector(this Material self, int propertyId, Vector4 start, Vector4 target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, v => self.SetVector(propertyId, v), UCoroutine.YieldTime(duration, easer));
+        #endregion
     }
 
     internal static class InternalMaterialExtensions

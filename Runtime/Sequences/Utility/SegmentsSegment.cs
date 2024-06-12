@@ -21,7 +21,7 @@ namespace Common.Coroutines.Segments
             return _segments;
         }
 
-        public abstract override IEnumerator GetSequence();
+        public abstract override IEnumerator Build();
 
         public override void OnValidate()
         {
@@ -38,28 +38,44 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Sequence", SegmentPath.Utility, SegmentGroup.Utility)]
     public class SequenceSegment : SegmentsSegment
     {
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
         {
-            var providers = new IEnumerator[_segments.Count];
-            for (int i = 0; i < _segments.Count; ++i)
+            var prev = (ILink)_segments[0];
+            for (int i = 1; i < _segments.Count; ++i)
             {
-                providers[i] = _segments[i].GetSequence();
+                var next = _segments[i];
+                if (next is IDecorator decorator)
+                {
+                    prev = new DecoratorLink(prev, decorator);
+                }
+                else
+                {
+                    prev = new ThenLink(prev, next);
+                }
             }
-            return UCoroutine.YieldInSequence(providers);
+            return prev.Build();
         }
     }
 
     [SegmentMenu("Parallel", SegmentPath.Utility, SegmentGroup.Utility)]
     public class ParallelSegment : SegmentsSegment
     {
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
         {
-            var providers = new IEnumerator[_segments.Count];
-            for (int i = 0; i < _segments.Count; ++i)
+            var prev = (ILink)_segments[0];
+            for (int i = 1; i < _segments.Count; ++i)
             {
-                providers[i] = _segments[i].GetSequence();
+                var next = _segments[i];
+                if (next is IDecorator decorator)
+                {
+                    prev = new DecoratorLink(prev, decorator);
+                }
+                else
+                {
+                    prev = new WithLink(prev, next);
+                }
             }
-            return UCoroutine.YieldInParallel(providers);
+            return prev.Build();
         }
     }
 

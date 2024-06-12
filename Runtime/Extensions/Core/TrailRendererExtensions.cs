@@ -6,26 +6,76 @@ namespace Common.Coroutines
 {
     public static class TrailRendererExtensions
     {
-        public static IEnumerator CoStartColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartColor, self.SetStartColor, target, UCoroutine.YieldTime(duration, easer));
+        #region Color
+        public static IEnumerator CoStartColor(this TrailRenderer self, Color target)
+            => UCoroutine.Yield(self.SetStartColor, target);
 
-        public static IEnumerator CoStartFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartColorA, self.SetStartColorA, target, UCoroutine.YieldTime(duration, easer));
+        public static IEnumerator CoStartColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetStartColor, target, self.SetStartColor, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoStartColor(this TrailRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetStartColor, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoEndColor(this TrailRenderer self, Color target)
+            => UCoroutine.Yield(self.SetEndColor, target);
 
         public static IEnumerator CoEndColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndColor, self.SetEndColor, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetEndColor, target, self.SetEndColor, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoEndColor(this TrailRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetEndColor, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Fade
+        public static IEnumerator CoStartFade(this TrailRenderer self, float target)
+            => UCoroutine.Yield(self.SetStartColorA, target);
+
+        public static IEnumerator CoStartFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(self.GetStartColorA, target, self.SetStartColorA, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoStartFade(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetStartColorA, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoEndFade(this TrailRenderer self, float target)
+            => UCoroutine.Yield(self.SetEndColorA, target);
 
         public static IEnumerator CoEndFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndColorA, self.SetEndColorA, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetEndColorA, target, self.SetEndColorA, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoEndFade(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetEndColorA, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Time
+        public static IEnumerator CoTime(this TrailRenderer self, float target)
+            => UCoroutine.Yield(self.SetTime, target);
 
         public static IEnumerator CoTime(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetTime, self.SetTime, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetTime, target, self.SetTime, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoTime(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetTime, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Width
+        public static IEnumerator CoStartWidth(this TrailRenderer self, float target)
+            => UCoroutine.Yield(self.SetStartWidth, target);
 
         public static IEnumerator CoStartWidth(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartWidth, self.SetStartWidth, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetStartWidth, target, self.SetStartWidth, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoStartWidth(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetStartWidth, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoEndWidth(this TrailRenderer self, float target)
+            => UCoroutine.Yield(self.SetEndWidth, target);
 
         public static IEnumerator CoEndWidth(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndWidth, self.SetEndWidth, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetEndWidth, target, self.SetEndWidth, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoEndWidth(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetEndWidth, UCoroutine.YieldTime(duration, easer));
+        #endregion
     }
 
     internal static class InternalTrailRendererExtensions

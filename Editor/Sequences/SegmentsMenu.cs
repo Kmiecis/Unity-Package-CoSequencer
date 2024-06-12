@@ -82,6 +82,10 @@ namespace CommonEditor.Coroutines
             var types = AppDomain.CurrentDomain.FindTypes(IsValidType);
             foreach (var type in types)
             {
+                var obsolete = type.GetCustomAttribute<ObsoleteAttribute>();
+                if (obsolete != null)
+                    continue;
+
                 var attribute = type.GetCustomAttribute<SegmentMenuAttribute>();
 
                 var menuPath = attribute.GetMenuPathOrDefault();
@@ -115,7 +119,7 @@ namespace CommonEditor.Coroutines
                 added += 1;
 
                 var entries = kv.Value;
-                entries.Sort();
+                entries.StableSort();
 
                 foreach (var entry in entries)
                 {

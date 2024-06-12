@@ -9,7 +9,7 @@ namespace Common.Coroutines.Segments
     {
         public float duration = 1.0f;
 
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
             => UCoroutine.YieldTime(duration);
     }
 
@@ -19,7 +19,7 @@ namespace Common.Coroutines.Segments
     {
         public float duration = 1.0f;
 
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
             => UCoroutine.YieldRealtime(duration);
     }
 
@@ -29,7 +29,7 @@ namespace Common.Coroutines.Segments
     {
         public int frames = 1;
 
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
             => UCoroutine.YieldFrames(frames);
     }
 }

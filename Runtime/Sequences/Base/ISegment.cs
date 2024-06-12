@@ -1,11 +1,7 @@
-using System.Collections;
-
 namespace Common.Coroutines
 {
-    public interface ISegment
+    public interface ISegment : ILink
     {
-        IEnumerator GetSequence();
-
         void OnValidate();
     }
 }

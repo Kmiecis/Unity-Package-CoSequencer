@@ -6,17 +6,49 @@ namespace Common.Coroutines
 {
     public static class LightExtensions
     {
+        #region Color
+        public static IEnumerator CoColor(this Light self, Color target)
+            => UCoroutine.Yield(self.SetColor, target);
+
         public static IEnumerator CoColor(this Light self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetColor, self.SetColor, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetColor, target, self.SetColor, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoColor(this Light self, Color start, Color target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetColor, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Intensity
+        public static IEnumerator CoIntensity(this Light self, float target)
+            => UCoroutine.Yield(self.SetIntensity, target);
 
         public static IEnumerator CoIntensity(this Light self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetIntensity, self.SetIntensity, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetIntensity, target, self.SetIntensity, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoIntensity(this Light self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetIntensity, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Range
+        public static IEnumerator CoRange(this Light self, float target)
+            => UCoroutine.Yield(self.SetRange, target);
 
         public static IEnumerator CoRange(this Light self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRange, self.SetRange, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetRange, target, self.SetRange, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoRange(this Light self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetRange, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region Shadow
+        public static IEnumerator CoShadowStrength(this Light self, float target)
+            => UCoroutine.Yield(self.SetShadowStrength, target);
 
         public static IEnumerator CoShadowStrength(this Light self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetShadowStrength, self.SetShadowStrength, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetShadowStrength, target, self.SetShadowStrength, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoShadowStrength(this Light self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetShadowStrength, UCoroutine.YieldTime(duration, easer));
+        #endregion
     }
 
     internal static class InternalLightExtensions

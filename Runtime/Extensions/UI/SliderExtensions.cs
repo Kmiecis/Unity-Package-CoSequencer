@@ -6,11 +6,27 @@ namespace Common.Coroutines
 {
     public static class SliderExtensions
     {
+        #region Value
+        public static IEnumerator CoValue(this Slider self, float target)
+            => UCoroutine.Yield(self.SetValue, target);
+
         public static IEnumerator CoValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetValue, self.SetValue, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetValue, target, self.SetValue, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoValue(this Slider self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetValue, UCoroutine.YieldTime(duration, easer));
+        #endregion
+
+        #region NormalizedValue
+        public static IEnumerator CoNormalizedValue(this Slider self, float target)
+            => UCoroutine.Yield(self.SetNormalizedValue, target);
 
         public static IEnumerator CoNormalizedValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetNormalizedValue, self.SetNormalizedValue, target, UCoroutine.YieldTime(duration, easer));
+            => UCoroutine.YieldValueTo(self.GetNormalizedValue, target, self.SetNormalizedValue, UCoroutine.YieldTime(duration, easer));
+
+        public static IEnumerator CoNormalizedValue(this Slider self, float start, float target, float duration, Func<float, float> easer = null)
+            => UCoroutine.YieldValueTo(start, target, self.SetNormalizedValue, UCoroutine.YieldTime(duration, easer));
+        #endregion
     }
 
     internal static class InternalSliderExtensions

@@ -13,7 +13,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Log", SegmentPath.Debug, SegmentGroup.Utility)]
     public class DebugLogSegment : DebugSegment
     {
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
         {
             Debug.Log(message);
             yield return null;
@@ -23,7 +23,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Warning", SegmentPath.Debug, SegmentGroup.Utility)]
     public class DebugWarningSegment : DebugSegment
     {
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
         {
             Debug.LogWarning(message);
             yield return null;
@@ -33,7 +33,7 @@ namespace Common.Coroutines.Segments
     [SegmentMenu("Error", SegmentPath.Debug, SegmentGroup.Utility)]
     public class DebugErrorSegment : DebugSegment
     {
-        public override IEnumerator GetSequence()
+        public override IEnumerator Build()
         {
             Debug.LogError(message);
             yield return null;
