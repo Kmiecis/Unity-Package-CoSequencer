@@ -15,9 +15,7 @@ namespace Common.Coroutines
 
         public IEnumerator Build()
         {
-            var prev = _prev.Build();
-            var next = _next.Build();
-            return prev.Then(next);
+            return _prev.Build().Then(_next.Build);
         }
     }
 }
