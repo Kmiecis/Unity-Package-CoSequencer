@@ -80,7 +80,11 @@ namespace Common.Coroutines.Segments
     public sealed class MaterialFadeSegment : MaterialTimedSegment<float>
     {
         public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        {
+            base.OnValidate();
+
+            target = Mathf.Clamp(target, 0.0f, 1.0f);
+        }
 
         public override IEnumerator Build()
             => material.CoFade(_propertyId, target, duration, easer.Evaluate);
@@ -90,7 +94,11 @@ namespace Common.Coroutines.Segments
     public sealed class MaterialFadeSetSegment : MaterialSegment<float>
     {
         public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        {
+            base.OnValidate();
+
+            target = Mathf.Clamp(target, 0.0f, 1.0f);
+        }
 
         public override IEnumerator Build()
             => material.CoFade(_propertyId, target);
@@ -101,6 +109,8 @@ namespace Common.Coroutines.Segments
     {
         public override void OnValidate()
         {
+            base.OnValidate();
+
             start = Mathf.Clamp(start, 0.0f, 1.0f);
             target = Mathf.Clamp(target, 0.0f, 1.0f);
         }
