@@ -7,8 +7,6 @@ namespace Common.Coroutines
     [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/" + nameof(CoSequencer))]
     public class CoSequencer : SegmentBehaviour
     {
-        [SerializeField]
-        private bool _playOnStart;
         [SerializeReference]
         protected List<ISegment> _segments;
 
@@ -55,14 +53,6 @@ namespace Common.Coroutines
         public void Stop()
         {
             UCoroutine.SafeStop(ref _coroutine, this);
-        }
-
-        private void Start()
-        {
-            if (_playOnStart)
-            {
-                Play();
-            }
         }
 
         public override void OnValidate()
