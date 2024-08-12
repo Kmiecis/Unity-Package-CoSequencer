@@ -206,7 +206,12 @@ namespace Common.Coroutines
 
         public static Coroutine Start(this IEnumerator self, MonoBehaviour target)
         {
-            if (target.isActiveAndEnabled)
+            return target.StartCoroutine(self);
+        }
+
+        public static Coroutine SafeStart(this IEnumerator self, MonoBehaviour target)
+        {
+            if (target.gameObject.activeInHierarchy)
             {
                 return target.StartCoroutine(self);
             }
