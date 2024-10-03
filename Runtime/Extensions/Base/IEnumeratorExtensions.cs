@@ -21,12 +21,12 @@ namespace Common.Coroutines
 
         public static IEnumerator Then(this IEnumerator self, Action action)
         {
-            return self.Then(Yield.Action(action));
+            return self.Then(Yield.Invoke(action));
         }
 
         public static IEnumerator Then(this IEnumerator self, UnityEvent action)
         {
-            return self.Then(Yield.Action(action));
+            return self.Then(Yield.Invoke(action));
         }
 
         public static IEnumerator Then<T>(this IEnumerator self, Func<T> provider)

@@ -40,16 +40,16 @@ namespace Common.Coroutines
         }
         #endregion
 
-        #region Yield action
+        #region Yield invoke
         /// <summary> Executes 'action' method once </summary>
-        public static IEnumerator Action(Action action)
+        public static IEnumerator Invoke(Action action)
         {
             action();
             yield return null;
         }
 
         /// <summary> Executes 'action' uevent once </summary>
-        public static IEnumerator Action(UnityEvent action)
+        public static IEnumerator Invoke(UnityEvent action)
         {
             action.Invoke();
             yield return null;
