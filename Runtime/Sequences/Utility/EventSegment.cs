@@ -11,6 +11,6 @@ namespace Common.Coroutines.Segments
         public UnityEvent action;
 
         public override IEnumerator Build()
-            => UCoroutine.Yield(action);
+            => Yield.Action(action);
     }
 }

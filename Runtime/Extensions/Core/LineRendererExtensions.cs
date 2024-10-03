@@ -8,62 +8,62 @@ namespace Common.Coroutines
     {
         #region Color
         public static IEnumerator CoStartColor(this LineRenderer self, Color target)
-            => UCoroutine.Yield(self.SetStartColor, target);
+            => Yield.Into(target, self.SetStartColor);
 
         public static IEnumerator CoStartColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartColor, target, self.SetStartColor, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetStartColor, target, self.SetStartColor, Yield.Time(duration, easer));
 
         public static IEnumerator CoStartColor(this LineRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetStartColor, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetStartColor, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndColor(this LineRenderer self, Color target)
-            => UCoroutine.Yield(self.SetEndColor, target);
+            => Yield.Into(target, self.SetEndColor);
 
         public static IEnumerator CoEndColor(this LineRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndColor, target, self.SetEndColor, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetEndColor, target, self.SetEndColor, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndColor(this LineRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetEndColor, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetEndColor, Yield.Time(duration, easer));
         #endregion
 
         #region Fade
         public static IEnumerator CoStartFade(this LineRenderer self, float target)
-            => UCoroutine.Yield(self.SetStartColorA, target);
+            => Yield.Into(target, self.SetStartColorA);
 
         public static IEnumerator CoStartFade(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartColorA, target, self.SetStartColorA, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetStartColorA, target, self.SetStartColorA, Yield.Time(duration, easer));
 
         public static IEnumerator CoStartFade(this LineRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetStartColorA, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetStartColorA, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndFade(this LineRenderer self, float target)
-            => UCoroutine.Yield(self.SetEndColorA, target);
+            => Yield.Into(target, self.SetEndColorA);
 
         public static IEnumerator CoEndFade(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndColorA, target, self.SetEndColorA, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetEndColorA, target, self.SetEndColorA, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndFade(this LineRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetEndColorA, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetEndColorA, Yield.Time(duration, easer));
         #endregion
 
         #region Width
         public static IEnumerator CoStartWidth(this LineRenderer self, float target)
-            => UCoroutine.Yield(self.SetStartWidth, target);
+            => Yield.Into(target, self.SetStartWidth);
 
         public static IEnumerator CoStartWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetStartWidth, target, self.SetStartWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetStartWidth, target, self.SetStartWidth, Yield.Time(duration, easer));
 
         public static IEnumerator CoStartWidth(this LineRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetStartWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetStartWidth, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndWidth(this LineRenderer self, float target)
-            => UCoroutine.Yield(self.SetEndWidth, target);
+            => Yield.Into(target, self.SetEndWidth);
 
         public static IEnumerator CoEndWidth(this LineRenderer self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetEndWidth, target, self.SetEndWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetEndWidth, target, self.SetEndWidth, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndWidth(this LineRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetEndWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetEndWidth, Yield.Time(duration, easer));
         #endregion
     }
 

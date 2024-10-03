@@ -8,21 +8,21 @@ namespace Common.Coroutines
     {
         #region FontSize
         public static IEnumerator CoFontSize(this Text self, int target)
-            => UCoroutine.Yield(self.SetFontSize, target);
+            => Yield.Into(target, self.SetFontSize);
 
         public static IEnumerator CoFontSize(this Text self, int target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFontSize, target, self.SetFontSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetFontSize, target, self.SetFontSize, Yield.Time(duration, easer));
 
         public static IEnumerator CoFontSize(this Text self, int start, int target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetFontSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetFontSize, Yield.Time(duration, easer));
         #endregion
 
         #region Text
         public static IEnumerator CoText(this Text self, string target)
-            => UCoroutine.Yield(self.SetText, target);
+            => Yield.Into(target, self.SetText);
 
         public static IEnumerator CoText(this Text self, string target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => target.Substring(t), self.SetText, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(t => target.Substring(t), self.SetText, Yield.Time(duration, easer));
         #endregion
     }
 

@@ -8,24 +8,24 @@ namespace Common.Coroutines
     {
         #region Value
         public static IEnumerator CoValue(this Slider self, float target)
-            => UCoroutine.Yield(self.SetValue, target);
+            => Yield.Into(target, self.SetValue);
 
         public static IEnumerator CoValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetValue, target, self.SetValue, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetValue, target, self.SetValue, Yield.Time(duration, easer));
 
         public static IEnumerator CoValue(this Slider self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetValue, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetValue, Yield.Time(duration, easer));
         #endregion
 
         #region NormalizedValue
         public static IEnumerator CoNormalizedValue(this Slider self, float target)
-            => UCoroutine.Yield(self.SetNormalizedValue, target);
+            => Yield.Into(target, self.SetNormalizedValue);
 
         public static IEnumerator CoNormalizedValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetNormalizedValue, target, self.SetNormalizedValue, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetNormalizedValue, target, self.SetNormalizedValue, Yield.Time(duration, easer));
 
         public static IEnumerator CoNormalizedValue(this Slider self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetNormalizedValue, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetNormalizedValue, Yield.Time(duration, easer));
         #endregion
     }
 

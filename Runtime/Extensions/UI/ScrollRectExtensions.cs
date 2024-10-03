@@ -9,68 +9,68 @@ namespace Common.Coroutines
     {
         #region Position
         public static IEnumerator CoPosition(this ScrollRect self, Vector2 target)
-            => UCoroutine.Yield(self.SetNormalizedPosition, target);
+            => Yield.Into(target, self.SetNormalizedPosition);
 
         public static IEnumerator CoPosition(this ScrollRect self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetNormalizedPosition, target, self.SetNormalizedPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetNormalizedPosition, target, self.SetNormalizedPosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoPosition(this ScrollRect self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetNormalizedPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetNormalizedPosition, Yield.Time(duration, easer));
         #endregion
 
         #region HorizontalPosition
         public static IEnumerator CoHorizontalPosition(this ScrollRect self, float target)
-            => UCoroutine.Yield(self.SetHorizontalNormalizedPosition, target);
+            => Yield.Into(target, self.SetHorizontalNormalizedPosition);
 
         public static IEnumerator CoHorizontalPosition(this ScrollRect self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetHorizontalNormalizedPosition, target, self.SetHorizontalNormalizedPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetHorizontalNormalizedPosition, target, self.SetHorizontalNormalizedPosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoHorizontalPosition(this ScrollRect self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetHorizontalNormalizedPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetHorizontalNormalizedPosition, Yield.Time(duration, easer));
         #endregion
 
         #region VerticalPosition
         public static IEnumerator CoVerticalPosition(this ScrollRect self, float target)
-            => UCoroutine.Yield(self.SetVerticalNormalizedPosition, target);
+            => Yield.Into(target, self.SetVerticalNormalizedPosition);
 
         public static IEnumerator CoVerticalPosition(this ScrollRect self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetVerticalNormalizedPosition, target, self.SetVerticalNormalizedPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetVerticalNormalizedPosition, target, self.SetVerticalNormalizedPosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoVerticalPosition(this ScrollRect self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetVerticalNormalizedPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetVerticalNormalizedPosition, Yield.Time(duration, easer));
         #endregion
 
         #region Velocity
         public static IEnumerator CoVelocity(this ScrollRect self, Vector2 target)
-            => UCoroutine.Yield(self.SetVelocity, target);
+            => Yield.Into(target, self.SetVelocity);
 
         public static IEnumerator CoVelocity(this ScrollRect self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetVelocity, target, self.SetVelocity, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetVelocity, target, self.SetVelocity, Yield.Time(duration, easer));
 
         public static IEnumerator CoVelocity(this ScrollRect self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetVelocity, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetVelocity, Yield.Time(duration, easer));
         #endregion
 
         #region HorizontalVelocity
         public static IEnumerator CoHorizontalVelocity(this ScrollRect self, float target)
-            => UCoroutine.Yield(self.SetHorizontalVelocity, target);
+            => Yield.Into(target, self.SetHorizontalVelocity);
 
         public static IEnumerator CoHorizontalVelocity(this ScrollRect self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetHorizontalVelocity, target, self.SetHorizontalVelocity, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetHorizontalVelocity, target, self.SetHorizontalVelocity, Yield.Time(duration, easer));
 
         public static IEnumerator CoHorizontalVelocity(this ScrollRect self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetHorizontalVelocity, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetHorizontalVelocity, Yield.Time(duration, easer));
         #endregion
 
         #region VerticalVelocity
         public static IEnumerator CoVerticalVelocity(this ScrollRect self, float target)
-            => UCoroutine.Yield(self.SetVerticalVelocity, target);
+            => Yield.Into(target, self.SetVerticalVelocity);
 
         public static IEnumerator CoVerticalVelocity(this ScrollRect self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetVerticalVelocity, target, self.SetVerticalVelocity, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetVerticalVelocity, target, self.SetVerticalVelocity, Yield.Time(duration, easer));
 
         public static IEnumerator CoVerticalVelocity(this ScrollRect self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetVerticalVelocity, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetVerticalVelocity, Yield.Time(duration, easer));
         #endregion
     }
 

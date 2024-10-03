@@ -8,24 +8,24 @@ namespace Common.Coroutines
     {
         #region Pitch
         public static IEnumerator CoPitch(this AudioSource self, float target)
-            => UCoroutine.Yield(self.SetPitch, target);
+            => Yield.Into(target, self.SetPitch);
 
         public static IEnumerator CoPitch(this AudioSource self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPitch, target, self.SetPitch, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPitch, target, self.SetPitch, Yield.Time(duration, easer));
 
         public static IEnumerator CoPitch(this AudioSource self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPitch, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPitch, Yield.Time(duration, easer));
         #endregion
 
         #region Volume
         public static IEnumerator CoVolume(this AudioSource self, float target)
-            => UCoroutine.Yield(self.SetVolume, target);
+            => Yield.Into(target, self.SetVolume);
 
         public static IEnumerator CoVolume(this AudioSource self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetVolume, target, self.SetVolume, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetVolume, target, self.SetVolume, Yield.Time(duration, easer));
 
         public static IEnumerator CoVolume(this AudioSource self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetVolume, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetVolume, Yield.Time(duration, easer));
         #endregion
     }
 

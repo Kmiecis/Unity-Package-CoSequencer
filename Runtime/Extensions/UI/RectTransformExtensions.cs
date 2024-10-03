@@ -8,205 +8,205 @@ namespace Common.Coroutines
     {
         #region AnchorMin
         public static IEnumerator CoAnchorMin(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetAnchorMin, target);
+            => Yield.Into(target, self.SetAnchorMin);
 
         public static IEnumerator CoAnchorMin(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMin, target, self.SetAnchorMin, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMin, target, self.SetAnchorMin, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMin(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorMin, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorMin, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMinX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMinX, target, self.SetAnchorMinX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMinX, target, self.SetAnchorMinX, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMinX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorMinX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorMinX, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMinY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMinY, target, self.SetAnchorMinY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMinY, target, self.SetAnchorMinY, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMinY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorMinY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorMinY, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMinBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMin, () => self.GetAnchorMinBy(target), self.SetAnchorMin, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMin, () => self.GetAnchorMinBy(target), self.SetAnchorMin, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMinFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetAnchorMinBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetAnchorMinBy, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region AnchorMax
         public static IEnumerator CoAnchorMax(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetAnchorMax, target);
+            => Yield.Into(target, self.SetAnchorMax);
 
         public static IEnumerator CoAnchorMax(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMax, target, self.SetAnchorMax, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMax, target, self.SetAnchorMax, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMax(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorMax, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorMax, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMaxX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMaxX, target, self.SetAnchorMaxX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMaxX, target, self.SetAnchorMaxX, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMaxX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorMaxX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorMaxX, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMaxY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorMaxY, target, self.SetAnchorMaxY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorMaxY, target, self.SetAnchorMaxY, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMaxY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorMaxY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorMaxY, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMaxBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-           => UCoroutine.YieldValueTo(self.GetAnchorMax, () => self.GetAnchorMaxBy(target), self.SetAnchorMax, UCoroutine.YieldTime(duration, easer));
+           => Yield.ValueTo(self.GetAnchorMax, () => self.GetAnchorMaxBy(target), self.SetAnchorMax, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMaxFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetAnchorMaxBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetAnchorMaxBy, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region AnchorMove
         public static IEnumerator CoAnchorMove(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetAnchorPosition, target);
+            => Yield.Into(target, self.SetAnchorPosition);
 
         public static IEnumerator CoAnchorMove(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorPosition, target, self.SetAnchorPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorPosition, target, self.SetAnchorPosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMove(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorPosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMoveX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorPositionX, target, self.SetAnchorPositionX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorPositionX, target, self.SetAnchorPositionX, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMoveX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorPositionX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorPositionX, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMoveY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorPositionY, target, self.SetAnchorPositionY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorPositionY, target, self.SetAnchorPositionY, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMoveY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAnchorPositionY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAnchorPositionY, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMoveBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAnchorPosition, () => self.GetAnchorPositionBy(target), self.SetAnchorPosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAnchorPosition, () => self.GetAnchorPositionBy(target), self.SetAnchorPosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoAnchorMoveFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetAnchorPositionBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetAnchorPositionBy, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region OffsetMin
         public static IEnumerator CoOffsetMin(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetOffsetMin, target);
+            => Yield.Into(target, self.SetOffsetMin);
 
         public static IEnumerator CoOffsetMin(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMin, target, self.SetOffsetMin, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMin, target, self.SetOffsetMin, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMin(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOffsetMin, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOffsetMin, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMinX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMinX, target, self.SetOffsetMinX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMinX, target, self.SetOffsetMinX, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMinX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOffsetMinX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOffsetMinX, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMinY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMinY, target, self.SetOffsetMinY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMinY, target, self.SetOffsetMinY, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMinY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOffsetMinY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOffsetMinY, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMinBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMin, () => self.GetOffsetMinBy(target), self.SetOffsetMin, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMin, () => self.GetOffsetMinBy(target), self.SetOffsetMin, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMinFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetOffsetMinBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetOffsetMinBy, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region OffsetMax
         public static IEnumerator CoOffsetMax(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetOffsetMax, target);
+            => Yield.Into(target, self.SetOffsetMax);
 
         public static IEnumerator CoOffsetMax(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMax, target, self.SetOffsetMax, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMax, target, self.SetOffsetMax, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMax(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOffsetMax, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOffsetMax, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMaxX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMaxX, target, self.SetOffsetMaxX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMaxX, target, self.SetOffsetMaxX, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMaxX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOffsetMaxX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOffsetMaxX, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMaxY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMaxY, target, self.SetOffsetMaxY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMaxY, target, self.SetOffsetMaxY, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMaxY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOffsetMaxY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOffsetMaxY, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMaxBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOffsetMax, () => self.GetOffsetMaxBy(target), self.SetOffsetMax, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOffsetMax, () => self.GetOffsetMaxBy(target), self.SetOffsetMax, Yield.Time(duration, easer));
 
         public static IEnumerator CoOffsetMaxFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetOffsetMaxBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetOffsetMaxBy, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region Pivot
         public static IEnumerator CoPivot(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetPivot, target);
+            => Yield.Into(target, self.SetPivot);
 
         public static IEnumerator CoPivot(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPivot, target, self.SetPivot, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPivot, target, self.SetPivot, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivot(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPivot, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPivot, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivotX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPivotX, target, self.SetPivotX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPivotX, target, self.SetPivotX, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivotX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPivotX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPivotX, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivotY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPivotY, target, self.SetPivotY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPivotY, target, self.SetPivotY, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivotY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPivotY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPivotY, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivotBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPivot, () => self.GetPivotBy(target), self.SetPivot, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPivot, () => self.GetPivotBy(target), self.SetPivot, Yield.Time(duration, easer));
 
         public static IEnumerator CoPivotFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetPivotBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetPivotBy, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region SizeDelta
         public static IEnumerator CoSizeDelta(this RectTransform self, Vector2 target)
-            => UCoroutine.Yield(self.SetSizeDelta, target);
+            => Yield.Into(target, self.SetSizeDelta);
 
         public static IEnumerator CoSizeDelta(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetSizeDelta, target, self.SetSizeDelta, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetSizeDelta, target, self.SetSizeDelta, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDelta(this RectTransform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetSizeDelta, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetSizeDelta, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDeltaX(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetSizeDeltaX, target, self.SetSizeDeltaX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetSizeDeltaX, target, self.SetSizeDeltaX, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDeltaX(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetSizeDeltaX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetSizeDeltaX, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDeltaY(this RectTransform self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetSizeDeltaY, target, self.SetSizeDeltaY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetSizeDeltaY, target, self.SetSizeDeltaY, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDeltaY(this RectTransform self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetSizeDeltaY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetSizeDeltaY, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDeltaBy(this RectTransform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetSizeDelta, () => self.GetSizeDeltaBy(target), self.SetSizeDelta, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetSizeDelta, () => self.GetSizeDeltaBy(target), self.SetSizeDelta, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeDeltaFor(this RectTransform self, Vector2 direction, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(t => direction * t, self.SetSizeDeltaBy, UCoroutine.YieldDeltaTime(duration, easer));
+            => Yield.ValueTo(t => direction * t, self.SetSizeDeltaBy, Yield.DeltaTime(duration, easer));
         #endregion
     }
 

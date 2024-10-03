@@ -10,7 +10,7 @@ namespace Common.Coroutines.Segments
         public float duration = 1.0f;
 
         public override IEnumerator Build()
-            => UCoroutine.YieldTime(duration);
+            => Yield.Time(duration);
     }
 
     [Serializable]
@@ -20,7 +20,7 @@ namespace Common.Coroutines.Segments
         public float duration = 1.0f;
 
         public override IEnumerator Build()
-            => UCoroutine.YieldRealtime(duration);
+            => Yield.Realtime(duration);
     }
 
     [Serializable]
@@ -30,6 +30,6 @@ namespace Common.Coroutines.Segments
         public int frames = 1;
 
         public override IEnumerator Build()
-            => UCoroutine.YieldFrames(frames);
+            => Yield.Frames(frames);
     }
 }

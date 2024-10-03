@@ -9,101 +9,101 @@ namespace Common.Coroutines
     {
         #region FlexibleWidth
         public static IEnumerator CoFlexibleWidth(this LayoutElement self, float target)
-            => UCoroutine.Yield(self.SetFlexibleWidth, target);
+            => Yield.Into(target, self.SetFlexibleWidth);
 
         public static IEnumerator CoFlexibleWidth(this LayoutElement self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFlexibleWidth, target, self.SetFlexibleWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetFlexibleWidth, target, self.SetFlexibleWidth, Yield.Time(duration, easer));
 
         public static IEnumerator CoFlexibleWidth(this LayoutElement self, float start, float target, float duration, Func<float, float> easer = null)
-           => UCoroutine.YieldValueTo(start, target, self.SetFlexibleWidth, UCoroutine.YieldTime(duration, easer));
+           => Yield.ValueTo(start, target, self.SetFlexibleWidth, Yield.Time(duration, easer));
         #endregion
 
         #region FlexibleHeight
         public static IEnumerator CoFlexibleHeight(this LayoutElement self, float target)
-            => UCoroutine.Yield(self.SetFlexibleHeight, target);
+            => Yield.Into(target, self.SetFlexibleHeight);
 
         public static IEnumerator CoFlexibleHeight(this LayoutElement self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFlexibleHeight, target, self.SetFlexibleHeight, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetFlexibleHeight, target, self.SetFlexibleHeight, Yield.Time(duration, easer));
 
         public static IEnumerator CoFlexibleHeight(this LayoutElement self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetFlexibleHeight, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetFlexibleHeight, Yield.Time(duration, easer));
         #endregion
 
         #region FlexibleSize
         public static IEnumerator CoFlexibleSize(this LayoutElement self, Vector2 target)
-            => UCoroutine.Yield(self.SetFlexibleSize, target);
+            => Yield.Into(target, self.SetFlexibleSize);
 
         public static IEnumerator CoFlexibleSize(this LayoutElement self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFlexibleSize, target, self.SetFlexibleSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetFlexibleSize, target, self.SetFlexibleSize, Yield.Time(duration, easer));
 
         public static IEnumerator CoFlexibleSize(this LayoutElement self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetFlexibleSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetFlexibleSize, Yield.Time(duration, easer));
         #endregion
 
         #region MinWidth
         public static IEnumerator CoMinWidth(this LayoutElement self, float target)
-            => UCoroutine.Yield(self.SetMinWidth, target);
+            => Yield.Into(target, self.SetMinWidth);
 
         public static IEnumerator CoMinWidth(this LayoutElement self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetMinWidth, target, self.SetMinWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetMinWidth, target, self.SetMinWidth, Yield.Time(duration, easer));
 
         public static IEnumerator CoMinWidth(this LayoutElement self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetMinWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetMinWidth, Yield.Time(duration, easer));
         #endregion
 
         #region MinHeight
         public static IEnumerator CoMinHeight(this LayoutElement self, float target)
-            => UCoroutine.Yield(self.SetMinHeight, target);
+            => Yield.Into(target, self.SetMinHeight);
 
         public static IEnumerator CoMinHeight(this LayoutElement self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetMinHeight, target, self.SetMinHeight, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetMinHeight, target, self.SetMinHeight, Yield.Time(duration, easer));
 
         public static IEnumerator CoMinHeight(this LayoutElement self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetMinHeight, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetMinHeight, Yield.Time(duration, easer));
         #endregion
 
         #region MinSize
         public static IEnumerator CoMinSize(this LayoutElement self, Vector2 target)
-            => UCoroutine.Yield(self.SetMinSize, target);
+            => Yield.Into(target, self.SetMinSize);
 
         public static IEnumerator CoMinSize(this LayoutElement self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetMinSize, target, self.SetMinSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetMinSize, target, self.SetMinSize, Yield.Time(duration, easer));
 
         public static IEnumerator CoMinSize(this LayoutElement self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetMinSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetMinSize, Yield.Time(duration, easer));
         #endregion
 
         #region PreferredWidth
         public static IEnumerator CoPreferredWidth(this LayoutElement self, float target)
-            => UCoroutine.Yield(self.SetPreferredWidth, target);
+            => Yield.Into(target, self.SetPreferredWidth);
 
         public static IEnumerator CoPreferredWidth(this LayoutElement self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPreferredWidth, target, self.SetPreferredWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPreferredWidth, target, self.SetPreferredWidth, Yield.Time(duration, easer));
 
         public static IEnumerator CoPreferredWidth(this LayoutElement self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPreferredWidth, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPreferredWidth, Yield.Time(duration, easer));
         #endregion
 
         #region PreferredHeight
         public static IEnumerator CoPreferredHeight(this LayoutElement self, float target)
-            => UCoroutine.Yield(self.SetPreferredHeight, target);
+            => Yield.Into(target, self.SetPreferredHeight);
 
         public static IEnumerator CoPreferredHeight(this LayoutElement self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPreferredHeight, target, self.SetPreferredHeight, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPreferredHeight, target, self.SetPreferredHeight, Yield.Time(duration, easer));
 
         public static IEnumerator CoPreferredHeight(this LayoutElement self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPreferredHeight, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPreferredHeight, Yield.Time(duration, easer));
         #endregion
 
         #region PreferredSize
         public static IEnumerator CoPreferredSize(this LayoutElement self, Vector2 target)
-            => UCoroutine.Yield(self.SetPreferredSize, target);
+            => Yield.Into(target, self.SetPreferredSize);
 
         public static IEnumerator CoPreferredSize(this LayoutElement self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPreferredSize, target, self.SetPreferredSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPreferredSize, target, self.SetPreferredSize, Yield.Time(duration, easer));
 
         public static IEnumerator CoPreferredSize(this LayoutElement self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPreferredSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPreferredSize, Yield.Time(duration, easer));
         #endregion
     }
 

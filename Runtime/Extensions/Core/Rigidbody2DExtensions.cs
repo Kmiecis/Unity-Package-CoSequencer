@@ -8,30 +8,30 @@ namespace Common.Coroutines
     {
         #region Move
         public static IEnumerator CoMove(this Rigidbody2D self, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPosition, target, self.MovePosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPosition, target, self.MovePosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoMove(this Rigidbody2D self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.MovePosition, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.MovePosition, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveX(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionX, target, self.MovePositionX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPositionX, target, self.MovePositionX, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveX(this Rigidbody2D self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.MovePositionX, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.MovePositionX, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveY(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPositionY, target, self.MovePositionY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPositionY, target, self.MovePositionY, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveY(this Rigidbody2D self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.MovePositionY, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.MovePositionY, Yield.Time(duration, easer));
         #endregion
 
         #region Rotate
         public static IEnumerator CoRotate(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRotation, target, self.MoveRotation, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetRotation, target, self.MoveRotation, Yield.Time(duration, easer));
 
         public static IEnumerator CoRotate(this Rigidbody2D self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.MoveRotation, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.MoveRotation, Yield.Time(duration, easer));
         #endregion
     }
 

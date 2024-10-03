@@ -7,13 +7,13 @@ namespace Common.Coroutines
     public static class CanvasGroupExtensions
     {
         public static IEnumerator CoFade(this CanvasGroup self, float target)
-            => UCoroutine.Yield(self.SetAlpha, target);
+            => Yield.Into(target, self.SetAlpha);
 
         public static IEnumerator CoFade(this CanvasGroup self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAlpha, target, self.SetAlpha, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAlpha, target, self.SetAlpha, Yield.Time(duration, easer));
 
         public static IEnumerator CoFade(this CanvasGroup self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAlpha, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAlpha, Yield.Time(duration, easer));
     }
 
     internal static class InternalCanvasGroupExtensions

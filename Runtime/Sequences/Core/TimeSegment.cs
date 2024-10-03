@@ -13,6 +13,6 @@ namespace Common.Coroutines.Segments
     public class TimeScaleSegment : TimeSegment
     {
         public override IEnumerator Build()
-            => UCoroutine.CoTimeScale(target, duration, easer.Evaluate);
+            => Yield.TimeScale(target, duration, easer.Evaluate);
     }
 }

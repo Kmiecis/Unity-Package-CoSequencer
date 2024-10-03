@@ -8,90 +8,90 @@ namespace Common.Coroutines
     {
         #region Aspect
         public static IEnumerator CoAspect(this Camera self, float target)
-            => UCoroutine.Yield(self.SetAspect, target);
+            => Yield.Into(target, self.SetAspect);
 
         public static IEnumerator CoAspect(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetAspect, target, self.SetAspect, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetAspect, target, self.SetAspect, Yield.Time(duration, easer));
 
         public static IEnumerator CoAspect(this Camera self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetAspect, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetAspect, Yield.Time(duration, easer));
         #endregion
 
         #region BackgroundColor
         public static IEnumerator CoBackgroundColor(this Camera self, Color target)
-            => UCoroutine.Yield(self.SetBackgroundColor, target);
+            => Yield.Into(target, self.SetBackgroundColor);
 
         public static IEnumerator CoBackgroundColor(this Camera self, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetBackgroundColor, target, self.SetBackgroundColor, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetBackgroundColor, target, self.SetBackgroundColor, Yield.Time(duration, easer));
 
         public static IEnumerator CoBackgroundColor(this Camera self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetBackgroundColor, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetBackgroundColor, Yield.Time(duration, easer));
         #endregion
 
         #region NearClipPlane
         public static IEnumerator CoNearClipPlane(this Camera self, float target)
-            => UCoroutine.Yield(self.SetNearClipPlane, target);
+            => Yield.Into(target, self.SetNearClipPlane);
 
         public static IEnumerator CoNearClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetNearClipPlane, target, self.SetNearClipPlane, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetNearClipPlane, target, self.SetNearClipPlane, Yield.Time(duration, easer));
 
         public static IEnumerator CoNearClipPlane(this Camera self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetNearClipPlane, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetNearClipPlane, Yield.Time(duration, easer));
         #endregion
 
         #region FarClipPlane
         public static IEnumerator CoFarClipPlane(this Camera self, float target)
-            => UCoroutine.Yield(self.SetFarClipPlane, target);
+            => Yield.Into(target, self.SetFarClipPlane);
 
         public static IEnumerator CoFarClipPlane(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFarClipPlane, target, self.SetFarClipPlane, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetFarClipPlane, target, self.SetFarClipPlane, Yield.Time(duration, easer));
 
         public static IEnumerator CoFarClipPlane(this Camera self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetFarClipPlane, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetFarClipPlane, Yield.Time(duration, easer));
         #endregion
 
         #region FieldOfView
         public static IEnumerator CoFieldOfView(this Camera self, float target)
-            => UCoroutine.Yield(self.SetFieldOfView, target);
+            => Yield.Into(target, self.SetFieldOfView);
 
         public static IEnumerator CoFieldOfView(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetFieldOfView, target, self.SetFieldOfView, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetFieldOfView, target, self.SetFieldOfView, Yield.Time(duration, easer));
 
         public static IEnumerator CoFieldOfView(this Camera self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetFieldOfView, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetFieldOfView, Yield.Time(duration, easer));
         #endregion
 
         #region OrthographicSize
         public static IEnumerator CoOrthographicSize(this Camera self, float target)
-            => UCoroutine.Yield(self.SetOrthographicSize, target);
+            => Yield.Into(target, self.SetOrthographicSize);
 
         public static IEnumerator CoOrthographicSize(this Camera self, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetOrthographicSize, target, self.SetOrthographicSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetOrthographicSize, target, self.SetOrthographicSize, Yield.Time(duration, easer));
 
         public static IEnumerator CoOrthographicSize(this Camera self, float start, float target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetOrthographicSize, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetOrthographicSize, Yield.Time(duration, easer));
         #endregion
 
         #region PixelRect
         public static IEnumerator CoPixelRect(this Camera self, Rect target)
-            => UCoroutine.Yield(self.SetPixelRect, target);
+            => Yield.Into(target, self.SetPixelRect);
 
         public static IEnumerator CoPixelRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetPixelRect, target, self.SetPixelRect, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetPixelRect, target, self.SetPixelRect, Yield.Time(duration, easer));
 
         public static IEnumerator CoPixelRect(this Camera self, Rect start, Rect target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetPixelRect, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetPixelRect, Yield.Time(duration, easer));
         #endregion
 
         #region Rect
         public static IEnumerator CoRect(this Camera self, Rect target)
-            => UCoroutine.Yield(self.SetRect, target);
+            => Yield.Into(target, self.SetRect);
 
         public static IEnumerator CoRect(this Camera self, Rect target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(self.GetRect, target, self.SetRect, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(self.GetRect, target, self.SetRect, Yield.Time(duration, easer));
 
         public static IEnumerator CoRect(this Camera self, Rect start, Rect target, float duration, Func<float, float> easer = null)
-            => UCoroutine.YieldValueTo(start, target, self.SetRect, UCoroutine.YieldTime(duration, easer));
+            => Yield.ValueTo(start, target, self.SetRect, Yield.Time(duration, easer));
         #endregion
     }
 
