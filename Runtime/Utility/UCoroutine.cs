@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -20,6 +21,19 @@ namespace Common.Coroutines
             {
                 coroutine = null;
             }
+        }
+
+        public static T SafeUpdate<T>(ref IEnumerator<T> coroutine)
+        {
+            if (coroutine != null)
+            {
+                if (coroutine.MoveNext())
+                {
+                    return coroutine.Current;
+                }
+                coroutine = null;
+            }
+            return default;
         }
     }
 }
