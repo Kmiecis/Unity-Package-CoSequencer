@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -9,6 +10,14 @@ namespace Common.Coroutines
             if (coroutine != null)
             {
                 coroutine.Stop(target);
+                coroutine = null;
+            }
+        }
+
+        public static void SafeUpdate(ref IEnumerator coroutine)
+        {
+            if (coroutine != null && !coroutine.MoveNext())
+            {
                 coroutine = null;
             }
         }
