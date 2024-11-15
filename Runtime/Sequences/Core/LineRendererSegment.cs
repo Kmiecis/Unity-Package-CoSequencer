@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class LineRendererSegment<T> : Segment
     {
         public LineRenderer renderer;
         public T target;
     }
 
-    [Serializable]
     public abstract class LineRendererTimedSegment<T> : TimedSegment
     {
         public LineRenderer renderer;
         public T target;
     }
 
-    [Serializable]
     public abstract class LineRendererBetweenSegment<T> : TimedSegment
     {
         public LineRenderer renderer;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererStartColor, SegmentGroup.Core)]
     public sealed class LineRendererStartColorSegment : LineRendererTimedSegment<Color>
     {
@@ -37,6 +35,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererStartColor, SegmentGroup.Core)]
     public sealed class LineRendererStartColorSetSegment : LineRendererSegment<Color>
     {
@@ -47,6 +46,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererStartColor, SegmentGroup.Core)]
     public sealed class LineRendererStartColorBetweenSegment : LineRendererBetweenSegment<Color>
     {
@@ -60,6 +60,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererEndColor, SegmentGroup.Core)]
     public sealed class LineRendererEndColorSegment : LineRendererTimedSegment<Color>
     {
@@ -70,6 +71,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererEndColor, SegmentGroup.Core)]
     public sealed class LineRendererEndColorSetSegment : LineRendererSegment<Color>
     {
@@ -80,6 +82,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererEndColor, SegmentGroup.Core)]
     public sealed class LineRendererEndColorBetweenSegment : LineRendererBetweenSegment<Color>
     {
@@ -95,6 +98,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Fade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererStartFade, SegmentGroup.Core)]
     public sealed class LineRendererStartFadeSegment : LineRendererTimedSegment<float>
     {
@@ -105,6 +109,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererStartFade, SegmentGroup.Core)]
     public sealed class LineRendererStartFadeSetSegment : LineRendererSegment<float>
     {
@@ -115,6 +120,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererStartFade, SegmentGroup.Core)]
     public sealed class LineRendererStartFadeBetweenSegment : LineRendererBetweenSegment<float>
     {
@@ -128,6 +134,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererEndFade, SegmentGroup.Core)]
     public sealed class LineRendererEndFadeSegment : LineRendererTimedSegment<float>
     {
@@ -138,6 +145,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererEndFade, SegmentGroup.Core)]
     public sealed class LineRendererEndFadeSetSegment : LineRendererSegment<float>
     {
@@ -148,6 +156,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererEndFade, SegmentGroup.Core)]
     public sealed class LineRendererEndFadeBetweenSegment : LineRendererBetweenSegment<float>
     {
@@ -163,6 +172,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Width
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererStartWidth, SegmentGroup.Core)]
     public sealed class LineRendererStartWidthSegment : LineRendererTimedSegment<float>
     {
@@ -170,6 +180,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererStartWidth, SegmentGroup.Core)]
     public sealed class LineRendererStartWidthSetSegment : LineRendererSegment<float>
     {
@@ -177,6 +188,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererStartWidth, SegmentGroup.Core)]
     public sealed class LineRendererStartWidthBetweenSegment : LineRendererBetweenSegment<float>
     {
@@ -184,6 +196,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartWidth(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererEndWidth, SegmentGroup.Core)]
     public sealed class LineRendererEndWidthSegment : LineRendererTimedSegment<float>
     {
@@ -191,6 +204,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererEndWidth, SegmentGroup.Core)]
     public sealed class LineRendererEndWidthSetSegment : LineRendererSegment<float>
     {
@@ -198,6 +212,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererEndWidth, SegmentGroup.Core)]
     public sealed class LineRendererEndWidthBetweenSegment : LineRendererBetweenSegment<float>
     {

@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class CanvasGroupSegment<T> : Segment
     {
         public CanvasGroup canvas;
         public T target;
     }
 
-    [Serializable]
     public abstract class CanvasGroupTimedSegment<T> : TimedSegment
     {
         public CanvasGroup canvas;
         public T target;
     }
 
-    [Serializable]
     public abstract class CanvasGroupBetweenSegment<T> : TimedSegment
     {
         public CanvasGroup canvas;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Fade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
     public sealed class CanvasGroupFadeSegment : CanvasGroupTimedSegment<float>
     {
@@ -37,6 +35,7 @@ namespace Common.Coroutines.Segments
             => canvas.CoFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
     public sealed class CanvasGroupFadeSetSegment : CanvasGroupSegment<float>
     {
@@ -47,6 +46,7 @@ namespace Common.Coroutines.Segments
             => canvas.CoFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
     public sealed class CanvasGroupFadeBetweenSegment : CanvasGroupBetweenSegment<float>
     {

@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class CameraSegment<T> : Segment
     {
         public Camera camera;
         public T target;
     }
 
-    [Serializable]
     public abstract class CameraTimedSegment<T> : TimedSegment
     {
         public Camera camera;
         public T target;
     }
 
-    [Serializable]
     public abstract class CameraBetweenSegment<T> : TimedSegment
     {
         public Camera camera;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Aspect
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraAspect, SegmentGroup.Core)]
     public sealed class CameraAspectSegment : CameraTimedSegment<float>
     {
@@ -34,6 +32,7 @@ namespace Common.Coroutines.Segments
             => camera.CoAspect(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraAspect, SegmentGroup.Core)]
     public sealed class CameraAspectSetSegment : CameraSegment<float>
     {
@@ -41,6 +40,7 @@ namespace Common.Coroutines.Segments
             => camera.CoAspect(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraAspect, SegmentGroup.Core)]
     public sealed class CameraAspectBetweenSegment : CameraBetweenSegment<float>
     {
@@ -50,6 +50,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraBackgroundColor, SegmentGroup.Core)]
     public sealed class CameraBackgroundColorSegment : CameraTimedSegment<Color>
     {
@@ -60,6 +61,7 @@ namespace Common.Coroutines.Segments
             => camera.CoBackgroundColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraBackgroundColor, SegmentGroup.Core)]
     public sealed class CameraBackgroundColorSetSegment : CameraSegment<Color>
     {
@@ -70,6 +72,7 @@ namespace Common.Coroutines.Segments
             => camera.CoBackgroundColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraBackgroundColor, SegmentGroup.Core)]
     public sealed class CameraBackgroundColorBetweenSegment : CameraBetweenSegment<Color>
     {
@@ -85,6 +88,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region ClipPlane
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraNearClipPlane, SegmentGroup.Core)]
     public sealed class CameraNearClipPlaneSegment : CameraTimedSegment<float>
     {
@@ -98,6 +102,7 @@ namespace Common.Coroutines.Segments
             => camera.CoNearClipPlane(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraNearClipPlane, SegmentGroup.Core)]
     public sealed class CameraNearClipPlaneSetSegment : CameraSegment<float>
     {
@@ -111,6 +116,7 @@ namespace Common.Coroutines.Segments
             => camera.CoNearClipPlane(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraNearClipPlane, SegmentGroup.Core)]
     public sealed class CameraNearClipPlaneBetweenSegment : CameraBetweenSegment<float>
     {
@@ -126,6 +132,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region FarClipPlane
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraFarClipPlane, SegmentGroup.Core)]
     public sealed class CameraFarClipPlaneSegment : CameraTimedSegment<float>
     {
@@ -133,6 +140,7 @@ namespace Common.Coroutines.Segments
             => camera.CoFarClipPlane(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraFarClipPlane, SegmentGroup.Core)]
     public sealed class CameraFarClipPlaneSetSegment : CameraSegment<float>
     {
@@ -140,6 +148,7 @@ namespace Common.Coroutines.Segments
             => camera.CoFarClipPlane(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraFarClipPlane, SegmentGroup.Core)]
     public sealed class CameraFarClipPlaneBetweenSegment : CameraBetweenSegment<float>
     {
@@ -149,6 +158,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region FieldOfView
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraFieldOfView, SegmentGroup.Core)]
     public sealed class CameraFieldOfViewSegment : CameraTimedSegment<float>
     {
@@ -159,6 +169,7 @@ namespace Common.Coroutines.Segments
             => camera.CoFieldOfView(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraFieldOfView, SegmentGroup.Core)]
     public sealed class CameraFieldOfViewSetSegment : CameraSegment<float>
     {
@@ -169,6 +180,7 @@ namespace Common.Coroutines.Segments
             => camera.CoFieldOfView(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraFieldOfView, SegmentGroup.Core)]
     public sealed class CameraFieldOfViewBetweenSegment : CameraBetweenSegment<float>
     {
@@ -181,6 +193,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region OrthographicSize
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraOrthographicSize, SegmentGroup.Core)]
     public sealed class CameraOrthographicSizeSegment : CameraTimedSegment<float>
     {
@@ -188,6 +201,7 @@ namespace Common.Coroutines.Segments
             => camera.CoOrthographicSize(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraOrthographicSize, SegmentGroup.Core)]
     public sealed class CameraOrthographicSizeSetSegment : CameraSegment<float>
     {
@@ -195,6 +209,7 @@ namespace Common.Coroutines.Segments
             => camera.CoOrthographicSize(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraOrthographicSize, SegmentGroup.Core)]
     public sealed class CameraOrthographicSizeBetweenSegment : CameraBetweenSegment<float>
     {
@@ -204,6 +219,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region PixelRect
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraPixelRect, SegmentGroup.Core)]
     public sealed class CameraPixelRectSegment : CameraTimedSegment<Rect>
     {
@@ -214,6 +230,7 @@ namespace Common.Coroutines.Segments
             => camera.CoPixelRect(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraPixelRect, SegmentGroup.Core)]
     public sealed class CameraPixelRectSetSegment : CameraSegment<Rect>
     {
@@ -224,6 +241,7 @@ namespace Common.Coroutines.Segments
             => camera.CoPixelRect(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraPixelRect, SegmentGroup.Core)]
     public sealed class CameraPixelRectBetweenSegment : CameraBetweenSegment<Rect>
     {
@@ -236,6 +254,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Rect
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.CameraRect, SegmentGroup.Core)]
     public sealed class CameraRectSegment : CameraTimedSegment<Rect>
     {
@@ -246,6 +265,7 @@ namespace Common.Coroutines.Segments
             => camera.CoRect(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraRect, SegmentGroup.Core)]
     public sealed class CameraRectSetSegment : CameraSegment<Rect>
     {
@@ -256,6 +276,7 @@ namespace Common.Coroutines.Segments
             => camera.CoRect(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.CameraRect, SegmentGroup.Core)]
     public sealed class CameraRectBetweenSegment : CameraBetweenSegment<Rect>
     {

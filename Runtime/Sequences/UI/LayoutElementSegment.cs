@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class LayoutElementSegment<T> : Segment
     {
         public LayoutElement element;
         public T target;
     }
 
-    [Serializable]
     public abstract class LayoutElementTimedSegment<T> : TimedSegment
     {
         public LayoutElement element;
         public T target;
     }
 
-    [Serializable]
     public abstract class LayoutElementBetweenSegment<T> : TimedSegment
     {
         public LayoutElement element;
@@ -28,6 +25,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region FlexibleWidth
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleWidth, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleWidthSegment : LayoutElementTimedSegment<float>
     {
@@ -35,6 +33,7 @@ namespace Common.Coroutines.Segments
             => element.CoFlexibleWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementFlexibleWidth, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleWidthSetSegment : LayoutElementSegment<float>
     {
@@ -42,6 +41,7 @@ namespace Common.Coroutines.Segments
             => element.CoFlexibleWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementFlexibleWidth, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleWidtBetweenhSegment : LayoutElementBetweenSegment<float>
     {
@@ -51,6 +51,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region FlexibleHeight
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleHeight, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleHeightSegment : LayoutElementTimedSegment<float>
     {
@@ -58,6 +59,7 @@ namespace Common.Coroutines.Segments
             => element.CoFlexibleHeight(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementFlexibleHeight, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleHeightSetSegment : LayoutElementSegment<float>
     {
@@ -65,6 +67,7 @@ namespace Common.Coroutines.Segments
             => element.CoFlexibleHeight(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementFlexibleHeight, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleHeightBetweenSegment : LayoutElementBetweenSegment<float>
     {
@@ -74,6 +77,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region FlexibleSize
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleSize, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleSizeSegment : LayoutElementTimedSegment<Vector2>
     {
@@ -81,6 +85,7 @@ namespace Common.Coroutines.Segments
             => element.CoFlexibleSize(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementFlexibleSize, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleSizeSetSegment : LayoutElementSegment<Vector2>
     {
@@ -88,6 +93,7 @@ namespace Common.Coroutines.Segments
             => element.CoFlexibleSize(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementFlexibleSize, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleSizeBetweenSegment : LayoutElementBetweenSegment<Vector2>
     {
@@ -97,6 +103,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region MinWidth
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementMinWidth, SegmentGroup.UI)]
     public sealed class LayoutElementMinWidthSegment : LayoutElementTimedSegment<float>
     {
@@ -104,6 +111,7 @@ namespace Common.Coroutines.Segments
             => element.CoMinWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementMinWidth, SegmentGroup.UI)]
     public sealed class LayoutElementMinWidthSetSegment : LayoutElementSegment<float>
     {
@@ -111,6 +119,7 @@ namespace Common.Coroutines.Segments
             => element.CoMinWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementMinWidth, SegmentGroup.UI)]
     public sealed class LayoutElementMinWidthBetweenSegment : LayoutElementBetweenSegment<float>
     {
@@ -120,6 +129,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region MinHeight
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementMinHeight, SegmentGroup.UI)]
     public sealed class LayoutElementMinHeightSegment : LayoutElementTimedSegment<float>
     {
@@ -127,6 +137,7 @@ namespace Common.Coroutines.Segments
             => element.CoMinHeight(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementMinHeight, SegmentGroup.UI)]
     public sealed class LayoutElementMinHeightSetSegment : LayoutElementSegment<float>
     {
@@ -134,6 +145,7 @@ namespace Common.Coroutines.Segments
             => element.CoMinHeight(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementMinHeight, SegmentGroup.UI)]
     public sealed class LayoutElementMinHeightBetweenSegment : LayoutElementBetweenSegment<float>
     {
@@ -143,6 +155,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region MinSize
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementMinSize, SegmentGroup.UI)]
     public sealed class LayoutElementMinSizeSegment : LayoutElementTimedSegment<Vector2>
     {
@@ -150,6 +163,7 @@ namespace Common.Coroutines.Segments
             => element.CoMinSize(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementMinSize, SegmentGroup.UI)]
     public sealed class LayoutElementMinSizeSetSegment : LayoutElementSegment<Vector2>
     {
@@ -157,6 +171,7 @@ namespace Common.Coroutines.Segments
             => element.CoMinSize(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementMinSize, SegmentGroup.UI)]
     public sealed class LayoutElementMinSizeBetweenSegment : LayoutElementBetweenSegment<Vector2>
     {
@@ -166,6 +181,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region PreferredWidth
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredWidth, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredWidthSegment : LayoutElementTimedSegment<float>
     {
@@ -173,6 +189,7 @@ namespace Common.Coroutines.Segments
             => element.CoPreferredWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementPreferredWidth, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredWidthSetSegment : LayoutElementSegment<float>
     {
@@ -180,6 +197,7 @@ namespace Common.Coroutines.Segments
             => element.CoPreferredWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementPreferredWidth, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredWidthBetweenSegment : LayoutElementBetweenSegment<float>
     {
@@ -189,6 +207,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region PreferredHeight
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredHeight, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredHeightSegment : LayoutElementTimedSegment<float>
     {
@@ -196,6 +215,7 @@ namespace Common.Coroutines.Segments
             => element.CoPreferredHeight(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementPreferredHeight, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredHeightSetSegment : LayoutElementSegment<float>
     {
@@ -203,6 +223,7 @@ namespace Common.Coroutines.Segments
             => element.CoPreferredHeight(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementPreferredHeight, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredHeightBetweenSegment : LayoutElementBetweenSegment<float>
     {
@@ -212,6 +233,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region PreferredSize
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredSize, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredSizeSegment : LayoutElementTimedSegment<Vector2>
     {
@@ -219,6 +241,7 @@ namespace Common.Coroutines.Segments
             => element.CoPreferredSize(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementPreferredSize, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredSizeSetSegment : LayoutElementSegment<Vector2>
     {
@@ -226,6 +249,7 @@ namespace Common.Coroutines.Segments
             => element.CoPreferredSize(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LayoutElementPreferredSize, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredSizeBetweenSegment : LayoutElementBetweenSegment<Vector2>
     {

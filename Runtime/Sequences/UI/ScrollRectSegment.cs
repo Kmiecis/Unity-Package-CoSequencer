@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class ScrollRectSegment<T> : Segment
     {
         public ScrollRect scroll;
         public T target;
     }
 
-    [Serializable]
     public abstract class ScrollRectTimedSegment<T> : TimedSegment
     {
         public ScrollRect scroll;
         public T target;
     }
 
-    [Serializable]
     public abstract class ScrollRectBetweenSegment<T> : TimedSegment
     {
         public ScrollRect scroll;
@@ -28,6 +25,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Position
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ScrollRectPosition, SegmentGroup.UI)]
     public sealed class ScrollRectPositionSegment : ScrollRectTimedSegment<Vector2>
     {
@@ -38,6 +36,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoPosition(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectPosition, SegmentGroup.UI)]
     public sealed class ScrollRectPositionSetSegment : ScrollRectSegment<Vector2>
     {
@@ -48,6 +47,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoPosition(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ScrollRectPosition, SegmentGroup.UI)]
     public sealed class ScrollRectPositionBetweenSegment : ScrollRectBetweenSegment<Vector2>
     {
@@ -63,6 +63,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region HorizontalPosition
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ScrollRectHorizontalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalPositionSegment : ScrollRectTimedSegment<float>
     {
@@ -73,6 +74,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoHorizontalPosition(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectHorizontalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalPositionSetSegment : ScrollRectSegment<float>
     {
@@ -83,6 +85,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoHorizontalPosition(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ScrollRectHorizontalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalPositionBetweenSegment : ScrollRectBetweenSegment<float>
     {
@@ -98,6 +101,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region VerticalPosition
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ScrollRectVerticalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalPositionSegment : ScrollRectTimedSegment<float>
     {
@@ -108,6 +112,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoVerticalPosition(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectVerticalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalPositionSetSegment : ScrollRectSegment<float>
     {
@@ -118,6 +123,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoVerticalPosition(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ScrollRectVerticalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalPositionBetweenSegment : ScrollRectBetweenSegment<float>
     {
@@ -133,6 +139,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Velocity
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ScrollRectVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVelocitySegment : ScrollRectTimedSegment<Vector2>
     {
@@ -140,6 +147,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoVelocity(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVelocitySetSegment : ScrollRectSegment<Vector2>
     {
@@ -147,6 +155,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoVelocity(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ScrollRectVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVelocityBetweenSegment : ScrollRectBetweenSegment<Vector2>
     {
@@ -156,6 +165,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region HorizontalVelocity
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ScrollRectHorizontalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalVelocitySegment : ScrollRectTimedSegment<float>
     {
@@ -163,6 +173,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoHorizontalVelocity(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectHorizontalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalVelocitySetSegment : ScrollRectSegment<float>
     {
@@ -170,6 +181,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoHorizontalVelocity(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ScrollRectHorizontalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalVelocityBetweenSegment : ScrollRectBetweenSegment<float>
     {
@@ -179,6 +191,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region VerticalVelocity
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ScrollRectVerticalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalVelocitySegment : ScrollRectTimedSegment<float>
     {
@@ -186,6 +199,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoVerticalVelocity(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectVerticalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalVelocitySetSegment : ScrollRectSegment<float>
     {
@@ -193,6 +207,7 @@ namespace Common.Coroutines.Segments
             => scroll.CoVerticalVelocity(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ScrollRectVerticalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalVelocityBetweenSegment : ScrollRectBetweenSegment<float>
     {

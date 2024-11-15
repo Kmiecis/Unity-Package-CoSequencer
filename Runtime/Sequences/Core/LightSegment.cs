@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class LightSegment<T> : Segment
     {
         public Light light;
         public T target;
     }
 
-    [Serializable]
     public abstract class LightTimedSegment<T> : TimedSegment
     {
         public Light light;
         public T target;
     }
 
-    [Serializable]
     public abstract class LightBetweenSegment<T> : TimedSegment
     {
         public Light light;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightColor, SegmentGroup.Core)]
     public sealed class LightColorSegment : LightTimedSegment<Color>
     {
@@ -37,6 +35,7 @@ namespace Common.Coroutines.Segments
             => light.CoColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightColor, SegmentGroup.Core)]
     public sealed class LightColorSetSegment : LightSegment<Color>
     {
@@ -47,6 +46,7 @@ namespace Common.Coroutines.Segments
             => light.CoColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LightColor, SegmentGroup.Core)]
     public sealed class LightColorBetweenSegment : LightBetweenSegment<Color>
     {
@@ -62,6 +62,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Intensity
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightIntensity, SegmentGroup.Core)]
     public sealed class LightIntensitySegment : LightTimedSegment<float>
     {
@@ -72,6 +73,7 @@ namespace Common.Coroutines.Segments
             => light.CoIntensity(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightIntensity, SegmentGroup.Core)]
     public sealed class LightIntensitySetSegment : LightSegment<float>
     {
@@ -82,6 +84,7 @@ namespace Common.Coroutines.Segments
             => light.CoIntensity(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LightIntensity, SegmentGroup.Core)]
     public sealed class LightIntensityBetweenSegment : LightBetweenSegment<float>
     {
@@ -97,6 +100,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Range
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightRange, SegmentGroup.Core)]
     public sealed class LightRangeSegment : LightTimedSegment<float>
     {
@@ -104,6 +108,7 @@ namespace Common.Coroutines.Segments
             => light.CoRange(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightRange, SegmentGroup.Core)]
     public sealed class LightRangeSetSegment : LightSegment<float>
     {
@@ -111,6 +116,7 @@ namespace Common.Coroutines.Segments
             => light.CoRange(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LightRange, SegmentGroup.Core)]
     public sealed class LightRangeBetweenSegment : LightBetweenSegment<float>
     {
@@ -120,6 +126,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region ShadowStrength
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
     public sealed class LightShadowStrengthSegment : LightTimedSegment<float>
     {
@@ -130,6 +137,7 @@ namespace Common.Coroutines.Segments
             => light.CoShadowStrength(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
     public sealed class LightShadowStrengthSetSegment : LightSegment<float>
     {
@@ -140,6 +148,7 @@ namespace Common.Coroutines.Segments
             => light.CoShadowStrength(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
     public sealed class LightShadowStrengthBetweenSegment : LightBetweenSegment<float>
     {

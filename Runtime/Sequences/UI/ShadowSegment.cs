@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class ShadowSegment<T> : Segment
     {
         public Shadow shadow;
         public T target;
     }
 
-    [Serializable]
     public abstract class ShadowTimedSegment<T> : TimedSegment
     {
         public Shadow shadow;
         public T target;
     }
 
-    [Serializable]
     public abstract class ShadowBetweenSegment<T> : TimedSegment
     {
         public Shadow shadow;
@@ -28,6 +25,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region EffectColor
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ShadowEffectColor, SegmentGroup.UI)]
     public sealed class ShadowEffectColorSegment : ShadowTimedSegment<Color>
     {
@@ -38,6 +36,7 @@ namespace Common.Coroutines.Segments
             => shadow.CoEffectColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ShadowEffectColor, SegmentGroup.UI)]
     public sealed class ShadowEffectColorSetSegment : ShadowSegment<Color>
     {
@@ -48,6 +47,7 @@ namespace Common.Coroutines.Segments
             => shadow.CoEffectColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ShadowEffectColor, SegmentGroup.UI)]
     public sealed class ShadowEffectColorBetweenSegment : ShadowBetweenSegment<Color>
     {
@@ -63,6 +63,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region EffectFade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.ShadowEffectFade, SegmentGroup.UI)]
     public sealed class ShadowEffectFadeSegment : ShadowTimedSegment<float>
     {
@@ -73,6 +74,7 @@ namespace Common.Coroutines.Segments
             => shadow.CoEffectFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.ShadowEffectFade, SegmentGroup.UI)]
     public sealed class ShadowEffectFadeSetSegment : ShadowSegment<float>
     {
@@ -83,6 +85,7 @@ namespace Common.Coroutines.Segments
             => shadow.CoEffectFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.ShadowEffectFade, SegmentGroup.UI)]
     public sealed class ShadowEffectFadeBetweenSegment : ShadowBetweenSegment<float>
     {
@@ -98,6 +101,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region EffectGradient
+    [Serializable]
     [SegmentMenu("Effect Gradient", SegmentPath.Shadow, SegmentGroup.UI)]
     public sealed class ShadowEffectGradientSegment : ShadowTimedSegment<Gradient>
     {

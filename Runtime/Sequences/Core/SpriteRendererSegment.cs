@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class SpriteRendererSegment<T> : Segment
     {
         public SpriteRenderer renderer;
         public T target;
     }
 
-    [Serializable]
     public abstract class SpriteRendererTimedSegment<T> : TimedSegment
     {
         public SpriteRenderer renderer;
         public T target;
     }
 
-    [Serializable]
     public abstract class SpriteRendererBetweenSegment<T> : TimedSegment
     {
         public SpriteRenderer renderer;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.SpriteRendererColor, SegmentGroup.Core)]
     public sealed class SpriteRendererColorSegment : SpriteRendererTimedSegment<Color>
     {
@@ -37,6 +35,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.SpriteRendererColor, SegmentGroup.Core)]
     public sealed class SpriteRendererColorSetSegment : SpriteRendererSegment<Color>
     {
@@ -47,6 +46,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.SpriteRendererColor, SegmentGroup.Core)]
     public sealed class SpriteRendererColorBetweenSegment : SpriteRendererBetweenSegment<Color>
     {
@@ -62,6 +62,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Fade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.SpriteRendererFade, SegmentGroup.Core)]
     public sealed class SpriteRendererFadeSegment : SpriteRendererTimedSegment<float>
     {
@@ -72,6 +73,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.SpriteRendererFade, SegmentGroup.Core)]
     public sealed class SpriteRendererFadeSetSegment : SpriteRendererSegment<float>
     {
@@ -82,6 +84,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.SpriteRendererFade, SegmentGroup.Core)]
     public sealed class SpriteRendererFadeBetweenSegment : SpriteRendererBetweenSegment<float>
     {
@@ -97,6 +100,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Gradient
+    [Serializable]
     [SegmentMenu("Gradient", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
     public sealed class SpriteRendererGradientSegment : SpriteRendererTimedSegment<Gradient>
     {
@@ -106,6 +110,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Size
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeSetSegment : SpriteRendererSegment<Vector2>
     {
@@ -113,6 +118,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoSize(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeSegment : SpriteRendererTimedSegment<Vector2>
     {
@@ -120,6 +126,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoSize(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeXSegment : SpriteRendererTimedSegment<float>
     {
@@ -127,6 +134,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoSizeX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeYSegment : SpriteRendererTimedSegment<float>
     {
@@ -134,6 +142,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoSizeY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeBetweenSegment : SpriteRendererBetweenSegment<Vector2>
     {
@@ -141,6 +150,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoSize(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeXBetweenSegment : SpriteRendererBetweenSegment<float>
     {
@@ -148,6 +158,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoSizeX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
     public sealed class SpriteRendererSizeYBetweenSegment : SpriteRendererBetweenSegment<float>
     {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class MaterialSegmentBase<T> : Segment
     {
         public Material material;
@@ -17,13 +16,11 @@ namespace Common.Coroutines.Segments
         }
     }
 
-    [Serializable]
     public abstract class MaterialSegment<T> : MaterialSegmentBase<T>
     {
         public T target;
     }
 
-    [Serializable]
     public abstract class MaterialTimedSegment<T> : MaterialSegmentBase<T>
     {
         public T target;
@@ -31,7 +28,6 @@ namespace Common.Coroutines.Segments
         public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
     }
 
-    [Serializable]
     public abstract class MaterialBetweenSegment<T> : MaterialSegmentBase<T>
     {
         public T start;
@@ -41,6 +37,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialColor, SegmentGroup.Core)]
     public sealed class MaterialColorSegment : MaterialTimedSegment<Color>
     {
@@ -51,6 +48,7 @@ namespace Common.Coroutines.Segments
             => material.CoColor(_propertyId, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialColor, SegmentGroup.Core)]
     public sealed class MaterialColorSetSegment : MaterialSegment<Color>
     {
@@ -61,6 +59,7 @@ namespace Common.Coroutines.Segments
             => material.CoColor(_propertyId, target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.MaterialColor, SegmentGroup.Core)]
     public sealed class MaterialColorBetweenSegment : MaterialBetweenSegment<Color>
     {
@@ -76,6 +75,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Fade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialFade, SegmentGroup.Core)]
     public sealed class MaterialFadeSegment : MaterialTimedSegment<float>
     {
@@ -90,6 +90,7 @@ namespace Common.Coroutines.Segments
             => material.CoFade(_propertyId, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialFade, SegmentGroup.Core)]
     public sealed class MaterialFadeSetSegment : MaterialSegment<float>
     {
@@ -104,6 +105,7 @@ namespace Common.Coroutines.Segments
             => material.CoFade(_propertyId, target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.MaterialFade, SegmentGroup.Core)]
     public sealed class MaterialFadeBetweenSegment : MaterialBetweenSegment<float>
     {
@@ -121,6 +123,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Gradient
+    [Serializable]
     [SegmentMenu("Gradient", SegmentPath.Material, SegmentGroup.Core)]
     public sealed class MaterialGradientSegment : MaterialTimedSegment<Gradient>
     {
@@ -130,6 +133,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Float
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialFloat, SegmentGroup.Core)]
     public sealed class MaterialFloatSegment : MaterialTimedSegment<float>
     {
@@ -137,6 +141,7 @@ namespace Common.Coroutines.Segments
             => material.CoFloat(_propertyId, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialFloat, SegmentGroup.Core)]
     public sealed class MaterialFloatSetSegment : MaterialSegment<float>
     {
@@ -144,6 +149,7 @@ namespace Common.Coroutines.Segments
             => material.CoFloat(_propertyId, target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.MaterialFloat, SegmentGroup.Core)]
     public sealed class MaterialFloatBetweenSegment : MaterialBetweenSegment<float>
     {
@@ -153,6 +159,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Tiling
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialTiling, SegmentGroup.Core)]
     public sealed class MaterialTilingSegment : MaterialTimedSegment<Vector2>
     {
@@ -160,6 +167,7 @@ namespace Common.Coroutines.Segments
             => material.CoTiling(_propertyId, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialTiling, SegmentGroup.Core)]
     public sealed class MaterialTilingSetSegment : MaterialSegment<Vector2>
     {
@@ -167,6 +175,7 @@ namespace Common.Coroutines.Segments
             => material.CoTiling(_propertyId, target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.MaterialTiling, SegmentGroup.Core)]
     public sealed class MaterialTilingBetweenSegment : MaterialBetweenSegment<Vector2>
     {
@@ -176,6 +185,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Offset
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialOffset, SegmentGroup.Core)]
     public sealed class MaterialOffsetSegment : MaterialTimedSegment<Vector2>
     {
@@ -183,6 +193,7 @@ namespace Common.Coroutines.Segments
             => material.CoOffset(_propertyId, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialOffset, SegmentGroup.Core)]
     public sealed class MaterialOffsetSetSegment : MaterialSegment<Vector2>
     {
@@ -190,6 +201,7 @@ namespace Common.Coroutines.Segments
             => material.CoOffset(_propertyId, target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.MaterialOffset, SegmentGroup.Core)]
     public sealed class MaterialOffsetBetweenSegment : MaterialBetweenSegment<Vector2>
     {
@@ -199,6 +211,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Vector
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialVector, SegmentGroup.Core)]
     public sealed class MaterialVectorSegment : MaterialTimedSegment<Vector4>
     {
@@ -206,6 +219,7 @@ namespace Common.Coroutines.Segments
             => material.CoVector(_propertyId, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialVector, SegmentGroup.Core)]
     public sealed class MaterialVectorSetSegment : MaterialSegment<Vector4>
     {
@@ -213,6 +227,7 @@ namespace Common.Coroutines.Segments
             => material.CoVector(_propertyId, target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.MaterialVector, SegmentGroup.Core)]
     public sealed class MaterialVectorBetweenSegment : MaterialBetweenSegment<Vector4>
     {

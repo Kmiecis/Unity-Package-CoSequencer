@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class OutlineSegment<T> : TimedSegment
     {
         public Outline outline;
         public T target;
     }
 
-    [Serializable]
     public abstract class OutlineTimedSegment<T> : TimedSegment
     {
         public Outline outline;
         public T target;
     }
 
-    [Serializable]
     public abstract class OutlineBetweenSegment<T> : TimedSegment
     {
         public Outline outline;
@@ -28,6 +25,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Shadow
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
     public sealed class OutlineEffectColorSegment : OutlineTimedSegment<Color>
     {
@@ -38,6 +36,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
     public sealed class OutlineEffectColorSetSegment : OutlineSegment<Color>
     {
@@ -48,6 +47,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
     public sealed class OutlineEffectColorBetweenSegment : OutlineBetweenSegment<Color>
     {
@@ -61,6 +61,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectColor(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
     public sealed class OutlineEffectFadeSegment : OutlineTimedSegment<float>
     {
@@ -71,6 +72,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
     public sealed class OutlineEffectFadeSetSegment : OutlineSegment<float>
     {
@@ -81,6 +83,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
     public sealed class OutlineEffectFadeBetweenSegment : OutlineBetweenSegment<float>
     {
@@ -94,6 +97,7 @@ namespace Common.Coroutines.Segments
             => outline.CoEffectFade(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Effect Gradient", SegmentPath.Outline, SegmentGroup.UI)]
     public sealed class OutlineEffectGradientSegment : OutlineTimedSegment<Gradient>
     {

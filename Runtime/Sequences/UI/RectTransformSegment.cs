@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class RectTransformSegment<T> : Segment
     {
         public RectTransform transform;
         public T target;
     }
 
-    [Serializable]
     public abstract class RectTransformTimedSegment<T> : TimedSegment
     {
         public RectTransform transform;
         public T target;
     }
 
-    [Serializable]
     public abstract class RectTransformBetweenSegment<T> : TimedSegment
     {
         public RectTransform transform;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region AnchorMin
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinSetSegment : RectTransformSegment<Vector2>
     {
@@ -34,6 +32,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMin(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinSegment : RectTransformTimedSegment<Vector2>
     {
@@ -41,6 +40,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMin(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinXSegment : RectTransformTimedSegment<float>
     {
@@ -48,6 +48,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMinX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinYSegment : RectTransformTimedSegment<float>
     {
@@ -55,6 +56,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMinY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -62,6 +64,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMin(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -69,6 +72,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMinX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -76,6 +80,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMinY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -83,6 +88,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMinBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMinForSegment : RectTransformTimedSegment<Vector2>
     {
@@ -92,6 +98,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region AnchorMax
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxSetSegment : RectTransformSegment<Vector2>
     {
@@ -99,6 +106,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMax(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxSegment : RectTransformTimedSegment<Vector2>
     {
@@ -106,6 +114,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMax(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxXSegment : RectTransformTimedSegment<float>
     {
@@ -113,6 +122,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMaxX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxYSegment : RectTransformTimedSegment<float>
     {
@@ -120,6 +130,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMaxY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -127,6 +138,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMax(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -134,6 +146,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMaxX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -141,6 +154,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMaxY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -148,6 +162,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMaxBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMaxForSegment : RectTransformTimedSegment<Vector2>
     {
@@ -157,6 +172,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region AnchorMove
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveSetSegment : RectTransformSegment<Vector2>
     {
@@ -164,6 +180,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMove(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveSegment : RectTransformTimedSegment<Vector2>
     {
@@ -171,6 +188,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMove(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveXSegment : RectTransformTimedSegment<float>
     {
@@ -178,6 +196,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMoveX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveYSegment : RectTransformTimedSegment<float>
     {
@@ -185,6 +204,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMoveY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -192,6 +212,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMove(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -199,6 +220,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMoveX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -206,6 +228,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMoveY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -213,6 +236,7 @@ namespace Common.Coroutines.Segments
             => transform.CoAnchorMoveBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
     public sealed class RectTransformAnchorMoveForSegment : RectTransformTimedSegment<Vector2>
     {
@@ -222,6 +246,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region OffsetMin
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinSetSegment : RectTransformSegment<Vector2>
     {
@@ -229,6 +254,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMin(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinSegment : RectTransformTimedSegment<Vector2>
     {
@@ -236,6 +262,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMin(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinXSegment : RectTransformTimedSegment<float>
     {
@@ -243,6 +270,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMinX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinYSegment : RectTransformTimedSegment<float>
     {
@@ -250,6 +278,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMinY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -257,6 +286,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMin(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -264,6 +294,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMinX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -271,6 +302,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMinY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -278,6 +310,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMinBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMinForSegment : RectTransformTimedSegment<Vector2>
     {
@@ -287,6 +320,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region OffsetMax
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxSetSegment : RectTransformSegment<Vector2>
     {
@@ -294,6 +328,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMax(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxSegment : RectTransformTimedSegment<Vector2>
     {
@@ -301,6 +336,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMax(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxXSegment : RectTransformTimedSegment<float>
     {
@@ -308,6 +344,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMaxX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxYSegment : RectTransformTimedSegment<float>
     {
@@ -315,6 +352,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMaxY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -322,6 +360,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMax(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -329,6 +368,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMaxX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -336,6 +376,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMaxY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -343,6 +384,7 @@ namespace Common.Coroutines.Segments
             => transform.CoOffsetMaxBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
     public sealed class RectTransformOffsetMaxForSegment : RectTransformTimedSegment<Vector2>
     {
@@ -352,6 +394,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Pivot
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotSetSegment : RectTransformSegment<Vector2>
     {
@@ -359,6 +402,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivot(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotSegment : RectTransformTimedSegment<Vector2>
     {
@@ -366,6 +410,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivot(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotXSegment : RectTransformTimedSegment<float>
     {
@@ -373,6 +418,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivotX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotYSegment : RectTransformTimedSegment<float>
     {
@@ -380,6 +426,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivotY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -387,6 +434,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivot(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -394,6 +442,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivotX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -401,6 +450,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivotY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -408,6 +458,7 @@ namespace Common.Coroutines.Segments
             => transform.CoPivotBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
     public sealed class RectTransformPivotForSegment : RectTransformTimedSegment<Vector2>
     {
@@ -417,6 +468,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region SizeDelta
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaSetSegment : RectTransformSegment<Vector2>
     {
@@ -424,6 +476,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDelta(target);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaSegment : RectTransformTimedSegment<Vector2>
     {
@@ -431,6 +484,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDelta(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaXSegment : RectTransformTimedSegment<float>
     {
@@ -438,6 +492,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDeltaX(target, duration, easer.Evaluate);
     }
     
+    [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaYSegment : RectTransformTimedSegment<float>
     {
@@ -445,6 +500,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDeltaY(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaBetweenSegment : RectTransformBetweenSegment<Vector2>
     {
@@ -452,6 +508,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDelta(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaXBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -459,6 +516,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDeltaX(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaYBetweenSegment : RectTransformBetweenSegment<float>
     {
@@ -466,6 +524,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDeltaY(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaBySegment : RectTransformTimedSegment<Vector2>
     {
@@ -473,6 +532,7 @@ namespace Common.Coroutines.Segments
             => transform.CoSizeDeltaBy(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
     public sealed class RectTransformSizeDeltaForSegment : RectTransformTimedSegment<Vector2>
     {

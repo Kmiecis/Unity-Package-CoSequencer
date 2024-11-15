@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class GraphicSegment<T> : Segment
     {
         public Graphic graphic;
         public T target;
     }
 
-    [Serializable]
     public abstract class GraphicTimedSegment<T> : TimedSegment
     {
         public Graphic graphic;
         public T target;
     }
 
-    [Serializable]
     public abstract class GraphicBetweenSegment<T> : TimedSegment
     {
         public Graphic graphic;
@@ -28,6 +25,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.GraphicColor, SegmentGroup.UI)]
     public sealed class GraphicColorSegment : GraphicTimedSegment<Color>
     {
@@ -38,6 +36,7 @@ namespace Common.Coroutines.Segments
             => graphic.CoColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.GraphicColor, SegmentGroup.UI)]
     public sealed class GraphicColorSetSegment : GraphicSegment<Color>
     {
@@ -48,6 +47,7 @@ namespace Common.Coroutines.Segments
             => graphic.CoColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.GraphicColor, SegmentGroup.UI)]
     public sealed class GraphicColorBetweenSegment : GraphicBetweenSegment<Color>
     {
@@ -63,6 +63,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Fade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.GraphicFade, SegmentGroup.UI)]
     public sealed class GraphicFadeSegment : GraphicTimedSegment<float>
     {
@@ -73,6 +74,7 @@ namespace Common.Coroutines.Segments
             => graphic.CoFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.GraphicFade, SegmentGroup.UI)]
     public sealed class GraphicFadeSetSegment : GraphicSegment<float>
     {
@@ -83,6 +85,7 @@ namespace Common.Coroutines.Segments
             => graphic.CoFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.GraphicFade, SegmentGroup.UI)]
     public sealed class GraphicFadeBetweenSegment : GraphicBetweenSegment<float>
     {
@@ -98,6 +101,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Gradient
+    [Serializable]
     [SegmentMenu("Gradient", SegmentPath.Graphic, SegmentGroup.UI)]
     public sealed class GraphicGradientSegment : GraphicTimedSegment<Gradient>
     {

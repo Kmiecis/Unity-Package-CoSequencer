@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class TextSegment<T> : Segment
     {
         public Text text;
         public T target;
     }
 
-    [Serializable]
     public abstract class TextTimedSegment<T> : TimedSegment
     {
         public Text text;
         public T target;
     }
 
-    [Serializable]
     public abstract class TextBetweenSegment<T> : TimedSegment
     {
         public Text text;
@@ -28,6 +25,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region FontSize
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TextFontSize, SegmentGroup.UI)]
     public sealed class TextFontSizeSegment : TextTimedSegment<int>
     {
@@ -38,6 +36,7 @@ namespace Common.Coroutines.Segments
             => text.CoFontSize(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextFontSize, SegmentGroup.UI)]
     public sealed class TextFontSizeSetSegment : TextSegment<int>
     {
@@ -48,6 +47,7 @@ namespace Common.Coroutines.Segments
             => text.CoFontSize(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TextFontSize, SegmentGroup.UI)]
     public sealed class TextFontSizeBetweenSegment : TextBetweenSegment<int>
     {
@@ -60,6 +60,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Text
+    [Serializable]
     [SegmentMenu("Unwind", SegmentPath.TextText, SegmentGroup.UI)]
     public sealed class TextTextSegment : TextTimedSegment<string>
     {
@@ -67,6 +68,7 @@ namespace Common.Coroutines.Segments
             => text.CoText(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextText, SegmentGroup.UI)]
     public sealed class TextTextSetSegment : TextSegment<string>
     {
@@ -76,6 +78,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Graphic
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TextColor, SegmentGroup.UI)]
     public sealed class TextColorSegment : TextTimedSegment<Color>
     {
@@ -86,6 +89,7 @@ namespace Common.Coroutines.Segments
             => text.CoColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextColor, SegmentGroup.UI)]
     public sealed class TextColorSetSegment : TextTimedSegment<Color>
     {
@@ -96,6 +100,7 @@ namespace Common.Coroutines.Segments
             => text.CoColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TextColor, SegmentGroup.UI)]
     public sealed class TextColorBetweenSegment : TextBetweenSegment<Color>
     {
@@ -109,6 +114,7 @@ namespace Common.Coroutines.Segments
             => text.CoColor(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TextFade, SegmentGroup.UI)]
     public sealed class TextFadeSegment : TextTimedSegment<float>
     {
@@ -119,6 +125,7 @@ namespace Common.Coroutines.Segments
             => text.CoFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextFade, SegmentGroup.UI)]
     public sealed class TextFadeSetSegment : TextTimedSegment<float>
     {
@@ -129,6 +136,7 @@ namespace Common.Coroutines.Segments
             => text.CoFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TextFade, SegmentGroup.UI)]
     public sealed class TextFadeBetweenSegment : TextBetweenSegment<float>
     {
@@ -142,6 +150,7 @@ namespace Common.Coroutines.Segments
             => text.CoFade(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Gradient", SegmentPath.Text, SegmentGroup.UI)]
     public sealed class TextGradientSegment : TextTimedSegment<Gradient>
     {

@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class AudioSourceSegment<T> : Segment
     {
         public AudioSource audio;
         public T target;
     }
 
-    [Serializable]
     public abstract class AudioSourceTimedSegment<T> : TimedSegment
     {
         public AudioSource audio;
         public T target;
     }
 
-    [Serializable]
     public abstract class AudioSourceBetweenSegment<T> : TimedSegment
     {
         public AudioSource audio;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Pitch
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
     public sealed class AudioSourcePitchSegment : AudioSourceTimedSegment<float>
     {
@@ -37,6 +35,7 @@ namespace Common.Coroutines.Segments
             => audio.CoPitch(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
     public sealed class AudioSourcePitchSetSegment : AudioSourceSegment<float>
     {
@@ -47,6 +46,7 @@ namespace Common.Coroutines.Segments
             => audio.CoPitch(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
     public sealed class AudioSourcePitchBetweenSegment : AudioSourceBetweenSegment<float>
     {
@@ -62,6 +62,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Volume
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
     public sealed class AudioSourceVolumeSegment : AudioSourceTimedSegment<float>
     {
@@ -72,6 +73,7 @@ namespace Common.Coroutines.Segments
             => audio.CoVolume(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
     public sealed class AudioSourceVolumeSetSegment : AudioSourceSegment<float>
     {
@@ -82,6 +84,7 @@ namespace Common.Coroutines.Segments
             => audio.CoVolume(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
     public sealed class AudioSourceVolumeBetweenSegment : AudioSourceBetweenSegment<float>
     {

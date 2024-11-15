@@ -3,12 +3,12 @@ using System.Collections;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class TimeSegment : TimedSegment
     {
         public float target;
     }
 
+    [Serializable]
     [SegmentMenu("Scale", SegmentPath.Time, SegmentGroup.Utility)]
     public class TimeScaleSegment : TimeSegment
     {

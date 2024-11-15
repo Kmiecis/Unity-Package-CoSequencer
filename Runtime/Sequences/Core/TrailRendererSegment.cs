@@ -4,21 +4,18 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    [Serializable]
     public abstract class TrailRendererSegment<T> : Segment
     {
         public TrailRenderer renderer;
         public T target;
     }
 
-    [Serializable]
     public abstract class TrailRendererTimedSegment<T> : TimedSegment
     {
         public TrailRenderer renderer;
         public T target;
     }
 
-    [Serializable]
     public abstract class TrailRendererBetweenSegment<T> : TimedSegment
     {
         public TrailRenderer renderer;
@@ -27,6 +24,7 @@ namespace Common.Coroutines.Segments
     }
 
     #region Color
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererStartColor, SegmentGroup.Core)]
     public sealed class TrailRendererStartColorSegment : TrailRendererTimedSegment<Color>
     {
@@ -37,6 +35,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererStartColor, SegmentGroup.Core)]
     public sealed class TrailRendererStartColorSetSegment : TrailRendererSegment<Color>
     {
@@ -47,6 +46,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererStartColor, SegmentGroup.Core)]
     public sealed class TrailRendererStartColorBetweenSegment : TrailRendererBetweenSegment<Color>
     {
@@ -60,6 +60,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartColor(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererEndColor, SegmentGroup.Core)]
     public sealed class TrailRendererEndColorSegment : TrailRendererTimedSegment<Color>
     {
@@ -70,6 +71,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndColor(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererEndColor, SegmentGroup.Core)]
     public sealed class TrailRendererEndColorSetSegment : TrailRendererSegment<Color>
     {
@@ -80,6 +82,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndColor(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererEndColor, SegmentGroup.Core)]
     public sealed class TrailRendererEndColorBetweenSegment : TrailRendererBetweenSegment<Color>
     {
@@ -95,6 +98,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Fade
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererStartFade, SegmentGroup.Core)]
     public sealed class TrailRendererStartFadeSegment : TrailRendererTimedSegment<float>
     {
@@ -105,6 +109,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererStartFade, SegmentGroup.Core)]
     public sealed class TrailRendererStartFadeSetSegment : TrailRendererSegment<float>
     {
@@ -115,6 +120,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererStartFade, SegmentGroup.Core)]
     public sealed class TrailRendererStartFadeBetweenSegment : TrailRendererBetweenSegment<float>
     {
@@ -128,6 +134,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartFade(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererEndFade, SegmentGroup.Core)]
     public sealed class TrailRendererEndFadeSegment : TrailRendererTimedSegment<float>
     {
@@ -138,6 +145,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndFade(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererEndFade, SegmentGroup.Core)]
     public sealed class TrailRendererEndFadeSetSegment : TrailRendererSegment<float>
     {
@@ -148,6 +156,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndFade(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererEndFade, SegmentGroup.Core)]
     public sealed class TrailRendererEndFadeBetweenSegment : TrailRendererBetweenSegment<float>
     {
@@ -163,6 +172,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Time
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererTime, SegmentGroup.Core)]
     public sealed class TrailRendererTimeSegment : TrailRendererTimedSegment<float>
     {
@@ -170,6 +180,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoTime(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererTime, SegmentGroup.Core)]
     public sealed class TrailRendererTimeSetSegment : TrailRendererSegment<float>
     {
@@ -177,6 +188,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoTime(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererTime, SegmentGroup.Core)]
     public sealed class TrailRendererTimeBetweenSegment : TrailRendererBetweenSegment<float>
     {
@@ -186,6 +198,7 @@ namespace Common.Coroutines.Segments
     #endregion
 
     #region Width
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererStartWidth, SegmentGroup.Core)]
     public sealed class TrailRendererStartWidthSegment : TrailRendererTimedSegment<float>
     {
@@ -193,6 +206,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererStartWidth, SegmentGroup.Core)]
     public sealed class TrailRendererStartWidthSetSegment : TrailRendererSegment<float>
     {
@@ -200,6 +214,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererStartWidth, SegmentGroup.Core)]
     public sealed class TrailRendererStartWidthBetweenSegment : TrailRendererBetweenSegment<float>
     {
@@ -207,6 +222,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoStartWidth(start, target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Towards", SegmentPath.TrailRendererEndWidth, SegmentGroup.Core)]
     public sealed class TrailRendererEndWidthSegment : TrailRendererTimedSegment<float>
     {
@@ -214,6 +230,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndWidth(target, duration, easer.Evaluate);
     }
 
+    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererEndWidth, SegmentGroup.Core)]
     public sealed class TrailRendererEndWidthSetSegment : TrailRendererSegment<float>
     {
@@ -221,6 +238,7 @@ namespace Common.Coroutines.Segments
             => renderer.CoEndWidth(target);
     }
 
+    [Serializable]
     [SegmentMenu("Between", SegmentPath.TrailRendererEndWidth, SegmentGroup.Core)]
     public sealed class TrailRendererEndWidthBetweenSegment : TrailRendererBetweenSegment<float>
     {
