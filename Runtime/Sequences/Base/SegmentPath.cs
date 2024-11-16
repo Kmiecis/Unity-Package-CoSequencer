@@ -8,6 +8,17 @@ namespace Common.Coroutines
 
         public const string Debug = nameof(UnityEngine.Debug);
 
+        public const string Animator = nameof(UnityEngine.Animator);
+        public const string AnimatorFeetPivot = Animator + "/FeetPivot";
+        public const string AnimatorPlaybackTime = Animator + "/PlaybackTime";
+        public const string AnimatorRootMove = Animator + "/RootMove";
+        public const string AnimatorRootRotate = Animator + "/RootRotat";
+        public const string AnimatorSpeed = Animator + "/Speed";
+        public const string AnimatorFloat = Animator + "/Float";
+        public const string AnimatorLayerWeight = Animator + "/LayerWeight";
+        public const string AnimatorLookAtPosition = Animator + "/LookAtPosition";
+        public const string AnimatorLookAtWeight = Animator + "/LookAtWeight";
+
         public const string AudioSource = nameof(UnityEngine.AudioSource);
         public const string AudioSourcePitch = AudioSource + "/Pitch";
         public const string AudioSourceVolume = AudioSource + "/Volume";

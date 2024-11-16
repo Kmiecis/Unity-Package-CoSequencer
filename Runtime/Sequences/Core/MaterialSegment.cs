@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class MaterialSegmentBase<T> : Segment
+    public abstract class MaterialSegmentBase : Segment
     {
         public Material material;
         [SerializeField] protected string _property;
@@ -16,19 +16,19 @@ namespace Common.Coroutines.Segments
         }
     }
 
-    public abstract class MaterialSegment<T> : MaterialSegmentBase<T>
+    public abstract class MaterialSegment<T> : MaterialSegmentBase
     {
         public T target;
     }
 
-    public abstract class MaterialTimedSegment<T> : MaterialSegmentBase<T>
+    public abstract class MaterialTimedSegment<T> : MaterialSegmentBase
     {
         public T target;
         public float duration = 1.0f;
         public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
     }
 
-    public abstract class MaterialBetweenSegment<T> : MaterialSegmentBase<T>
+    public abstract class MaterialBetweenSegment<T> : MaterialSegmentBase
     {
         public T start;
         public T target;
