@@ -9,7 +9,7 @@ namespace Common.Coroutines
     public abstract class Segment : ISegment
     {
 #if UNITY_EDITOR
-        [SerializeField] [HideInInspector] private string _name;
+        [SerializeField, HideInInspector] private string _name;
 #endif
 
         public Segment()

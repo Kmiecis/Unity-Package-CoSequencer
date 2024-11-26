@@ -55,6 +55,16 @@ namespace Common.Coroutines
             UCoroutine.SafeStop(ref _coroutine, this);
         }
 
+        private void OnEnable()
+        {
+            Play();
+        }
+
+        private void OnDisable()
+        {
+            Stop();
+        }
+
         public override void OnValidate()
         {
             foreach (var segment in GetSegments())
@@ -64,6 +74,11 @@ namespace Common.Coroutines
                     segment.OnValidate();
                 }
             }
+        }
+
+        private void Reset()
+        {
+            enabled = false;
         }
     }
 
