@@ -676,17 +676,33 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield time
+        /// <summary> Yields dynamically invoked delta time for a duration </summary>
+        public static IEnumerator<float> DeltaTime(float duration, Func<float> deltaTimer)
+        {
+            var dt = deltaTimer();
+
+            while (duration > dt)
+            {
+                yield return dt;
+
+                duration -= dt;
+                dt = deltaTimer();
+            }
+
+            yield return duration;
+        }
+
         /// <summary> Yields delta time for a duration </summary>
         public static IEnumerator<float> DeltaTime(float duration)
         {
-            var deltaTime = UnityEngine.Time.deltaTime;
+            var dt = UnityEngine.Time.deltaTime;
 
-            while (duration > deltaTime)
+            while (duration > dt)
             {
-                yield return deltaTime;
+                yield return dt;
 
-                duration -= deltaTime;
-                deltaTime = UnityEngine.Time.deltaTime;
+                duration -= dt;
+                dt = UnityEngine.Time.deltaTime;
             }
 
             yield return duration;
@@ -695,14 +711,29 @@ namespace Common.Coroutines
         /// <summary> Yields unscaled delta time for a duration </summary>
         public static IEnumerator<float> DeltaRealtime(float duration)
         {
-            var deltaTime = UnityEngine.Time.unscaledDeltaTime;
+            var dt = UnityEngine.Time.unscaledDeltaTime;
 
-            while (duration > deltaTime)
+            while (duration > dt)
             {
-                yield return deltaTime;
+                yield return dt;
 
-                duration -= deltaTime;
-                deltaTime = UnityEngine.Time.unscaledDeltaTime;
+                duration -= dt;
+                dt = UnityEngine.Time.unscaledDeltaTime;
+            }
+
+            yield return duration;
+        }
+
+        /// <summary> Yields dynamically invoked time for a duration </summary>
+        public static IEnumerator<float> Time(float duration, Func<float> deltaTimer)
+        {
+            float t = deltaTimer();
+
+            while (t < duration)
+            {
+                yield return t;
+
+                t += deltaTimer();
             }
 
             yield return duration;
@@ -738,6 +769,22 @@ namespace Common.Coroutines
             yield return duration;
         }
 
+        /// <summary> Yields normalized dynamically invoked time for a duration </summary>
+        public static IEnumerator<float> TimeNormalized(float duration, Func<float> deltaTimer)
+        {
+            float n = 1.0f / duration;
+            float t = n * deltaTimer();
+
+            while (t < 1.0f)
+            {
+                yield return t;
+
+                t += n * deltaTimer();
+            }
+
+            yield return 1.0f;
+        }
+
         /// <summary> Yields normalized time for a duration </summary>
         public static IEnumerator<float> TimeNormalized(float duration)
         {
@@ -770,6 +817,13 @@ namespace Common.Coroutines
             yield return 1.0f;
         }
 
+        /// <summary> Yields dynamically invoked delta time, eased by 'easer' method </summary>
+        public static IEnumerator<float> DeltaTime(float duration, Func<float> deltaTimer, Func<float, float> easer = null)
+        {
+            return DeltaTime(duration, deltaTimer)
+                .Eased(easer);
+        }
+
         /// <summary> Yields delta time, eased by 'easer' method </summary>
         public static IEnumerator<float> DeltaTime(float duration, Func<float, float> easer = null)
         {
@@ -781,6 +835,13 @@ namespace Common.Coroutines
         public static IEnumerator<float> DeltaRealtime(float duration, Func<float, float> easer = null)
         {
             return DeltaRealtime(duration)
+                .Eased(easer);
+        }
+
+        /// <summary> Yields normalized dynamically invoked time, eased by 'easer' method </summary>
+        public static IEnumerator<float> Time(float duration, Func<float> deltaTimer, Func<float, float> easer = null)
+        {
+            return TimeNormalized(duration, deltaTimer)
                 .Eased(easer);
         }
 
