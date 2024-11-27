@@ -26,17 +26,6 @@ namespace Common.Coroutines.Segments
 
     #region Position
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ScrollRectPosition, SegmentGroup.UI)]
-    public sealed class ScrollRectPositionSegment : ScrollRectTimedSegment<Vector2>
-    {
-        public override void OnValidate()
-            => target = new Vector2(Mathf.Clamp(target.x, 0.0f, 1.0f), Mathf.Clamp(target.y, 0.0f, 1.0f));
-        
-        public override IEnumerator Build()
-            => scroll.CoPosition(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectPosition, SegmentGroup.UI)]
     public sealed class ScrollRectPositionSetSegment : ScrollRectSegment<Vector2>
     {
@@ -45,6 +34,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => scroll.CoPosition(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ScrollRectPosition, SegmentGroup.UI)]
+    public sealed class ScrollRectPositionSegment : ScrollRectTimedSegment<Vector2>
+    {
+        public override void OnValidate()
+            => target = new Vector2(Mathf.Clamp(target.x, 0.0f, 1.0f), Mathf.Clamp(target.y, 0.0f, 1.0f));
+        
+        public override IEnumerator Build()
+            => scroll.CoPosition(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -64,17 +64,6 @@ namespace Common.Coroutines.Segments
 
     #region HorizontalPosition
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ScrollRectHorizontalPosition, SegmentGroup.UI)]
-    public sealed class ScrollRectHorizontalPositionSegment : ScrollRectTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-        
-        public override IEnumerator Build()
-            => scroll.CoHorizontalPosition(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectHorizontalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalPositionSetSegment : ScrollRectSegment<float>
     {
@@ -83,6 +72,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => scroll.CoHorizontalPosition(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ScrollRectHorizontalPosition, SegmentGroup.UI)]
+    public sealed class ScrollRectHorizontalPositionSegment : ScrollRectTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        
+        public override IEnumerator Build()
+            => scroll.CoHorizontalPosition(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -102,17 +102,6 @@ namespace Common.Coroutines.Segments
 
     #region VerticalPosition
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ScrollRectVerticalPosition, SegmentGroup.UI)]
-    public sealed class ScrollRectVerticalPositionSegment : ScrollRectTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-        
-        public override IEnumerator Build()
-            => scroll.CoVerticalPosition(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectVerticalPosition, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalPositionSetSegment : ScrollRectSegment<float>
     {
@@ -121,6 +110,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => scroll.CoVerticalPosition(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ScrollRectVerticalPosition, SegmentGroup.UI)]
+    public sealed class ScrollRectVerticalPositionSegment : ScrollRectTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        
+        public override IEnumerator Build()
+            => scroll.CoVerticalPosition(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -140,19 +140,19 @@ namespace Common.Coroutines.Segments
 
     #region Velocity
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ScrollRectVelocity, SegmentGroup.UI)]
-    public sealed class ScrollRectVelocitySegment : ScrollRectTimedSegment<Vector2>
-    {
-        public override IEnumerator Build()
-            => scroll.CoVelocity(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVelocitySetSegment : ScrollRectSegment<Vector2>
     {
         public override IEnumerator Build()
             => scroll.CoVelocity(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ScrollRectVelocity, SegmentGroup.UI)]
+    public sealed class ScrollRectVelocitySegment : ScrollRectTimedSegment<Vector2>
+    {
+        public override IEnumerator Build()
+            => scroll.CoVelocity(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -166,19 +166,19 @@ namespace Common.Coroutines.Segments
 
     #region HorizontalVelocity
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ScrollRectHorizontalVelocity, SegmentGroup.UI)]
-    public sealed class ScrollRectHorizontalVelocitySegment : ScrollRectTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => scroll.CoHorizontalVelocity(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectHorizontalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectHorizontalVelocitySetSegment : ScrollRectSegment<float>
     {
         public override IEnumerator Build()
             => scroll.CoHorizontalVelocity(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ScrollRectHorizontalVelocity, SegmentGroup.UI)]
+    public sealed class ScrollRectHorizontalVelocitySegment : ScrollRectTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => scroll.CoHorizontalVelocity(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -192,19 +192,19 @@ namespace Common.Coroutines.Segments
 
     #region VerticalVelocity
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ScrollRectVerticalVelocity, SegmentGroup.UI)]
-    public sealed class ScrollRectVerticalVelocitySegment : ScrollRectTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => scroll.CoVerticalVelocity(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ScrollRectVerticalVelocity, SegmentGroup.UI)]
     public sealed class ScrollRectVerticalVelocitySetSegment : ScrollRectSegment<float>
     {
         public override IEnumerator Build()
             => scroll.CoVerticalVelocity(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ScrollRectVerticalVelocity, SegmentGroup.UI)]
+    public sealed class ScrollRectVerticalVelocitySegment : ScrollRectTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => scroll.CoVerticalVelocity(target, duration, easer.Evaluate);
     }
 
     [Serializable]

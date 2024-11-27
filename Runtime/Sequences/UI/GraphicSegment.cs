@@ -26,17 +26,6 @@ namespace Common.Coroutines.Segments
 
     #region Color
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.GraphicColor, SegmentGroup.UI)]
-    public sealed class GraphicColorSegment : GraphicTimedSegment<Color>
-    {
-        public GraphicColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => graphic.CoColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.GraphicColor, SegmentGroup.UI)]
     public sealed class GraphicColorSetSegment : GraphicSegment<Color>
     {
@@ -45,6 +34,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => graphic.CoColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.GraphicColor, SegmentGroup.UI)]
+    public sealed class GraphicColorSegment : GraphicTimedSegment<Color>
+    {
+        public GraphicColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => graphic.CoColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -64,17 +64,6 @@ namespace Common.Coroutines.Segments
 
     #region Fade
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.GraphicFade, SegmentGroup.UI)]
-    public sealed class GraphicFadeSegment : GraphicTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-        
-        public override IEnumerator Build()
-            => graphic.CoFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.GraphicFade, SegmentGroup.UI)]
     public sealed class GraphicFadeSetSegment : GraphicSegment<float>
     {
@@ -83,6 +72,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => graphic.CoFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.GraphicFade, SegmentGroup.UI)]
+    public sealed class GraphicFadeSegment : GraphicTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        
+        public override IEnumerator Build()
+            => graphic.CoFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]

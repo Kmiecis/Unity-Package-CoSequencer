@@ -26,17 +26,6 @@ namespace Common.Coroutines.Segments
 
     #region FillAmount
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ImageFillAmount, SegmentGroup.UI)]
-    public sealed class ImageFillAmountSegment : ImageTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-        
-        public override IEnumerator Build()
-            => image.CoFillAmount(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ImageFillAmount, SegmentGroup.UI)]
     public sealed class ImageFillAmountSetSegment : ImageSegment<float>
     {
@@ -45,6 +34,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => image.CoFillAmount(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ImageFillAmount, SegmentGroup.UI)]
+    public sealed class ImageFillAmountSegment : ImageTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        
+        public override IEnumerator Build()
+            => image.CoFillAmount(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -64,17 +64,6 @@ namespace Common.Coroutines.Segments
 
     #region Graphic
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ImageColor, SegmentGroup.UI)]
-    public sealed class ImageColorSegment : ImageTimedSegment<Color>
-    {
-        public ImageColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => image.CoColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ImageColor, SegmentGroup.UI)]
     public sealed class ImageColorSetSegment : ImageTimedSegment<Color>
     {
@@ -83,6 +72,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => image.CoColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ImageColor, SegmentGroup.UI)]
+    public sealed class ImageColorSegment : ImageTimedSegment<Color>
+    {
+        public ImageColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => image.CoColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -100,17 +100,6 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ImageFade, SegmentGroup.UI)]
-    public sealed class ImageFadeSegment : ImageTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => image.CoFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ImageFade, SegmentGroup.UI)]
     public sealed class ImageFadeSetSegment : ImageTimedSegment<float>
     {
@@ -119,6 +108,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => image.CoFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ImageFade, SegmentGroup.UI)]
+    public sealed class ImageFadeSegment : ImageTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => image.CoFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]

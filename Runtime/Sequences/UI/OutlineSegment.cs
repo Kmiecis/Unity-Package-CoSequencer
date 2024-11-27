@@ -26,17 +26,6 @@ namespace Common.Coroutines.Segments
 
     #region Shadow
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
-    public sealed class OutlineEffectColorSegment : OutlineTimedSegment<Color>
-    {
-        public OutlineEffectColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => outline.CoEffectColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
     public sealed class OutlineEffectColorSetSegment : OutlineSegment<Color>
     {
@@ -45,6 +34,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => outline.CoEffectColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
+    public sealed class OutlineEffectColorSegment : OutlineTimedSegment<Color>
+    {
+        public OutlineEffectColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => outline.CoEffectColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -62,17 +62,6 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
-    public sealed class OutlineEffectFadeSegment : OutlineTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => outline.CoEffectFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
     public sealed class OutlineEffectFadeSetSegment : OutlineSegment<float>
     {
@@ -81,6 +70,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => outline.CoEffectFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
+    public sealed class OutlineEffectFadeSegment : OutlineTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => outline.CoEffectFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]

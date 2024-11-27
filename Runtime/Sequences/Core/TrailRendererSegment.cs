@@ -25,17 +25,6 @@ namespace Common.Coroutines.Segments
 
     #region Color
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererStartColor, SegmentGroup.Core)]
-    public sealed class TrailRendererStartColorSegment : TrailRendererTimedSegment<Color>
-    {
-        public TrailRendererStartColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => renderer.CoStartColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererStartColor, SegmentGroup.Core)]
     public sealed class TrailRendererStartColorSetSegment : TrailRendererSegment<Color>
     {
@@ -44,6 +33,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => renderer.CoStartColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererStartColor, SegmentGroup.Core)]
+    public sealed class TrailRendererStartColorSegment : TrailRendererTimedSegment<Color>
+    {
+        public TrailRendererStartColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => renderer.CoStartColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -61,17 +61,6 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererEndColor, SegmentGroup.Core)]
-    public sealed class TrailRendererEndColorSegment : TrailRendererTimedSegment<Color>
-    {
-        public TrailRendererEndColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => renderer.CoEndColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererEndColor, SegmentGroup.Core)]
     public sealed class TrailRendererEndColorSetSegment : TrailRendererSegment<Color>
     {
@@ -80,6 +69,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => renderer.CoEndColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererEndColor, SegmentGroup.Core)]
+    public sealed class TrailRendererEndColorSegment : TrailRendererTimedSegment<Color>
+    {
+        public TrailRendererEndColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => renderer.CoEndColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -99,17 +99,6 @@ namespace Common.Coroutines.Segments
 
     #region Fade
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererStartFade, SegmentGroup.Core)]
-    public sealed class TrailRendererStartFadeSegment : TrailRendererTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => renderer.CoStartFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererStartFade, SegmentGroup.Core)]
     public sealed class TrailRendererStartFadeSetSegment : TrailRendererSegment<float>
     {
@@ -118,6 +107,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => renderer.CoStartFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererStartFade, SegmentGroup.Core)]
+    public sealed class TrailRendererStartFadeSegment : TrailRendererTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => renderer.CoStartFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -135,17 +135,6 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererEndFade, SegmentGroup.Core)]
-    public sealed class TrailRendererEndFadeSegment : TrailRendererTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => renderer.CoEndFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererEndFade, SegmentGroup.Core)]
     public sealed class TrailRendererEndFadeSetSegment : TrailRendererSegment<float>
     {
@@ -154,6 +143,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => renderer.CoEndFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererEndFade, SegmentGroup.Core)]
+    public sealed class TrailRendererEndFadeSegment : TrailRendererTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => renderer.CoEndFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -173,19 +173,19 @@ namespace Common.Coroutines.Segments
 
     #region Time
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererTime, SegmentGroup.Core)]
-    public sealed class TrailRendererTimeSegment : TrailRendererTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => renderer.CoTime(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererTime, SegmentGroup.Core)]
     public sealed class TrailRendererTimeSetSegment : TrailRendererSegment<float>
     {
         public override IEnumerator Build()
             => renderer.CoTime(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererTime, SegmentGroup.Core)]
+    public sealed class TrailRendererTimeSegment : TrailRendererTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => renderer.CoTime(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -199,19 +199,19 @@ namespace Common.Coroutines.Segments
 
     #region Width
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererStartWidth, SegmentGroup.Core)]
-    public sealed class TrailRendererStartWidthSegment : TrailRendererTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => renderer.CoStartWidth(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererStartWidth, SegmentGroup.Core)]
     public sealed class TrailRendererStartWidthSetSegment : TrailRendererSegment<float>
     {
         public override IEnumerator Build()
             => renderer.CoStartWidth(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererStartWidth, SegmentGroup.Core)]
+    public sealed class TrailRendererStartWidthSegment : TrailRendererTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => renderer.CoStartWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -223,19 +223,19 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TrailRendererEndWidth, SegmentGroup.Core)]
-    public sealed class TrailRendererEndWidthSegment : TrailRendererTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => renderer.CoEndWidth(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TrailRendererEndWidth, SegmentGroup.Core)]
     public sealed class TrailRendererEndWidthSetSegment : TrailRendererSegment<float>
     {
         public override IEnumerator Build()
             => renderer.CoEndWidth(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TrailRendererEndWidth, SegmentGroup.Core)]
+    public sealed class TrailRendererEndWidthSegment : TrailRendererTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => renderer.CoEndWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]

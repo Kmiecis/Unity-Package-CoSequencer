@@ -26,17 +26,6 @@ namespace Common.Coroutines.Segments
 
     #region EffectColor
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ShadowEffectColor, SegmentGroup.UI)]
-    public sealed class ShadowEffectColorSegment : ShadowTimedSegment<Color>
-    {
-        public ShadowEffectColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => shadow.CoEffectColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ShadowEffectColor, SegmentGroup.UI)]
     public sealed class ShadowEffectColorSetSegment : ShadowSegment<Color>
     {
@@ -45,6 +34,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => shadow.CoEffectColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ShadowEffectColor, SegmentGroup.UI)]
+    public sealed class ShadowEffectColorSegment : ShadowTimedSegment<Color>
+    {
+        public ShadowEffectColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => shadow.CoEffectColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -64,17 +64,6 @@ namespace Common.Coroutines.Segments
 
     #region EffectFade
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.ShadowEffectFade, SegmentGroup.UI)]
-    public sealed class ShadowEffectFadeSegment : ShadowTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => shadow.CoEffectFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.ShadowEffectFade, SegmentGroup.UI)]
     public sealed class ShadowEffectFadeSetSegment : ShadowSegment<float>
     {
@@ -83,6 +72,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => shadow.CoEffectFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.ShadowEffectFade, SegmentGroup.UI)]
+    public sealed class ShadowEffectFadeSegment : ShadowTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => shadow.CoEffectFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]

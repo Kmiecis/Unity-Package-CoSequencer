@@ -25,17 +25,6 @@ namespace Common.Coroutines.Segments
 
     #region Fade
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
-    public sealed class CanvasGroupFadeSegment : CanvasGroupTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-        
-        public override IEnumerator Build()
-            => canvas.CoFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
     public sealed class CanvasGroupFadeSetSegment : CanvasGroupSegment<float>
     {
@@ -44,6 +33,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => canvas.CoFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
+    public sealed class CanvasGroupFadeSegment : CanvasGroupTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        
+        public override IEnumerator Build()
+            => canvas.CoFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]

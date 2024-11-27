@@ -25,19 +25,19 @@ namespace Common.Coroutines.Segments
 
     #region Aspect
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraAspect, SegmentGroup.Core)]
-    public sealed class CameraAspectSegment : CameraTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => camera.CoAspect(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraAspect, SegmentGroup.Core)]
     public sealed class CameraAspectSetSegment : CameraSegment<float>
     {
         public override IEnumerator Build()
             => camera.CoAspect(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraAspect, SegmentGroup.Core)]
+    public sealed class CameraAspectSegment : CameraTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => camera.CoAspect(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -51,17 +51,6 @@ namespace Common.Coroutines.Segments
 
     #region Color
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraBackgroundColor, SegmentGroup.Core)]
-    public sealed class CameraBackgroundColorSegment : CameraTimedSegment<Color>
-    {
-        public CameraBackgroundColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => camera.CoBackgroundColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraBackgroundColor, SegmentGroup.Core)]
     public sealed class CameraBackgroundColorSetSegment : CameraSegment<Color>
     {
@@ -70,6 +59,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => camera.CoBackgroundColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraBackgroundColor, SegmentGroup.Core)]
+    public sealed class CameraBackgroundColorSegment : CameraTimedSegment<Color>
+    {
+        public CameraBackgroundColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => camera.CoBackgroundColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -89,20 +89,6 @@ namespace Common.Coroutines.Segments
 
     #region ClipPlane
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraNearClipPlane, SegmentGroup.Core)]
-    public sealed class CameraNearClipPlaneSegment : CameraTimedSegment<float>
-    {
-        public CameraNearClipPlaneSegment()
-            => target = 0.3f;
-
-        public override void OnValidate()
-            => target = Mathf.Max(target, 1e-02f);
-        
-        public override IEnumerator Build()
-            => camera.CoNearClipPlane(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraNearClipPlane, SegmentGroup.Core)]
     public sealed class CameraNearClipPlaneSetSegment : CameraSegment<float>
     {
@@ -114,6 +100,20 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => camera.CoNearClipPlane(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraNearClipPlane, SegmentGroup.Core)]
+    public sealed class CameraNearClipPlaneSegment : CameraTimedSegment<float>
+    {
+        public CameraNearClipPlaneSegment()
+            => target = 0.3f;
+
+        public override void OnValidate()
+            => target = Mathf.Max(target, 1e-02f);
+        
+        public override IEnumerator Build()
+            => camera.CoNearClipPlane(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -133,19 +133,19 @@ namespace Common.Coroutines.Segments
 
     #region FarClipPlane
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraFarClipPlane, SegmentGroup.Core)]
-    public sealed class CameraFarClipPlaneSegment : CameraTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => camera.CoFarClipPlane(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraFarClipPlane, SegmentGroup.Core)]
     public sealed class CameraFarClipPlaneSetSegment : CameraSegment<float>
     {
         public override IEnumerator Build()
             => camera.CoFarClipPlane(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraFarClipPlane, SegmentGroup.Core)]
+    public sealed class CameraFarClipPlaneSegment : CameraTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => camera.CoFarClipPlane(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -159,17 +159,6 @@ namespace Common.Coroutines.Segments
 
     #region FieldOfView
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraFieldOfView, SegmentGroup.Core)]
-    public sealed class CameraFieldOfViewSegment : CameraTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 1e-05f, 180.0f - 1e-05f);
-
-        public override IEnumerator Build()
-            => camera.CoFieldOfView(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraFieldOfView, SegmentGroup.Core)]
     public sealed class CameraFieldOfViewSetSegment : CameraSegment<float>
     {
@@ -178,6 +167,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => camera.CoFieldOfView(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraFieldOfView, SegmentGroup.Core)]
+    public sealed class CameraFieldOfViewSegment : CameraTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 1e-05f, 180.0f - 1e-05f);
+
+        public override IEnumerator Build()
+            => camera.CoFieldOfView(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -194,19 +194,19 @@ namespace Common.Coroutines.Segments
 
     #region OrthographicSize
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraOrthographicSize, SegmentGroup.Core)]
-    public sealed class CameraOrthographicSizeSegment : CameraTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => camera.CoOrthographicSize(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraOrthographicSize, SegmentGroup.Core)]
     public sealed class CameraOrthographicSizeSetSegment : CameraSegment<float>
     {
         public override IEnumerator Build()
             => camera.CoOrthographicSize(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraOrthographicSize, SegmentGroup.Core)]
+    public sealed class CameraOrthographicSizeSegment : CameraTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => camera.CoOrthographicSize(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -220,17 +220,6 @@ namespace Common.Coroutines.Segments
 
     #region PixelRect
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraPixelRect, SegmentGroup.Core)]
-    public sealed class CameraPixelRectSegment : CameraTimedSegment<Rect>
-    {
-        public CameraPixelRectSegment()
-            => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => camera.CoPixelRect(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraPixelRect, SegmentGroup.Core)]
     public sealed class CameraPixelRectSetSegment : CameraSegment<Rect>
     {
@@ -239,6 +228,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => camera.CoPixelRect(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraPixelRect, SegmentGroup.Core)]
+    public sealed class CameraPixelRectSegment : CameraTimedSegment<Rect>
+    {
+        public CameraPixelRectSegment()
+            => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => camera.CoPixelRect(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -255,17 +255,6 @@ namespace Common.Coroutines.Segments
 
     #region Rect
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.CameraRect, SegmentGroup.Core)]
-    public sealed class CameraRectSegment : CameraTimedSegment<Rect>
-    {
-        public CameraRectSegment()
-            => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => camera.CoRect(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.CameraRect, SegmentGroup.Core)]
     public sealed class CameraRectSetSegment : CameraSegment<Rect>
     {
@@ -274,6 +263,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => camera.CoRect(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.CameraRect, SegmentGroup.Core)]
+    public sealed class CameraRectSegment : CameraTimedSegment<Rect>
+    {
+        public CameraRectSegment()
+            => target = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => camera.CoRect(target, duration, easer.Evaluate);
     }
 
     [Serializable]

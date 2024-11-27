@@ -25,17 +25,6 @@ namespace Common.Coroutines.Segments
 
     #region Color
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LightColor, SegmentGroup.Core)]
-    public sealed class LightColorSegment : LightTimedSegment<Color>
-    {
-        public LightColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => light.CoColor(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightColor, SegmentGroup.Core)]
     public sealed class LightColorSetSegment : LightSegment<Color>
     {
@@ -44,6 +33,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => light.CoColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LightColor, SegmentGroup.Core)]
+    public sealed class LightColorSegment : LightTimedSegment<Color>
+    {
+        public LightColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => light.CoColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -63,17 +63,6 @@ namespace Common.Coroutines.Segments
 
     #region Intensity
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LightIntensity, SegmentGroup.Core)]
-    public sealed class LightIntensitySegment : LightTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Max(target, 0.0f);
-
-        public override IEnumerator Build()
-            => light.CoIntensity(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightIntensity, SegmentGroup.Core)]
     public sealed class LightIntensitySetSegment : LightSegment<float>
     {
@@ -82,6 +71,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => light.CoIntensity(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LightIntensity, SegmentGroup.Core)]
+    public sealed class LightIntensitySegment : LightTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Max(target, 0.0f);
+
+        public override IEnumerator Build()
+            => light.CoIntensity(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -101,19 +101,19 @@ namespace Common.Coroutines.Segments
 
     #region Range
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LightRange, SegmentGroup.Core)]
-    public sealed class LightRangeSegment : LightTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => light.CoRange(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightRange, SegmentGroup.Core)]
     public sealed class LightRangeSetSegment : LightSegment<float>
     {
         public override IEnumerator Build()
             => light.CoRange(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LightRange, SegmentGroup.Core)]
+    public sealed class LightRangeSegment : LightTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => light.CoRange(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -127,17 +127,6 @@ namespace Common.Coroutines.Segments
 
     #region ShadowStrength
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
-    public sealed class LightShadowStrengthSegment : LightTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => light.CoShadowStrength(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
     public sealed class LightShadowStrengthSetSegment : LightSegment<float>
     {
@@ -146,6 +135,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => light.CoShadowStrength(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
+    public sealed class LightShadowStrengthSegment : LightTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => light.CoShadowStrength(target, duration, easer.Evaluate);
     }
 
     [Serializable]

@@ -26,19 +26,19 @@ namespace Common.Coroutines.Segments
 
     #region FlexibleWidth
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleWidth, SegmentGroup.UI)]
-    public sealed class LayoutElementFlexibleWidthSegment : LayoutElementTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => element.CoFlexibleWidth(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementFlexibleWidth, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleWidthSetSegment : LayoutElementSegment<float>
     {
         public override IEnumerator Build()
             => element.CoFlexibleWidth(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleWidth, SegmentGroup.UI)]
+    public sealed class LayoutElementFlexibleWidthSegment : LayoutElementTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => element.CoFlexibleWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -52,19 +52,19 @@ namespace Common.Coroutines.Segments
 
     #region FlexibleHeight
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleHeight, SegmentGroup.UI)]
-    public sealed class LayoutElementFlexibleHeightSegment : LayoutElementTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => element.CoFlexibleHeight(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementFlexibleHeight, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleHeightSetSegment : LayoutElementSegment<float>
     {
         public override IEnumerator Build()
             => element.CoFlexibleHeight(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleHeight, SegmentGroup.UI)]
+    public sealed class LayoutElementFlexibleHeightSegment : LayoutElementTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => element.CoFlexibleHeight(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -78,19 +78,19 @@ namespace Common.Coroutines.Segments
 
     #region FlexibleSize
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleSize, SegmentGroup.UI)]
-    public sealed class LayoutElementFlexibleSizeSegment : LayoutElementTimedSegment<Vector2>
-    {
-        public override IEnumerator Build()
-            => element.CoFlexibleSize(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementFlexibleSize, SegmentGroup.UI)]
     public sealed class LayoutElementFlexibleSizeSetSegment : LayoutElementSegment<Vector2>
     {
         public override IEnumerator Build()
             => element.CoFlexibleSize(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementFlexibleSize, SegmentGroup.UI)]
+    public sealed class LayoutElementFlexibleSizeSegment : LayoutElementTimedSegment<Vector2>
+    {
+        public override IEnumerator Build()
+            => element.CoFlexibleSize(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -104,19 +104,19 @@ namespace Common.Coroutines.Segments
 
     #region MinWidth
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementMinWidth, SegmentGroup.UI)]
-    public sealed class LayoutElementMinWidthSegment : LayoutElementTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => element.CoMinWidth(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementMinWidth, SegmentGroup.UI)]
     public sealed class LayoutElementMinWidthSetSegment : LayoutElementSegment<float>
     {
         public override IEnumerator Build()
             => element.CoMinWidth(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementMinWidth, SegmentGroup.UI)]
+    public sealed class LayoutElementMinWidthSegment : LayoutElementTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => element.CoMinWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -130,19 +130,19 @@ namespace Common.Coroutines.Segments
 
     #region MinHeight
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementMinHeight, SegmentGroup.UI)]
-    public sealed class LayoutElementMinHeightSegment : LayoutElementTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => element.CoMinHeight(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementMinHeight, SegmentGroup.UI)]
     public sealed class LayoutElementMinHeightSetSegment : LayoutElementSegment<float>
     {
         public override IEnumerator Build()
             => element.CoMinHeight(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementMinHeight, SegmentGroup.UI)]
+    public sealed class LayoutElementMinHeightSegment : LayoutElementTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => element.CoMinHeight(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -156,19 +156,19 @@ namespace Common.Coroutines.Segments
 
     #region MinSize
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementMinSize, SegmentGroup.UI)]
-    public sealed class LayoutElementMinSizeSegment : LayoutElementTimedSegment<Vector2>
-    {
-        public override IEnumerator Build()
-            => element.CoMinSize(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementMinSize, SegmentGroup.UI)]
     public sealed class LayoutElementMinSizeSetSegment : LayoutElementSegment<Vector2>
     {
         public override IEnumerator Build()
             => element.CoMinSize(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementMinSize, SegmentGroup.UI)]
+    public sealed class LayoutElementMinSizeSegment : LayoutElementTimedSegment<Vector2>
+    {
+        public override IEnumerator Build()
+            => element.CoMinSize(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -182,19 +182,19 @@ namespace Common.Coroutines.Segments
 
     #region PreferredWidth
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredWidth, SegmentGroup.UI)]
-    public sealed class LayoutElementPreferredWidthSegment : LayoutElementTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => element.CoPreferredWidth(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementPreferredWidth, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredWidthSetSegment : LayoutElementSegment<float>
     {
         public override IEnumerator Build()
             => element.CoPreferredWidth(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredWidth, SegmentGroup.UI)]
+    public sealed class LayoutElementPreferredWidthSegment : LayoutElementTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => element.CoPreferredWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -208,19 +208,19 @@ namespace Common.Coroutines.Segments
 
     #region PreferredHeight
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredHeight, SegmentGroup.UI)]
-    public sealed class LayoutElementPreferredHeightSegment : LayoutElementTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => element.CoPreferredHeight(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementPreferredHeight, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredHeightSetSegment : LayoutElementSegment<float>
     {
         public override IEnumerator Build()
             => element.CoPreferredHeight(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredHeight, SegmentGroup.UI)]
+    public sealed class LayoutElementPreferredHeightSegment : LayoutElementTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => element.CoPreferredHeight(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -234,19 +234,19 @@ namespace Common.Coroutines.Segments
 
     #region PreferredSize
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredSize, SegmentGroup.UI)]
-    public sealed class LayoutElementPreferredSizeSegment : LayoutElementTimedSegment<Vector2>
-    {
-        public override IEnumerator Build()
-            => element.CoPreferredSize(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.LayoutElementPreferredSize, SegmentGroup.UI)]
     public sealed class LayoutElementPreferredSizeSetSegment : LayoutElementSegment<Vector2>
     {
         public override IEnumerator Build()
             => element.CoPreferredSize(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.LayoutElementPreferredSize, SegmentGroup.UI)]
+    public sealed class LayoutElementPreferredSizeSegment : LayoutElementTimedSegment<Vector2>
+    {
+        public override IEnumerator Build()
+            => element.CoPreferredSize(target, duration, easer.Evaluate);
     }
 
     [Serializable]

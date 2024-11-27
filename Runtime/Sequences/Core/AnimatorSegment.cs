@@ -83,17 +83,6 @@ namespace Common.Coroutines.Segments
 
     #region FeetPivot
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AnimatorFeetPivot, SegmentGroup.Core)]
-    public sealed class AnimatorFeetPivotSegment : AnimatorTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => animator.CoFeetPivot(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorFeetPivot, SegmentGroup.Core)]
     public sealed class AnimatorFeetPivotSetSegment : AnimatorSegment<float>
     {
@@ -102,6 +91,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => animator.CoFeetPivot(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AnimatorFeetPivot, SegmentGroup.Core)]
+    public sealed class AnimatorFeetPivotSegment : AnimatorTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => animator.CoFeetPivot(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -121,17 +121,6 @@ namespace Common.Coroutines.Segments
 
     #region PlaybackTime
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AnimatorPlaybackTime, SegmentGroup.Core)]
-    public sealed class AnimatorPlaybackTimeSegment : AnimatorTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, animator.recorderStartTime, animator.recorderStopTime);
-
-        public override IEnumerator Build()
-            => animator.CoPlaybackTime(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorPlaybackTime, SegmentGroup.Core)]
     public sealed class AnimatorPlaybackTimeSetSegment : AnimatorSegment<float>
     {
@@ -140,6 +129,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => animator.CoPlaybackTime(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AnimatorPlaybackTime, SegmentGroup.Core)]
+    public sealed class AnimatorPlaybackTimeSegment : AnimatorTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, animator.recorderStartTime, animator.recorderStopTime);
+
+        public override IEnumerator Build()
+            => animator.CoPlaybackTime(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -243,17 +243,6 @@ namespace Common.Coroutines.Segments
 
     #region Speed
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AnimatorSpeed, SegmentGroup.Core)]
-    public sealed class AnimatorSpeedSegment : AnimatorTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => animator.CoSpeed(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorSpeed, SegmentGroup.Core)]
     public sealed class AnimatorSpeedSetSegment : AnimatorSegment<float>
     {
@@ -262,6 +251,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => animator.CoSpeed(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AnimatorSpeed, SegmentGroup.Core)]
+    public sealed class AnimatorSpeedSegment : AnimatorTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => animator.CoSpeed(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -281,19 +281,19 @@ namespace Common.Coroutines.Segments
 
     #region Float
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AnimatorFloat, SegmentGroup.Core)]
-    public sealed class AnimatorFloatSegment : AnimatorWithIdTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => animator.CoFloat(_propertyId, target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorFloat, SegmentGroup.Core)]
     public sealed class AnimatorFloatSetSegment : AnimatorWithIdSegment<float>
     {
         public override IEnumerator Build()
             => animator.CoFloat(_propertyId, target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AnimatorFloat, SegmentGroup.Core)]
+    public sealed class AnimatorFloatSegment : AnimatorWithIdTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => animator.CoFloat(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -307,19 +307,19 @@ namespace Common.Coroutines.Segments
 
     #region LayerWeight
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AnimatorLayerWeight, SegmentGroup.Core)]
-    public sealed class AnimatorLayerWeightSegment : AnimatorWithLayerTimedSegment<float>
-    {
-        public override IEnumerator Build()
-            => animator.CoLayerWeight(layer, target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorLayerWeight, SegmentGroup.Core)]
     public sealed class AnimatorLayerWeightSetSegment : AnimatorWithLayerSegment<float>
     {
         public override IEnumerator Build()
             => animator.CoLayerWeight(layer, target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AnimatorLayerWeight, SegmentGroup.Core)]
+    public sealed class AnimatorLayerWeightSegment : AnimatorWithLayerTimedSegment<float>
+    {
+        public override IEnumerator Build()
+            => animator.CoLayerWeight(layer, target, duration, easer.Evaluate);
     }
 
     [Serializable]

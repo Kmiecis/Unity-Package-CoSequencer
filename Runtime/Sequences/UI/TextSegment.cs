@@ -26,17 +26,6 @@ namespace Common.Coroutines.Segments
 
     #region FontSize
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TextFontSize, SegmentGroup.UI)]
-    public sealed class TextFontSizeSegment : TextTimedSegment<int>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0, 300);
-
-        public override IEnumerator Build()
-            => text.CoFontSize(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextFontSize, SegmentGroup.UI)]
     public sealed class TextFontSizeSetSegment : TextSegment<int>
     {
@@ -45,6 +34,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => text.CoFontSize(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TextFontSize, SegmentGroup.UI)]
+    public sealed class TextFontSizeSegment : TextTimedSegment<int>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0, 300);
+
+        public override IEnumerator Build()
+            => text.CoFontSize(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -61,34 +61,23 @@ namespace Common.Coroutines.Segments
 
     #region Text
     [Serializable]
-    [SegmentMenu("Unwind", SegmentPath.TextText, SegmentGroup.UI)]
-    public sealed class TextTextSegment : TextTimedSegment<string>
-    {
-        public override IEnumerator Build()
-            => text.CoText(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextText, SegmentGroup.UI)]
     public sealed class TextTextSetSegment : TextSegment<string>
     {
         public override IEnumerator Build()
             => text.CoText(target);
     }
+
+    [Serializable]
+    [SegmentMenu("Unwind", SegmentPath.TextText, SegmentGroup.UI)]
+    public sealed class TextTextSegment : TextTimedSegment<string>
+    {
+        public override IEnumerator Build()
+            => text.CoText(target, duration, easer.Evaluate);
+    }
     #endregion
 
     #region Graphic
-    [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TextColor, SegmentGroup.UI)]
-    public sealed class TextColorSegment : TextTimedSegment<Color>
-    {
-        public TextColorSegment()
-            => target = Color.white;
-
-        public override IEnumerator Build()
-            => text.CoColor(target, duration, easer.Evaluate);
-    }
-
     [Serializable]
     [SegmentMenu("Set", SegmentPath.TextColor, SegmentGroup.UI)]
     public sealed class TextColorSetSegment : TextTimedSegment<Color>
@@ -98,6 +87,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => text.CoColor(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TextColor, SegmentGroup.UI)]
+    public sealed class TextColorSegment : TextTimedSegment<Color>
+    {
+        public TextColorSegment()
+            => target = Color.white;
+
+        public override IEnumerator Build()
+            => text.CoColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -115,17 +115,6 @@ namespace Common.Coroutines.Segments
     }
 
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.TextFade, SegmentGroup.UI)]
-    public sealed class TextFadeSegment : TextTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-
-        public override IEnumerator Build()
-            => text.CoFade(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.TextFade, SegmentGroup.UI)]
     public sealed class TextFadeSetSegment : TextTimedSegment<float>
     {
@@ -134,6 +123,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => text.CoFade(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.TextFade, SegmentGroup.UI)]
+    public sealed class TextFadeSegment : TextTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => text.CoFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]

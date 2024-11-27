@@ -25,17 +25,6 @@ namespace Common.Coroutines.Segments
 
     #region Pitch
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
-    public sealed class AudioSourcePitchSegment : AudioSourceTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, -3.0f, 3.0f);
-
-        public override IEnumerator Build()
-            => audio.CoPitch(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
     public sealed class AudioSourcePitchSetSegment : AudioSourceSegment<float>
     {
@@ -44,6 +33,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => audio.CoPitch(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
+    public sealed class AudioSourcePitchSegment : AudioSourceTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, -3.0f, 3.0f);
+
+        public override IEnumerator Build()
+            => audio.CoPitch(target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -63,17 +63,6 @@ namespace Common.Coroutines.Segments
 
     #region Volume
     [Serializable]
-    [SegmentMenu("Towards", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
-    public sealed class AudioSourceVolumeSegment : AudioSourceTimedSegment<float>
-    {
-        public override void OnValidate()
-            => target = Mathf.Clamp(target, 0.0f, 1.0f);
-        
-        public override IEnumerator Build()
-            => audio.CoVolume(target, duration, easer.Evaluate);
-    }
-
-    [Serializable]
     [SegmentMenu("Set", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
     public sealed class AudioSourceVolumeSetSegment : AudioSourceSegment<float>
     {
@@ -82,6 +71,17 @@ namespace Common.Coroutines.Segments
 
         public override IEnumerator Build()
             => audio.CoVolume(target);
+    }
+
+    [Serializable]
+    [SegmentMenu("Towards", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
+    public sealed class AudioSourceVolumeSegment : AudioSourceTimedSegment<float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+        
+        public override IEnumerator Build()
+            => audio.CoVolume(target, duration, easer.Evaluate);
     }
 
     [Serializable]
