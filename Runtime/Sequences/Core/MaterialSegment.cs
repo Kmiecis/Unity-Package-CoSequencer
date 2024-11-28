@@ -4,59 +4,54 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class MaterialSegmentBase : Segment
+    public abstract class MaterialSetSegment<T> : SetSegment<Material, T>
     {
-        public Material material;
         [SerializeField] protected string _property;
         [SerializeField][HideInInspector] protected int _propertyId;
 
         public override void OnValidate()
-        {
-            _propertyId = Shader.PropertyToID(_property);
-        }
+            => _propertyId = Shader.PropertyToID(_property);
     }
 
-    public abstract class MaterialSegment<T> : MaterialSegmentBase
+    public abstract class MaterialTowardsSegment<T> : TowardsSegment<Material, T>
     {
-        public T target;
+        [SerializeField] protected string _property;
+        [SerializeField][HideInInspector] protected int _propertyId;
+
+        public override void OnValidate()
+            => _propertyId = Shader.PropertyToID(_property);
     }
 
-    public abstract class MaterialTimedSegment<T> : MaterialSegmentBase
+    public abstract class MaterialBetweenSegment<T> : BetweenSegment<Material, T>
     {
-        public T target;
-        public float duration = 1.0f;
-        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
-    }
+        [SerializeField] protected string _property;
+        [SerializeField][HideInInspector] protected int _propertyId;
 
-    public abstract class MaterialBetweenSegment<T> : MaterialSegmentBase
-    {
-        public T start;
-        public T target;
-        public float duration = 1.0f;
-        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
+        public override void OnValidate()
+            => _propertyId = Shader.PropertyToID(_property);
     }
 
     #region Color
     [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialColor, SegmentGroup.Core)]
-    public sealed class MaterialColorSetSegment : MaterialSegment<Color>
+    public sealed class MaterialColorSetSegment : MaterialSetSegment<Color>
     {
         public MaterialColorSetSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => material.CoColor(_propertyId, target);
+            => component.CoColor(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialColor, SegmentGroup.Core)]
-    public sealed class MaterialColorSegment : MaterialTimedSegment<Color>
+    public sealed class MaterialColorSegment : MaterialTowardsSegment<Color>
     {
         public MaterialColorSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => material.CoColor(_propertyId, target, duration, easer.Evaluate);
+            => component.CoColor(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -70,14 +65,14 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => material.CoColor(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoColor(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Fade
     [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialFade, SegmentGroup.Core)]
-    public sealed class MaterialFadeSetSegment : MaterialSegment<float>
+    public sealed class MaterialFadeSetSegment : MaterialSetSegment<float>
     {
         public override void OnValidate()
         {
@@ -87,12 +82,12 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => material.CoFade(_propertyId, target);
+            => component.CoFade(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialFade, SegmentGroup.Core)]
-    public sealed class MaterialFadeSegment : MaterialTimedSegment<float>
+    public sealed class MaterialFadeSegment : MaterialTowardsSegment<float>
     {
         public override void OnValidate()
         {
@@ -102,7 +97,7 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => material.CoFade(_propertyId, target, duration, easer.Evaluate);
+            => component.CoFade(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -118,35 +113,35 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => material.CoFade(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoFade(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Gradient
     [Serializable]
     [SegmentMenu("Gradient", SegmentPath.Material, SegmentGroup.Core)]
-    public sealed class MaterialGradientSegment : MaterialTimedSegment<Gradient>
+    public sealed class MaterialGradientSegment : MaterialTowardsSegment<Gradient>
     {
         public override IEnumerator Build()
-            => material.CoGradient(_propertyId, target, duration, easer.Evaluate);
+            => component.CoGradient(_propertyId, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Float
     [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialFloat, SegmentGroup.Core)]
-    public sealed class MaterialFloatSetSegment : MaterialSegment<float>
+    public sealed class MaterialFloatSetSegment : MaterialSetSegment<float>
     {
         public override IEnumerator Build()
-            => material.CoFloat(_propertyId, target);
+            => component.CoFloat(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialFloat, SegmentGroup.Core)]
-    public sealed class MaterialFloatSegment : MaterialTimedSegment<float>
+    public sealed class MaterialFloatSegment : MaterialTowardsSegment<float>
     {
         public override IEnumerator Build()
-            => material.CoFloat(_propertyId, target, duration, easer.Evaluate);
+            => component.CoFloat(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -154,25 +149,25 @@ namespace Common.Coroutines.Segments
     public sealed class MaterialFloatBetweenSegment : MaterialBetweenSegment<float>
     {
         public override IEnumerator Build()
-            => material.CoFloat(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoFloat(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Tiling
     [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialTiling, SegmentGroup.Core)]
-    public sealed class MaterialTilingSetSegment : MaterialSegment<Vector2>
+    public sealed class MaterialTilingSetSegment : MaterialSetSegment<Vector2>
     {
         public override IEnumerator Build()
-            => material.CoTiling(_propertyId, target);
+            => component.CoTiling(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialTiling, SegmentGroup.Core)]
-    public sealed class MaterialTilingSegment : MaterialTimedSegment<Vector2>
+    public sealed class MaterialTilingSegment : MaterialTowardsSegment<Vector2>
     {
         public override IEnumerator Build()
-            => material.CoTiling(_propertyId, target, duration, easer.Evaluate);
+            => component.CoTiling(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -180,25 +175,25 @@ namespace Common.Coroutines.Segments
     public sealed class MaterialTilingBetweenSegment : MaterialBetweenSegment<Vector2>
     {
         public override IEnumerator Build()
-            => material.CoTiling(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoTiling(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Offset
     [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialOffset, SegmentGroup.Core)]
-    public sealed class MaterialOffsetSetSegment : MaterialSegment<Vector2>
+    public sealed class MaterialOffsetSetSegment : MaterialSetSegment<Vector2>
     {
         public override IEnumerator Build()
-            => material.CoOffset(_propertyId, target);
+            => component.CoOffset(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialOffset, SegmentGroup.Core)]
-    public sealed class MaterialOffsetSegment : MaterialTimedSegment<Vector2>
+    public sealed class MaterialOffsetSegment : MaterialTowardsSegment<Vector2>
     {
         public override IEnumerator Build()
-            => material.CoOffset(_propertyId, target, duration, easer.Evaluate);
+            => component.CoOffset(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -206,25 +201,25 @@ namespace Common.Coroutines.Segments
     public sealed class MaterialOffsetBetweenSegment : MaterialBetweenSegment<Vector2>
     {
         public override IEnumerator Build()
-            => material.CoOffset(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoOffset(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Vector
     [Serializable]
     [SegmentMenu("Set", SegmentPath.MaterialVector, SegmentGroup.Core)]
-    public sealed class MaterialVectorSetSegment : MaterialSegment<Vector4>
+    public sealed class MaterialVectorSetSegment : MaterialSetSegment<Vector4>
     {
         public override IEnumerator Build()
-            => material.CoVector(_propertyId, target);
+            => component.CoVector(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.MaterialVector, SegmentGroup.Core)]
-    public sealed class MaterialVectorSegment : MaterialTimedSegment<Vector4>
+    public sealed class MaterialVectorSegment : MaterialTowardsSegment<Vector4>
     {
         public override IEnumerator Build()
-            => material.CoVector(_propertyId, target, duration, easer.Evaluate);
+            => component.CoVector(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -232,7 +227,7 @@ namespace Common.Coroutines.Segments
     public sealed class MaterialVectorBetweenSegment : MaterialBetweenSegment<Vector4>
     {
         public override IEnumerator Build()
-            => material.CoVector(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoVector(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 }

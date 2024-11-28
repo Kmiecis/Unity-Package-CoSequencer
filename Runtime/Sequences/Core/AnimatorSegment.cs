@@ -4,109 +4,74 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class AnimatorSegment<T> : Segment
+    public abstract class AnimatorWithLayerSetSegment<TValue> : SetSegment<Animator, TValue>
     {
-        public Animator animator;
-        public T target;
+        public int layer;
     }
 
-    public abstract class AnimatorTimedSegment<T> : TimedSegment
+    public abstract class AnimatorWithLayerTowardsSegment<TValue> : TowardsSegment<Animator, TValue>
     {
-        public Animator animator;
-        public T target;
+        public int layer;
     }
 
-    public abstract class AnimatorBetweenSegment<T> : TimedSegment
+    public abstract class AnimatorWithLayerBetweenSegment<TValue> : BetweenSegment<Animator, TValue>
     {
-        public Animator animator;
-        public T start;
-        public T target;
+        public int layer;
     }
 
-    public abstract class AnimatorWithIdSegmentBase : Segment
+    public abstract class AnimatorWithIdSetSegment<TValue> : SetSegment<Animator, TValue>
     {
-        public Animator animator;
         [SerializeField] protected string _property;
         [SerializeField][HideInInspector] protected int _propertyId;
 
         public override void OnValidate()
-        {
-            _propertyId = Animator.StringToHash(_property);
-        }
+            => _propertyId = Animator.StringToHash(_property);
     }
 
-    public abstract class AnimatorWithIdSegment<T> : AnimatorWithIdSegmentBase
+    public abstract class AnimatorWithIdTowardsSegment<TValue> : TowardsSegment<Animator, TValue>
     {
-        public T target;
+        [SerializeField] protected string _property;
+        [SerializeField][HideInInspector] protected int _propertyId;
+
+        public override void OnValidate()
+            => _propertyId = Animator.StringToHash(_property);
     }
 
-    public abstract class AnimatorWithIdTimedSegment<T> : AnimatorWithIdSegmentBase
+    public abstract class AnimatorWithIdBetweenSegment<TValue> : BetweenSegment<Animator, TValue>
     {
-        public T target;
-        public float duration = 1.0f;
-        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
-    }
+        [SerializeField] protected string _property;
+        [SerializeField][HideInInspector] protected int _propertyId;
 
-    public abstract class AnimatorWithIdBetweenSegment<T> : AnimatorWithIdSegmentBase
-    {
-        public T start;
-        public T target;
-        public float duration = 1.0f;
-        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
-    }
-
-    public abstract class AnimatorWithLayerSegmentBase : Segment
-    {
-        public Animator animator;
-        public int layer;
-    }
-
-    public abstract class AnimatorWithLayerSegment<T> : AnimatorWithLayerSegmentBase
-    {
-        public T target;
-    }
-
-    public abstract class AnimatorWithLayerTimedSegment<T> : AnimatorWithLayerSegmentBase
-    {
-        public T target;
-        public float duration = 1.0f;
-        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
-    }
-
-    public abstract class AnimatorWithLayerBetweenSegment<T> : AnimatorWithLayerSegmentBase
-    {
-        public T start;
-        public T target;
-        public float duration = 1.0f;
-        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
+        public override void OnValidate()
+            => _propertyId = Animator.StringToHash(_property);
     }
 
     #region FeetPivot
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorFeetPivot, SegmentGroup.Core)]
-    public sealed class AnimatorFeetPivotSetSegment : AnimatorSegment<float>
+    public sealed class AnimatorFeetPivotSetSegment : SetSegment<Animator, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => animator.CoFeetPivot(target);
+            => component.CoFeetPivot(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorFeetPivot, SegmentGroup.Core)]
-    public sealed class AnimatorFeetPivotSegment : AnimatorTimedSegment<float>
+    public sealed class AnimatorFeetPivotSegment : TowardsSegment<Animator, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => animator.CoFeetPivot(target, duration, easer.Evaluate);
+            => component.CoFeetPivot(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorFeetPivot, SegmentGroup.Core)]
-    public sealed class AnimatorFeetPivotBetweenSegment : AnimatorBetweenSegment<float>
+    public sealed class AnimatorFeetPivotBetweenSegment : BetweenSegment<Animator, float>
     {
         public override void OnValidate()
         {
@@ -115,158 +80,158 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => animator.CoFeetPivot(start, target, duration, easer.Evaluate);
+            => component.CoFeetPivot(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region PlaybackTime
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorPlaybackTime, SegmentGroup.Core)]
-    public sealed class AnimatorPlaybackTimeSetSegment : AnimatorSegment<float>
+    public sealed class AnimatorPlaybackTimeSetSegment : SetSegment<Animator, float>
     {
         public override void OnValidate()
-            => target = Mathf.Clamp(target, animator.recorderStartTime, animator.recorderStopTime);
+            => target = Mathf.Clamp(target, component.recorderStartTime, component.recorderStopTime);
 
         public override IEnumerator Build()
-            => animator.CoPlaybackTime(target);
+            => component.CoPlaybackTime(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorPlaybackTime, SegmentGroup.Core)]
-    public sealed class AnimatorPlaybackTimeSegment : AnimatorTimedSegment<float>
+    public sealed class AnimatorPlaybackTimeSegment : TowardsSegment<Animator, float>
     {
         public override void OnValidate()
-            => target = Mathf.Clamp(target, animator.recorderStartTime, animator.recorderStopTime);
+            => target = Mathf.Clamp(target, component.recorderStartTime, component.recorderStopTime);
 
         public override IEnumerator Build()
-            => animator.CoPlaybackTime(target, duration, easer.Evaluate);
+            => component.CoPlaybackTime(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorPlaybackTime, SegmentGroup.Core)]
-    public sealed class AnimatorPlaybackTimeBetweenSegment : AnimatorBetweenSegment<float>
+    public sealed class AnimatorPlaybackTimeBetweenSegment : BetweenSegment<Animator, float>
     {
         public override void OnValidate()
         {
-            start = Mathf.Clamp(target, animator.recorderStartTime, animator.recorderStopTime);
-            target = Mathf.Clamp(target, animator.recorderStartTime, animator.recorderStopTime);
+            start = Mathf.Clamp(target, component.recorderStartTime, component.recorderStopTime);
+            target = Mathf.Clamp(target, component.recorderStartTime, component.recorderStopTime);
         }
 
         public override IEnumerator Build()
-            => animator.CoPlaybackTime(target, duration, easer.Evaluate);
+            => component.CoPlaybackTime(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region RootMove
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorRootMove, SegmentGroup.Core)]
-    public sealed class AnimatorRootMoveSetSegment : AnimatorSegment<Vector3>
+    public sealed class AnimatorRootMoveSetSegment : SetSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootMove(target);
+            => component.CoRootMove(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorRootMove, SegmentGroup.Core)]
-    public sealed class AnimatorRootMoveSegment : AnimatorTimedSegment<Vector3>
+    public sealed class AnimatorRootMoveSegment : TowardsSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootMove(target, duration, easer.Evaluate);
+            => component.CoRootMove(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorRootMove, SegmentGroup.Core)]
-    public sealed class AnimatorRootMoveBetweenSegment : AnimatorBetweenSegment<Vector3>
+    public sealed class AnimatorRootMoveBetweenSegment : BetweenSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootMove(start, target, duration, easer.Evaluate);
+            => component.CoRootMove(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Target", SegmentPath.AnimatorRootMove, SegmentGroup.Core)]
-    public sealed class AnimatorRootMoveToSegment : AnimatorTimedSegment<Animator>
+    public sealed class AnimatorRootMoveToSegment : TowardsSegment<Animator, Animator>
     {
         public override IEnumerator Build()
-            => animator.CoRootMove(target, duration, easer.Evaluate);
+            => component.CoRootMove(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.AnimatorRootMove, SegmentGroup.Core)]
-    public sealed class AnimatorRootMoveBySegment : AnimatorTimedSegment<Vector3>
+    public sealed class AnimatorRootMoveBySegment : TowardsSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootMoveBy(target, duration, easer.Evaluate);
+            => component.CoRootMoveBy(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region RootRotate
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorRootRotate, SegmentGroup.Core)]
-    public sealed class AnimatorRootRotateSetSegment : AnimatorSegment<Vector3>
+    public sealed class AnimatorRootRotateSetSegment : SetSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootRotate(Quaternion.Euler(target));
+            => component.CoRootRotate(Quaternion.Euler(target));
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorRootRotate, SegmentGroup.Core)]
-    public sealed class AnimatorRootRotateSegment : AnimatorTimedSegment<Vector3>
+    public sealed class AnimatorRootRotateSegment : TowardsSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootRotate(Quaternion.Euler(target), duration, easer.Evaluate);
+            => component.CoRootRotate(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorRootRotate, SegmentGroup.Core)]
-    public sealed class AnimatorRootRotateBetweenSegment : AnimatorBetweenSegment<Vector3>
+    public sealed class AnimatorRootRotateBetweenSegment : BetweenSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootRotate(Quaternion.Euler(start), Quaternion.Euler(target), duration, easer.Evaluate);
+            => component.CoRootRotate(Quaternion.Euler(start), Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Target", SegmentPath.AnimatorRootRotate, SegmentGroup.Core)]
-    public sealed class AnimatorRootRotateAsSegment : AnimatorTimedSegment<Animator>
+    public sealed class AnimatorRootRotateAsSegment : TowardsSegment<Animator, Animator>
     {
         public override IEnumerator Build()
-            => animator.CoRootRotate(target, duration, easer.Evaluate);
+            => component.CoRootRotate(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.AnimatorRootRotate, SegmentGroup.Core)]
-    public sealed class AnimatorRootRotateBySegment : AnimatorTimedSegment<Vector3>
+    public sealed class AnimatorRootRotateBySegment : TowardsSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoRootRotateBy(Quaternion.Euler(target), duration, easer.Evaluate);
+            => component.CoRootRotateBy(Quaternion.Euler(target), duration, easer.Evaluate);
     }
     #endregion
 
     #region Speed
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorSpeed, SegmentGroup.Core)]
-    public sealed class AnimatorSpeedSetSegment : AnimatorSegment<float>
+    public sealed class AnimatorSpeedSetSegment : SetSegment<Animator, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => animator.CoSpeed(target);
+            => component.CoSpeed(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorSpeed, SegmentGroup.Core)]
-    public sealed class AnimatorSpeedSegment : AnimatorTimedSegment<float>
+    public sealed class AnimatorSpeedSegment : TowardsSegment<Animator, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => animator.CoSpeed(target, duration, easer.Evaluate);
+            => component.CoSpeed(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorSpeed, SegmentGroup.Core)]
-    public sealed class AnimatorSpeedBetweenSegment : AnimatorBetweenSegment<float>
+    public sealed class AnimatorSpeedBetweenSegment : BetweenSegment<Animator, float>
     {
         public override void OnValidate()
         {
@@ -275,25 +240,25 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => animator.CoSpeed(start, target, duration, easer.Evaluate);
+            => component.CoSpeed(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Float
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorFloat, SegmentGroup.Core)]
-    public sealed class AnimatorFloatSetSegment : AnimatorWithIdSegment<float>
+    public sealed class AnimatorFloatSetSegment : AnimatorWithIdSetSegment<float>
     {
         public override IEnumerator Build()
-            => animator.CoFloat(_propertyId, target);
+            => component.CoFloat(_propertyId, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorFloat, SegmentGroup.Core)]
-    public sealed class AnimatorFloatSegment : AnimatorWithIdTimedSegment<float>
+    public sealed class AnimatorFloatSegment : AnimatorWithIdTowardsSegment<float>
     {
         public override IEnumerator Build()
-            => animator.CoFloat(_propertyId, target, duration, easer.Evaluate);
+            => component.CoFloat(_propertyId, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -301,25 +266,25 @@ namespace Common.Coroutines.Segments
     public sealed class AnimatorFloatBetweenSegment : AnimatorWithIdBetweenSegment<float>
     {
         public override IEnumerator Build()
-            => animator.CoFloat(_propertyId, start, target, duration, easer.Evaluate);
+            => component.CoFloat(_propertyId, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region LayerWeight
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorLayerWeight, SegmentGroup.Core)]
-    public sealed class AnimatorLayerWeightSetSegment : AnimatorWithLayerSegment<float>
+    public sealed class AnimatorLayerWeightSetSegment : AnimatorWithLayerSetSegment<float>
     {
         public override IEnumerator Build()
-            => animator.CoLayerWeight(layer, target);
+            => component.CoLayerWeight(layer, target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AnimatorLayerWeight, SegmentGroup.Core)]
-    public sealed class AnimatorLayerWeightSegment : AnimatorWithLayerTimedSegment<float>
+    public sealed class AnimatorLayerWeightSegment : AnimatorWithLayerTowardsSegment<float>
     {
         public override IEnumerator Build()
-            => animator.CoLayerWeight(layer, target, duration, easer.Evaluate);
+            => component.CoLayerWeight(layer, target, duration, easer.Evaluate);
     }
 
     [Serializable]
@@ -327,43 +292,43 @@ namespace Common.Coroutines.Segments
     public sealed class AnimatorLayerWeightBetweenSegment : AnimatorWithLayerBetweenSegment<float>
     {
         public override IEnumerator Build()
-            => animator.CoLayerWeight(layer, start, target, duration, easer.Evaluate);
+            => component.CoLayerWeight(layer, start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region LookAtPosition
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorLookAtPosition, SegmentGroup.Core)]
-    public sealed class AnimatorLookAtPositionSetSegment : AnimatorSegment<Vector3>
+    public sealed class AnimatorLookAtPositionSetSegment : SetSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoLookAtPosition(target);
+            => component.CoLookAtPosition(target);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorLookAtPosition, SegmentGroup.Core)]
-    public sealed class AnimatorLookAtPositionBetweenSegment : AnimatorBetweenSegment<Vector3>
+    public sealed class AnimatorLookAtPositionBetweenSegment : BetweenSegment<Animator, Vector3>
     {
         public override IEnumerator Build()
-            => animator.CoLookAtPosition(start, target, duration, easer.Evaluate);
+            => component.CoLookAtPosition(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region LookAtWeight
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AnimatorLookAtWeight, SegmentGroup.Core)]
-    public sealed class AnimatorLookAtWeightSetSegment : AnimatorSegment<float>
+    public sealed class AnimatorLookAtWeightSetSegment : SetSegment<Animator, float>
     {
         public override IEnumerator Build()
-            => animator.CoLookAtWeight(target);
+            => component.CoLookAtWeight(target);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AnimatorLookAtWeight, SegmentGroup.Core)]
-    public sealed class AnimatorLookAtWeightBetweenSegment : AnimatorBetweenSegment<float>
+    public sealed class AnimatorLookAtWeightBetweenSegment : BetweenSegment<Animator, float>
     {
         public override IEnumerator Build()
-            => animator.CoLookAtWeight(start, target, duration, easer.Evaluate);
+            => component.CoLookAtWeight(start, target, duration, easer.Evaluate);
     }
     #endregion
 }

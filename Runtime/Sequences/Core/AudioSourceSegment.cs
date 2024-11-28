@@ -4,51 +4,32 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class AudioSourceSegment<T> : Segment
-    {
-        public AudioSource audio;
-        public T target;
-    }
-
-    public abstract class AudioSourceTimedSegment<T> : TimedSegment
-    {
-        public AudioSource audio;
-        public T target;
-    }
-
-    public abstract class AudioSourceBetweenSegment<T> : TimedSegment
-    {
-        public AudioSource audio;
-        public T start;
-        public T target;
-    }
-
     #region Pitch
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
-    public sealed class AudioSourcePitchSetSegment : AudioSourceSegment<float>
+    public sealed class AudioSourcePitchSetSegment : SetSegment<AudioSource, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, -3.0f, 3.0f);
 
         public override IEnumerator Build()
-            => audio.CoPitch(target);
+            => component.CoPitch(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
-    public sealed class AudioSourcePitchSegment : AudioSourceTimedSegment<float>
+    public sealed class AudioSourcePitchSegment : TowardsSegment<AudioSource, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, -3.0f, 3.0f);
 
         public override IEnumerator Build()
-            => audio.CoPitch(target, duration, easer.Evaluate);
+            => component.CoPitch(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AudioSourcePitch, SegmentGroup.Core)]
-    public sealed class AudioSourcePitchBetweenSegment : AudioSourceBetweenSegment<float>
+    public sealed class AudioSourcePitchBetweenSegment : BetweenSegment<AudioSource, float>
     {
         public override void OnValidate()
         {
@@ -57,36 +38,36 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => audio.CoPitch(start, target, duration, easer.Evaluate);
+            => component.CoPitch(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Volume
     [Serializable]
     [SegmentMenu("Set", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
-    public sealed class AudioSourceVolumeSetSegment : AudioSourceSegment<float>
+    public sealed class AudioSourceVolumeSetSegment : SetSegment<AudioSource, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => audio.CoVolume(target);
+            => component.CoVolume(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
-    public sealed class AudioSourceVolumeSegment : AudioSourceTimedSegment<float>
+    public sealed class AudioSourceVolumeSegment : TowardsSegment<AudioSource, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
         public override IEnumerator Build()
-            => audio.CoVolume(target, duration, easer.Evaluate);
+            => component.CoVolume(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.AudioSourceVolume, SegmentGroup.Core)]
-    public sealed class AudioSourceVolumeBetweenSegment : AudioSourceBetweenSegment<float>
+    public sealed class AudioSourceVolumeBetweenSegment : BetweenSegment<AudioSource, float>
     {
         public override void OnValidate()
         {
@@ -95,7 +76,7 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => audio.CoVolume(target, duration, easer.Evaluate);
+            => component.CoVolume(target, duration, easer.Evaluate);
     }
     #endregion
 }

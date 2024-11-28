@@ -8,13 +8,28 @@ namespace CommonEditor.Coroutines
         public const float SpaceHeight = 2.0f;
         public const float IndentWidth = 10.0f;
 
+        public static void LabelField(ref Rect position, GUIContent label, GUIStyle style)
+        {
+            position.height = EditorGUIUtility.singleLineHeight;
+
+            EditorGUI.LabelField(position, label, style);
+
+            position.y += position.height + SpaceHeight;
+        }
+
         public static void UnfoldedLabelField(ref Rect position, GUIContent label, GUIStyle style)
         {
             position.x -= IndentWidth;
             position.width += IndentWidth;
-            position.height = EditorGUIUtility.singleLineHeight;
 
-            EditorGUI.LabelField(position, label, style);
+            LabelField(ref position, label, style);
+        }
+
+        public static void PropertyField(ref Rect position, SerializedProperty property, GUIContent label = null)
+        {
+            position.height = EditorGUI.GetPropertyHeight(property, true);
+
+            EditorGUI.PropertyField(position, property, label, true);
 
             position.y += position.height + SpaceHeight;
         }
@@ -23,11 +38,7 @@ namespace CommonEditor.Coroutines
         {
             foreach (var child in property.GetChildren())
             {
-                position.height = EditorGUI.GetPropertyHeight(child, true);
-
-                EditorGUI.PropertyField(position, child, true);
-
-                position.y += position.height + SpaceHeight;
+                PropertyField(ref position, child);
             }
         }
 

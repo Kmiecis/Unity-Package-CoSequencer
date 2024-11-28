@@ -85,6 +85,9 @@ namespace Common.Coroutines
         public const string TransformLocalScale = Transform + "/Local Scale";
         public const string TransformLookAt = Transform + "/Look At";
 
+        public const string VideoPlayer = nameof(UnityEngine.Video.VideoPlayer);
+        public const string VideoPlayerVolume = VideoPlayer + "/Volume";
+
         public const string CanvasGroup = nameof(UnityEngine.CanvasGroup);
         public const string CanvasGroupFade = CanvasGroup + "/Fade";
 

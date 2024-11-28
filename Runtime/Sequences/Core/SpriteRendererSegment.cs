@@ -4,51 +4,32 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class SpriteRendererSegment<T> : Segment
-    {
-        public SpriteRenderer renderer;
-        public T target;
-    }
-
-    public abstract class SpriteRendererTimedSegment<T> : TimedSegment
-    {
-        public SpriteRenderer renderer;
-        public T target;
-    }
-
-    public abstract class SpriteRendererBetweenSegment<T> : TimedSegment
-    {
-        public SpriteRenderer renderer;
-        public T start;
-        public T target;
-    }
-
     #region Color
     [Serializable]
     [SegmentMenu("Set", SegmentPath.SpriteRendererColor, SegmentGroup.Core)]
-    public sealed class SpriteRendererColorSetSegment : SpriteRendererSegment<Color>
+    public sealed class SpriteRendererColorSetSegment : SetSegment<SpriteRenderer, Color>
     {
         public SpriteRendererColorSetSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => renderer.CoColor(target);
+            => component.CoColor(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.SpriteRendererColor, SegmentGroup.Core)]
-    public sealed class SpriteRendererColorSegment : SpriteRendererTimedSegment<Color>
+    public sealed class SpriteRendererColorSegment : TowardsSegment<SpriteRenderer, Color>
     {
         public SpriteRendererColorSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => renderer.CoColor(target, duration, easer.Evaluate);
+            => component.CoColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.SpriteRendererColor, SegmentGroup.Core)]
-    public sealed class SpriteRendererColorBetweenSegment : SpriteRendererBetweenSegment<Color>
+    public sealed class SpriteRendererColorBetweenSegment : BetweenSegment<SpriteRenderer, Color>
     {
         public SpriteRendererColorBetweenSegment()
         {
@@ -57,36 +38,36 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => renderer.CoColor(start, target, duration, easer.Evaluate);
+            => component.CoColor(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Fade
     [Serializable]
     [SegmentMenu("Set", SegmentPath.SpriteRendererFade, SegmentGroup.Core)]
-    public sealed class SpriteRendererFadeSetSegment : SpriteRendererSegment<float>
+    public sealed class SpriteRendererFadeSetSegment : SetSegment<SpriteRenderer, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => renderer.CoFade(target);
+            => component.CoFade(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.SpriteRendererFade, SegmentGroup.Core)]
-    public sealed class SpriteRendererFadeSegment : SpriteRendererTimedSegment<float>
+    public sealed class SpriteRendererFadeSegment : TowardsSegment<SpriteRenderer, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
     
         public override IEnumerator Build()
-            => renderer.CoFade(target, duration, easer.Evaluate);
+            => component.CoFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.SpriteRendererFade, SegmentGroup.Core)]
-    public sealed class SpriteRendererFadeBetweenSegment : SpriteRendererBetweenSegment<float>
+    public sealed class SpriteRendererFadeBetweenSegment : BetweenSegment<SpriteRenderer, float>
     {
         public override void OnValidate()
         {
@@ -95,75 +76,75 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => renderer.CoFade(start, target, duration, easer.Evaluate);
+            => component.CoFade(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Gradient
     [Serializable]
     [SegmentMenu("Gradient", SegmentPath.SpriteRenderer, SegmentGroup.Core)]
-    public sealed class SpriteRendererGradientSegment : SpriteRendererTimedSegment<Gradient>
+    public sealed class SpriteRendererGradientSegment : TowardsSegment<SpriteRenderer, Gradient>
     {
         public override IEnumerator Build()
-            => renderer.CoGradient(target, duration, easer.Evaluate);
+            => component.CoGradient(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Size
     [Serializable]
     [SegmentMenu("Set", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeSetSegment : SpriteRendererSegment<Vector2>
+    public sealed class SpriteRendererSizeSetSegment : SetSegment<SpriteRenderer, Vector2>
     {
         public override IEnumerator Build()
-            => renderer.CoSize(target);
+            => component.CoSize(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeSegment : SpriteRendererTimedSegment<Vector2>
+    public sealed class SpriteRendererSizeSegment : TowardsSegment<SpriteRenderer, Vector2>
     {
         public override IEnumerator Build()
-            => renderer.CoSize(target, duration, easer.Evaluate);
+            => component.CoSize(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeXSegment : SpriteRendererTimedSegment<float>
+    public sealed class SpriteRendererSizeXSegment : TowardsSegment<SpriteRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoSizeX(target, duration, easer.Evaluate);
+            => component.CoSizeX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeYSegment : SpriteRendererTimedSegment<float>
+    public sealed class SpriteRendererSizeYSegment : TowardsSegment<SpriteRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoSizeY(target, duration, easer.Evaluate);
+            => component.CoSizeY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeBetweenSegment : SpriteRendererBetweenSegment<Vector2>
+    public sealed class SpriteRendererSizeBetweenSegment : BetweenSegment<SpriteRenderer, Vector2>
     {
         public override IEnumerator Build()
-            => renderer.CoSize(start, target, duration, easer.Evaluate);
+            => component.CoSize(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeXBetweenSegment : SpriteRendererBetweenSegment<float>
+    public sealed class SpriteRendererSizeXBetweenSegment : BetweenSegment<SpriteRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoSizeX(start, target, duration, easer.Evaluate);
+            => component.CoSizeX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.SpriteRendererSize, SegmentGroup.Core)]
-    public sealed class SpriteRendererSizeYBetweenSegment : SpriteRendererBetweenSegment<float>
+    public sealed class SpriteRendererSizeYBetweenSegment : BetweenSegment<SpriteRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoSizeY(start, target, duration, easer.Evaluate);
+            => component.CoSizeY(start, target, duration, easer.Evaluate);
     }
     #endregion
 }

@@ -4,148 +4,135 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class RigidbodyTimedSegment<T> : TimedSegment
-    {
-        public Rigidbody rigidbody;
-        public T target;
-    }
-
-    public abstract class RigidbodyBetweenSegment<T> : TimedSegment
-    {
-        public Rigidbody rigidbody;
-        public T start;
-        public T target;
-    }
-
     #region Move
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveSegment : RigidbodyTimedSegment<Vector3>
+    public sealed class RigidbodyMoveSegment : TowardsSegment<Rigidbody, Vector3>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMove(target, duration, easer.Evaluate);
+            => component.CoMove(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveXSegment : RigidbodyTimedSegment<float>
+    public sealed class RigidbodyMoveXSegment : TowardsSegment<Rigidbody, float>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveX(target, duration, easer.Evaluate);
+            => component.CoMoveX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveYSegment : RigidbodyTimedSegment<float>
+    public sealed class RigidbodyMoveYSegment : TowardsSegment<Rigidbody, float>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveY(target, duration, easer.Evaluate);
+            => component.CoMoveY(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Z", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveZSegment : RigidbodyTimedSegment<float>
+    public sealed class RigidbodyMoveZSegment : TowardsSegment<Rigidbody, float>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveZ(target, duration, easer.Evaluate);
+            => component.CoMoveZ(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards XY", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveXYSegment : RigidbodyTimedSegment<Vector2>
+    public sealed class RigidbodyMoveXYSegment : TowardsSegment<Rigidbody, Vector2>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveXY(target, duration, easer.Evaluate);
+            => component.CoMoveXY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards YZ", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveYZSegment : RigidbodyTimedSegment<Vector2>
+    public sealed class RigidbodyMoveYZSegment : TowardsSegment<Rigidbody, Vector2>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveYZ(target, duration, easer.Evaluate);
+            => component.CoMoveYZ(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards XZ", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveXZSegment : RigidbodyTimedSegment<Vector2>
+    public sealed class RigidbodyMoveXZSegment : TowardsSegment<Rigidbody, Vector2>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveXZ(target, duration, easer.Evaluate);
+            => component.CoMoveXZ(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveBetweenSegment : RigidbodyBetweenSegment<Vector3>
+    public sealed class RigidbodyMoveBetweenSegment : BetweenSegment<Rigidbody, Vector3>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMove(start, target, duration, easer.Evaluate);
+            => component.CoMove(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveXBetweenSegment : RigidbodyBetweenSegment<float>
+    public sealed class RigidbodyMoveXBetweenSegment : BetweenSegment<Rigidbody, float>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveX(start, target, duration, easer.Evaluate);
+            => component.CoMoveX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveYBetweenSegment : RigidbodyBetweenSegment<float>
+    public sealed class RigidbodyMoveYBetweenSegment : BetweenSegment<Rigidbody, float>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveY(start, target, duration, easer.Evaluate);
+            => component.CoMoveY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Z", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveZBetweenSegment : RigidbodyBetweenSegment<float>
+    public sealed class RigidbodyMoveZBetweenSegment : BetweenSegment<Rigidbody, float>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveZ(start, target, duration, easer.Evaluate);
+            => component.CoMoveZ(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between XY", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveXYBetweenSegment : RigidbodyBetweenSegment<Vector2>
+    public sealed class RigidbodyMoveXYBetweenSegment : BetweenSegment<Rigidbody, Vector2>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveXY(start, target, duration, easer.Evaluate);
+            => component.CoMoveXY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between YZ", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveYZBetweenSegment : RigidbodyBetweenSegment<Vector2>
+    public sealed class RigidbodyMoveYZBetweenSegment : BetweenSegment<Rigidbody, Vector2>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveYZ(start, target, duration, easer.Evaluate);
+            => component.CoMoveYZ(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between XZ", SegmentPath.RigidbodyMove, SegmentGroup.Core)]
-    public sealed class RigidbodyMoveXZBetweenSegment : RigidbodyBetweenSegment<Vector2>
+    public sealed class RigidbodyMoveXZBetweenSegment : BetweenSegment<Rigidbody, Vector2>
     {
         public override IEnumerator Build()
-            => rigidbody.CoMoveXZ(start, target, duration, easer.Evaluate);
+            => component.CoMoveXZ(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Rotate
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RigidbodyRotate, SegmentGroup.Core)]
-    public sealed class RigidbodyRotateSegment : RigidbodyTimedSegment<Vector3>
+    public sealed class RigidbodyRotateSegment : TowardsSegment<Rigidbody, Vector3>
     {
         public override IEnumerator Build()
-            => rigidbody.CoRotate(Quaternion.Euler(target), duration, easer.Evaluate);
+            => component.CoRotate(Quaternion.Euler(target), duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RigidbodyRotate, SegmentGroup.Core)]
-    public sealed class RigidbodyRotateBetweenSegment : RigidbodyBetweenSegment<Vector3>
+    public sealed class RigidbodyRotateBetweenSegment : BetweenSegment<Rigidbody, Vector3>
     {
         public override IEnumerator Build()
-            => rigidbody.CoRotate(Quaternion.Euler(start), Quaternion.Euler(target), duration, easer.Evaluate);
+            => component.CoRotate(Quaternion.Euler(start), Quaternion.Euler(target), duration, easer.Evaluate);
     }
     #endregion
 }

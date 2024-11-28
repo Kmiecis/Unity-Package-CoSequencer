@@ -5,51 +5,32 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class OutlineSegment<T> : TimedSegment
-    {
-        public Outline outline;
-        public T target;
-    }
-
-    public abstract class OutlineTimedSegment<T> : TimedSegment
-    {
-        public Outline outline;
-        public T target;
-    }
-
-    public abstract class OutlineBetweenSegment<T> : TimedSegment
-    {
-        public Outline outline;
-        public T start;
-        public T target;
-    }
-
     #region Shadow
     [Serializable]
     [SegmentMenu("Set", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
-    public sealed class OutlineEffectColorSetSegment : OutlineSegment<Color>
+    public sealed class OutlineEffectColorSetSegment : SetSegment<Outline, Color>
     {
         public OutlineEffectColorSetSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => outline.CoEffectColor(target);
+            => component.CoEffectColor(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
-    public sealed class OutlineEffectColorSegment : OutlineTimedSegment<Color>
+    public sealed class OutlineEffectColorSegment : TowardsSegment<Outline, Color>
     {
         public OutlineEffectColorSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => outline.CoEffectColor(target, duration, easer.Evaluate);
+            => component.CoEffectColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.OutlineEffectColor, SegmentGroup.UI)]
-    public sealed class OutlineEffectColorBetweenSegment : OutlineBetweenSegment<Color>
+    public sealed class OutlineEffectColorBetweenSegment : BetweenSegment<Outline, Color>
     {
         public OutlineEffectColorBetweenSegment()
         {
@@ -58,34 +39,34 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => outline.CoEffectColor(start, target, duration, easer.Evaluate);
+            => component.CoEffectColor(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Set", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
-    public sealed class OutlineEffectFadeSetSegment : OutlineSegment<float>
+    public sealed class OutlineEffectFadeSetSegment : SetSegment<Outline, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => outline.CoEffectFade(target);
+            => component.CoEffectFade(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
-    public sealed class OutlineEffectFadeSegment : OutlineTimedSegment<float>
+    public sealed class OutlineEffectFadeSegment : TowardsSegment<Outline, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => outline.CoEffectFade(target, duration, easer.Evaluate);
+            => component.CoEffectFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.OutlineEffectFade, SegmentGroup.UI)]
-    public sealed class OutlineEffectFadeBetweenSegment : OutlineBetweenSegment<float>
+    public sealed class OutlineEffectFadeBetweenSegment : BetweenSegment<Outline, float>
     {
         public override void OnValidate()
         {
@@ -94,15 +75,15 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => outline.CoEffectFade(start, target, duration, easer.Evaluate);
+            => component.CoEffectFade(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Effect Gradient", SegmentPath.Outline, SegmentGroup.UI)]
-    public sealed class OutlineEffectGradientSegment : OutlineTimedSegment<Gradient>
+    public sealed class OutlineEffectGradientSegment : TowardsSegment<Outline, Gradient>
     {
         public override IEnumerator Build()
-            => outline.CoEffectGradient(target, duration, easer.Evaluate);
+            => component.CoEffectGradient(target, duration, easer.Evaluate);
     }
     #endregion
 }

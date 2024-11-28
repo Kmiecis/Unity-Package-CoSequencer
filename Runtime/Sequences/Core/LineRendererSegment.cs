@@ -4,51 +4,32 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class LineRendererSegment<T> : Segment
-    {
-        public LineRenderer renderer;
-        public T target;
-    }
-
-    public abstract class LineRendererTimedSegment<T> : TimedSegment
-    {
-        public LineRenderer renderer;
-        public T target;
-    }
-
-    public abstract class LineRendererBetweenSegment<T> : TimedSegment
-    {
-        public LineRenderer renderer;
-        public T start;
-        public T target;
-    }
-
     #region Color
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererStartColor, SegmentGroup.Core)]
-    public sealed class LineRendererStartColorSetSegment : LineRendererSegment<Color>
+    public sealed class LineRendererStartColorSetSegment : SetSegment<LineRenderer, Color>
     {
         public LineRendererStartColorSetSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => renderer.CoStartColor(target);
+            => component.CoStartColor(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererStartColor, SegmentGroup.Core)]
-    public sealed class LineRendererStartColorSegment : LineRendererTimedSegment<Color>
+    public sealed class LineRendererStartColorSegment : TowardsSegment<LineRenderer, Color>
     {
         public LineRendererStartColorSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => renderer.CoStartColor(target, duration, easer.Evaluate);
+            => component.CoStartColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererStartColor, SegmentGroup.Core)]
-    public sealed class LineRendererStartColorBetweenSegment : LineRendererBetweenSegment<Color>
+    public sealed class LineRendererStartColorBetweenSegment : BetweenSegment<LineRenderer, Color>
     {
         public LineRendererStartColorBetweenSegment()
         {
@@ -57,34 +38,34 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => renderer.CoStartColor(start, target, duration, easer.Evaluate);
+            => component.CoStartColor(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererEndColor, SegmentGroup.Core)]
-    public sealed class LineRendererEndColorSetSegment : LineRendererSegment<Color>
+    public sealed class LineRendererEndColorSetSegment : SetSegment<LineRenderer, Color>
     {
         public LineRendererEndColorSetSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => renderer.CoEndColor(target);
+            => component.CoEndColor(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererEndColor, SegmentGroup.Core)]
-    public sealed class LineRendererEndColorSegment : LineRendererTimedSegment<Color>
+    public sealed class LineRendererEndColorSegment : TowardsSegment<LineRenderer, Color>
     {
         public LineRendererEndColorSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => renderer.CoEndColor(target, duration, easer.Evaluate);
+            => component.CoEndColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererEndColor, SegmentGroup.Core)]
-    public sealed class LineRendererEndColorBetweenSegment : LineRendererBetweenSegment<Color>
+    public sealed class LineRendererEndColorBetweenSegment : BetweenSegment<LineRenderer, Color>
     {
         public LineRendererEndColorBetweenSegment()
         {
@@ -93,36 +74,36 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => renderer.CoEndColor(start, target, duration, easer.Evaluate);
+            => component.CoEndColor(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Fade
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererStartFade, SegmentGroup.Core)]
-    public sealed class LineRendererStartFadeSetSegment : LineRendererSegment<float>
+    public sealed class LineRendererStartFadeSetSegment : SetSegment<LineRenderer, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => renderer.CoStartFade(target);
+            => component.CoStartFade(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererStartFade, SegmentGroup.Core)]
-    public sealed class LineRendererStartFadeSegment : LineRendererTimedSegment<float>
+    public sealed class LineRendererStartFadeSegment : TowardsSegment<LineRenderer, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => renderer.CoStartFade(target, duration, easer.Evaluate);
+            => component.CoStartFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererStartFade, SegmentGroup.Core)]
-    public sealed class LineRendererStartFadeBetweenSegment : LineRendererBetweenSegment<float>
+    public sealed class LineRendererStartFadeBetweenSegment : BetweenSegment<LineRenderer, float>
     {
         public override void OnValidate()
         {
@@ -131,34 +112,34 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => renderer.CoStartFade(start, target, duration, easer.Evaluate);
+            => component.CoStartFade(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererEndFade, SegmentGroup.Core)]
-    public sealed class LineRendererEndFadeSetSegment : LineRendererSegment<float>
+    public sealed class LineRendererEndFadeSetSegment : SetSegment<LineRenderer, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => renderer.CoEndFade(target);
+            => component.CoEndFade(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererEndFade, SegmentGroup.Core)]
-    public sealed class LineRendererEndFadeSegment : LineRendererTimedSegment<float>
+    public sealed class LineRendererEndFadeSegment : TowardsSegment<LineRenderer, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => renderer.CoEndFade(target, duration, easer.Evaluate);
+            => component.CoEndFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererEndFade, SegmentGroup.Core)]
-    public sealed class LineRendererEndFadeBetweenSegment : LineRendererBetweenSegment<float>
+    public sealed class LineRendererEndFadeBetweenSegment : BetweenSegment<LineRenderer, float>
     {
         public override void OnValidate()
         {
@@ -167,57 +148,57 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => renderer.CoEndFade(start, target, duration, easer.Evaluate);
+            => component.CoEndFade(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Width
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererStartWidth, SegmentGroup.Core)]
-    public sealed class LineRendererStartWidthSetSegment : LineRendererSegment<float>
+    public sealed class LineRendererStartWidthSetSegment : SetSegment<LineRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoStartWidth(target);
+            => component.CoStartWidth(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererStartWidth, SegmentGroup.Core)]
-    public sealed class LineRendererStartWidthSegment : LineRendererTimedSegment<float>
+    public sealed class LineRendererStartWidthSegment : TowardsSegment<LineRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoStartWidth(target, duration, easer.Evaluate);
+            => component.CoStartWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererStartWidth, SegmentGroup.Core)]
-    public sealed class LineRendererStartWidthBetweenSegment : LineRendererBetweenSegment<float>
+    public sealed class LineRendererStartWidthBetweenSegment : BetweenSegment<LineRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoStartWidth(start, target, duration, easer.Evaluate);
+            => component.CoStartWidth(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LineRendererEndWidth, SegmentGroup.Core)]
-    public sealed class LineRendererEndWidthSetSegment : LineRendererSegment<float>
+    public sealed class LineRendererEndWidthSetSegment : SetSegment<LineRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoEndWidth(target);
+            => component.CoEndWidth(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LineRendererEndWidth, SegmentGroup.Core)]
-    public sealed class LineRendererEndWidthSegment : LineRendererTimedSegment<float>
+    public sealed class LineRendererEndWidthSegment : TowardsSegment<LineRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoEndWidth(target, duration, easer.Evaluate);
+            => component.CoEndWidth(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LineRendererEndWidth, SegmentGroup.Core)]
-    public sealed class LineRendererEndWidthBetweenSegment : LineRendererBetweenSegment<float>
+    public sealed class LineRendererEndWidthBetweenSegment : BetweenSegment<LineRenderer, float>
     {
         public override IEnumerator Build()
-            => renderer.CoEndWidth(start, target, duration, easer.Evaluate);
+            => component.CoEndWidth(start, target, duration, easer.Evaluate);
     }
     #endregion
 }

@@ -9,16 +9,30 @@ namespace CommonEditor.Coroutines
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            UEditorGUI.UnfoldedLabelField(ref position, label, EditorStyles.boldLabel);
-            UEditorGUI.UnfoldedPropertyField(ref position, property);
+            if (property.IsInArray())
+            {
+                UEditorGUI.UnfoldedLabelField(ref position, label, EditorStyles.boldLabel);
+                UEditorGUI.UnfoldedPropertyField(ref position, property);
+            }
+            else
+            {
+                EditorGUI.PropertyField(position, property, label, true);
+            }
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return (
-                UEditorGUI.GetUnfoldedLabelHeight(label) +
-                UEditorGUI.GetUnfoldedPropertyHeight(property)
-            );
+            if (property.IsInArray())
+            {
+                return (
+                    UEditorGUI.GetUnfoldedLabelHeight(label) +
+                    UEditorGUI.GetUnfoldedPropertyHeight(property)
+                );
+            }
+            else
+            {
+                return EditorGUI.GetPropertyHeight(property, true);
+            }
         }
     }
 }

@@ -4,51 +4,32 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class CanvasGroupSegment<T> : Segment
-    {
-        public CanvasGroup canvas;
-        public T target;
-    }
-
-    public abstract class CanvasGroupTimedSegment<T> : TimedSegment
-    {
-        public CanvasGroup canvas;
-        public T target;
-    }
-
-    public abstract class CanvasGroupBetweenSegment<T> : TimedSegment
-    {
-        public CanvasGroup canvas;
-        public T start;
-        public T target;
-    }
-
     #region Fade
     [Serializable]
     [SegmentMenu("Set", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
-    public sealed class CanvasGroupFadeSetSegment : CanvasGroupSegment<float>
+    public sealed class CanvasGroupFadeSetSegment : SetSegment<CanvasGroup, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => canvas.CoFade(target);
+            => component.CoFade(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
-    public sealed class CanvasGroupFadeSegment : CanvasGroupTimedSegment<float>
+    public sealed class CanvasGroupFadeSegment : TowardsSegment<CanvasGroup, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
         public override IEnumerator Build()
-            => canvas.CoFade(target, duration, easer.Evaluate);
+            => component.CoFade(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.CanvasGroupFade, SegmentGroup.UI)]
-    public sealed class CanvasGroupFadeBetweenSegment : CanvasGroupBetweenSegment<float>
+    public sealed class CanvasGroupFadeBetweenSegment : BetweenSegment<CanvasGroup, float>
     {
         public override void OnValidate()
         {
@@ -57,7 +38,7 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => canvas.CoFade(start, target, duration, easer.Evaluate);
+            => component.CoFade(start, target, duration, easer.Evaluate);
     }
     #endregion
 }

@@ -5,77 +5,58 @@ using UnityEngine.UI;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class SliderSegment<T> : Segment
-    {
-        public Slider slider;
-        public T target;
-    }
-
-    public abstract class SliderTimerSegment<T> : TimedSegment
-    {
-        public Slider slider;
-        public T target;
-    }
-
-    public abstract class SliderBetweenSegment<T> : TimedSegment
-    {
-        public Slider slider;
-        public T start;
-        public T target;
-    }
-
     #region Value
     [Serializable]
     [SegmentMenu("Set", SegmentPath.SliderValue, SegmentGroup.UI)]
-    public sealed class SliderValueSetSegment : SliderSegment<float>
+    public sealed class SliderValueSetSegment : SetSegment<Slider, float>
     {
         public override IEnumerator Build()
-            => slider.CoValue(target);
+            => component.CoValue(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.SliderValue, SegmentGroup.UI)]
-    public sealed class SliderValueSegment : SliderTimerSegment<float>
+    public sealed class SliderValueSegment : TowardsSegment<Slider, float>
     {
         public override IEnumerator Build()
-            => slider.CoValue(target, duration, easer.Evaluate);
+            => component.CoValue(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.SliderValue, SegmentGroup.UI)]
-    public sealed class SliderValueBetweenSegment : SliderBetweenSegment<float>
+    public sealed class SliderValueBetweenSegment : BetweenSegment<Slider, float>
     {
         public override IEnumerator Build()
-            => slider.CoValue(start, target, duration, easer.Evaluate);
+            => component.CoValue(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region NormalizedValue
     [Serializable]
     [SegmentMenu("Set", SegmentPath.SliderNormalizedValue, SegmentGroup.UI)]
-    public sealed class SliderNormalizedValueSetSegment : SliderSegment<float>
+    public sealed class SliderNormalizedValueSetSegment : SetSegment<Slider, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => slider.CoNormalizedValue(target);
+            => component.CoNormalizedValue(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.SliderNormalizedValue, SegmentGroup.UI)]
-    public sealed class SliderNormalizedValueSegment : SliderTimerSegment<float>
+    public sealed class SliderNormalizedValueSegment : TowardsSegment<Slider, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
         
         public override IEnumerator Build()
-            => slider.CoNormalizedValue(target, duration, easer.Evaluate);
+            => component.CoNormalizedValue(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.SliderNormalizedValue, SegmentGroup.UI)]
-    public sealed class SliderNormalizedValueBetweenSegment : SliderBetweenSegment<float>
+    public sealed class SliderNormalizedValueBetweenSegment : BetweenSegment<Slider, float>
     {
         public override void OnValidate()
         {
@@ -84,7 +65,7 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => slider.CoNormalizedValue(start, target, duration, easer.Evaluate);
+            => component.CoNormalizedValue(start, target, duration, easer.Evaluate);
     }
     #endregion
 }

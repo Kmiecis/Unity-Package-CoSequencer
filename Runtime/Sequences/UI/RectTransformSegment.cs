@@ -4,540 +4,521 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class RectTransformSegment<T> : Segment
-    {
-        public RectTransform transform;
-        public T target;
-    }
-
-    public abstract class RectTransformTimedSegment<T> : TimedSegment
-    {
-        public RectTransform transform;
-        public T target;
-    }
-
-    public abstract class RectTransformBetweenSegment<T> : TimedSegment
-    {
-        public RectTransform transform;
-        public T start;
-        public T target;
-    }
-
     #region AnchorMin
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformAnchorMinSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMin(target);
+            => component.CoAnchorMin(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMinSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMin(target, duration, easer.Evaluate);
+            => component.CoAnchorMin(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformAnchorMinXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMinX(target, duration, easer.Evaluate);
+            => component.CoAnchorMinX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformAnchorMinYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMinY(target, duration, easer.Evaluate);
+            => component.CoAnchorMinY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformAnchorMinBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMin(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMin(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformAnchorMinXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMinX(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMinX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformAnchorMinYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMinY(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMinY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMinBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMinBy(target, duration, easer.Evaluate);
+            => component.CoAnchorMinBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformAnchorMin, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMinForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMinForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMinFor(target, duration, easer.Evaluate);
+            => component.CoAnchorMinFor(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region AnchorMax
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformAnchorMaxSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMax(target);
+            => component.CoAnchorMax(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMaxSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMax(target, duration, easer.Evaluate);
+            => component.CoAnchorMax(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformAnchorMaxXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMaxX(target, duration, easer.Evaluate);
+            => component.CoAnchorMaxX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformAnchorMaxYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMaxY(target, duration, easer.Evaluate);
+            => component.CoAnchorMaxY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformAnchorMaxBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMax(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMax(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformAnchorMaxXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMaxX(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMaxX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformAnchorMaxYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMaxY(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMaxY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMaxBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMaxBy(target, duration, easer.Evaluate);
+            => component.CoAnchorMaxBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformAnchorMax, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMaxForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMaxForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMaxFor(target, duration, easer.Evaluate);
+            => component.CoAnchorMaxFor(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region AnchorMove
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformAnchorMoveSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMove(target);
+            => component.CoAnchorMove(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMoveSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMove(target, duration, easer.Evaluate);
+            => component.CoAnchorMove(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformAnchorMoveXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMoveX(target, duration, easer.Evaluate);
+            => component.CoAnchorMoveX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformAnchorMoveYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMoveY(target, duration, easer.Evaluate);
+            => component.CoAnchorMoveY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformAnchorMoveBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMove(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMove(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformAnchorMoveXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMoveX(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMoveX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformAnchorMoveYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMoveY(start, target, duration, easer.Evaluate);
+            => component.CoAnchorMoveY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMoveBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMoveBy(target, duration, easer.Evaluate);
+            => component.CoAnchorMoveBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformAnchorMove, SegmentGroup.UI)]
-    public sealed class RectTransformAnchorMoveForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformAnchorMoveForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoAnchorMoveFor(target, duration, easer.Evaluate);
+            => component.CoAnchorMoveFor(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region OffsetMin
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformOffsetMinSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMin(target);
+            => component.CoOffsetMin(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformOffsetMinSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMin(target, duration, easer.Evaluate);
+            => component.CoOffsetMin(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformOffsetMinXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMinX(target, duration, easer.Evaluate);
+            => component.CoOffsetMinX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformOffsetMinYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMinY(target, duration, easer.Evaluate);
+            => component.CoOffsetMinY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformOffsetMinBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMin(start, target, duration, easer.Evaluate);
+            => component.CoOffsetMin(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformOffsetMinXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMinX(start, target, duration, easer.Evaluate);
+            => component.CoOffsetMinX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformOffsetMinYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMinY(start, target, duration, easer.Evaluate);
+            => component.CoOffsetMinY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformOffsetMinBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMinBy(target, duration, easer.Evaluate);
+            => component.CoOffsetMinBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformOffsetMin, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMinForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformOffsetMinForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMinFor(target, duration, easer.Evaluate);
+            => component.CoOffsetMinFor(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region OffsetMax
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformOffsetMaxSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMax(target);
+            => component.CoOffsetMax(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformOffsetMaxSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMax(target, duration, easer.Evaluate);
+            => component.CoOffsetMax(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformOffsetMaxXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMaxX(target, duration, easer.Evaluate);
+            => component.CoOffsetMaxX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformOffsetMaxYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMaxY(target, duration, easer.Evaluate);
+            => component.CoOffsetMaxY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformOffsetMaxBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMax(start, target, duration, easer.Evaluate);
+            => component.CoOffsetMax(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformOffsetMaxXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMaxX(start, target, duration, easer.Evaluate);
+            => component.CoOffsetMaxX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformOffsetMaxYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMaxY(start, target, duration, easer.Evaluate);
+            => component.CoOffsetMaxY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformOffsetMaxBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMaxBy(target, duration, easer.Evaluate);
+            => component.CoOffsetMaxBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformOffsetMax, SegmentGroup.UI)]
-    public sealed class RectTransformOffsetMaxForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformOffsetMaxForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoOffsetMaxFor(target, duration, easer.Evaluate);
+            => component.CoOffsetMaxFor(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Pivot
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformPivotSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoPivot(target);
+            => component.CoPivot(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformPivotSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoPivot(target, duration, easer.Evaluate);
+            => component.CoPivot(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformPivotXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoPivotX(target, duration, easer.Evaluate);
+            => component.CoPivotX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformPivotYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoPivotY(target, duration, easer.Evaluate);
+            => component.CoPivotY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformPivotBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoPivot(start, target, duration, easer.Evaluate);
+            => component.CoPivot(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformPivotXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoPivotX(start, target, duration, easer.Evaluate);
+            => component.CoPivotX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformPivotYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoPivotY(start, target, duration, easer.Evaluate);
+            => component.CoPivotY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformPivotBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoPivotBy(target, duration, easer.Evaluate);
+            => component.CoPivotBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformPivot, SegmentGroup.UI)]
-    public sealed class RectTransformPivotForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformPivotForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoPivotFor(target, duration, easer.Evaluate);
+            => component.CoPivotFor(target, duration, easer.Evaluate);
     }
     #endregion
 
     #region SizeDelta
     [Serializable]
     [SegmentMenu("Set", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaSetSegment : RectTransformSegment<Vector2>
+    public sealed class RectTransformSizeDeltaSetSegment : SetSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDelta(target);
+            => component.CoSizeDelta(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformSizeDeltaSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDelta(target, duration, easer.Evaluate);
+            => component.CoSizeDelta(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Towards X", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaXSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformSizeDeltaXSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDeltaX(target, duration, easer.Evaluate);
+            => component.CoSizeDeltaX(target, duration, easer.Evaluate);
     }
     
     [Serializable]
     [SegmentMenu("Towards Y", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaYSegment : RectTransformTimedSegment<float>
+    public sealed class RectTransformSizeDeltaYSegment : TowardsSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDeltaY(target, duration, easer.Evaluate);
+            => component.CoSizeDeltaY(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaBetweenSegment : RectTransformBetweenSegment<Vector2>
+    public sealed class RectTransformSizeDeltaBetweenSegment : BetweenSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDelta(start, target, duration, easer.Evaluate);
+            => component.CoSizeDelta(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between X", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaXBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformSizeDeltaXBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDeltaX(start, target, duration, easer.Evaluate);
+            => component.CoSizeDeltaX(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between Y", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaYBetweenSegment : RectTransformBetweenSegment<float>
+    public sealed class RectTransformSizeDeltaYBetweenSegment : BetweenSegment<RectTransform, float>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDeltaY(start, target, duration, easer.Evaluate);
+            => component.CoSizeDeltaY(start, target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("By", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaBySegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformSizeDeltaBySegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDeltaBy(target, duration, easer.Evaluate);
+            => component.CoSizeDeltaBy(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("For", SegmentPath.RectTransformSizeDelta, SegmentGroup.UI)]
-    public sealed class RectTransformSizeDeltaForSegment : RectTransformTimedSegment<Vector2>
+    public sealed class RectTransformSizeDeltaForSegment : TowardsSegment<RectTransform, Vector2>
     {
         public override IEnumerator Build()
-            => transform.CoSizeDeltaFor(target, duration, easer.Evaluate);
+            => component.CoSizeDeltaFor(target, duration, easer.Evaluate);
     }
     #endregion
 }

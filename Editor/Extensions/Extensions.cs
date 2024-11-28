@@ -45,6 +45,11 @@ namespace CommonEditor.Coroutines
         #endregion
 
         #region SerializedProperty
+        public static bool IsInArray(this SerializedProperty self)
+        {
+            return self.propertyPath.EndsWith("]");
+        }
+
         public static IEnumerable<SerializedProperty> GetChildren(this SerializedProperty self)
         {
             var iterator = self.Copy();

@@ -4,51 +4,32 @@ using UnityEngine;
 
 namespace Common.Coroutines.Segments
 {
-    public abstract class LightSegment<T> : Segment
-    {
-        public Light light;
-        public T target;
-    }
-
-    public abstract class LightTimedSegment<T> : TimedSegment
-    {
-        public Light light;
-        public T target;
-    }
-
-    public abstract class LightBetweenSegment<T> : TimedSegment
-    {
-        public Light light;
-        public T start;
-        public T target;
-    }
-
     #region Color
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LightColor, SegmentGroup.Core)]
-    public sealed class LightColorSetSegment : LightSegment<Color>
+    public sealed class LightColorSetSegment : SetSegment<Light, Color>
     {
         public LightColorSetSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => light.CoColor(target);
+            => component.CoColor(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightColor, SegmentGroup.Core)]
-    public sealed class LightColorSegment : LightTimedSegment<Color>
+    public sealed class LightColorSegment : TowardsSegment<Light, Color>
     {
         public LightColorSegment()
             => target = Color.white;
 
         public override IEnumerator Build()
-            => light.CoColor(target, duration, easer.Evaluate);
+            => component.CoColor(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LightColor, SegmentGroup.Core)]
-    public sealed class LightColorBetweenSegment : LightBetweenSegment<Color>
+    public sealed class LightColorBetweenSegment : BetweenSegment<Light, Color>
     {
         public LightColorBetweenSegment()
         {
@@ -57,36 +38,36 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => light.CoColor(start, target, duration, easer.Evaluate);
+            => component.CoColor(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Intensity
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LightIntensity, SegmentGroup.Core)]
-    public sealed class LightIntensitySetSegment : LightSegment<float>
+    public sealed class LightIntensitySetSegment : SetSegment<Light, float>
     {
         public override void OnValidate()
             => target = Mathf.Max(target, 0.0f);
 
         public override IEnumerator Build()
-            => light.CoIntensity(target);
+            => component.CoIntensity(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightIntensity, SegmentGroup.Core)]
-    public sealed class LightIntensitySegment : LightTimedSegment<float>
+    public sealed class LightIntensitySegment : TowardsSegment<Light, float>
     {
         public override void OnValidate()
             => target = Mathf.Max(target, 0.0f);
 
         public override IEnumerator Build()
-            => light.CoIntensity(target, duration, easer.Evaluate);
+            => component.CoIntensity(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LightIntensity, SegmentGroup.Core)]
-    public sealed class LightIntensityBetweenSegment : LightBetweenSegment<float>
+    public sealed class LightIntensityBetweenSegment : BetweenSegment<Light, float>
     {
         public override void OnValidate()
         {
@@ -95,62 +76,62 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => light.CoIntensity(start, target, duration, easer.Evaluate);
+            => component.CoIntensity(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region Range
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LightRange, SegmentGroup.Core)]
-    public sealed class LightRangeSetSegment : LightSegment<float>
+    public sealed class LightRangeSetSegment : SetSegment<Light, float>
     {
         public override IEnumerator Build()
-            => light.CoRange(target);
+            => component.CoRange(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightRange, SegmentGroup.Core)]
-    public sealed class LightRangeSegment : LightTimedSegment<float>
+    public sealed class LightRangeSegment : TowardsSegment<Light, float>
     {
         public override IEnumerator Build()
-            => light.CoRange(target, duration, easer.Evaluate);
+            => component.CoRange(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LightRange, SegmentGroup.Core)]
-    public sealed class LightRangeBetweenSegment : LightBetweenSegment<float>
+    public sealed class LightRangeBetweenSegment : BetweenSegment<Light, float>
     {
         public override IEnumerator Build()
-            => light.CoRange(start, target, duration, easer.Evaluate);
+            => component.CoRange(start, target, duration, easer.Evaluate);
     }
     #endregion
 
     #region ShadowStrength
     [Serializable]
     [SegmentMenu("Set", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
-    public sealed class LightShadowStrengthSetSegment : LightSegment<float>
+    public sealed class LightShadowStrengthSetSegment : SetSegment<Light, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => light.CoShadowStrength(target);
+            => component.CoShadowStrength(target);
     }
 
     [Serializable]
     [SegmentMenu("Towards", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
-    public sealed class LightShadowStrengthSegment : LightTimedSegment<float>
+    public sealed class LightShadowStrengthSegment : TowardsSegment<Light, float>
     {
         public override void OnValidate()
             => target = Mathf.Clamp(target, 0.0f, 1.0f);
 
         public override IEnumerator Build()
-            => light.CoShadowStrength(target, duration, easer.Evaluate);
+            => component.CoShadowStrength(target, duration, easer.Evaluate);
     }
 
     [Serializable]
     [SegmentMenu("Between", SegmentPath.LightShadowStrength, SegmentGroup.Core)]
-    public sealed class LightShadowStrengthBetweenSegment : LightBetweenSegment<float>
+    public sealed class LightShadowStrengthBetweenSegment : BetweenSegment<Light, float>
     {
         public override void OnValidate()
         {
@@ -159,7 +140,7 @@ namespace Common.Coroutines.Segments
         }
 
         public override IEnumerator Build()
-            => light.CoShadowStrength(start, target, duration, easer.Evaluate);
+            => component.CoShadowStrength(start, target, duration, easer.Evaluate);
     }
     #endregion
 }
