@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Common.Coroutines
@@ -81,6 +82,15 @@ namespace Common.Coroutines
         FormerlySerializedAs("element"), FormerlySerializedAs("outline"), FormerlySerializedAs("scroll"),
         FormerlySerializedAs("shadow"), FormerlySerializedAs("slider"), FormerlySerializedAs("text")]
         public TComponent component;
+        public TValue start;
+        public TValue target;
+        public float duration = 1.0f;
+        public AnimationCurve easer = UAnimationCurve.EaseInOutNormalized();
+    }
+
+    public abstract class ConsumerSegment<TValue> : Segment
+    {
+        public UnityEvent<TValue> consumer = new UnityEvent<TValue>();
         public TValue start;
         public TValue target;
         public float duration = 1.0f;
