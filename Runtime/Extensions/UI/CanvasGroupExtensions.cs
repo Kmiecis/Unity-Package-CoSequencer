@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -9,11 +10,17 @@ namespace Common.Coroutines
         public static IEnumerator CoFade(this CanvasGroup self, float target)
             => Yield.Into(target, self.SetAlpha);
 
+        public static IEnumerator CoFade(this CanvasGroup self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetAlpha, target, self.SetAlpha, timer);
+
+        public static IEnumerator CoFade(this CanvasGroup self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetAlpha, timer);
+
         public static IEnumerator CoFade(this CanvasGroup self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetAlpha, target, self.SetAlpha, Yield.Time(duration, easer));
+            => self.CoFade(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoFade(this CanvasGroup self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetAlpha, Yield.Time(duration, easer));
+            => self.CoFade(start, target, Yield.Time(duration, easer));
     }
 
     internal static class InternalCanvasGroupExtensions

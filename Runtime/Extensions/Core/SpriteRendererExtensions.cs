@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -10,53 +11,89 @@ namespace Common.Coroutines
         public static IEnumerator CoColor(this SpriteRenderer self, Color target)
            => Yield.Into(target, self.SetColor);
 
+        public static IEnumerator CoColor(this SpriteRenderer self, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetColor, target, self.SetColor, timer);
+
+        public static IEnumerator CoColor(this SpriteRenderer self, Color start, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetColor, timer);
+
         public static IEnumerator CoColor(this SpriteRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetColor, target, self.SetColor, Yield.Time(duration, easer));
+            => self.CoColor(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoColor(this SpriteRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetColor, Yield.Time(duration, easer));
+            => self.CoColor(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Fade
         public static IEnumerator CoFade(this SpriteRenderer self, float target)
             => Yield.Into(target, self.SetColorA);
 
+        public static IEnumerator CoFade(this SpriteRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetColorA, target, self.SetColorA, timer);
+
+        public static IEnumerator CoFade(this SpriteRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetColorA, timer);
+
         public static IEnumerator CoFade(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetColorA, target, self.SetColorA, Yield.Time(duration, easer));
+            => self.CoFade(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoFade(this SpriteRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetColorA, Yield.Time(duration, easer));
+            => self.CoFade(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Gradient
+        public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, IEnumerator<float> timer)
+            => Yield.ValueTo(target.Evaluate, self.SetColor, timer);
+
+        public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float from, float to, IEnumerator<float> timer)
+            => Yield.ValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, timer);
+
         public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(target.Evaluate, self.SetColor, Yield.Time(duration, easer));
+            => self.CoGradient(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoGradient(this SpriteRenderer self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetColor, Yield.Time(duration, easer));
+            => self.CoGradient(target, from, to, Yield.Time(duration, easer));
         #endregion
 
         #region Size
         public static IEnumerator CoSize(this SpriteRenderer self, Vector2 target)
             => Yield.Into(target, self.SetSize);
 
+        public static IEnumerator CoSize(this SpriteRenderer self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetSize, target, self.SetSize, timer);
+
+        public static IEnumerator CoSize(this SpriteRenderer self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetSize, timer);
+
+        public static IEnumerator CoSizeX(this SpriteRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetSizeX, target, self.SetSizeX, timer);
+
+        public static IEnumerator CoSizeX(this SpriteRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetSizeX, timer);
+
+        public static IEnumerator CoSizeY(this SpriteRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetSizeY, target, self.SetSizeY, timer);
+
+        public static IEnumerator CoSizeY(this SpriteRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetSizeY, timer);
+
         public static IEnumerator CoSize(this SpriteRenderer self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetSize, target, self.SetSize, Yield.Time(duration, easer));
+            => self.CoSize(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoSize(this SpriteRenderer self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetSize, Yield.Time(duration, easer));
+            => self.CoSize(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeX(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetSizeX, target, self.SetSizeX, Yield.Time(duration, easer));
+            => self.CoSizeX(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeX(this SpriteRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetSizeX, Yield.Time(duration, easer));
+            => self.CoSizeX(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeY(this SpriteRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetSizeY, target, self.SetSizeY, Yield.Time(duration, easer));
+            => self.CoSizeY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoSizeY(this SpriteRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetSizeY, Yield.Time(duration, easer));
+            => self.CoSizeY(start, target, Yield.Time(duration, easer));
         #endregion
     }
 

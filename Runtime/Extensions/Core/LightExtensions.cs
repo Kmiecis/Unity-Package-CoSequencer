@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -10,44 +11,68 @@ namespace Common.Coroutines
         public static IEnumerator CoColor(this Light self, Color target)
             => Yield.Into(target, self.SetColor);
 
+        public static IEnumerator CoColor(this Light self, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetColor, target, self.SetColor, timer);
+
+        public static IEnumerator CoColor(this Light self, Color start, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetColor, timer);
+
         public static IEnumerator CoColor(this Light self, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetColor, target, self.SetColor, Yield.Time(duration, easer));
+            => self.CoColor(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoColor(this Light self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetColor, Yield.Time(duration, easer));
+            => self.CoColor(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Intensity
         public static IEnumerator CoIntensity(this Light self, float target)
             => Yield.Into(target, self.SetIntensity);
 
+        public static IEnumerator CoIntensity(this Light self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetIntensity, target, self.SetIntensity, timer);
+
+        public static IEnumerator CoIntensity(this Light self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetIntensity, timer);
+
         public static IEnumerator CoIntensity(this Light self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetIntensity, target, self.SetIntensity, Yield.Time(duration, easer));
+            => self.CoIntensity(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoIntensity(this Light self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetIntensity, Yield.Time(duration, easer));
+            => self.CoIntensity(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Range
         public static IEnumerator CoRange(this Light self, float target)
             => Yield.Into(target, self.SetRange);
 
+        public static IEnumerator CoRange(this Light self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRange, target, self.SetRange, timer);
+
+        public static IEnumerator CoRange(this Light self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetRange, timer);
+
         public static IEnumerator CoRange(this Light self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRange, target, self.SetRange, Yield.Time(duration, easer));
+            => self.CoRange(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoRange(this Light self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetRange, Yield.Time(duration, easer));
+            => self.CoRange(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Shadow
         public static IEnumerator CoShadowStrength(this Light self, float target)
             => Yield.Into(target, self.SetShadowStrength);
 
+        public static IEnumerator CoShadowStrength(this Light self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetShadowStrength, target, self.SetShadowStrength, timer);
+
+        public static IEnumerator CoShadowStrength(this Light self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetShadowStrength, timer);
+
         public static IEnumerator CoShadowStrength(this Light self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetShadowStrength, target, self.SetShadowStrength, Yield.Time(duration, easer));
+            => self.CoShadowStrength(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoShadowStrength(this Light self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetShadowStrength, Yield.Time(duration, easer));
+            => self.CoShadowStrength(start, target, Yield.Time(duration, easer));
         #endregion
     }
 

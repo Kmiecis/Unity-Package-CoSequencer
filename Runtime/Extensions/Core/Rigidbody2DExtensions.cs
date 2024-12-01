@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -7,31 +8,55 @@ namespace Common.Coroutines
     public static class Rigidbody2DExtensions
     {
         #region Move
+        public static IEnumerator CoMove(this Rigidbody2D self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPosition, target, self.MovePosition, timer);
+
+        public static IEnumerator CoMove(this Rigidbody2D self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.MovePosition, timer);
+
+        public static IEnumerator CoMoveX(this Rigidbody2D self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionX, target, self.MovePositionX, timer);
+
+        public static IEnumerator CoMoveX(this Rigidbody2D self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.MovePositionX, timer);
+
+        public static IEnumerator CoMoveY(this Rigidbody2D self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionY, target, self.MovePositionY, timer);
+
+        public static IEnumerator CoMoveY(this Rigidbody2D self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.MovePositionY, timer);
+
         public static IEnumerator CoMove(this Rigidbody2D self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPosition, target, self.MovePosition, Yield.Time(duration, easer));
+            => self.CoMove(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMove(this Rigidbody2D self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.MovePosition, Yield.Time(duration, easer));
+            => self.CoMove(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveX(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionX, target, self.MovePositionX, Yield.Time(duration, easer));
+            => self.CoMoveX(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveX(this Rigidbody2D self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.MovePositionX, Yield.Time(duration, easer));
+            => self.CoMoveX(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveY(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionY, target, self.MovePositionY, Yield.Time(duration, easer));
+            => self.CoMoveY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveY(this Rigidbody2D self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.MovePositionY, Yield.Time(duration, easer));
+            => self.CoMoveY(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Rotate
+        public static IEnumerator CoRotate(this Rigidbody2D self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRotation, target, self.MoveRotation, timer);
+
+        public static IEnumerator CoRotate(this Rigidbody2D self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.MoveRotation, timer);
+
         public static IEnumerator CoRotate(this Rigidbody2D self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRotation, target, self.MoveRotation, Yield.Time(duration, easer));
+            => self.CoRotate(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoRotate(this Rigidbody2D self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.MoveRotation, Yield.Time(duration, easer));
+            => self.CoRotate(start, target, Yield.Time(duration, easer));
         #endregion
     }
 

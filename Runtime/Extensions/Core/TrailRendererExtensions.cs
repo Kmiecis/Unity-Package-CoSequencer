@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -10,71 +11,113 @@ namespace Common.Coroutines
         public static IEnumerator CoStartColor(this TrailRenderer self, Color target)
             => Yield.Into(target, self.SetStartColor);
 
+        public static IEnumerator CoStartColor(this TrailRenderer self, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetStartColor, target, self.SetStartColor, timer);
+
+        public static IEnumerator CoStartColor(this TrailRenderer self, Color start, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetStartColor, timer);
+
         public static IEnumerator CoStartColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetStartColor, target, self.SetStartColor, Yield.Time(duration, easer));
+            => self.CoStartColor(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoStartColor(this TrailRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetStartColor, Yield.Time(duration, easer));
+            => self.CoStartColor(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndColor(this TrailRenderer self, Color target)
             => Yield.Into(target, self.SetEndColor);
 
+        public static IEnumerator CoEndColor(this TrailRenderer self, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetEndColor, target, self.SetEndColor, timer);
+
+        public static IEnumerator CoEndColor(this TrailRenderer self, Color start, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetEndColor, timer);
+
         public static IEnumerator CoEndColor(this TrailRenderer self, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetEndColor, target, self.SetEndColor, Yield.Time(duration, easer));
+            => self.CoEndColor(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndColor(this TrailRenderer self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetEndColor, Yield.Time(duration, easer));
+            => self.CoEndColor(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Fade
         public static IEnumerator CoStartFade(this TrailRenderer self, float target)
             => Yield.Into(target, self.SetStartColorA);
 
+        public static IEnumerator CoStartFade(this TrailRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetStartColorA, target, self.SetStartColorA, timer);
+
+        public static IEnumerator CoStartFade(this TrailRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetStartColorA, timer);
+
         public static IEnumerator CoStartFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetStartColorA, target, self.SetStartColorA, Yield.Time(duration, easer));
+            => self.CoStartFade(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoStartFade(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetStartColorA, Yield.Time(duration, easer));
+            => self.CoStartFade(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndFade(this TrailRenderer self, float target)
             => Yield.Into(target, self.SetEndColorA);
 
+        public static IEnumerator CoEndFade(this TrailRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetEndColorA, target, self.SetEndColorA, timer);
+
+        public static IEnumerator CoEndFade(this TrailRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetEndColorA, timer);
+
         public static IEnumerator CoEndFade(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetEndColorA, target, self.SetEndColorA, Yield.Time(duration, easer));
+            => self.CoEndFade(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndFade(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetEndColorA, Yield.Time(duration, easer));
+            => self.CoEndFade(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Time
         public static IEnumerator CoTime(this TrailRenderer self, float target)
             => Yield.Into(target, self.SetTime);
 
+        public static IEnumerator CoTime(this TrailRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetTime, target, self.SetTime, timer);
+
+        public static IEnumerator CoTime(this TrailRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetTime, timer);
+
         public static IEnumerator CoTime(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetTime, target, self.SetTime, Yield.Time(duration, easer));
+            => self.CoTime(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoTime(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetTime, Yield.Time(duration, easer));
+            => self.CoTime(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Width
         public static IEnumerator CoStartWidth(this TrailRenderer self, float target)
             => Yield.Into(target, self.SetStartWidth);
 
+        public static IEnumerator CoStartWidth(this TrailRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetStartWidth, target, self.SetStartWidth, timer);
+
+        public static IEnumerator CoStartWidth(this TrailRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetStartWidth, timer);
+
         public static IEnumerator CoStartWidth(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetStartWidth, target, self.SetStartWidth, Yield.Time(duration, easer));
+            => self.CoStartWidth(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoStartWidth(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetStartWidth, Yield.Time(duration, easer));
+            => self.CoStartWidth(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndWidth(this TrailRenderer self, float target)
             => Yield.Into(target, self.SetEndWidth);
 
+        public static IEnumerator CoEndWidth(this TrailRenderer self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetEndWidth, target, self.SetEndWidth, timer);
+
+        public static IEnumerator CoEndWidth(this TrailRenderer self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetEndWidth, timer);
+
         public static IEnumerator CoEndWidth(this TrailRenderer self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetEndWidth, target, self.SetEndWidth, Yield.Time(duration, easer));
+            => self.CoEndWidth(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEndWidth(this TrailRenderer self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetEndWidth, Yield.Time(duration, easer));
+            => self.CoEndWidth(start, target, Yield.Time(duration, easer));
         #endregion
     }
 

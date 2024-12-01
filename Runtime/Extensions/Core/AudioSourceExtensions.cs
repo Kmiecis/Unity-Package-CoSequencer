@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -10,22 +11,34 @@ namespace Common.Coroutines
         public static IEnumerator CoPitch(this AudioSource self, float target)
             => Yield.Into(target, self.SetPitch);
 
+        public static IEnumerator CoPitch(this AudioSource self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPitch, target, self.SetPitch, timer);
+
+        public static IEnumerator CoPitch(this AudioSource self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPitch, timer);
+
         public static IEnumerator CoPitch(this AudioSource self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPitch, target, self.SetPitch, Yield.Time(duration, easer));
+            => self.CoPitch(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoPitch(this AudioSource self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPitch, Yield.Time(duration, easer));
+            => self.CoPitch(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Volume
         public static IEnumerator CoVolume(this AudioSource self, float target)
             => Yield.Into(target, self.SetVolume);
 
+        public static IEnumerator CoVolume(this AudioSource self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetVolume, target, self.SetVolume, timer);
+
+        public static IEnumerator CoVolume(this AudioSource self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetVolume, timer);
+
         public static IEnumerator CoVolume(this AudioSource self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetVolume, target, self.SetVolume, Yield.Time(duration, easer));
+            => self.CoVolume(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoVolume(this AudioSource self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetVolume, Yield.Time(duration, easer));
+            => self.CoVolume(start, target, Yield.Time(duration, easer));
         #endregion
     }
 

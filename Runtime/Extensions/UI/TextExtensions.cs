@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace Common.Coroutines
@@ -10,19 +11,28 @@ namespace Common.Coroutines
         public static IEnumerator CoFontSize(this Text self, int target)
             => Yield.Into(target, self.SetFontSize);
 
+        public static IEnumerator CoFontSize(this Text self, int target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetFontSize, target, self.SetFontSize, timer);
+
+        public static IEnumerator CoFontSize(this Text self, int start, int target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetFontSize, timer);
+
         public static IEnumerator CoFontSize(this Text self, int target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetFontSize, target, self.SetFontSize, Yield.Time(duration, easer));
+            => self.CoFontSize(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoFontSize(this Text self, int start, int target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetFontSize, Yield.Time(duration, easer));
+            => self.CoFontSize(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Text
         public static IEnumerator CoText(this Text self, string target)
             => Yield.Into(target, self.SetText);
 
+        public static IEnumerator CoText(this Text self, string target, IEnumerator<float> timer)
+            => Yield.ValueTo(t => target.Substring(t), self.SetText, timer);
+
         public static IEnumerator CoText(this Text self, string target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(t => target.Substring(t), self.SetText, Yield.Time(duration, easer));
+            => self.CoText(target, Yield.Time(duration, easer));
         #endregion
     }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Video;
 
 namespace Common.Coroutines
@@ -10,11 +11,17 @@ namespace Common.Coroutines
         public static IEnumerator CoVolume(this VideoPlayer self, ushort trackIndex, float target)
             => Yield.Into(target, v => self.SetDirectAudioVolume(trackIndex, v));
 
+        public static IEnumerator CoVolume(this VideoPlayer self, ushort trackIndex, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(() => self.GetDirectAudioVolume(trackIndex), target, v => self.SetDirectAudioVolume(trackIndex, v), timer);
+
+        public static IEnumerator CoVolume(this VideoPlayer self, ushort trackIndex, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, v => self.SetDirectAudioVolume(trackIndex, v), timer);
+
         public static IEnumerator CoVolume(this VideoPlayer self, ushort trackIndex, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(() => self.GetDirectAudioVolume(trackIndex), target, v => self.SetDirectAudioVolume(trackIndex, v), Yield.Time(duration, easer));
+            => self.CoVolume(trackIndex, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoVolume(this VideoPlayer self, ushort trackIndex, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, v => self.SetDirectAudioVolume(trackIndex, v), Yield.Time(duration, easer));
+            => self.CoVolume(trackIndex, start, target, Yield.Time(duration, easer));
         #endregion
     }
 }

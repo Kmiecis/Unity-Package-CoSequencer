@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,30 +12,48 @@ namespace Common.Coroutines
         public static IEnumerator CoEffectColor(this Shadow self, Color target)
             => Yield.Into(target, self.SetEffectColor);
 
+        public static IEnumerator CoEffectColor(this Shadow self, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetEffectColor, target, self.SetEffectColor, timer);
+
+        public static IEnumerator CoEffectColor(this Shadow self, Color start, Color target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetEffectColor, timer);
+
         public static IEnumerator CoEffectColor(this Shadow self, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetEffectColor, target, self.SetEffectColor, Yield.Time(duration, easer));
+            => self.CoEffectColor(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEffectColor(this Shadow self, Color start, Color target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetEffectColor, Yield.Time(duration, easer));
+            => self.CoEffectColor(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Fade
         public static IEnumerator CoEffectFade(this Shadow self, float target)
             => Yield.Into(target, self.SetEffectColorA);
 
+        public static IEnumerator CoEffectFade(this Shadow self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetEffectColorA, target, self.SetEffectColorA, timer);
+
+        public static IEnumerator CoEffectFade(this Shadow self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetEffectColorA, timer);
+
         public static IEnumerator CoEffectFade(this Shadow self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetEffectColorA, target, self.SetEffectColorA, Yield.Time(duration, easer));
+            => self.CoEffectFade(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoEffectFade(this Shadow self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetEffectColorA, Yield.Time(duration, easer));
+            => self.CoEffectFade(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region Gradient
+        public static IEnumerator CoEffectGradient(this Shadow self, Gradient target, IEnumerator<float> timer)
+            => Yield.ValueTo(target.Evaluate, self.SetEffectColor, timer);
+
+        public static IEnumerator CoGradient(this Shadow self, Gradient target, float from, float to, IEnumerator<float> timer)
+            => Yield.ValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetEffectColor, timer);
+
         public static IEnumerator CoEffectGradient(this Shadow self, Gradient target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(target.Evaluate, self.SetEffectColor, Yield.Time(duration, easer));
+            => self.CoEffectGradient(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoGradient(this Shadow self, Gradient target, float from, float to, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetEffectColor, Yield.Time(duration, easer));
+            => self.CoGradient(target, from, to, Yield.Time(duration, easer));
         #endregion
     }
 

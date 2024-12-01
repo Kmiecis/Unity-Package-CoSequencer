@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common.Coroutines
@@ -10,230 +11,431 @@ namespace Common.Coroutines
         public static IEnumerator CoMove(this Transform self, Vector3 target)
             => Yield.Into(target, self.SetPosition);
 
+        public static IEnumerator CoMove(this Transform self, Vector3 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPosition, target, self.SetPosition, timer);
+
+        public static IEnumerator CoMove(this Transform self, Vector3 start, Vector3 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPosition, timer);
+
+        public static IEnumerator CoMove(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPosition, target.GetPosition, self.SetPosition, timer);
+
+        public static IEnumerator CoMove(this Transform self, Vector3 start, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target.GetPosition, self.SetPosition, timer);
+
+        public static IEnumerator CoMoveX(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionX, target, self.SetPositionX, timer);
+
+        public static IEnumerator CoMoveX(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPositionX, timer);
+
+        public static IEnumerator CoMoveY(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionY, target, self.SetPositionY, timer);
+
+        public static IEnumerator CoMoveY(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPositionY, timer);
+
+        public static IEnumerator CoMoveZ(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionZ, target, self.SetPositionZ, timer);
+
+        public static IEnumerator CoMoveZ(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPositionZ, timer);
+
+        public static IEnumerator CoMoveXY(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionXY, target, self.SetPositionXY, timer);
+
+        public static IEnumerator CoMoveXY(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPositionXY, timer);
+
+        public static IEnumerator CoMoveYZ(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionYZ, target, self.SetPositionYZ, timer);
+
+        public static IEnumerator CoMoveYZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPositionYZ, timer);
+
+        public static IEnumerator CoMoveXZ(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPositionXZ, target, self.SetPositionXZ, timer);
+
+        public static IEnumerator CoMoveXZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetPositionXZ, timer);
+
+        public static IEnumerator CoMoveBy(this Transform self, Vector3 offset, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetPosition, () => self.GetPositionBy(offset), self.SetPosition, timer);
+
+        public static IEnumerator CoMoveFor(this Transform self, Vector3 direction, IEnumerator<float> deltaTimer)
+            => Yield.ValueTo(t => direction * t, self.SetPositionBy, deltaTimer);
+
         public static IEnumerator CoMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPosition, target, self.SetPosition, Yield.Time(duration, easer));
+            => self.CoMove(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMove(this Transform self, Vector3 start, Vector3 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPosition, Yield.Time(duration, easer));
+            => self.CoMove(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMove(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPosition, target.GetPosition, self.SetPosition, Yield.Time(duration, easer));
+            => self.CoMove(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMove(this Transform self, Vector3 start, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target.GetPosition, self.SetPosition, Yield.Time(duration, easer));
+            => self.CoMove(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveX(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionX, target, self.SetPositionX, Yield.Time(duration, easer));
+            => self.CoMoveX(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveX(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPositionX, Yield.Time(duration, easer));
+            => self.CoMoveX(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveY(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionY, target, self.SetPositionY, Yield.Time(duration, easer));
+            => self.CoMoveY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveY(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPositionY, Yield.Time(duration, easer));
+            => self.CoMoveY(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveZ(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionZ, target, self.SetPositionZ, Yield.Time(duration, easer));
+            => self.CoMoveZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveZ(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPositionZ, Yield.Time(duration, easer));
+            => self.CoMoveZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveXY(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionXY, target, self.SetPositionXY, Yield.Time(duration, easer));
+            => self.CoMoveXY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveXY(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPositionXY, Yield.Time(duration, easer));
+            => self.CoMoveXY(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveYZ(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionYZ, target, self.SetPositionYZ, Yield.Time(duration, easer));
+            => self.CoMoveYZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveYZ(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPositionYZ, Yield.Time(duration, easer));
+            => self.CoMoveYZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveXZ(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPositionXZ, target, self.SetPositionXZ, Yield.Time(duration, easer));
+            => self.CoMoveXZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveXZ(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetPositionXZ, Yield.Time(duration, easer));
+            => self.CoMoveXZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveBy(this Transform self, Vector3 offset, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetPosition, () => self.GetPositionBy(offset), self.SetPosition, Yield.Time(duration, easer));
+            => self.CoMoveBy(offset, Yield.Time(duration, easer));
 
         public static IEnumerator CoMoveFor(this Transform self, Vector3 direction, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(t => direction * t, self.SetPositionBy, Yield.DeltaTime(duration, easer));
+            => self.CoMoveFor(direction, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region LocalMove
         public static IEnumerator CoLocalMove(this Transform self, Vector3 target)
             => Yield.Into(target, self.SetLocalPosition);
 
+        public static IEnumerator CoLocalMove(this Transform self, Vector3 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPosition, target, self.SetLocalPosition, timer);
+
+        public static IEnumerator CoLocalMove(this Transform self, Vector3 start, Vector3 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPosition, timer);
+
+        public static IEnumerator CoLocalMove(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPosition, target.GetLocalPosition, self.SetLocalPosition, timer);
+
+        public static IEnumerator CoLocalMove(this Transform self, Vector3 start, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target.GetLocalPosition, self.SetLocalPosition, timer);
+
+        public static IEnumerator CoLocalMoveX(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPositionX, target, self.SetLocalPositionX, timer);
+
+        public static IEnumerator CoLocalMoveX(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPositionX, timer);
+
+        public static IEnumerator CoLocalMoveY(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPositionY, target, self.SetLocalPositionY, timer);
+
+        public static IEnumerator CoLocalMoveY(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPositionY, timer);
+
+        public static IEnumerator CoLocalMoveZ(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPositionZ, target, self.SetLocalPositionZ, timer);
+
+        public static IEnumerator CoLocalMoveZ(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPositionZ, timer);
+
+        public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPositionXY, target, self.SetLocalPositionXY, timer);
+
+        public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPositionXY, timer);
+
+        public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPositionYZ, target, self.SetLocalPositionYZ, timer);
+
+        public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPositionYZ, timer);
+
+        public static IEnumerator CoLocalMoveXZ(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPositionXZ, target, self.SetLocalPositionXZ, timer);
+
+        public static IEnumerator CoLocalMoveXZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalPositionXZ, timer);
+
+        public static IEnumerator CoLocalMoveBy(this Transform self, Vector3 offset, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalPosition, () => self.GetLocalOffsetPosition(offset), self.SetLocalPosition, timer);
+
+        public static IEnumerator CoLocalMoveFor(this Transform self, Vector3 direction, IEnumerator<float> deltaTimer)
+            => Yield.ValueTo(t => direction * t, self.SetLocalOffsetPosition, deltaTimer);
+
         public static IEnumerator CoLocalMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPosition, target, self.SetLocalPosition, Yield.Time(duration, easer));
+            => self.CoLocalMove(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMove(this Transform self, Vector3 start, Vector3 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPosition, Yield.Time(duration, easer));
+            => self.CoLocalMove(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMove(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPosition, target.GetLocalPosition, self.SetLocalPosition, Yield.Time(duration, easer));
+            => self.CoLocalMove(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMove(this Transform self, Vector3 start, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target.GetLocalPosition, self.SetLocalPosition, Yield.Time(duration, easer));
+            => self.CoLocalMove(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveX(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPositionX, target, self.SetLocalPositionX, Yield.Time(duration, easer));
+            => self.CoLocalMoveX(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveX(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPositionX, Yield.Time(duration, easer));
+            => self.CoLocalMoveX(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveY(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPositionY, target, self.SetLocalPositionY, Yield.Time(duration, easer));
+            => self.CoLocalMoveY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveY(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPositionY, Yield.Time(duration, easer));
+            => self.CoLocalMoveY(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveZ(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPositionZ, target, self.SetLocalPositionZ, Yield.Time(duration, easer));
+            => self.CoLocalMoveZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveZ(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPositionZ, Yield.Time(duration, easer));
+            => self.CoLocalMoveZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPositionXY, target, self.SetLocalPositionXY, Yield.Time(duration, easer));
+            => self.CoLocalMoveXY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPositionXY, Yield.Time(duration, easer));
+            => self.CoLocalMoveXY(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPositionYZ, target, self.SetLocalPositionYZ, Yield.Time(duration, easer));
+            => self.CoLocalMoveYZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPositionYZ, Yield.Time(duration, easer));
+            => self.CoLocalMoveYZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveXZ(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPositionXZ, target, self.SetLocalPositionXZ, Yield.Time(duration, easer));
+            => self.CoLocalMoveXZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveXZ(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalPositionXZ, Yield.Time(duration, easer));
+            => self.CoLocalMoveXZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveBy(this Transform self, Vector3 offset, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalPosition, () => self.GetLocalOffsetPosition(offset), self.SetLocalPosition, Yield.Time(duration, easer));
+            => self.CoLocalMoveBy(offset, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalMoveFor(this Transform self, Vector3 direction, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(t => direction * t, self.SetLocalOffsetPosition, Yield.DeltaTime(duration, easer));
+            => self.CoLocalMoveFor(direction, Yield.DeltaTime(duration, easer));
         #endregion
 
         #region Rotate
         public static IEnumerator CoRotate(this Transform self, Quaternion target)
             => Yield.Into(target, self.SetRotation);
 
+        public static IEnumerator CoRotate(this Transform self, Quaternion target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRotation, target, self.SetRotation, timer);
+
+        public static IEnumerator CoRotate(this Transform self, Quaternion start, Quaternion target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetRotation, timer);
+
+        public static IEnumerator CoRotate(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRotation, target.GetRotation, self.SetRotation, timer);
+
+        public static IEnumerator CoRotate(this Transform self, Quaternion start, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target.GetRotation, self.SetRotation, timer);
+
+        public static IEnumerator CoRotateBy(this Transform self, Quaternion offset, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRotation, () => self.GetRotationBy(offset), self.SetRotation, timer);
+
         public static IEnumerator CoRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRotation, target, self.SetRotation, Yield.Time(duration, easer));
+            => self.CoRotate(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoRotate(this Transform self, Quaternion start, Quaternion target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetRotation, Yield.Time(duration, easer));
+            => self.CoRotate(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoRotate(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRotation, target.GetRotation, self.SetRotation, Yield.Time(duration, easer));
+            => self.CoRotate(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoRotate(this Transform self, Quaternion start, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target.GetRotation, self.SetRotation, Yield.Time(duration, easer));
+            => self.CoRotate(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoRotateBy(this Transform self, Quaternion offset, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRotation, () => self.GetRotationBy(offset), self.SetRotation, Yield.Time(duration, easer));
+            => self.CoRotateBy(offset, Yield.Time(duration, easer));
         #endregion
 
         #region LocalRotate
         public static IEnumerator CoLocalRotate(this Transform self, Quaternion target)
             => Yield.Into(target, self.SetLocalRotation);
 
+        public static IEnumerator CoLocalRotate(this Transform self, Quaternion target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalRotation, target, self.SetLocalRotation, timer);
+
+        public static IEnumerator CoLocalRotate(this Transform self, Quaternion start, Quaternion target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalRotation, timer);
+
+        public static IEnumerator CoLocalRotate(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalRotation, target.GetLocalRotation, self.SetLocalRotation, timer);
+
+        public static IEnumerator CoLocalRotate(this Transform self, Quaternion start, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target.GetLocalRotation, self.SetLocalRotation, timer);
+
+        public static IEnumerator CoLocalRotateBy(this Transform self, Quaternion offset, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalRotation, () => self.GetLocalRotationBy(offset), self.SetLocalRotation, timer);
+
         public static IEnumerator CoLocalRotate(this Transform self, Quaternion target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalRotation, target, self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalRotate(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalRotate(this Transform self, Quaternion start, Quaternion target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalRotate(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalRotate(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalRotation, target.GetLocalRotation, self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalRotate(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalRotate(this Transform self, Quaternion start, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target.GetLocalRotation, self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalRotate(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalRotateBy(this Transform self, Quaternion offset, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalRotation, () => self.GetLocalRotationBy(offset), self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalRotateBy(offset, Yield.Time(duration, easer));
         #endregion
 
         #region LookAt
+        public static IEnumerator CoLookAt(this Transform self, Vector3 position, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRotation, () => self.GetLookAtRotation(position), self.SetRotation, timer);
+
+        public static IEnumerator CoLookAt(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetRotation, () => self.GetLookAtRotation(target), self.SetRotation, timer);
+
         public static IEnumerator CoLookAt(this Transform self, Vector3 position, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRotation, () => self.GetLookAtRotation(position), self.SetRotation, Yield.Time(duration, easer));
+            => self.CoLookAt(position, Yield.Time(duration, easer));
 
         public static IEnumerator CoLookAt(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetRotation, () => self.GetLookAtRotation(target), self.SetRotation,Yield.Time(duration, easer));
+            => self.CoLookAt(target, Yield.Time(duration, easer));
         #endregion
 
         #region LocalLookAt
+        public static IEnumerator CoLocalLookAt(this Transform self, Vector3 position, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalRotation, () => self.GetLocalLookAtRotation(position), self.SetLocalRotation, timer);
+
+        public static IEnumerator CoLocalLookAt(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalRotation, () => self.GetLocalLookAtRotation(target), self.SetLocalRotation, timer);
+
         public static IEnumerator CoLocalLookAt(this Transform self, Vector3 position, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalRotation, () => self.GetLocalLookAtRotation(position), self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalLookAt(position, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalLookAt(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalRotation, () => self.GetLocalLookAtRotation(target), self.SetLocalRotation, Yield.Time(duration, easer));
+            => self.CoLocalLookAt(target, Yield.Time(duration, easer));
         #endregion
 
         #region LocalScale
         public static IEnumerator CoLocalScale(this Transform self, Vector3 target)
             => Yield.Into(target, self.SetLocalScale);
 
+        public static IEnumerator CoLocalScale(this Transform self, Vector3 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScale, target, self.SetLocalScale, timer);
+
+        public static IEnumerator CoLocalScale(this Transform self, Vector3 start, Vector3 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScale, timer);
+
+        public static IEnumerator CoLocalScale(this Transform self, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScale, target.GetLocalScale, self.SetLocalScale, timer);
+
+        public static IEnumerator CoLocalScale(this Transform self, Vector3 start, Transform target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target.GetLocalScale, self.SetLocalScale, timer);
+
+        public static IEnumerator CoLocalScaleX(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScaleX, target, self.SetLocalScaleX, timer);
+
+        public static IEnumerator CoLocalScaleX(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScaleX, timer);
+
+        public static IEnumerator CoLocalScaleY(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScaleY, target, self.SetLocalScaleY, timer);
+
+        public static IEnumerator CoLocalScaleY(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScaleY, timer);
+
+        public static IEnumerator CoLocalScaleZ(this Transform self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScaleZ, target, self.SetLocalScaleZ, timer);
+
+        public static IEnumerator CoLocalScaleZ(this Transform self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScaleZ, timer);
+
+        public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScaleXY, target, self.SetLocalScaleXY, timer);
+
+        public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScaleXY, timer);
+
+        public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScaleYZ, target, self.SetLocalScaleYZ, timer);
+
+        public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScaleYZ, timer);
+
+        public static IEnumerator CoLocalScaleXZ(this Transform self, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScaleXZ, target, self.SetLocalScaleXZ, timer);
+
+        public static IEnumerator CoLocalScaleXZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetLocalScaleXZ, timer);
+
+        public static IEnumerator CoLocalScaleBy(this Transform self, Vector3 offset, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetLocalScale, () => self.GetLocalScaleBy(offset), self.SetLocalScale, timer);
+
         public static IEnumerator CoLocalScale(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScale, target, self.SetLocalScale, Yield.Time(duration, easer));
+            => self.CoLocalScale(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScale(this Transform self, Vector3 start, Vector3 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScale, Yield.Time(duration, easer));
+            => self.CoLocalScale(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScale(this Transform self, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScale, target.GetLocalScale, self.SetLocalScale, Yield.Time(duration, easer));
+            => self.CoLocalScale(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScale(this Transform self, Vector3 start, Transform target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target.GetLocalScale, self.SetLocalScale, Yield.Time(duration, easer));
+            => self.CoLocalScale(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleX(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScaleX, target, self.SetLocalScaleX, Yield.Time(duration, easer));
+            => self.CoLocalScaleX(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleX(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScaleX, Yield.Time(duration, easer));
+            => self.CoLocalScaleX(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleY(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScaleY, target, self.SetLocalScaleY, Yield.Time(duration, easer));
+            => self.CoLocalScaleY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleY(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScaleY, Yield.Time(duration, easer));
+            => self.CoLocalScaleY(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleZ(this Transform self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScaleZ, target, self.SetLocalScaleZ, Yield.Time(duration, easer));
+            => self.CoLocalScaleZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleZ(this Transform self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScaleZ, Yield.Time(duration, easer));
+            => self.CoLocalScaleZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScaleXY, target, self.SetLocalScaleXY, Yield.Time(duration, easer));
+            => self.CoLocalScaleXY(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScaleXY, Yield.Time(duration, easer));
+            => self.CoLocalScaleXY(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScaleYZ, target, self.SetLocalScaleYZ, Yield.Time(duration, easer));
+            => self.CoLocalScaleYZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScaleYZ, Yield.Time(duration, easer));
+            => self.CoLocalScaleYZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleXZ(this Transform self, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScaleXZ, target, self.SetLocalScaleXZ, Yield.Time(duration, easer));
+            => self.CoLocalScaleXZ(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleXZ(this Transform self, Vector2 start, Vector2 target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetLocalScaleXZ, Yield.Time(duration, easer));
+            => self.CoLocalScaleXZ(start, target, Yield.Time(duration, easer));
 
         public static IEnumerator CoLocalScaleBy(this Transform self, Vector3 offset, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetLocalScale, () => self.GetLocalScaleBy(offset), self.SetLocalScale, Yield.Time(duration, easer));
+            => self.CoLocalScaleBy(offset, Yield.Time(duration, easer));
         #endregion
     }
 

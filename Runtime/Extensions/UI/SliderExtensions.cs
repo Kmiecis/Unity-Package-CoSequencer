@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace Common.Coroutines
@@ -10,22 +11,34 @@ namespace Common.Coroutines
         public static IEnumerator CoValue(this Slider self, float target)
             => Yield.Into(target, self.SetValue);
 
+        public static IEnumerator CoValue(this Slider self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetValue, target, self.SetValue, timer);
+
+        public static IEnumerator CoValue(this Slider self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetValue, timer);
+
         public static IEnumerator CoValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetValue, target, self.SetValue, Yield.Time(duration, easer));
+            => self.CoValue(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoValue(this Slider self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetValue, Yield.Time(duration, easer));
+            => self.CoValue(start, target, Yield.Time(duration, easer));
         #endregion
 
         #region NormalizedValue
         public static IEnumerator CoNormalizedValue(this Slider self, float target)
             => Yield.Into(target, self.SetNormalizedValue);
 
+        public static IEnumerator CoNormalizedValue(this Slider self, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(self.GetNormalizedValue, target, self.SetNormalizedValue, timer);
+
+        public static IEnumerator CoNormalizedValue(this Slider self, float start, float target, IEnumerator<float> timer)
+            => Yield.ValueTo(start, target, self.SetNormalizedValue, timer);
+
         public static IEnumerator CoNormalizedValue(this Slider self, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(self.GetNormalizedValue, target, self.SetNormalizedValue, Yield.Time(duration, easer));
+            => self.CoNormalizedValue(target, Yield.Time(duration, easer));
 
         public static IEnumerator CoNormalizedValue(this Slider self, float start, float target, float duration, Func<float, float> easer = null)
-            => Yield.ValueTo(start, target, self.SetNormalizedValue, Yield.Time(duration, easer));
+            => self.CoNormalizedValue(start, target, Yield.Time(duration, easer));
         #endregion
     }
 
