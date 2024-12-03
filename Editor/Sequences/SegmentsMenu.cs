@@ -21,15 +21,15 @@ namespace CommonEditor.Coroutines
                 => this.group - other.group;
         }
 
+        private static Type[] _types;
+
         private readonly IList _list;
-        private readonly Type _type;
 
         private int _count;
 
         public SegmentsMenu(IList list)
         {
             _list = list;
-            _type = list.GetType().GetGenericArguments()[0];
 
             _count = list.Count;
         }
@@ -63,10 +63,15 @@ namespace CommonEditor.Coroutines
             }
         }
 
-        private bool IsValidType(Type type)
+        private static Type[] GetValidTypes()
+        {
+            return _types ?? (_types = AppDomain.CurrentDomain.FindTypes(IsValidType).ToArray());
+        }
+
+        private static bool IsValidType(Type type)
         {
             return (
-                type.HasInterface(_type) &&
+                type.HasInterface(typeof(ISegment)) &&
                 !type.IsInterface &&
                 !type.IsAbstract &&
                 !type.IsSubclassOf(typeof(MonoBehaviour))
@@ -79,7 +84,7 @@ namespace CommonEditor.Coroutines
 
             var map = new Dictionary<int, List<EntryData>>();
 
-            var types = AppDomain.CurrentDomain.FindTypes(IsValidType);
+            var types = GetValidTypes();
             foreach (var type in types)
             {
                 var obsolete = type.GetCustomAttribute<ObsoleteAttribute>();

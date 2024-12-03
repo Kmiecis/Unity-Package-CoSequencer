@@ -5,30 +5,66 @@ namespace Common.Coroutines
     internal static class Vector3Extensions
     {
         public static Vector2 XY(this Vector3 self)
-            => new Vector2(self.x, self.y);
+        {
+            Vector2 r;
+            r.x = self.x;
+            r.y = self.y;
+            return r;
+        }
 
         public static Vector2 XZ(this Vector3 self)
-            => new Vector2(self.x, self.z);
+        {
+            Vector2 r;
+            r.x = self.x;
+            r.y = self.z;
+            return r;
+        }
 
         public static Vector2 YZ(this Vector3 self)
-            => new Vector2(self.y, self.z);
+        {
+            Vector2 r;
+            r.x = self.y;
+            r.y = self.z;
+            return r;
+        }
 
         public static Vector3 WithX(this Vector3 self, float value)
-            => new Vector3(value, self.y, self.z);
+        {
+            self.x = value;
+            return self;
+        }
 
         public static Vector3 WithY(this Vector3 self, float value)
-            => new Vector3(self.x, value, self.z);
+        {
+            self.y = value;
+            return self;
+        }
 
         public static Vector3 WithZ(this Vector3 self, float value)
-            => new Vector3(self.x, self.y, value);
+        {
+            self.z = value;
+            return self;
+        }
 
         public static Vector3 WithXY(this Vector3 self, Vector2 value)
-            => new Vector3(value.x, value.y, self.z);
+        {
+            self.x = value.x;
+            self.y = value.y;
+            return self;
+        }
 
         public static Vector3 WithXZ(this Vector3 self, Vector2 value)
-            => new Vector3(value.x, self.y, value.y);
+        {
+            self.x = value.x;
+            self.z = value.y;
+            return self;
+        }
 
         public static Vector3 WithYZ(this Vector3 self, Vector2 value)
-            => new Vector3(self.x, value.x, value.y);
+        {
+            self.y = value.x;
+            self.z = value.y;
+            return self;
+        }
     }
 }
