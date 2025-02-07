@@ -29,6 +29,12 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield frames
+        /// <summary> Yields a single frame</summary>
+        public static IEnumerator Frame()
+        {
+            yield return null;
+        }
+
         /// <summary> Yields frames for a number of frames </summary>
         public static IEnumerator<int> Frames(int frames)
         {

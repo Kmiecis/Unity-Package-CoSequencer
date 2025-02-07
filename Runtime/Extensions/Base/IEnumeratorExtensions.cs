@@ -218,7 +218,7 @@ namespace Common.Coroutines
         {
             if (target.gameObject.activeInHierarchy)
             {
-                return target.StartCoroutine(self);
+                return Start(self, target);
             }
             return null;
         }
