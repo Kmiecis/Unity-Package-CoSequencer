@@ -477,7 +477,31 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield repeat
-        /// <summary> Executes coroutine from 'provider' method a number of times </summary>
+        /// <summary> Executes 'action' method a 'repeats' number of times </summary>
+        public static IEnumerator Repeat(Action action, int repeats)
+        {
+            while (repeats > 0)
+            {
+                action();
+                yield return null;
+
+                --repeats;
+            }
+        }
+
+        /// <summary> Executes 'provider' method a 'repeats' number of times </summary>
+        public static IEnumerator<T> Repeat<T>(Func<T> provider, int repeats)
+        {
+            while (repeats > 0)
+            {
+                var current = provider();
+                yield return current;
+
+                --repeats;
+            }
+        }
+
+        /// <summary> Executes coroutine from 'provider' method a 'repeats' number of times </summary>
         public static IEnumerator Repeat(Func<IEnumerator> provider, int repeats)
         {
             while (repeats > 0)
@@ -491,7 +515,7 @@ namespace Common.Coroutines
             }
         }
 
-        /// <summary> Executes coroutine from 'provider' method a number of times </summary>
+        /// <summary> Executes coroutine from 'provider' method a 'repeats' number of times </summary>
         public static IEnumerator<T> Repeat<T>(Func<IEnumerator<T>> provider, int repeats)
         {
             while (repeats > 0)
@@ -507,12 +531,22 @@ namespace Common.Coroutines
         #endregion
 
         #region Yield infinitely
-        /// <summary> Yields nothing infinitely </summary>
-        public static IEnumerator Infinitely()
+        /// <summary> Executes 'action' method infinitely </summary>
+        public static IEnumerator Infinitely(Action action)
         {
             while (true)
             {
                 yield return null;
+            }
+        }
+
+        /// <summary> Executes 'provider' method infinitely </summary>
+        public static IEnumerator<T> Infinitely<T>(Func<T> provider)
+        {
+            while (true)
+            {
+                var current = provider();
+                yield return current;
             }
         }
 
