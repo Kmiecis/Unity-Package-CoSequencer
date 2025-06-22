@@ -195,3 +195,34 @@ namespace Common.Examples
 
 </p>
 </details>
+
+<details>
+<summary>
+Custom Segment added to Inspector
+</summary>
+<p>
+
+```cs
+using Common.Coroutines;
+using System;
+using TMPro;
+using UnityEngine;
+using System.Collections;
+
+namespace Common.Examples
+{
+    [Serializable]
+    [SegmentMenu("Towards", "TextMeshPro/Fade", SegmentGroup.Custom)]
+    public class TextProFadeSegment : TowardsSegment<TMP_Text, float>
+    {
+        public override void OnValidate()
+            => target = Mathf.Clamp(target, 0.0f, 1.0f);
+
+        public override IEnumerator Build()
+            => component.CoFade(target, duration, easer.Evaluate);
+    }
+}
+```
+
+</p>
+</details>
