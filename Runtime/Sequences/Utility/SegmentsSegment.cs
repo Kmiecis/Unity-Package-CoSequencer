@@ -35,6 +35,7 @@ namespace Common.Coroutines.Segments
         }
     }
 
+    [Serializable]
     [SegmentMenu("Sequence", SegmentPath.Utility, SegmentGroup.Utility)]
     public class SequenceSegment : SegmentsSegment
     {
@@ -57,6 +58,7 @@ namespace Common.Coroutines.Segments
         }
     }
 
+    [Serializable]
     [SegmentMenu("Parallel", SegmentPath.Utility, SegmentGroup.Utility)]
     public class ParallelSegment : SegmentsSegment
     {
