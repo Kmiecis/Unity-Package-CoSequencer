@@ -10,8 +10,6 @@ namespace Common.Coroutines
         [SerializeReference]
         protected List<ISegment> _segments;
 
-        private Coroutine _coroutine;
-
         public CoSequencer()
         {
             _segments = new List<ISegment>();
@@ -40,31 +38,6 @@ namespace Common.Coroutines
             return prev.Build();
         }
 
-        public Coroutine Play(MonoBehaviour target)
-        {
-            return Build().Start(target);
-        }
-
-        public void Play()
-        {
-            _coroutine = Play(this);
-        }
-
-        public void Stop()
-        {
-            UCoroutine.SafeStop(ref _coroutine, this);
-        }
-
-        private void OnEnable()
-        {
-            Play();
-        }
-
-        private void OnDisable()
-        {
-            Stop();
-        }
-
         public override void OnValidate()
         {
             foreach (var segment in GetSegments())
@@ -74,11 +47,6 @@ namespace Common.Coroutines
                     segment.OnValidate();
                 }
             }
-        }
-
-        private void Reset()
-        {
-            enabled = false;
         }
     }
 
