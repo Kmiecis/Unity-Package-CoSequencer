@@ -21,6 +21,12 @@ namespace Common.Coroutines
             yield return null;
         }
 
+        /// <summary> Yields null </summary>
+        public static IEnumerator Null()
+        {
+            yield return null;
+        }
+
         /// <summary> Yields break </summary>
         public static IEnumerator Break()
         {
