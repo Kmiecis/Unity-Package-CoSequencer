@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common.Coroutines
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/" + nameof(CoSequencer))]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Coroutines) + "/Co Sequencer")]
     public class CoSequencer : SegmentBehaviour
     {
         [SerializeReference]
