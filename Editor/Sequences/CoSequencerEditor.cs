@@ -7,7 +7,7 @@ namespace CommonEditor.Coroutines
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(CoSequencer))]
-    public class CoSequencerEditor : Editor
+    public class CoSequencerEditor : SegmentBehaviourEditor
     {
         private SegmentsMenu _menu;
 

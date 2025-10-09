@@ -44,20 +44,5 @@ namespace Common.Coroutines
             enabled = false;
         }
 #endif
-
-        [ContextMenu("Play")]
-        private void PlayFromContext()
-        {
-            if (Application.isPlaying)
-            {
-                StartCoroutine(Build());
-            }
-#if UNITY_EDITOR
-            else
-            {
-                EditorCoroutines.StartCoroutine(Build());
-            }
-#endif
-        }
     }
 }
