@@ -913,7 +913,7 @@ namespace Common.Coroutines
             yield return value;
         }
 
-        /// <summary> Yields values one by one each frame </summary>
+        /// <summary> Yields values one by one, each frame </summary>
         public static IEnumerator<T> Values<T>(params T[] values)
         {
             for (int i = 0; i < values.Length; ++i)
@@ -928,73 +928,77 @@ namespace Common.Coroutines
             yield return provider();
         }
 
-        /// <summary> Yields value from 'evaluator' method, fed by values from timer </summary>
+        /// <summary> Yields value from 'evaluator' method, fed by values from 'timer' </summary>
         public static IEnumerator<T> Value<T>(Func<float, T> evaluator, IEnumerator<float> timer)
         {
             return timer.Into(evaluator);
         }
 
-        /// <summary> Yields value from 'parser' method, fed by start, target and timer values </summary>
+        /// <summary> Yields value from 'evaluator' method for a 'duration' </summary>
+        public static IEnumerator<T> Value<T>(Func<float, T> evaluator, float duration, Func<float, float> easer = null)
+        {
+            var timer = Time(duration, easer);
+            return Value(evaluator, timer);
+        }
+
+        /// <summary> Yields value from 'parser' method, fed by 'start', 'target' and 'timer' values </summary>
         public static IEnumerator<T> Value<T>(T start, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             while (timer.MoveNext())
             {
                 var t = timer.Current;
                 var v = parser(start, target, t);
-
                 yield return v;
             }
         }
 
-        /// <summary> Yields value from 'evaluator' method, fed by values from timer, directly into 'setter' method </summary>
-        public static IEnumerator ValueTo<T>(Func<float, T> evaluator, Action<T> setter, IEnumerator<float> timer)
+        /// <summary> Yields value from 'parser' method, fed by 'start' and 'target' for a 'duration' </summary>
+        public static IEnumerator<T> Value<T>(T start, T target, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
         {
-            return timer.Into(evaluator).Into(setter);
+            var timer = Time(duration, easer);
+            return Value(start, target, parser, timer);
         }
 
-        /// <summary> Yields value from 'parser' method, fed by start, target and timer values, into 'setter' method </summary>
-        public static IEnumerator ValueTo<T>(T start, T target, Action<T> setter, Func<T, T, float, T> parser, IEnumerator<float> timer)
-        {
-            while (timer.MoveNext())
-            {
-                var t = timer.Current;
-                var v = parser(start, target, t);
-                setter(v);
-
-                yield return null;
-            }
-        }
-
-        /// <summary> Yields value from 'parser' method, fed by values from timer, along with a start value from 'getter' method and target, into 'setter' method </summary>
-        public static IEnumerator ValueTo<T>(Func<T> getter, T target, Action<T> setter, Func<T, T, float, T> parser, IEnumerator<float> timer)
+        /// <summary> Yields value from 'parser' method, fed by values from a 'getter' method, 'target' and 'timer' </summary>
+        public static IEnumerator<T> Value<T>(Func<T> getter, T target, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             var start = getter();
             while (timer.MoveNext())
             {
                 var t = timer.Current;
                 var v = parser(start, target, t);
-                setter(v);
-
-                yield return null;
+                yield return v;
             }
         }
 
-        /// <summary> Yields value from 'parser' method, fed by start, target and timer values, into 'setter' method </summary>
-        public static IEnumerator ValueTo<T>(T start, Func<T> provider, Action<T> setter, Func<T, T, float, T> parser, IEnumerator<float> timer)
+        /// <summary> Yields value from 'parser' method, fed by values from a 'getter' method and 'target' for a 'duration' </summary>
+        public static IEnumerator<T> Value<T>(Func<T> getter, T target, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
+        {
+            var timer = Time(duration, easer);
+            return Value(getter, target, parser, timer);
+        }
+
+        /// <summary> Yields value from 'parser' method, fed by values from 'start', a 'provider' method and 'timer' </summary>
+        public static IEnumerator<T> Value<T>(T start, Func<T> provider, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             var target = provider();
             while (timer.MoveNext())
             {
                 var t = timer.Current;
                 var v = parser(start, target, t);
-                setter(v);
-
-                yield return null;
+                yield return v;
             }
         }
 
-        /// <summary> Yields value from 'parser' method, fed by values from timer, along with a start value from 'getter' method and target value from 'provider' method, into 'setter' method </summary>
-        public static IEnumerator ValueTo<T>(Func<T> getter, Func<T> provider, Action<T> setter, Func<T, T, float, T> parser, IEnumerator<float> timer)
+        /// <summary> Yields value from 'parser' method, fed by values from 'start' and a 'provider' method for a 'duration' </summary>
+        public static IEnumerator<T> Value<T>(T start, Func<T> provider, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
+        {
+            var timer = Time(duration, easer);
+            return Value(start, provider, parser, timer);
+        }
+
+        /// <summary> Yields value from 'parser' method, fed by values from a 'getter' method, a 'provider' method and 'timer' </summary>
+        public static IEnumerator<T> Value<T>(Func<T> getter, Func<T> provider, Func<T, T, float, T> parser, IEnumerator<float> timer)
         {
             var start = getter();
             var target = provider();
@@ -1002,10 +1006,15 @@ namespace Common.Coroutines
             {
                 var t = timer.Current;
                 var v = parser(start, target, t);
-                setter(v);
-
-                yield return null;
+                yield return v;
             }
+        }
+
+        /// <summary> Yields value from 'parser' method, fed by values from a 'getter' method and a 'provider' method for a 'duration' </summary>
+        public static IEnumerator<T> Value<T>(Func<T> getter, Func<T> provider, Func<T, T, float, T> parser, float duration, Func<float, float> easer = null)
+        {
+            var timer = Time(duration, easer);
+            return Value(getter, provider, parser, timer);
         }
         #endregion
 
@@ -1014,31 +1023,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(float start, float target, Action<float> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<float> getter, float target, Action<float> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(float start, Func<float> provider, Action<float> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<float> getter, Func<float> provider, Action<float> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<float> Value(float start, float target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(float start, float target, Action<float> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<float> getter, float target, Action<float> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(float start, Func<float> provider, Action<float> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<float> getter, Func<float> provider, Action<float> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Ints
@@ -1046,31 +1055,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(int start, int target, Action<int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<int> getter, int target, Action<int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(int start, Func<int> provider, Action<int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<int> getter, Func<int> provider, Action<int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<int> Value(int start, int target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(int start, int target, Action<int> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<int> getter, int target, Action<int> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(int start, Func<int> provider, Action<int> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<int> getter, Func<int> provider, Action<int> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Vector2s
@@ -1078,31 +1087,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Vector2 start, Vector2 target, Action<Vector2> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2> getter, Vector2 target, Action<Vector2> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Vector2 start, Func<Vector2> provider, Action<Vector2> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2> getter, Func<Vector2> provider, Action<Vector2> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Vector2> Value(Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Vector2 start, Vector2 target, Action<Vector2> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2> getter, Vector2 target, Action<Vector2> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Vector2 start, Func<Vector2> provider, Action<Vector2> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2> getter, Func<Vector2> provider, Action<Vector2> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Vector2Ints
@@ -1110,31 +1119,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Vector2Int start, Vector2Int target, Action<Vector2Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2Int> getter, Vector2Int target, Action<Vector2Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Vector2Int start, Func<Vector2Int> provider, Action<Vector2Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2Int> getter, Func<Vector2Int> provider, Action<Vector2Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Vector2Int> Value(Vector2Int start, Vector2Int target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Vector2Int start, Vector2Int target, Action<Vector2Int> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2Int> getter, Vector2Int target, Action<Vector2Int> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Vector2Int start, Func<Vector2Int> provider, Action<Vector2Int> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector2Int> getter, Func<Vector2Int> provider, Action<Vector2Int> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Vector3s
@@ -1142,31 +1151,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Vector3 start, Vector3 target, Action<Vector3> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3> getter, Vector3 target, Action<Vector3> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Vector3 start, Func<Vector3> provider, Action<Vector3> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3> getter, Func<Vector3> provider, Action<Vector3> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Vector3> Value(Vector3 start, Vector3 target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Vector3 start, Vector3 target, Action<Vector3> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3> getter, Vector3 target, Action<Vector3> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Vector3 start, Func<Vector3> provider, Action<Vector3> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3> getter, Func<Vector3> provider, Action<Vector3> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Vector3Ints
@@ -1174,31 +1183,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Vector3Int start, Vector3Int target, Action<Vector3Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3Int> getter, Vector3Int target, Action<Vector3Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Vector3Int start, Func<Vector3Int> provider, Action<Vector3Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3Int> getter, Func<Vector3Int> provider, Action<Vector3Int> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Vector3Int> Value(Vector3Int start, Vector3Int target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Vector3Int start, Vector3Int target, Action<Vector3Int> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3Int> getter, Vector3Int target, Action<Vector3Int> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Vector3Int start, Func<Vector3Int> provider, Action<Vector3Int> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector3Int> getter, Func<Vector3Int> provider, Action<Vector3Int> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Vector4s
@@ -1206,31 +1215,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Vector4 start, Vector4 target, Action<Vector4> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector4> getter, Vector4 target, Action<Vector4> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Vector4 start, Func<Vector4> provider, Action<Vector4> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector4> getter, Func<Vector4> provider, Action<Vector4> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Vector4> Value(Vector4 start, Vector4 target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Vector4 start, Vector4 target, Action<Vector4> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector4> getter, Vector4 target, Action<Vector4> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Vector4 start, Func<Vector4> provider, Action<Vector4> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Vector4> getter, Func<Vector4> provider, Action<Vector4> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Quaternions
@@ -1238,31 +1247,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Quaternion start, Quaternion target, Action<Quaternion> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Quaternion> getter, Quaternion target, Action<Quaternion> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Quaternion start, Func<Quaternion> provider, Action<Quaternion> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Quaternion> getter, Func<Quaternion> provider, Action<Quaternion> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Quaternion> Value(Quaternion start, Quaternion target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Quaternion start, Quaternion target, Action<Quaternion> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Quaternion> getter, Quaternion target, Action<Quaternion> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Quaternion start, Func<Quaternion> provider, Action<Quaternion> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Quaternion> getter, Func<Quaternion> provider, Action<Quaternion> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Colors
@@ -1270,31 +1279,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Color start, Color target, Action<Color> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Color> getter, Color target, Action<Color> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Color start, Func<Color> provider, Action<Color> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Color> getter, Func<Color> provider, Action<Color> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Color> Value(Color start, Color target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Color start, Color target, Action<Color> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Color> getter, Color target, Action<Color> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Color start, Func<Color> provider, Action<Color> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Color> getter, Func<Color> provider, Action<Color> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Rects
@@ -1302,31 +1311,31 @@ namespace Common.Coroutines
             => Value(start, target, UMath.Lerp, Time(duration, easer));
 
         public static IEnumerator ValueTo(Rect start, Rect target, Action<Rect> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Rect> getter, Rect target, Action<Rect> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, target, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, target, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Rect start, Func<Rect> provider, Action<Rect> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(start, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(start, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator ValueTo(Func<Rect> getter, Func<Rect> provider, Action<Rect> setter, float duration, Func<float, float> easer = null)
-            => ValueTo(getter, provider, setter, UMath.Lerp, Time(duration, easer));
+            => Value(getter, provider, UMath.Lerp, Time(duration, easer)).Into(setter);
 
         public static IEnumerator<Rect> Value(Rect start, Rect target, IEnumerator<float> timer)
             => Value(start, target, UMath.Lerp, timer);
 
         public static IEnumerator ValueTo(Rect start, Rect target, Action<Rect> setter, IEnumerator<float> timer)
-            => ValueTo(start, target, setter, UMath.Lerp, timer);
+            => Value(start, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Rect> getter, Rect target, Action<Rect> setter, IEnumerator<float> timer)
-            => ValueTo(getter, target, setter, UMath.Lerp, timer);
+            => Value(getter, target, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Rect start, Func<Rect> provider, Action<Rect> setter, IEnumerator<float> timer)
-            => ValueTo(start, provider, setter, UMath.Lerp, timer);
+            => Value(start, provider, UMath.Lerp, timer).Into(setter);
 
         public static IEnumerator ValueTo(Func<Rect> getter, Func<Rect> provider, Action<Rect> setter, IEnumerator<float> timer)
-            => ValueTo(getter, provider, setter, UMath.Lerp, timer);
+            => Value(getter, provider, UMath.Lerp, timer).Into(setter);
         #endregion
 
         #region Time

@@ -44,10 +44,10 @@ namespace Common.Coroutines
 
         #region Gradient
         public static IEnumerator CoEffectGradient(this Shadow self, Gradient target, IEnumerator<float> timer)
-            => Yield.ValueTo(target.Evaluate, self.SetEffectColor, timer);
+            => Yield.Value(target.Evaluate, timer).Into(self.SetEffectColor);
 
         public static IEnumerator CoGradient(this Shadow self, Gradient target, float from, float to, IEnumerator<float> timer)
-            => Yield.ValueTo(time => target.Evaluate(Mathf.Lerp(from, to, time)), self.SetEffectColor, timer);
+            => Yield.Value(time => target.Evaluate(Mathf.Lerp(from, to, time)), timer).Into(self.SetEffectColor);
 
         public static IEnumerator CoEffectGradient(this Shadow self, Gradient target, float duration, Func<float, float> easer = null)
             => self.CoEffectGradient(target, Yield.Time(duration, easer));

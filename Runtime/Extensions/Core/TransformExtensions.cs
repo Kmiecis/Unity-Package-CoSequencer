@@ -63,7 +63,7 @@ namespace Common.Coroutines
             => Yield.ValueTo(self.GetPosition, () => self.GetPositionBy(offset), self.SetPosition, timer);
 
         public static IEnumerator CoMoveFor(this Transform self, Vector3 direction, IEnumerator<float> deltaTimer)
-            => Yield.ValueTo(t => direction * t, self.SetPositionBy, deltaTimer);
+            => Yield.Value(t => direction * t, deltaTimer).Into(self.SetPositionBy);
 
         public static IEnumerator CoMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => self.CoMove(target, Yield.Time(duration, easer));
@@ -176,7 +176,7 @@ namespace Common.Coroutines
             => Yield.ValueTo(self.GetLocalPosition, () => self.GetLocalOffsetPosition(offset), self.SetLocalPosition, timer);
 
         public static IEnumerator CoLocalMoveFor(this Transform self, Vector3 direction, IEnumerator<float> deltaTimer)
-            => Yield.ValueTo(t => direction * t, self.SetLocalOffsetPosition, deltaTimer);
+            => Yield.Value(t => direction * t, deltaTimer).Into(self.SetLocalOffsetPosition);
 
         public static IEnumerator CoLocalMove(this Transform self, Vector3 target, float duration, Func<float, float> easer = null)
             => self.CoLocalMove(target, Yield.Time(duration, easer));

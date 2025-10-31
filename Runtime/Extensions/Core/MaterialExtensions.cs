@@ -73,16 +73,16 @@ namespace Common.Coroutines
 
         #region Gradient
         public static IEnumerator CoGradient(this Material self, Gradient target, IEnumerator<float> timer)
-            => Yield.ValueTo(target.Evaluate, self.SetColor, timer);
+            => Yield.Value(target.Evaluate, timer).Into(self.SetColor);
 
         public static IEnumerator CoGradient(this Material self, Gradient target, float from, float to, IEnumerator<float> timer)
-            => Yield.ValueTo(time => target.Evaluate(UMath.Lerp(from, to, time)), self.SetColor, timer);
+            => Yield.Value(time => target.Evaluate(UMath.Lerp(from, to, time)), timer).Into(self.SetColor);
 
         public static IEnumerator CoGradient(this Material self, int propertyId, Gradient target, IEnumerator<float> timer)
-            => Yield.ValueTo(target.Evaluate, c => self.SetColor(propertyId, c), timer);
+            => Yield.Value(target.Evaluate, timer).Into(c => self.SetColor(propertyId, c));
 
         public static IEnumerator CoGradient(this Material self, int propertyId, Gradient target, float from, float to, IEnumerator<float> timer)
-            => Yield.ValueTo(time => target.Evaluate(UMath.Lerp(from, to, time)), c => self.SetColor(propertyId, c), timer);
+            => Yield.Value(time => target.Evaluate(UMath.Lerp(from, to, time)), timer).Into(c => self.SetColor(propertyId, c));
 
         public static IEnumerator CoGradient(this Material self, Gradient target, float duration, Func<float, float> easer = null)
             => self.CoGradient(target, Yield.Time(duration, easer));

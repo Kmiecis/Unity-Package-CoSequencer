@@ -29,7 +29,7 @@ namespace Common.Coroutines
             => Yield.Into(target, self.SetText);
 
         public static IEnumerator CoText(this Text self, string target, IEnumerator<float> timer)
-            => Yield.ValueTo(t => target.Substring(t), self.SetText, timer);
+            => Yield.Value(t => target.Substring(t), timer).Into(self.SetText);
 
         public static IEnumerator CoText(this Text self, string target, float duration, Func<float, float> easer = null)
             => self.CoText(target, Yield.Time(duration, easer));
