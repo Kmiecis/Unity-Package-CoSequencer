@@ -29,6 +29,14 @@ namespace CommonEditor.Coroutines
                 }
             }
 
+            if (EditorCoroutines.IsPlaying)
+            {
+                if (GUILayout.Button("Stop All"))
+                {
+                    EditorCoroutines.StopAllCoroutines();
+                }
+            }
+
             base.OnInspectorGUI();
         }
 

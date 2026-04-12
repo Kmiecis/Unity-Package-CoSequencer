@@ -12,6 +12,11 @@ namespace Common.Coroutines
             _coroutines = new List<EditorCoroutine>();
         }
 
+        public static bool IsPlaying
+        {
+            get => _coroutines.Count > 0;
+        }
+
         public static void StartCoroutine(IEnumerator coroutine)
         {
             var ecoroutine = new EditorCoroutine(coroutine);
