@@ -52,11 +52,9 @@ namespace Common.Coroutines
                 }
             }
 
-            if (_coroutines.Count > 0)
-            {
-                EditorQueueUpdate();
-            }
-            else
+            EditorQueueUpdate();
+
+            if (_coroutines.Count == 0)
             {
                 EditorRemoveUpdate();
             }
