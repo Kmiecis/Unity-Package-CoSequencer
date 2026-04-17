@@ -597,6 +597,20 @@ namespace Common.Coroutines
             }
         }
 
+        /// <summary> Executes two coroutines one after another </summary>
+        public static IEnumerator Sequence(IEnumerator first, Func<IEnumerator> second)
+        {
+            while (first.MoveNext())
+            {
+                yield return first.Current;
+            }
+            var coroutine = second();
+            while (coroutine.MoveNext())
+            {
+                yield return coroutine.Current;
+            }
+        }
+
         /// <summary> Executes two coroutines from providers one after another </summary>
         public static IEnumerator Sequence(Func<IEnumerator> first, Func<IEnumerator> second)
         {
@@ -622,6 +636,20 @@ namespace Common.Coroutines
             while (second.MoveNext())
             {
                 yield return second.Current;
+            }
+        }
+
+        /// <summary> Executes two coroutines one after another </summary>
+        public static IEnumerator<T> Sequence<T>(IEnumerator<T> first, Func<IEnumerator<T>> second)
+        {
+            while (first.MoveNext())
+            {
+                yield return first.Current;
+            }
+            var coroutine = second();
+            while (coroutine.MoveNext())
+            {
+                yield return coroutine.Current;
             }
         }
 
@@ -687,6 +715,16 @@ namespace Common.Coroutines
         public static IEnumerator Parallel(IEnumerator first, IEnumerator second)
         {
             while (first.MoveNext() | second.MoveNext())
+            {
+                yield return null;
+            }
+        }
+
+        /// <summary> Executes two coroutines simultaenously </summary>
+        public static IEnumerator Parallel(IEnumerator first, Func<IEnumerator> second)
+        {
+            var secondCoroutine = second();
+            while (first.MoveNext() | secondCoroutine.MoveNext())
             {
                 yield return null;
             }

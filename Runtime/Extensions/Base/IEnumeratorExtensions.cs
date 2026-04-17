@@ -51,12 +51,12 @@ namespace Common.Coroutines
 
         public static IEnumerator Then(this IEnumerator self, Func<IEnumerator> provider)
         {
-            return self.Then(Yield.Coroutine(provider));
+            return Yield.Sequence(self, provider);
         }
 
         public static IEnumerator<T> Then<T>(this IEnumerator<T> self, Func<IEnumerator<T>> provider)
         {
-            return self.Then(Yield.Coroutine(provider));
+            return Yield.Sequence(self, provider);
         }
 
         public static IEnumerator Then(this IEnumerator self, params IEnumerator[] coroutines)
@@ -84,6 +84,11 @@ namespace Common.Coroutines
         public static IEnumerator With(this IEnumerator self, IEnumerator coroutine)
         {
             return Yield.Parallel(self, coroutine);
+        }
+
+        public static IEnumerator With(this IEnumerator self, Func<IEnumerator> provider)
+        {
+            return Yield.Parallel(self, provider);
         }
 
         public static IEnumerator With(this IEnumerator self, Action action)
@@ -221,6 +226,13 @@ namespace Common.Coroutines
                 return Start(self, target);
             }
             return null;
+        }
+
+        public static void Immediate(this IEnumerator self)
+        {
+            while (self.MoveNext())
+            {
+            }
         }
     }
 }
