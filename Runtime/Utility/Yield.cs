@@ -716,6 +716,14 @@ namespace Common.Coroutines
         {
             while (first.MoveNext() | second.MoveNext())
             {
+                if (first.Current is IEnumerator subfirst)
+                {
+                    first = Sequence(subfirst, first);
+                }
+                if (second.Current is IEnumerator subsecond)
+                {
+                    second = Sequence(subsecond, second);
+                }
                 yield return null;
             }
         }
@@ -723,22 +731,13 @@ namespace Common.Coroutines
         /// <summary> Executes two coroutines simultaenously </summary>
         public static IEnumerator Parallel(IEnumerator first, Func<IEnumerator> second)
         {
-            var secondCoroutine = second();
-            while (first.MoveNext() | secondCoroutine.MoveNext())
-            {
-                yield return null;
-            }
+            yield return Parallel(first, second());
         }
 
         /// <summary> Executes two coroutines from providers simultaenously </summary>
         public static IEnumerator Parallel(Func<IEnumerator> first, Func<IEnumerator> second)
         {
-            var firstCoroutine = first();
-            var secondCoroutine = second();
-            while (firstCoroutine.MoveNext() | secondCoroutine.MoveNext())
-            {
-                yield return null;
-            }
+            yield return Parallel(first(), second());
         }
 
         /// <summary> Executes an arbitrary amount of coroutines simultaenously </summary>
@@ -751,7 +750,15 @@ namespace Common.Coroutines
                 for (int i = 0; i < coroutines.Length; ++i)
                 {
                     var coroutine = coroutines[i];
-                    running |= coroutine.MoveNext();
+                    if (coroutine.MoveNext())
+                    {
+                        running = true;
+
+                        if (coroutine.Current is IEnumerator subroutine)
+                        {
+                            coroutines[i] = Sequence(subroutine, coroutine);
+                        }
+                    }
                 }
                 yield return null;
             }
