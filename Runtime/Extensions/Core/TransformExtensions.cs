@@ -23,11 +23,17 @@ namespace Common.Coroutines
         public static IEnumerator CoMove(this Transform self, Vector3 start, Transform target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target.GetPosition, self.SetPosition, timer);
 
+        public static IEnumerator CoMoveX(this Transform self, float target)
+            => Yield.Into(target, self.SetPositionX);
+
         public static IEnumerator CoMoveX(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetPositionX, target, self.SetPositionX, timer);
 
         public static IEnumerator CoMoveX(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetPositionX, timer);
+
+        public static IEnumerator CoMoveY(this Transform self, float target)
+            => Yield.Into(target, self.SetPositionY);
 
         public static IEnumerator CoMoveY(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetPositionY, target, self.SetPositionY, timer);
@@ -35,11 +41,17 @@ namespace Common.Coroutines
         public static IEnumerator CoMoveY(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetPositionY, timer);
 
+        public static IEnumerator CoMoveZ(this Transform self, float target)
+            => Yield.Into(target, self.SetPositionZ);
+
         public static IEnumerator CoMoveZ(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetPositionZ, target, self.SetPositionZ, timer);
 
         public static IEnumerator CoMoveZ(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetPositionZ, timer);
+
+        public static IEnumerator CoMoveXY(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetPositionXY);
 
         public static IEnumerator CoMoveXY(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetPositionXY, target, self.SetPositionXY, timer);
@@ -47,11 +59,17 @@ namespace Common.Coroutines
         public static IEnumerator CoMoveXY(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetPositionXY, timer);
 
+        public static IEnumerator CoMoveYZ(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetPositionYZ);
+
         public static IEnumerator CoMoveYZ(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetPositionYZ, target, self.SetPositionYZ, timer);
 
         public static IEnumerator CoMoveYZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetPositionYZ, timer);
+
+        public static IEnumerator CoMoveXZ(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetPositionXZ);
 
         public static IEnumerator CoMoveXZ(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetPositionXZ, target, self.SetPositionXZ, timer);
@@ -136,11 +154,17 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalMove(this Transform self, Vector3 start, Transform target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target.GetLocalPosition, self.SetLocalPosition, timer);
 
+        public static IEnumerator CoLocalMoveX(this Transform self, float target)
+            => Yield.Into(target, self.SetLocalPositionX);
+
         public static IEnumerator CoLocalMoveX(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalPositionX, target, self.SetLocalPositionX, timer);
 
         public static IEnumerator CoLocalMoveX(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalPositionX, timer);
+
+        public static IEnumerator CoLocalMoveY(this Transform self, float target)
+            => Yield.Into(target, self.SetLocalPositionY);
 
         public static IEnumerator CoLocalMoveY(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalPositionY, target, self.SetLocalPositionY, timer);
@@ -148,11 +172,17 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalMoveY(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalPositionY, timer);
 
+        public static IEnumerator CoLocalMoveZ(this Transform self, float target)
+            => Yield.Into(target, self.SetLocalPositionZ);
+
         public static IEnumerator CoLocalMoveZ(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalPositionZ, target, self.SetLocalPositionZ, timer);
 
         public static IEnumerator CoLocalMoveZ(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalPositionZ, timer);
+
+        public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetLocalPositionXY);
 
         public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalPositionXY, target, self.SetLocalPositionXY, timer);
@@ -160,11 +190,17 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalMoveXY(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalPositionXY, timer);
 
+        public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetLocalPositionYZ);
+
         public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalPositionYZ, target, self.SetLocalPositionYZ, timer);
 
         public static IEnumerator CoLocalMoveYZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalPositionYZ, timer);
+
+        public static IEnumerator CoLocalMoveXZ(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetLocalPositionXZ);
 
         public static IEnumerator CoLocalMoveXZ(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalPositionXZ, target, self.SetLocalPositionXZ, timer);
@@ -347,11 +383,17 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalScale(this Transform self, Vector3 start, Transform target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target.GetLocalScale, self.SetLocalScale, timer);
 
+        public static IEnumerator CoLocalScaleX(this Transform self, float target)
+            => Yield.Into(target, self.SetLocalScaleX);
+
         public static IEnumerator CoLocalScaleX(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalScaleX, target, self.SetLocalScaleX, timer);
 
         public static IEnumerator CoLocalScaleX(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalScaleX, timer);
+
+        public static IEnumerator CoLocalScaleY(this Transform self, float target)
+            => Yield.Into(target, self.SetLocalScaleY);
 
         public static IEnumerator CoLocalScaleY(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalScaleY, target, self.SetLocalScaleY, timer);
@@ -359,11 +401,17 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalScaleY(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalScaleY, timer);
 
+        public static IEnumerator CoLocalScaleZ(this Transform self, float target)
+            => Yield.Into(target, self.SetLocalScaleZ);
+
         public static IEnumerator CoLocalScaleZ(this Transform self, float target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalScaleZ, target, self.SetLocalScaleZ, timer);
 
         public static IEnumerator CoLocalScaleZ(this Transform self, float start, float target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalScaleZ, timer);
+
+        public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetLocalScaleXY);
 
         public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalScaleXY, target, self.SetLocalScaleXY, timer);
@@ -371,11 +419,17 @@ namespace Common.Coroutines
         public static IEnumerator CoLocalScaleXY(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalScaleXY, timer);
 
+        public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetLocalScaleYZ);
+
         public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalScaleYZ, target, self.SetLocalScaleYZ, timer);
 
         public static IEnumerator CoLocalScaleYZ(this Transform self, Vector2 start, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(start, target, self.SetLocalScaleYZ, timer);
+
+        public static IEnumerator CoLocalScaleXZ(this Transform self, Vector2 target)
+            => Yield.Into(target, self.SetLocalScaleXZ);
 
         public static IEnumerator CoLocalScaleXZ(this Transform self, Vector2 target, IEnumerator<float> timer)
             => Yield.ValueTo(self.GetLocalScaleXZ, target, self.SetLocalScaleXZ, timer);
